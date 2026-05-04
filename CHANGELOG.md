@@ -6,12 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Phase 7 (complete except GitHub push)
+
+- **`how/standard/skills/skill_publish_lattice.md`** — 7-step publishing skill: clean-state check, build publish tree (rsync with explicit excludes for `what/local/`, `how/local/`, `who/operators/`, `deploy/`, `dist/`, `.git/`, `how/sessions/active/`, `*.dryrun.log`), sanitization scan via LAYER_CONTRACT § 4, tarball at `dist/<utc>.tar.gz`, extract + health-check the tarball, push to `github.com/LatticeProtocol/spacemacs.aDNA` (REQUIRES OPERATOR CONFIRMATION), publish receipt at `who/peers/published/<utc>.md`.
+- **Live dry-run publish** (steps 1-5) caught 6 `/Users/stanley/...` Clause 1 violations across CHANGELOG.md, STATE.md, README.md, and `what/decisions/adr/adr_000_vault_identity.md`. All replaced with `~/...` shorthand or rephrased to remove the literal pattern.
+- **Hostname-literal regex tightened** in `what/standard/LAYER_CONTRACT.md` to avoid `.env.local` (gitignore line) and `settings.local.json` (inherited claude-code context) false positives. Pattern now requires non-`.` lookbehind + lookahead.
+- **GitHub push DEFERRED** — Step 6 (`git push origin main` + tag) requires explicit operator confirmation; dry-run produces tarball locally only. DoD #6 partial satisfaction (tarball + extract health-check green); full satisfaction requires running `skill_install` from extracted tarball on a clean reference environment with emacs.
+
 ### Phase 6 (complete)
 
 - **`what/standard/LAYER_CONTRACT.md`** — full normative contract replacing the Phase 2 stub. 7 sections, 6 clauses (standard-is-commons, local-is-private, overlay-is-third-party, promotion ritual, license interlock, sanitization scan), with verification mechanisms. Sanitization scan inlined as Python (regex patterns: hostname literals, user-home paths, secret patterns, IP ranges, emails). Self-validates: contract's own scan runs clean against this vault's `what/standard/` + `how/standard/`.
 - **`how/standard/skills/skill_layer_promote.md`** — `local/` → `standard/` promotion ritual. Sanitization scan gate, ADR-required, dry-run health-check, operator-gated apply. Move/move+example/copy options.
 - **`how/standard/skills/skill_overlay_consume.md`** — third-party Spacemacs distribution consumption. Per-layer ADR-gated disposition (merge / hold / reject). License compatibility check (GPL-3.0 / Apache / MIT / BSD acceptable; AGPL / proprietary REJECT). Provenance tracking.
-- **Layer Contract enforcement (live fix)**: scan flagged a hardcoded `/Users/stanley/...` plan reference in `how/standard/skills/README.md` (Clause 1 violation); replaced with `~/...`. Contract examples reformatted to use `<placeholder>` shape so the scan doesn't false-trigger on its own documentation.
+- **Layer Contract enforcement (live fix)**: scan flagged an operator-home plan reference in `how/standard/skills/README.md` (Clause 1 violation); replaced absolute path with the `~/` shorthand. Contract examples reformatted to use `<placeholder>` shape so the scan doesn't false-trigger on its own documentation.
 
 ### Phase 5 (complete — DoD #5 satisfied)
 
@@ -77,7 +84,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## Genesis plan
 
-The seven-phase genesis plan lives at `/Users/stanley/.claude/plans/please-read-the-claude-md-splendid-boole.md`. Stop gates between every phase per the user's "Report at the end of each phase" directive.
+The seven-phase genesis plan lives at `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` (originating operator's machine). Stop gates between every phase per the user's "Report at the end of each phase" directive.
 
 | Phase | Status | Description |
 |-------|--------|-------------|

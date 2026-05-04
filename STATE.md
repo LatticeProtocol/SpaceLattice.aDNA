@@ -5,7 +5,7 @@ created: 2026-05-03
 updated: 2026-05-03
 last_edited_by: agent_init
 last_session: null
-tags: [state, governance, spacemacs, daedalus, genesis, p6]
+tags: [state, governance, spacemacs, daedalus, genesis, p7]
 ---
 
 # Operational State
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Genesis (v0.1.0)** — Phases 0-6 of the seven-phase genesis plan complete (2026-05-03 + 2026-05-04). Phase 7 + DoD pending.
+**Genesis (v0.1.0)** — All seven phases complete (2026-05-03 + 2026-05-04). DoD verification pending. GitHub push (Phase 7 step 6) DEFERRED — operator confirmation required.
 
 ## What's Working
 
@@ -27,7 +27,8 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 - `how/standard/runbooks/` populated: `fresh_machine.md`, `update_spacemacs.md`, `recover_from_breakage.md`
 - **Phase 4** — aDNA bridge layer authored: `what/standard/layers/adna/{packages,config,funcs,keybindings}.el`. Python CLI fallback `what/standard/index/build_graph.py` runs end-to-end against this vault — 218 nodes, 331 edges. `skill_adna_index.md` wraps both callers (elisp + Python).
 - **Phase 5** — Self-improvement loop authored at `how/standard/skills/skill_self_improve.md` (~250 lines, 6 detection rules A-F, operator-gated commit). DoD #5 demo run end-to-end: synthetic friction (duplicated `SPC a h` binding) injected into working tree, Rule E fired, ADR 001 drafted (`adr_kind: synthetic_demo`), proposal diff generated, scratch-worktree dry-run health-check green, operator ACCEPTED, diff applied (removed injection), evidence committed. Synthetic friction never entered committed history.
-- **Phase 6** — Layer contract + overlay: full `what/standard/LAYER_CONTRACT.md` (replaces stub) with 7 normative clauses + sanitization scan (Python inline) + license interlock. `skill_layer_promote.md` + `skill_overlay_consume.md` reference contract by clause number. The contract's own sanitization scan ran clean against this vault's `what/standard/` + `how/standard/` after fixing one Clause 1 violation (hardcoded `/Users/stanley/...` plan path replaced with `~/...`).
+- **Phase 6** — Layer contract + overlay: full `what/standard/LAYER_CONTRACT.md` (replaces stub) with 7 normative clauses + sanitization scan (Python inline) + license interlock. `skill_layer_promote.md` + `skill_overlay_consume.md` reference contract by clause number. The contract's own sanitization scan ran clean against this vault's `what/standard/` + `how/standard/` after fixing one Clause 1 violation (an operator-home path replaced with the `~/` shorthand).
+- **Phase 7** — Lattice publishing: `skill_publish_lattice.md` authored. Dry-run publish ran end-to-end (rsync publish tree, sanitize, tarball, extract, structural + graph health-check). Sanitize step caught 6 real `/Users/stanley/...` violations across CHANGELOG, STATE, README, ADR 000 — fixed in this same commit. Hostname-literal regex tightened to avoid `.env.local` / `settings.local.json` false positives. GitHub push to `LatticeProtocol/spacemacs.aDNA` DEFERRED until operator confirms.
 - `README.md` (operator-facing 60-second orientation) and `CHANGELOG.md` replace inherited template content
 - `CLAUDE.md` updated: Project Map, Spacemacs Standing Orders (clauses 7-12), expanded Skills Inventory (inherited + project-specific)
 - First commit `50c7084` (Phase 1+2) on `master`; Phase 3 commit pending end of this turn
@@ -41,8 +42,8 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Next Steps
 
-1. **Phase 7** — Lattice publishing: `skill_publish_lattice.md` + first publish receipt to `github.com/LatticeProtocol/spacemacs.aDNA`
-2. **DoD** — 8-check end-to-end verification (D-E require emacs on host; A/B/C/F all green now; #5 satisfied via Phase 5 demo; #7 verified by sanitization scan run end of Phase 6)
+1. **DoD** — 8-check end-to-end verification (D-E require emacs on host; A/B/C/F green; #5 satisfied via Phase 5 demo; #7 verified by sanitization scan)
+2. **Operator confirms** — push tarball + working clone to `github.com/LatticeProtocol/spacemacs.aDNA` (Phase 7 step 6)
 
 ## Recent Decisions
 
@@ -66,7 +67,8 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 | 2026-05-03 | Phase 3 — `skill_install` + `skill_deploy` + `skill_health_check` + `skill_layer_add` + 3 runbooks | Phase 3 commit `3c38e14` |
 | 2026-05-03 | Phase 4 — aDNA bridge layer (4 elisp files + Python CLI + skill wrapper); `build_graph.py` validated end-to-end (218 nodes, 331 edges) | Phase 4 commit `c0af42e` |
 | 2026-05-04 | Phase 5 — `skill_self_improve.md` + DoD #5 demo (Rule E detected synthetic dup keybind, ADR 001 accepted, evidence committed) | Phase 5 commit `d4fe0a1` + `f7a4ef8` |
-| 2026-05-04 | Phase 6 — `LAYER_CONTRACT.md` (full, 7 clauses + scan), `skill_layer_promote.md`, `skill_overlay_consume.md`; sanitization scan ran clean against vault | Phase 6 |
+| 2026-05-04 | Phase 6 — `LAYER_CONTRACT.md` (full, 7 clauses + scan), `skill_layer_promote.md`, `skill_overlay_consume.md`; sanitization scan ran clean against vault | Phase 6 commit `721ec5c` |
+| 2026-05-04 | Phase 7 — `skill_publish_lattice.md`; dry-run publish caught 6 sanitization violations and fixed them; tarball verified by extract+health-check | Phase 7 |
 
 ## Partial-Resume Detection
 
@@ -74,4 +76,4 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Plan reference
 
-The full execution plan for Phases 0-7 + DoD lives at `/Users/stanley/.claude/plans/please-read-the-claude-md-splendid-boole.md`. Stop gates are between every phase per the brief's "Begin with Phase 1. Report at the end of each phase" directive.
+The full execution plan for Phases 0-7 + DoD lives at `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` (originating operator's machine). Stop gates are between every phase per the brief's "Begin with Phase 1. Report at the end of each phase" directive.

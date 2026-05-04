@@ -102,7 +102,7 @@ The `standard/` layer (when `skill_publish_lattice` runs in Phase 7) mirrors to 
 
 ## References
 
-- Plan: `/Users/stanley/.claude/plans/please-read-the-claude-md-splendid-boole.md`
+- Plan: `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` (originating operator's machine)
 - Template ADR: `~/lattice/.adna/how/templates/template_adr.md`
 - Workspace project catalogue: `~/lattice/CLAUDE.md`
 - Pattern precedent: `RareHarness.aDNA/what/decisions/adr_000_project_identity.md` (Platform.aDNA precedent)

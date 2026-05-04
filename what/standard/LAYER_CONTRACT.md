@@ -143,7 +143,7 @@ Used by `skill_layer_promote` step 2 + `skill_overlay_consume` step 5. The canon
 import re, sys, pathlib
 
 PATTERNS = [
-    ("hostname literal",       r"\b[a-z][a-z0-9-]+\.(local|internal|lan|home)\b",                      "FAIL"),
+    ("hostname literal",       r"(?<![.\w])[a-z][a-z0-9-]+\.(local|internal|lan|home)\b(?![.\w])",   "FAIL"),
     ("user home path",         r"/(Users|home)/[a-z][a-z0-9_-]+/",                                     "FAIL"),
     ("Windows user path",      r"[Cc]:\\\\[Uu]sers\\\\[A-Za-z][A-Za-z0-9_]+\\\\",                      "FAIL"),
     ("Anthropic API key",      r"\bsk-ant-[A-Za-z0-9_-]{20,}",                                         "FAIL"),

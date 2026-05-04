@@ -38,7 +38,7 @@ cd ~/lattice/spacemacs.aDNA
 # runs skill_health_check, writes deploy receipt to deploy/<hostname>/<utc>.md.
 ```
 
-Until then, the vault is being scaffolded interactively — see the plan at `/Users/stanley/.claude/plans/please-read-the-claude-md-splendid-boole.md` for current state.
+Until then, the vault is being scaffolded interactively — see the plan at `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` (on the originating operator's machine) for current state.
 
 ## Layout
 
