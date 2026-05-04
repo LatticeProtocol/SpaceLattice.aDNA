@@ -36,4 +36,4 @@ All skills use `~/lattice/.adna/how/templates/template_skill.md`. Frontmatter in
 3. Agent executes steps in order, treating each as authoritative
 4. Agent reports completion + any deviations
 
-The plan file (`/Users/stanley/.claude/plans/please-read-the-claude-md-splendid-boole.md`) drove the genesis fork itself. Subsequent operations are skill-driven.
+The plan file (`~/.claude/plans/please-read-the-claude-md-splendid-boole.md` on the originating operator's machine) drove the genesis fork itself. Subsequent operations are skill-driven.

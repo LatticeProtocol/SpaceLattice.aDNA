@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Phase 6 (complete)
+
+- **`what/standard/LAYER_CONTRACT.md`** — full normative contract replacing the Phase 2 stub. 7 sections, 6 clauses (standard-is-commons, local-is-private, overlay-is-third-party, promotion ritual, license interlock, sanitization scan), with verification mechanisms. Sanitization scan inlined as Python (regex patterns: hostname literals, user-home paths, secret patterns, IP ranges, emails). Self-validates: contract's own scan runs clean against this vault's `what/standard/` + `how/standard/`.
+- **`how/standard/skills/skill_layer_promote.md`** — `local/` → `standard/` promotion ritual. Sanitization scan gate, ADR-required, dry-run health-check, operator-gated apply. Move/move+example/copy options.
+- **`how/standard/skills/skill_overlay_consume.md`** — third-party Spacemacs distribution consumption. Per-layer ADR-gated disposition (merge / hold / reject). License compatibility check (GPL-3.0 / Apache / MIT / BSD acceptable; AGPL / proprietary REJECT). Provenance tracking.
+- **Layer Contract enforcement (live fix)**: scan flagged a hardcoded `/Users/stanley/...` plan reference in `how/standard/skills/README.md` (Clause 1 violation); replaced with `~/...`. Contract examples reformatted to use `<placeholder>` shape so the scan doesn't false-trigger on its own documentation.
+
 ### Phase 5 (complete — DoD #5 satisfied)
 
 - **`how/standard/skills/skill_self_improve.md`** — closed-loop self-improvement spec. Reads recent sessions + ADRs, detects friction via 6 rules (A: repeated manual fix; B: missing layer/package; C: slow operation; D: cross-layer key conflict; E: in-file duplicated keybinding; F: extensible), drafts ADR + unified diff + dry-run health-check in scratch worktree, presents bundle for operator ACCEPT/REJECT/DEFER. Hard rule: never auto-commits to `what/standard/`.
