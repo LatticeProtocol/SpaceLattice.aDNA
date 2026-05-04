@@ -6,7 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-### Phase 2 (in progress)
+### Phase 3 (complete)
+
+- `how/standard/skills/skill_install.md` — idempotent install on fresh machine. 8 steps: preflight, backup, clone-at-pin, render-templates, symlink-adna, batch-boot, health-check, deploy-receipt. OS matrix: macOS / Linux / WSL2.
+- `how/standard/skills/skill_deploy.md` — lighter cousin (steps 4-8 only). For when only templates changed.
+- `how/standard/skills/skill_health_check.md` — green/red gate. 6 check classes (A: structure; B: frontmatter; C: layer-contract; D: emacs-batch-boot; E: adna-layer; F: graph-emission). Used by every other skill that touches `what/standard/`.
+- `how/standard/skills/skill_layer_add.md` — ADR-gated Spacemacs layer addition. Conflict scan, ADR draft, diff, dry-run in scratch worktree, operator-gated commit.
+- `how/standard/runbooks/fresh_machine.md` — human-runnable orchestration of `skill_install` for new hosts. Includes OS-specific dep install commands.
+- `how/standard/runbooks/update_spacemacs.md` — bump pin via successor ADR + dry-run + smoke test.
+- `how/standard/runbooks/recover_from_breakage.md` — diagnostic-first recovery for 6 common failure modes; restore-from-backup path; nuke-and-reinstall path.
+
+### Phase 2 (complete)
 
 - Triad scaffold (additive on inherited template):
   - `who/{operators,upstreams,peers}/` — operator profiles, Spacemacs upstream attribution, peer forks
