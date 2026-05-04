@@ -1,0 +1,3 @@
+A: green
+E: green (no duplicates remain)
+validate OK: 220 nodes, 335 edges, 137 edges with non-vault path targets (expected for external/relative links)

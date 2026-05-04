@@ -69,6 +69,8 @@ env/
 node_modules/
 .npm/
 *.log
+# But ADR dry-run logs are evidence — keep them tracked
+!/what/decisions/adr/*.dryrun.log
 *~
 *.swp
 *.swo
