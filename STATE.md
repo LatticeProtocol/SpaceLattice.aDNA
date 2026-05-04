@@ -5,7 +5,7 @@ created: 2026-05-03
 updated: 2026-05-03
 last_edited_by: agent_init
 last_session: null
-tags: [state, governance, spacemacs, daedalus, genesis, p3]
+tags: [state, governance, spacemacs, daedalus, genesis, p4]
 ---
 
 # Operational State
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Genesis (v0.1.0)** — 2026-05-03. Phases 0-3 of the seven-phase genesis plan complete. Phases 4-7 + DoD pending.
+**Genesis (v0.1.0)** — 2026-05-03. Phases 0-4 of the seven-phase genesis plan complete. Phases 5-7 + DoD pending.
 
 ## What's Working
 
@@ -25,6 +25,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 - `what/standard/layers/adna/README.org` placeholder (elisp implementation in Phase 4)
 - `how/standard/skills/` populated: `skill_install`, `skill_deploy`, `skill_health_check`, `skill_layer_add` (Phase 3 deliverables)
 - `how/standard/runbooks/` populated: `fresh_machine.md`, `update_spacemacs.md`, `recover_from_breakage.md`
+- **Phase 4** — aDNA bridge layer authored: `what/standard/layers/adna/{packages,config,funcs,keybindings}.el`. Python CLI fallback `what/standard/index/build_graph.py` runs end-to-end against this vault — 218 nodes, 331 edges. `skill_adna_index.md` wraps both callers (elisp + Python).
 - `README.md` (operator-facing 60-second orientation) and `CHANGELOG.md` replace inherited template content
 - `CLAUDE.md` updated: Project Map, Spacemacs Standing Orders (clauses 7-12), expanded Skills Inventory (inherited + project-specific)
 - First commit `50c7084` (Phase 1+2) on `master`; Phase 3 commit pending end of this turn
@@ -38,11 +39,10 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Next Steps
 
-1. **Phase 4** — aDNA bridge layer: elisp source at `what/standard/layers/adna/{packages,config,funcs,keybindings}.el`, Python CLI fallback at `what/standard/index/build_graph.py`
-2. **Phase 5** — Self-improvement loop: `skill_self_improve.md` + injected-friction test
-3. **Phase 6** — Layer contract + overlay: full `LAYER_CONTRACT.md`, `skill_overlay_consume.md`, `skill_layer_promote.md`
-4. **Phase 7** — Lattice publishing: `skill_publish_lattice.md` + first publish receipt to `github.com/LatticeProtocol/spacemacs.aDNA`
-5. **DoD** — 8-check end-to-end verification (some checks defer until emacs available)
+1. **Phase 5** — Self-improvement loop: `skill_self_improve.md` + injected-friction test
+2. **Phase 6** — Layer contract + overlay: full `LAYER_CONTRACT.md`, `skill_overlay_consume.md`, `skill_layer_promote.md`
+3. **Phase 7** — Lattice publishing: `skill_publish_lattice.md` + first publish receipt to `github.com/LatticeProtocol/spacemacs.aDNA`
+4. **DoD** — 8-check end-to-end verification (D-E require emacs on host; A/B/C/F can run now)
 
 ## Recent Decisions
 
@@ -63,7 +63,8 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 |------|---------|--------|
 | 2026-05-03 | Phase 1 — Forked from `.adna/` template; identity customized (Daedalus); workspace integration | Phase 1 |
 | 2026-05-03 | Phase 2 — Triad scaffold (305 files, 40,420 insertions); first commit `50c7084` | Phase 2 |
-| 2026-05-03 | Phase 3 — `skill_install` + `skill_deploy` + `skill_health_check` + `skill_layer_add` + 3 runbooks | Phase 3 |
+| 2026-05-03 | Phase 3 — `skill_install` + `skill_deploy` + `skill_health_check` + `skill_layer_add` + 3 runbooks | Phase 3 commit `3c38e14` |
+| 2026-05-03 | Phase 4 — aDNA bridge layer (4 elisp files + Python CLI + skill wrapper); `build_graph.py` validated end-to-end (218 nodes, 331 edges) | Phase 4 |
 
 ## Partial-Resume Detection
 

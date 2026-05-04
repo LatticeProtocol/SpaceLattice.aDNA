@@ -45,6 +45,9 @@ secrets.env
 /tmp.dryrun-*/
 *.dryrun-*
 
+# === GENERATED CONTEXT GRAPH (regenerated on demand by adna-index-project) ===
+/what/standard/index/graph.json
+
 # === OBSIDIAN per-device state (already stripped at fork; ensure it stays gone) ===
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json

@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Phase 4 (complete)
+
+- **aDNA Spacemacs layer authored** at `what/standard/layers/adna/`:
+  - `packages.el` — Spacemacs layer manifest declaring `yaml`, `transient`, `vterm`, `json`, `markdown-mode`
+  - `config.el` — defcustoms (`adna-vault-search-paths`, `adna-claude-code-command`, `adna-obsidian-roundtrip-enabled`, etc.), buffer-local frontmatter mirrors, `adna-mode` minor mode definition
+  - `funcs.el` — interactive commands: `adna/find-vault-root`, `adna/parse-frontmatter`, `adna/open-{manifest,claude,state}`, `adna/jump-triad-root`, `adna/run-nearest-skill`, `adna/render-lattice-graph`, `adna-index-project`, `adna/capture-session-note`, `adna/follow-wikilink`, `adna/open-in-obsidian`, `adna/spawn-claude-code`, `adna/health-check`. ~17 commands, ~280 lines.
+  - `keybindings.el` — `SPC a` transient (m/c/s/r/k/g/i/n/w/o/h) + `SPC c c` Claude Code spawn
+- **Python CLI fallback** `what/standard/index/build_graph.py` — walks the triad, parses frontmatter via PyYAML, identifies wikilinks + markdown links + frontmatter refs (supersedes / superseded_by / pattern_spec / ratifies / implementation_path / target_files / etc.), emits JSON. Custom date serializer for YAML datetime objects. Self-validate mode for `skill_health_check` check F.
+- **`skill_adna_index.md`** in `how/standard/skills/` — wraps both callers (elisp + Python CLI), documents output schema, edge kinds, failure modes.
+- **`graph.json` added to `.gitignore`** — regenerated artifact, doesn't belong in commit history.
+- **End-to-end validation against this vault**: 218 nodes, 331 edges. Edge kinds: 230 references, 99 wikilinks, 2 frontmatter refs. Top node types: directory_index (38), skill (20), context_guide (13), context (13), folder_note (12).
+
 ### Phase 3 (complete)
 
 - `how/standard/skills/skill_install.md` — idempotent install on fresh machine. 8 steps: preflight, backup, clone-at-pin, render-templates, symlink-adna, batch-boot, health-check, deploy-receipt. OS matrix: macOS / Linux / WSL2.
