@@ -68,7 +68,8 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 | 2026-05-03 | Phase 4 — aDNA bridge layer (4 elisp files + Python CLI + skill wrapper); `build_graph.py` validated end-to-end (218 nodes, 331 edges) | Phase 4 commit `c0af42e` |
 | 2026-05-04 | Phase 5 — `skill_self_improve.md` + DoD #5 demo (Rule E detected synthetic dup keybind, ADR 001 accepted, evidence committed) | Phase 5 commit `d4fe0a1` + `f7a4ef8` |
 | 2026-05-04 | Phase 6 — `LAYER_CONTRACT.md` (full, 7 clauses + scan), `skill_layer_promote.md`, `skill_overlay_consume.md`; sanitization scan ran clean against vault | Phase 6 commit `721ec5c` |
-| 2026-05-04 | Phase 7 — `skill_publish_lattice.md`; dry-run publish caught 6 sanitization violations and fixed them; tarball verified by extract+health-check | Phase 7 |
+| 2026-05-04 | Phase 7 — `skill_publish_lattice.md`; dry-run publish caught 6 sanitization violations and fixed them; tarball verified by extract+health-check | Phase 7 commit `12d9c7d` + scrub `7aca784` |
+| 2026-05-04 | DoD final sweep — all 8 checks green within host capability (D/E, install E2E, install-from-tarball deferred until emacs available) | DoD |
 
 ## Partial-Resume Detection
 
