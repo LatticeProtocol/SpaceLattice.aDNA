@@ -1,0 +1,36 @@
+---
+type: machine_pins
+status: example
+created: 2026-05-03
+updated: 2026-05-03
+last_edited_by: agent_init
+tags: [pins, local, machine, example]
+---
+
+# machine.pins — per-machine version overrides
+
+> THIS IS AN EXAMPLE TEMPLATE. Copy to `machine.pins.md` (without `.example`), then edit. The real file is gitignored.
+
+## Why this layer exists
+
+`what/standard/pins.md` is the canonical reference. This file lets operators override pins on machines that need a different Spacemacs SHA, Emacs version, or tooling configuration than the published commons.
+
+Common reasons:
+
+- Operator's macOS is on an older release that needs Emacs 28 instead of 29
+- Operator on an air-gapped machine that uses a vendored clone of Spacemacs at a different SHA
+- Operator on Linux with system Emacs at a different version than what `what/standard/pins.md` recommends
+
+## Override format
+
+| Pin | Override value | Reason |
+|-----|----------------|--------|
+| Spacemacs SHA | (set to a different SHA than standard) | (why) |
+| Emacs minimum | (e.g., 28.2 instead of 29.0) | (why) |
+| Tooling | e.g., use `mdfind` instead of `fd` | (why) |
+
+## Override consequence
+
+`skill_install` reads `what/standard/pins.md` first, then layers `what/local/machine.pins.md` (this file) on top. Mismatches between the merged pin and the host get reported but DON'T abort if this file explicitly overrides.
+
+The override is logged to `deploy/<hostname>/<utc>.md` so the publish-clean check (Phase 6 sanitization scan) can verify only standard pins are used in published artifacts.

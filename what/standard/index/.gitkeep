@@ -1,0 +1,3 @@
+# Placeholder so the directory is tracked by git.
+# `M-x adna-index-project` writes graph.json here at runtime.
+# `what/standard/index/build_graph.py` (Phase 4) is the Python CLI fallback.

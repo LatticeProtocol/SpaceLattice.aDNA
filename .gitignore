@@ -1,0 +1,81 @@
+# spacemacs.aDNA — gitignore
+# Written BEFORE first commit so private content never enters history.
+
+# === LAYERED ARCHITECTURE: private layers ===
+# what/local/ and how/local/ are operator/machine-specific by contract.
+# Promotion to standard/ goes through skill_layer_promote (ADR-gated).
+# Anything inside is ignored EXCEPT .example templates and READMEs which document
+# the layer's structure for future operators.
+/what/local/*
+!/what/local/*.example
+!/what/local/README.md
+!/what/local/.gitkeep
+/how/local/*
+!/how/local/*.example
+!/how/local/README.md
+!/how/local/.gitkeep
+
+# === DEPLOY RECEIPTS ===
+# Deployment artifacts contain hostnames + machine state; per-machine, never published.
+/deploy/
+
+# === PUBLISH ARTIFACTS ===
+# skill_publish_lattice writes here; not committed to vault git.
+/dist/
+/.publish-clone/
+
+# === SECRETS ===
+# .example files (templates with placeholder values) ARE committed.
+# Real secrets files never are.
+secrets.env
+.env
+.env.local
+*.secrets
+
+# === PRIVATE ELISP ===
+# Operator-private elisp lives in what/local/ but the convention is also
+# enforced by suffix so accidental drift in standard/ gets caught.
+*.private.el
+
+# === CLAUDE CODE / AGENTIC TOOLING (per-session state) ===
+.claude/
+.mcp.json
+
+# === SCRATCH WORKTREES from skill_self_improve / skill_health_check ===
+/tmp.dryrun-*/
+*.dryrun-*
+
+# === OBSIDIAN per-device state (already stripped at fork; ensure it stays gone) ===
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/graph.json
+.obsidian/plugins/
+.obsidian/themes/
+
+# === STANDARD OS / LANGUAGE ARTIFACTS ===
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+node_modules/
+.npm/
+*.log
+*~
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# === EMACS BACKUP / AUTOSAVE ===
+*~
+\#*\#
+.\#*
+auto-save-list/
+tramp/
+.last_install.log

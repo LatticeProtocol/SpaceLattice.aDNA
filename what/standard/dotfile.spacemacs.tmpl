@@ -1,0 +1,156 @@
+;;; .spacemacs --- spacemacs.aDNA standard dotfile  -*- mode: emacs-lisp; lexical-binding: t -*-
+;;
+;; Template rendered to ~/.spacemacs by skill_deploy (how/standard/skills/skill_deploy.md).
+;; Placeholders use {{NAME}} syntax — substituted from what/standard/layers.md +
+;; what/local/operator.private.el (if present).
+;;
+;; License: GPL-3.0 (matches upstream Spacemacs)
+;; Vault: github.com/LatticeProtocol/spacemacs.aDNA  (planned Phase 7)
+
+(defun dotspacemacs/layers ()
+  "Configuration layers declaration."
+  (setq-default
+   dotspacemacs-distribution 'spacemacs
+   dotspacemacs-enable-lazy-installation 'unused
+   dotspacemacs-ask-for-lazy-installation t
+   dotspacemacs-configuration-layer-path '({{LAYER_PATH_LIST}})
+   dotspacemacs-configuration-layers
+   '(
+     ;; === editing & navigation ===
+     auto-completion
+     better-defaults
+     helm
+     (treemacs :variables treemacs-use-follow-mode t)
+     git
+     version-control
+
+     ;; === languages ===
+     (lsp :variables lsp-headerline-breadcrumb-enable t)
+     (python :variables python-backend 'lsp python-fill-column 100)
+     (typescript :variables typescript-fmt-on-save t)
+     (rust :variables rust-backend 'lsp rust-format-on-save t)
+     shell-scripts
+     emacs-lisp
+     (markdown :variables markdown-live-preview-engine 'vmd)
+     (org :variables org-want-todo-bindings t)
+     yaml
+
+     ;; === tools ===
+     (shell :variables shell-default-shell 'vterm shell-default-position 'bottom)
+     multiple-cursors
+     spell-checking
+     syntax-checking
+
+     ;; === spacemacs.aDNA bridge ===
+     adna
+
+     ;; === operator-added local layers (loaded by user-init from what/local/) ===
+     {{LOCAL_LAYER_LIST}}
+     )
+   dotspacemacs-additional-packages '()
+   dotspacemacs-frozen-packages '()
+   dotspacemacs-excluded-packages '()
+   dotspacemacs-install-packages 'used-only))
+
+(defun dotspacemacs/init ()
+  "Initialization. Called at very startup, before layers, packages, or user config."
+  (setq-default
+   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-timeout 5
+   dotspacemacs-check-for-update nil
+   dotspacemacs-elpa-subdirectory 'emacs-version
+   dotspacemacs-editing-style 'vim
+   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-lists '((recents . 5) (projects . 7))
+   dotspacemacs-startup-buffer-responsive t
+   dotspacemacs-show-startup-list-numbers t
+   dotspacemacs-themes '({{THEME_PRIMARY}} {{THEME_FALLBACK}})
+   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-colorize-cursor-according-to-state t
+   dotspacemacs-default-font '("{{FONT_FAMILY}}" :size {{FONT_SIZE}} :weight normal :width normal)
+   dotspacemacs-leader-key "SPC"
+   dotspacemacs-emacs-command-key "SPC"
+   dotspacemacs-ex-command-key ":"
+   dotspacemacs-emacs-leader-key "M-m"
+   dotspacemacs-major-mode-leader-key ","
+   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   dotspacemacs-distinguish-gui-tab nil
+   dotspacemacs-default-layout-name "Default"
+   dotspacemacs-display-default-layout nil
+   dotspacemacs-auto-resume-layouts nil
+   dotspacemacs-auto-generate-layout-names nil
+   dotspacemacs-large-file-size 1
+   dotspacemacs-auto-save-file-location 'cache
+   dotspacemacs-max-rollback-slots 5
+   dotspacemacs-enable-paste-transient-state nil
+   dotspacemacs-which-key-delay 0.4
+   dotspacemacs-which-key-position 'bottom
+   dotspacemacs-switch-to-buffer-prefers-purpose nil
+   dotspacemacs-loading-progress-bar t
+   dotspacemacs-fullscreen-at-startup nil
+   dotspacemacs-fullscreen-use-non-native nil
+   dotspacemacs-maximized-at-startup t
+   dotspacemacs-undecorated-at-startup nil
+   dotspacemacs-active-transparency 90
+   dotspacemacs-inactive-transparency 90
+   dotspacemacs-show-transient-state-title t
+   dotspacemacs-show-transient-state-color-guide t
+   dotspacemacs-mode-line-unicode-symbols t
+   dotspacemacs-smooth-scrolling t
+   dotspacemacs-line-numbers '(:relative t :enabled-for-modes prog-mode text-mode)
+   dotspacemacs-folding-method 'evil
+   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-highlight-delimiters 'all
+   dotspacemacs-enable-server t
+   dotspacemacs-server-socket-dir nil
+   dotspacemacs-persistent-server t
+   dotspacemacs-search-tools '("rg" "ag" "grep")
+   dotspacemacs-frame-title-format "%I@%S"
+   dotspacemacs-icon-title-format nil
+   dotspacemacs-show-trailing-whitespace t
+   dotspacemacs-whitespace-cleanup 'trailing
+   dotspacemacs-use-clean-aindent-mode t
+   dotspacemacs-zone-out-when-idle nil
+   dotspacemacs-pretty-docs nil
+   dotspacemacs-home-shorten-agenda-source nil
+   dotspacemacs-byte-compile nil))
+
+(defun dotspacemacs/user-env ()
+  "Setup environment variables."
+  (spacemacs/load-spacemacs-env))
+
+(defun dotspacemacs/user-init ()
+  "Called before layer config. Used here to load operator-private layers from local layer."
+  ;; Load operator's private elisp last (gitignored) — additive only.
+  (let ((private-el (expand-file-name "operator.private.el"
+                                      "{{LOCAL_LAYER_DIR}}")))
+    (when (file-readable-p private-el)
+      (load private-el nil 'nomessage))))
+
+(defun dotspacemacs/user-load ()
+  "Library to load when dumping. Empty for now.")
+
+(defun dotspacemacs/user-config ()
+  "Configuration. Called at end of startup, after layers loaded."
+  ;; aDNA layer activation surface
+  (when (fboundp 'adna/setup-global-hooks)
+    (adna/setup-global-hooks))
+
+  ;; Project-search prefers ripgrep
+  (with-eval-after-load 'projectile
+    (setq projectile-generic-command "rg --files --hidden --glob '!.git/'"))
+
+  ;; Magit performance
+  (with-eval-after-load 'magit
+    (setq magit-refresh-status-buffer nil)))
+
+;; Do not write anything past this comment. Anything written here is overwritten
+;; by Emacs on save. Operator customizations belong in
+;; what/local/operator.private.el (loaded by dotspacemacs/user-init above).
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings. Auto-managed by Spacemacs.")
+
+;; Local Variables:
+;; no-byte-compile: t
+;; End:

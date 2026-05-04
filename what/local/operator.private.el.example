@@ -1,0 +1,68 @@
+;;; operator.private.el --- per-operator elisp customizations  -*- mode: emacs-lisp; lexical-binding: t -*-
+;;
+;; THIS IS AN EXAMPLE TEMPLATE.
+;; Copy this file to operator.private.el (without .example), then edit.
+;; The real operator.private.el is gitignored.
+;;
+;; Loaded LAST by dotspacemacs/user-init in ~/.spacemacs (rendered from
+;; what/standard/dotfile.spacemacs.tmpl). Anything here overrides standard.
+;;
+;; License: same as the rest of the vault (GPL-3.0)
+
+;;; ============================================================================
+;;; PERSONAL THEMES
+;;; ============================================================================
+
+;; Override standard theme:
+;; (setq-default dotspacemacs-themes '(doom-one doom-solarized-dark))
+
+;;; ============================================================================
+;;; PERSONAL LAYERS
+;;; ============================================================================
+
+;; Add layers without touching standard. They get appended in dotspacemacs/layers
+;; via the {{LOCAL_LAYER_LIST}} placeholder.
+;;
+;; Examples:
+;; - org-roam, org-noter for note-taking
+;; - chatgpt-shell or gptel for in-Emacs LLM calls
+;; - vundo for visual undo tree
+
+;;; ============================================================================
+;;; aDNA LAYER PREFERENCES
+;;; ============================================================================
+
+;; Enable Obsidian round-trip (off by default per obsidian-coupling.md):
+;; (setq adna-obsidian-roundtrip-enabled t)
+
+;; Prefer local LLM over Claude API for in-Emacs calls:
+;; (setq adna-prefer-local t)
+
+;; Log every in-Emacs LLM call to *Messages*:
+;; (setq adna-log-llm-calls t)
+
+;;; ============================================================================
+;;; CLAUDE CODE INTEGRATION
+;;; ============================================================================
+
+;; Override the model for SPC c c sessions (otherwise Claude Code's default):
+;; (setq adna-claude-code-model "claude-opus-4-7")
+
+;;; ============================================================================
+;;; HOST-SPECIFIC CUSTOMIZATIONS
+;;; ============================================================================
+
+;; Per-host font tweaks:
+;; (when (string-match-p "macbook" (system-name))
+;;   (set-face-attribute 'default nil :height 140))
+
+;; Per-host directories:
+;; (setq adna-vault-search-paths
+;;       '("~/lattice"
+;;         "~/work/projects"))
+
+;;; ============================================================================
+;;; END
+;;; ============================================================================
+;; Anything that isn't private-by-nature should eventually be promoted to
+;; what/standard/ via skill_layer_promote (ADR-gated).
