@@ -5,7 +5,7 @@ created: 2026-05-03
 updated: 2026-05-03
 last_edited_by: agent_init
 last_session: null
-tags: [state, governance, spacemacs, daedalus, genesis, p4]
+tags: [state, governance, spacemacs, daedalus, genesis, p5]
 ---
 
 # Operational State
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Genesis (v0.1.0)** — 2026-05-03. Phases 0-4 of the seven-phase genesis plan complete. Phases 5-7 + DoD pending.
+**Genesis (v0.1.0)** — Phases 0-5 of the seven-phase genesis plan complete (2026-05-03 + 2026-05-04). Phases 6-7 + DoD pending.
 
 ## What's Working
 
@@ -26,6 +26,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 - `how/standard/skills/` populated: `skill_install`, `skill_deploy`, `skill_health_check`, `skill_layer_add` (Phase 3 deliverables)
 - `how/standard/runbooks/` populated: `fresh_machine.md`, `update_spacemacs.md`, `recover_from_breakage.md`
 - **Phase 4** — aDNA bridge layer authored: `what/standard/layers/adna/{packages,config,funcs,keybindings}.el`. Python CLI fallback `what/standard/index/build_graph.py` runs end-to-end against this vault — 218 nodes, 331 edges. `skill_adna_index.md` wraps both callers (elisp + Python).
+- **Phase 5** — Self-improvement loop authored at `how/standard/skills/skill_self_improve.md` (~250 lines, 6 detection rules A-F, operator-gated commit). DoD #5 demo run end-to-end: synthetic friction (duplicated `SPC a h` binding) injected into working tree, Rule E fired, ADR 001 drafted (`adr_kind: synthetic_demo`), proposal diff generated, scratch-worktree dry-run health-check green, operator ACCEPTED, diff applied (removed injection), evidence committed. Synthetic friction never entered committed history.
 - `README.md` (operator-facing 60-second orientation) and `CHANGELOG.md` replace inherited template content
 - `CLAUDE.md` updated: Project Map, Spacemacs Standing Orders (clauses 7-12), expanded Skills Inventory (inherited + project-specific)
 - First commit `50c7084` (Phase 1+2) on `master`; Phase 3 commit pending end of this turn
@@ -39,10 +40,9 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Next Steps
 
-1. **Phase 5** — Self-improvement loop: `skill_self_improve.md` + injected-friction test
-2. **Phase 6** — Layer contract + overlay: full `LAYER_CONTRACT.md`, `skill_overlay_consume.md`, `skill_layer_promote.md`
-3. **Phase 7** — Lattice publishing: `skill_publish_lattice.md` + first publish receipt to `github.com/LatticeProtocol/spacemacs.aDNA`
-4. **DoD** — 8-check end-to-end verification (D-E require emacs on host; A/B/C/F can run now)
+1. **Phase 6** — Layer contract + overlay: full `LAYER_CONTRACT.md`, `skill_overlay_consume.md`, `skill_layer_promote.md`
+2. **Phase 7** — Lattice publishing: `skill_publish_lattice.md` + first publish receipt to `github.com/LatticeProtocol/spacemacs.aDNA`
+3. **DoD** — 8-check end-to-end verification (D-E require emacs on host; A/B/C/F all green now; #5 satisfied via Phase 5 demo)
 
 ## Recent Decisions
 
@@ -64,7 +64,8 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 | 2026-05-03 | Phase 1 — Forked from `.adna/` template; identity customized (Daedalus); workspace integration | Phase 1 |
 | 2026-05-03 | Phase 2 — Triad scaffold (305 files, 40,420 insertions); first commit `50c7084` | Phase 2 |
 | 2026-05-03 | Phase 3 — `skill_install` + `skill_deploy` + `skill_health_check` + `skill_layer_add` + 3 runbooks | Phase 3 commit `3c38e14` |
-| 2026-05-03 | Phase 4 — aDNA bridge layer (4 elisp files + Python CLI + skill wrapper); `build_graph.py` validated end-to-end (218 nodes, 331 edges) | Phase 4 |
+| 2026-05-03 | Phase 4 — aDNA bridge layer (4 elisp files + Python CLI + skill wrapper); `build_graph.py` validated end-to-end (218 nodes, 331 edges) | Phase 4 commit `c0af42e` |
+| 2026-05-04 | Phase 5 — `skill_self_improve.md` + DoD #5 demo (Rule E detected synthetic dup keybind, ADR 001 accepted, evidence committed) | Phase 5 |
 
 ## Partial-Resume Detection
 

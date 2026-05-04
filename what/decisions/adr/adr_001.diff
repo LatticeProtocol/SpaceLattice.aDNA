@@ -1,0 +1,13 @@
+diff --git b/what/standard/layers/adna/keybindings.el a/what/standard/layers/adna/keybindings.el
+index 50812a4..cc7e5b9 100644
+--- b/what/standard/layers/adna/keybindings.el
++++ a/what/standard/layers/adna/keybindings.el
+@@ -32,8 +32,4 @@
+ (spacemacs/declare-prefix "c" "claude")
+ (spacemacs/set-leader-keys "cc" 'adna/spawn-claude-code)
+ 
+-;; Friction injection (Phase 5 DoD #5 demo) — duplicate of "ah" binding above.
+-;; Rule E should detect this; skill_self_improve drafts ADR proposing dedup.
+-(spacemacs/set-leader-keys "ah" 'adna/help-redundant)
+-
+ ;;; keybindings.el ends here

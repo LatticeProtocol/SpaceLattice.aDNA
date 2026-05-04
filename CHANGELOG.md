@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Phase 5 (complete — DoD #5 satisfied)
+
+- **`how/standard/skills/skill_self_improve.md`** — closed-loop self-improvement spec. Reads recent sessions + ADRs, detects friction via 6 rules (A: repeated manual fix; B: missing layer/package; C: slow operation; D: cross-layer key conflict; E: in-file duplicated keybinding; F: extensible), drafts ADR + unified diff + dry-run health-check in scratch worktree, presents bundle for operator ACCEPT/REJECT/DEFER. Hard rule: never auto-commits to `what/standard/`.
+- **DoD #5 demonstration**: synthetic friction (duplicated `SPC a h` binding) injected into `what/standard/layers/adna/keybindings.el`, Rule E detection fired (`"ah"` bound 2x), ADR 001 drafted (`adr_kind: synthetic_demo`), proposal diff generated, scratch-worktree dry-run green (A/E/F all OK), operator ACCEPTED, diff applied to working tree (injection removed), commit landed.
+  - Evidence files: `what/decisions/adr/adr_001_demo_dedup_keybind.md`, `adr_001.diff`, `adr_001.dryrun.log`
+  - Synthetic friction never entered committed history; the closed loop is the artifact.
+
 ### Phase 4 (complete)
 
 - **aDNA Spacemacs layer authored** at `what/standard/layers/adna/`:
