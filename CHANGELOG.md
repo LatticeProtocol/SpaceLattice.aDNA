@@ -18,7 +18,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   - `adna/wikilink-at-point` had malformed `cl-loop` (`for orig (point)` missing `=` — actually moved `orig` capture into outer `let` which is cleaner anyway)
   - `packages.el` redundantly declared `transient` and `vterm`; both are owned by `spacemacs-bootstrap` (transient) and `shell` (vterm) layers. Removed our declarations + `init-transient` / `init-vterm` functions; layer still works because we use `(when (fboundp 'vterm) ...)` defensive check in `adna/spawn-claude-code`.
 - **Deploy receipt** written to `deploy/<host>/<utc>.md` (gitignored — machine-specific audit trail).
-- **Pending in Phase 8**: install-from-tarball validation (DoD #6 full satisfaction). GitHub push (Phase 7 step 6) still operator-gated.
+- **DoD #6 install-from-tarball validated**: regenerated tarball with Phase 8 fixes; extracted to clean ref dir at `/tmp/refclean-<utc>`; ran skill_install steps inline with isolated `HOME=/tmp/refhome-<utc>`; cloned Spacemacs at pinned SHA; rendered templates; symlinked adna layer; **batch boot succeeded in 3.5 min, exit 0**; `(adna/health-check)` returned OK on the ref-clean install. The canonical peer-operator workflow is end-to-end validated.
+- **Phase 8 followup**: dotfile sets `vterm-always-compile-module t` so first-install in batch mode doesn't block on the `vterm-module` interactive compile prompt. This was caught when the ref-clean boot hung waiting for "Compile vterm-module? (y or n)".
+
+### DoD final sweep — all 8 checks GREEN, no deferrals (2026-05-04)
+
+- DoD #1 git repo + triad ✅
+- DoD #2 skill_install end-to-end ✅ (real ~/.emacs.d/ install)
+- DoD #3 skill_health_check A-F ✅ (all 6 classes including emacs batch boot + adna self-test)
+- DoD #4 M-x adna-index-project ✅ (elisp wrapper invokes Python CLI; graph.json 225 nodes, 342 edges)
+- DoD #5 skill_self_improve demo ✅ (ADR 001 evidence)
+- DoD #6 install-from-tarball ✅ (ref-clean install boots, adna/health-check OK)
+- DoD #7 private content gitignored ✅ (zero violations)
+- DoD #8 README operator-orientation ✅
 
 ### Phase 7 (complete except GitHub push)
 

@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Genesis (v0.1.0)** — All seven phases complete + Phase 8 (live install) completed (2026-05-03 + 2026-05-04). DoD #2/#3D-E/#4-elisp all green; #6-install-from-tarball pending in this Phase 8. GitHub push (Phase 7 step 6) still operator-gated.
+**Genesis (v0.1.0) — COMPLETE.** All eight phases done (2026-05-03 + 2026-05-04). All 8 DoD checks GREEN with no deferrals: live emacs install validated; ref-clean tarball install validated end-to-end. GitHub push (Phase 7 step 6) still operator-gated — only remaining outbound action.
 
 ## What's Working
 
@@ -43,9 +43,11 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Next Steps
 
-1. **DoD #6 install-from-tarball** — extract latest tarball to clean ref dir, run skill_install with `HOME=$REF`, verify boot + health-check
-2. **Final DoD sweep** — all 8 items green, no asterisks
-3. **Operator confirms** — push tarball + working clone to `github.com/LatticeProtocol/spacemacs.aDNA` (Phase 7 step 6, still gated)
+The vault is complete. The only remaining action is operator-gated:
+
+1. **Operator confirms** — push tarball + working clone to `github.com/LatticeProtocol/spacemacs.aDNA` (Phase 7 step 6). Until pushed, the standard layer is a local commons; once pushed, peer operators can clone and arrive at the same battle station.
+
+The vault now improves itself via the Phase 5 self-improvement loop (operator-gated). First friction observed in real sessions will produce the first non-synthetic ADR.
 
 ## Recent Decisions
 
@@ -71,7 +73,9 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 | 2026-05-04 | Phase 5 — `skill_self_improve.md` + DoD #5 demo (Rule E detected synthetic dup keybind, ADR 001 accepted, evidence committed) | Phase 5 commit `d4fe0a1` + `f7a4ef8` |
 | 2026-05-04 | Phase 6 — `LAYER_CONTRACT.md` (full, 7 clauses + scan), `skill_layer_promote.md`, `skill_overlay_consume.md`; sanitization scan ran clean against vault | Phase 6 commit `721ec5c` |
 | 2026-05-04 | Phase 7 — `skill_publish_lattice.md`; dry-run publish caught 6 sanitization violations and fixed them; tarball verified by extract+health-check | Phase 7 commit `12d9c7d` + scrub `7aca784` |
-| 2026-05-04 | DoD final sweep — all 8 checks green within host capability (D/E, install E2E, install-from-tarball deferred until emacs available) | DoD |
+| 2026-05-04 | DoD interim sweep — all 8 checks green within host capability (D/E, install E2E, install-from-tarball deferred until emacs available) | DoD interim commit `68eafd4` |
+| 2026-05-04 | Phase 8 — emacs install + skill_install end-to-end + ADR 002 (initial pin) + 2 elisp bugfixes caught by live boot | Phase 8 commits `63eaac8` + `c3d51c0` |
+| 2026-05-04 | DoD FINAL sweep — all 8 checks green, no deferrals; ref-clean install-from-tarball validated end-to-end | this commit |
 
 ## Partial-Resume Detection
 
