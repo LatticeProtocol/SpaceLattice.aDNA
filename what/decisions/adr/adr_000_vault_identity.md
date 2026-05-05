@@ -12,7 +12,7 @@ ratifies:
   - persona: daedalus
   - pattern: project
   - layered_architecture: [standard, local, overlay]
-  - publish_target: github.com/LatticeProtocol/spacemacs.aDNA
+  - publish_target: github.com/LatticeProtocol/SpaceLattice.aDNA
 supersedes:
 superseded_by:
 tags: [decision, adr, identity, governance, daedalus, layered_config, self_improving, genesis]
@@ -26,7 +26,7 @@ tags: [decision, adr, identity, governance, daedalus, layered_config, self_impro
 
 ## Context
 
-`spacemacs.aDNA` is a new aDNA project vault whose subject is a Spacemacs-based IDE used as the canonical battle station for ML ops, agentic coding, and aDNA context-graph navigation. This ADR captures the four decisions made before any code or content was written, in the planning phase under `~/.claude/plans/please-read-the-claude-md-splendid-boole.md`.
+`SpaceLattice.aDNA` is a new aDNA project vault whose subject is a Spacemacs-based IDE used as the canonical battle station for ML ops, agentic coding, and aDNA context-graph navigation. This ADR captures the four decisions made before any code or content was written, in the planning phase under `~/.claude/plans/please-read-the-claude-md-splendid-boole.md`.
 
 The decisions were taken collectively because each one constrains the others:
 
@@ -41,9 +41,9 @@ The decisions were taken collectively because each one constrains the others:
 
 This vault is tracked as a standard project in `~/lattice/CLAUDE.md`'s project table. It is **not** formalized as a new aDNA pattern category (e.g., `BattleStation.aDNA`) at genesis.
 
-**Reasoning.** The workspace pattern catalogue (`Forge.aDNA`, `Platform.aDNA`, `Org-Vault.aDNA`) only formalizes a category once a second instance emerges — see the Platform.aDNA canonical-spec note: *"promotes to workspace-canonical once a second platform emerges."* `spacemacs.aDNA` is N=1; promotion to a formal `BattleStation.aDNA` pattern is deferred until a second tooling vault appears.
+**Reasoning.** The workspace pattern catalogue (`Forge.aDNA`, `Platform.aDNA`, `Org-Vault.aDNA`) only formalizes a category once a second instance emerges — see the Platform.aDNA canonical-spec note: *"promotes to workspace-canonical once a second platform emerges."* `SpaceLattice.aDNA` is N=1; promotion to a formal `BattleStation.aDNA` pattern is deferred until a second tooling vault appears.
 
-**Reversibility.** If a second IDE-governance vault is forked, this ADR will be superseded by an ADR that formalizes `BattleStation.aDNA`, adds a workspace ecosystem section, and migrates `spacemacs.aDNA`'s pattern field accordingly.
+**Reversibility.** If a second IDE-governance vault is forked, this ADR will be superseded by an ADR that formalizes `BattleStation.aDNA`, adds a workspace ecosystem section, and migrates `SpaceLattice.aDNA`'s pattern field accordingly.
 
 ### 2. Persona: Daedalus
 
@@ -85,9 +85,9 @@ The contract is formalized in `what/standard/LAYER_CONTRACT.md`.
 
 **Reversibility.** Layers can be merged or split via successor ADRs. The contract change requires updating `LAYER_CONTRACT.md`, the `.gitignore`, and the deploy order in `skill_deploy.md`.
 
-### 4. Publish target: `github.com/LatticeProtocol/spacemacs.aDNA`
+### 4. Publish target: `github.com/LatticeProtocol/SpaceLattice.aDNA`
 
-The `standard/` layer (when `skill_publish_lattice` runs in Phase 7) mirrors to `github.com/LatticeProtocol/spacemacs.aDNA`. Same pattern as `SiteForge.aDNA`'s mirror at `github.com/LatticeProtocol/SiteForge.aDNA`.
+The `standard/` layer (when `skill_publish_lattice` runs in Phase 7) mirrors to `github.com/LatticeProtocol/SpaceLattice.aDNA`. Same pattern as `SiteForge.aDNA`'s mirror at `github.com/LatticeProtocol/SiteForge.aDNA`.
 
 **Reasoning.** The standard layer is a commons. Operators clone the repo, run `skill_install`, and arrive at the same battle station. The LatticeProtocol GitHub org houses the lattice-public commons; placing this vault there matches existing precedent.
 

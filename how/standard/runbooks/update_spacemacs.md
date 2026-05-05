@@ -83,7 +83,7 @@ Body:
 ### 3. Dry-run in scratch worktree
 
 ```bash
-SCRATCH=/tmp/spacemacs.aDNA.bumppin-$(date -u +%Y%m%dT%H%M%SZ)
+SCRATCH=/tmp/SpaceLattice.aDNA.bumppin-$(date -u +%Y%m%dT%H%M%SZ)
 cp -r . "$SCRATCH"
 cd "$SCRATCH"
 

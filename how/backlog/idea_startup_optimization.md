@@ -1,6 +1,6 @@
 ---
 type: backlog_idea
-status: proposed
+status: deferred
 priority: low
 created: 2026-04-04
 last_edited_by: agent_init

@@ -19,7 +19,7 @@ requirements:
   permissions:
     - "read all of vault"
     - "write what/decisions/adr/"
-    - "write to scratch worktree at /tmp/spacemacs.aDNA.dryrun-*"
+    - "write to scratch worktree at /tmp/SpaceLattice.aDNA.dryrun-*"
     - "execute skill_health_check"
     - "NEVER auto-commit to what/standard/"
 ---
@@ -174,7 +174,7 @@ git checkout -- .  # restore working tree; the diff is captured for dry-run
 ## Step 5 — Dry-run
 
 ```bash
-SCRATCH=/tmp/spacemacs.aDNA.dryrun-$(date -u +%Y%m%dT%H%M%SZ)
+SCRATCH=/tmp/SpaceLattice.aDNA.dryrun-$(date -u +%Y%m%dT%H%M%SZ)
 cp -r . "$SCRATCH"
 cd "$SCRATCH"
 git apply <vault>/what/decisions/adr/adr_NNN.diff
@@ -215,7 +215,7 @@ ARTIFACTS:
   ADR:     what/decisions/adr/adr_NNN_<slug>.md  (status: proposed)
   Diff:    what/decisions/adr/adr_NNN.diff
   Dry-run: what/decisions/adr/adr_NNN.dryrun.log
-  Scratch: /tmp/spacemacs.aDNA.dryrun-<utc>/
+  Scratch: /tmp/SpaceLattice.aDNA.dryrun-<utc>/
 
 OPERATOR DECISION:
   (a) ACCEPT  → apply diff, mark ADR accepted, commit, run skill_deploy

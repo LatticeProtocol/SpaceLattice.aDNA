@@ -1,10 +1,72 @@
-# Changelog — spacemacs.aDNA
+# Changelog — SpaceLattice.aDNA
 
 All notable changes to this project will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Plan B — Rename + repositioning + v1.0 campaign foundation (2026-05-05) — v0.2.0 target
+
+**Headline**: vault renamed `spacemacs.aDNA` → `SpaceLattice.aDNA`. Atomic rename ratified by **ADR 005**, which closes 5 coupled decisions (rename, sibling fork repo, LP-stack repositioning, persona-retention, version bump).
+
+**Filesystem + GitHub**:
+- `mv ~/lattice/spacemacs.aDNA ~/lattice/SpaceLattice.aDNA`
+- `gh repo rename SpaceLattice.aDNA --repo LatticeProtocol/spacemacs.aDNA` (GitHub auto-creates redirect from old name)
+- 39 tracked files updated via per-file sed (literal token `spacemacs.aDNA` → `SpaceLattice.aDNA`)
+- `~/.spacemacs` re-rendered with new `LOCAL_LAYER_DIR`; `~/.emacs.d/private/layers/adna` symlink relinked
+- `.publish-clone/` remote re-pointed to renamed repo
+- Workspace `~/lattice/CLAUDE.md` row + tree entry updated
+
+**Sibling fork opened**:
+- `gh repo fork syl20bnr/spacemacs --org LatticeProtocol --fork-name spacelattice` → `LatticeProtocol/spacelattice` (PUBLIC, default branch `develop`, parent confirmed)
+- Local clone deferred to v1.0 campaign Phase 4 (per ADR 005)
+- Provenance: `who/upstreams/spacelattice_fork.md`
+- Strategy: `what/standard/fork-strategy.md` (Stage 0 — fork opened; Stages 1-4 deferred)
+
+**LP-stack repositioning**:
+- `what/standard/lp-positioning.md` documents the agentic-IDE-governance-vault role of SpaceLattice.aDNA alongside `lattice-protocol` (runtime) + `Agentic-DNA` (template) + `LatticeProtocol/spacelattice` (sibling fork)
+
+**Customization reference persisted**:
+- `what/context/spacemacs/spacemacs_customization_reference.md` — operator-supplied Spacemacs Customization Architecture & LatticeProtocol Fork Playbook (~30K tokens) — verbatim, with aDNA frontmatter
+- `what/context/spacemacs/AGENTS.md` — load-discipline + section index
+
+**Sustainability framework outlined**:
+- `what/standard/sustainability.md` — stay-current cadence (weekly upstream check, monthly Emacs version check), 4-tier troubleshooting protocol (recover_from_breakage → skill_self_improve → cross-vault coord → upstream contribution), upgrade protocol, integration of findings during operation
+- Implementation deferred to v1.0 campaign Phase 2 (concrete schedules, runbook teeth, automation)
+
+**Telemetry framework outlined**:
+- `what/standard/telemetry.md` — channel (GitHub Issues w/ `telemetry` label per ADR 005), permission model (default opt-out, layered consent, per-submission confirm), submission contents schema outline (friction signals, ADR proposals, customizations, perf metrics), aggregation flow upstream, **agentic SRE feedback-loop diagram** (operator session → friction → operator-gated ADR → telemetry submit → fleet aggregate → upstream ADR → publish → operator pulls update)
+- Schema details + skill implementations deferred to v1.0 campaign Phase 2
+
+**Skill stubs**:
+- `how/standard/skills/skill_telemetry_submit.md` (stub — operator-gated submission)
+- `how/standard/skills/skill_telemetry_aggregate.md` (stub — maintainer-side fleet aggregation)
+- Both reference framework doc; full implementation in v1.0 P2
+
+**Campaign scaffold**:
+- `how/campaigns/campaign_spacelattice_v1_0/campaign_spacelattice_v1_0.md` — master file, 6 phases (P0 planning → P5 v1.0 release), mission_count + estimated_sessions = TBD pending M-Planning-01
+- `how/campaigns/campaign_spacelattice_v1_0/CLAUDE.md` — campaign-scoped governance overlay
+- `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_planning_01.md` — **the planning mission**, ready-to-run after this commit. Designs the rest of the campaign (mission tree, scope, estimation, phase-gate criteria, telemetry schema, sustainability runbook expansion plan, audit-findings closure plan, LP fork branding execution plan, customization walk-through mission grouping, user-in-the-loop session protocol)
+
+**Audit findings tracked**:
+- #4 inherited backlog cleanup → 6 ideas marked `status: deferred` (this commit); closure scope in v1.0 P1
+- #5 sanitization WARNs → tracked; ADR closure in v1.0 P1
+- #6 self-improve schedule → tracked; closure in v1.0 P2
+- #7 peer federation → deferred to post-v1.0
+
+**`.gitignore` extended** with telemetry outbox/sent (operator-local; gitignored).
+
+**Files added in this turn**:
+- `what/decisions/adr/adr_005_rename_to_spacelattice.md`
+- `what/context/spacemacs/{AGENTS.md, spacemacs_customization_reference.md}`
+- `what/standard/{lp-positioning, fork-strategy, sustainability, telemetry}.md`
+- `who/upstreams/spacelattice_fork.md`
+- `how/standard/skills/skill_telemetry_{submit, aggregate}.md` (stubs)
+- `how/campaigns/campaign_spacelattice_v1_0/{campaign_spacelattice_v1_0, CLAUDE}.md`
+- `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_planning_01.md`
+
+**Operator hand-off**: trigger `mission_sl_planning_01` in next session to design the v1.0 campaign mission tree.
 
 ### Phase 8 (live install + DoD completion)
 
@@ -32,7 +94,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Phase 7 step 6 (GitHub publish, 2026-05-05)
 
-- **`LatticeProtocol/spacemacs.aDNA` PUBLIC** at https://github.com/LatticeProtocol/spacemacs.aDNA
+- **`LatticeProtocol/SpaceLattice.aDNA` PUBLIC** at https://github.com/LatticeProtocol/SpaceLattice.aDNA
 - Tagged `v0.1.0-genesis`
 - Tarball SHA-256: `55b1a04a7e5c99fe...` (size 680197 bytes)
 - Publish receipt: `who/peers/published/20260505T023357Z.md`
@@ -53,7 +115,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Phase 7 (complete except GitHub push)
 
-- **`how/standard/skills/skill_publish_lattice.md`** — 7-step publishing skill: clean-state check, build publish tree (rsync with explicit excludes for `what/local/`, `how/local/`, `who/operators/`, `deploy/`, `dist/`, `.git/`, `how/sessions/active/`, `*.dryrun.log`), sanitization scan via LAYER_CONTRACT § 4, tarball at `dist/<utc>.tar.gz`, extract + health-check the tarball, push to `github.com/LatticeProtocol/spacemacs.aDNA` (REQUIRES OPERATOR CONFIRMATION), publish receipt at `who/peers/published/<utc>.md`.
+- **`how/standard/skills/skill_publish_lattice.md`** — 7-step publishing skill: clean-state check, build publish tree (rsync with explicit excludes for `what/local/`, `how/local/`, `who/operators/`, `deploy/`, `dist/`, `.git/`, `how/sessions/active/`, `*.dryrun.log`), sanitization scan via LAYER_CONTRACT § 4, tarball at `dist/<utc>.tar.gz`, extract + health-check the tarball, push to `github.com/LatticeProtocol/SpaceLattice.aDNA` (REQUIRES OPERATOR CONFIRMATION), publish receipt at `who/peers/published/<utc>.md`.
 - **Live dry-run publish** (steps 1-5) caught 6 operator-home path violations (Clause 1) across CHANGELOG.md, STATE.md, README.md, and `what/decisions/adr/adr_000_vault_identity.md`. All replaced with `~/...` shorthand or rephrased to remove the literal pattern.
 - **Hostname-literal regex tightened** in `what/standard/LAYER_CONTRACT.md` to avoid `.env.local` (gitignore line) and `settings.local.json` (inherited claude-code context) false positives. Pattern now requires non-`.` lookbehind + lookahead.
 - **GitHub push DEFERRED** — Step 6 (`git push origin main` + tag) requires explicit operator confirmation; dry-run produces tarball locally only. DoD #6 partial satisfaction (tarball + extract health-check green); full satisfaction requires running `skill_install` from extracted tarball on a clean reference environment with emacs.
@@ -103,7 +165,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Foundational ADR 000 — vault identity, persona (Daedalus), pattern (project, informal), publish target, layered architecture
 - `what/standard/` documents authored:
   - `pins.md` — Spacemacs SHA + Emacs version + OS matrix (pin pending first install)
-  - `layers.md` — canonical Spacemacs layer set + the spacemacs.aDNA-specific `adna` layer
+  - `layers.md` — canonical Spacemacs layer set + the SpaceLattice.aDNA-specific `adna` layer
   - `dotfile.spacemacs.tmpl` — template rendered to `~/.spacemacs` by `skill_deploy`
   - `packages.el.tmpl` — template for additional packages
   - `adna-bridge.md` — spec for the `adna` Spacemacs layer (impl in Phase 4)
@@ -140,5 +202,5 @@ The seven-phase genesis plan lives at `~/.claude/plans/please-read-the-claude-md
 | 4 — aDNA bridge layer | pending | Elisp at `what/standard/layers/adna/` + Python CLI fallback |
 | 5 — Self-improvement loop | pending | `skill_self_improve` with operator gate |
 | 6 — Layer contract + overlay | pending | Full LAYER_CONTRACT + `skill_overlay_consume` |
-| 7 — Lattice publishing | pending | tarball + push to `github.com/LatticeProtocol/spacemacs.aDNA` |
+| 7 — Lattice publishing | pending | tarball + push to `github.com/LatticeProtocol/SpaceLattice.aDNA` |
 | DoD | pending | 8-check end-to-end verification |

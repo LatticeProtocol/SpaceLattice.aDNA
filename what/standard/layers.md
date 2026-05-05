@@ -47,7 +47,7 @@ The canonical layer list rendered into `~/.spacemacs` via `dotfile.spacemacs.tmp
 | `spell-checking` | flyspell | — |
 | `syntax-checking` | flycheck | — |
 
-## spacemacs.aDNA-specific layers
+## SpaceLattice.aDNA-specific layers
 
 ### `adna` (vault-private)
 

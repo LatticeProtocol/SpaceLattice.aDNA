@@ -5,7 +5,8 @@ created: 2026-05-03
 updated: 2026-05-03
 last_edited_by: agent_init
 last_session: null
-tags: [state, governance, spacemacs, daedalus, genesis, p8]
+updated: 2026-05-05
+tags: [state, governance, spacelattice, daedalus, v0_2_0, rename, campaign_v1_0]
 ---
 
 # Operational State
@@ -14,7 +15,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Genesis (v0.1.0) — COMPLETE + AAR ratified.** All eight phases done (2026-05-03 → 2026-05-05). All 8 DoD checks green, no deferrals. Published to `LatticeProtocol/spacemacs.aDNA` (PUBLIC, tag `v0.1.0-genesis`). Genesis AAR written; ADR 003 closes the high-severity audit findings (skill batch-boot invocation + SIGPIPE pipe). Vault is in steady state — improving itself via Phase 5 closed loop on each session's friction.
+**SpaceLattice v0.2.0 — Renamed + repositioned + v1.0 campaign foundation.** Genesis closed at v0.1.0; this turn (Plan B) renamed `spacemacs.aDNA` → `SpaceLattice.aDNA` (vault dir + GitHub repo), opened sibling fork `LatticeProtocol/spacelattice` (fork of `syl20bnr/spacemacs`, no local clone yet), persisted operator's Spacemacs Customization Architecture reference doc, drafted sustainability + telemetry framework outlines, scaffolded `campaign_spacelattice_v1_0/` with Planning Mission `mission_sl_planning_01.md` ready to run. Foundational ADR 005 ratifies. v0.2.0 about to tag.
 
 ## What's Working
 
@@ -28,7 +29,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 - **Phase 4** — aDNA bridge layer authored: `what/standard/layers/adna/{packages,config,funcs,keybindings}.el`. Python CLI fallback `what/standard/index/build_graph.py` runs end-to-end against this vault — 218 nodes, 331 edges. `skill_adna_index.md` wraps both callers (elisp + Python).
 - **Phase 5** — Self-improvement loop authored at `how/standard/skills/skill_self_improve.md` (~250 lines, 6 detection rules A-F, operator-gated commit). DoD #5 demo run end-to-end: synthetic friction (duplicated `SPC a h` binding) injected into working tree, Rule E fired, ADR 001 drafted (`adr_kind: synthetic_demo`), proposal diff generated, scratch-worktree dry-run health-check green, operator ACCEPTED, diff applied (removed injection), evidence committed. Synthetic friction never entered committed history.
 - **Phase 6** — Layer contract + overlay: full `what/standard/LAYER_CONTRACT.md` (replaces stub) with 7 normative clauses + sanitization scan (Python inline) + license interlock. `skill_layer_promote.md` + `skill_overlay_consume.md` reference contract by clause number. The contract's own sanitization scan ran clean against this vault's `what/standard/` + `how/standard/` after fixing one Clause 1 violation (an operator-home path replaced with the `~/` shorthand).
-- **Phase 7** — Lattice publishing: `skill_publish_lattice.md` authored. Dry-run publish ran end-to-end (rsync publish tree, sanitize, tarball, extract, structural + graph health-check). Sanitize step caught 6 real operator-home path violations across CHANGELOG, STATE, README, ADR 000 — fixed in this same commit. Hostname-literal regex tightened to avoid `.env.local` / `settings.local.json` false positives. GitHub push to `LatticeProtocol/spacemacs.aDNA` DEFERRED until operator confirms.
+- **Phase 7** — Lattice publishing: `skill_publish_lattice.md` authored. Dry-run publish ran end-to-end (rsync publish tree, sanitize, tarball, extract, structural + graph health-check). Sanitize step caught 6 real operator-home path violations across CHANGELOG, STATE, README, ADR 000 — fixed in this same commit. Hostname-literal regex tightened to avoid `.env.local` / `settings.local.json` false positives. GitHub push to `LatticeProtocol/SpaceLattice.aDNA` DEFERRED until operator confirms.
 - **Phase 8 (live install + DoD completion)** — `brew install emacs-plus@29 fd` (ripgrep already present) → `skill_install` end-to-end → batch boot installed ~40 layer packages from MELPA in 3.5 min, exit 0 → captured Spacemacs SHA `e57594e7` into `pins.md` (ADR 002 ratifies) → `(adna/health-check)` returned OK → `M-x adna-index-project` wrote `graph.json` (223 nodes, 341 edges) via elisp wrapper. Two real elisp bugs caught and fixed by live boot: malformed `cl-loop` in `adna/wikilink-at-point` (`for orig (point)` → outer `let`), and redundant `transient`/`vterm` declarations in `packages.el` (already provided by spacemacs-bootstrap + shell layers). Deploy receipt: `deploy/<host>/<utc>.md` (gitignored).
 - `README.md` (operator-facing 60-second orientation) and `CHANGELOG.md` replace inherited template content
 - `CLAUDE.md` updated: Project Map, Spacemacs Standing Orders (clauses 7-12), expanded Skills Inventory (inherited + project-specific)
@@ -37,25 +38,35 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Active Blockers
 
-- `emacs` not installed on this host. Phase 3 skills are authored but cannot be E2E-validated against `~/.emacs.d/` until emacs is installed.
-- `ripgrep` and `fd` not installed (informational; required at install time, not now)
-- Phase 4-7 work can begin without emacs — elisp is authored, Python helpers can be written, lattice publish skill can be drafted. E2E execution waits.
+None blocking. Open audit findings tracked + integrated into v1.0 campaign:
+
+- #4 Inherited backlog cleanup → 6 ideas marked `status: deferred`; closed by v1.0 P1
+- #5 Sanitization WARNs (private IPv4 + email in inherited L1 upgrade skill) → ADR pending in v1.0 P1
+- #6 No schedule for `skill_self_improve` → architectural; closed by v1.0 P2
+- #7 Peer federation mechanism → deferred to post-v1.0
 
 ## Next Steps
 
-The vault is complete. The only remaining action is operator-gated:
+The vault is at v0.2.0 (post-rename, pre-v1.0). The next operator action is to **trigger M-Planning-01**:
 
-1. **Operator confirms** — push tarball + working clone to `github.com/LatticeProtocol/spacemacs.aDNA` (Phase 7 step 6). Until pushed, the standard layer is a local commons; once pushed, peer operators can clone and arrive at the same battle station.
+1. **Run M-Planning-01** — the planning mission designs the v1.0 campaign mission tree (file: `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_planning_01.md`). Operator triggers when ready ("run M-Planning-01" or equivalent).
 
-The vault now improves itself via the Phase 5 self-improvement loop (operator-gated). First friction observed in real sessions will produce the first non-synthetic ADR.
+After M-Planning-01 closes, P1-P5 missions execute one at a time, operator-gated between phases per Standing Order #1.
+
+The vault continues improving itself via the Phase 5 self-improvement loop (operator-gated). First non-synthetic ADR comes from real session friction.
 
 ## Recent Decisions
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-05 | **Vault rename: `spacemacs.aDNA` → `SpaceLattice.aDNA`** (filesystem + GitHub) | ADR 005 |
+| 2026-05-05 | **Sibling fork opened: `LatticeProtocol/spacelattice`** (fork of `syl20bnr/spacemacs`) | ADR 005 |
+| 2026-05-05 | **Repositioning**: Lattice-Protocol-aware Spacemacs distribution governed by aDNA | ADR 005 |
+| 2026-05-05 | **Telemetry channel**: GitHub Issues w/ `telemetry` label (schema TBD by M-Planning-01) | ADR 005 + Plan B |
+| 2026-05-05 | Persona retained: Daedalus (still on-theme post-rename) | ADR 005 |
 | 2026-05-03 | Persona locked: Daedalus | Plan approval |
 | 2026-05-03 | Pattern: project (informal) | Plan approval |
-| 2026-05-03 | Publish target: `github.com/LatticeProtocol/spacemacs.aDNA` | Plan approval |
+| 2026-05-03 | Publish target: `github.com/LatticeProtocol/SpaceLattice.aDNA` | Plan approval |
 | 2026-05-03 | Self-contained vault — no sibling code repo | Plan |
 | 2026-05-03 | `.gitignore` written before first commit | Phase 1 |
 | 2026-05-03 | Strip selectively for inherited template files | User choice (post-Phase 1) |
@@ -76,8 +87,10 @@ The vault now improves itself via the Phase 5 self-improvement loop (operator-ga
 | 2026-05-04 | DoD interim sweep — all 8 checks green within host capability (D/E, install E2E, install-from-tarball deferred until emacs available) | DoD interim commit `68eafd4` |
 | 2026-05-04 | Phase 8 — emacs install + skill_install end-to-end + ADR 002 (initial pin) + 2 elisp bugfixes caught by live boot | Phase 8 commits `63eaac8` + `c3d51c0` |
 | 2026-05-04 | DoD FINAL sweep — all 8 checks green, no deferrals; ref-clean install-from-tarball validated end-to-end | DoD final commit `1623f9b` |
-| 2026-05-04 | Phase 7 step 6 (GitHub publish) — `LatticeProtocol/spacemacs.aDNA` PUBLIC, tag `v0.1.0-genesis` | publish receipt commit `df25798` |
-| 2026-05-05 | Genesis AAR + ADR 003 — closes Standing Order #5 violation; fixes skill batch-boot invocation + SIGPIPE pipe (audit findings #2/#3/#4) | this commit |
+| 2026-05-04 | Phase 7 step 6 (GitHub publish) — `LatticeProtocol/SpaceLattice.aDNA` PUBLIC, tag `v0.1.0-genesis` | publish receipt commit `df25798` |
+| 2026-05-05 | Genesis AAR + ADR 003 — closes Standing Order #5 violation; fixes skill batch-boot invocation + SIGPIPE pipe (audit findings #2/#3/#4) | commit `d853a1e` |
+| 2026-05-05 | v0.1.0 published to GitHub mirror (post-AAR + ADR 003) | publish receipt commit `14a642f`, tag v0.1.0 |
+| 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | this commit (v0.2.0) |
 
 ## Partial-Resume Detection
 

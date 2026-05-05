@@ -70,7 +70,7 @@ Or open in Spacemacs: `SPC a g` (calls `adna/render-lattice-graph`).
 ```json
 {
   "version": "1.0",
-  "vault": "spacemacs.aDNA",
+  "vault": "SpaceLattice.aDNA",
   "generated": "2026-05-03T22:30:00Z",
   "node_count": 305,
   "edge_count": 412,

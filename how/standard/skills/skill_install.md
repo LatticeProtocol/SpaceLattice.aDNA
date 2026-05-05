@@ -6,7 +6,7 @@ created: 2026-05-03
 updated: 2026-05-03
 last_edited_by: agent_init
 category: install
-trigger: "Operator wants to install spacemacs.aDNA on a fresh machine, or machine state shows ~/.emacs.d/ is empty/missing, or first deploy after fork."
+trigger: "Operator wants to install SpaceLattice.aDNA on a fresh machine, or machine state shows ~/.emacs.d/ is empty/missing, or first deploy after fork."
 phase_introduced: 3
 tags: [skill, install, spacemacs, deploy, idempotent, daedalus]
 requirements:
@@ -26,11 +26,11 @@ requirements:
     - "read what/local/ if present"
 ---
 
-# skill_install — install spacemacs.aDNA on a fresh machine
+# skill_install — install SpaceLattice.aDNA on a fresh machine
 
 ## Purpose
 
-Take a host from "no Spacemacs" to "working spacemacs.aDNA battle station with the `adna` layer loaded and the `SPC a` transient available." Idempotent: rerunning produces the same end state without destroying prior work.
+Take a host from "no Spacemacs" to "working SpaceLattice.aDNA battle station with the `adna` layer loaded and the `SPC a` transient available." Idempotent: rerunning produces the same end state without destroying prior work.
 
 ## Pre-conditions
 
@@ -70,10 +70,10 @@ If any tool missing, abort with the OS-specific install hint from `what/standard
 ```bash
 UTC=$(date -u +%Y%m%dT%H%M%SZ)
 
-# Detect prior spacemacs.aDNA installation (carries marker in ~/.spacemacs)
+# Detect prior SpaceLattice.aDNA installation (carries marker in ~/.spacemacs)
 SPACEMACS_OURS=0
 if [[ -f ~/.spacemacs ]]; then
-  if grep -q "spacemacs.aDNA standard dotfile" ~/.spacemacs; then
+  if grep -q "SpaceLattice.aDNA standard dotfile" ~/.spacemacs; then
     SPACEMACS_OURS=1
   fi
 fi
@@ -112,7 +112,7 @@ fi
 cd <vault-root>
 ```
 
-(The `<vault-root>` substitution is the actual absolute path of the spacemacs.aDNA vault — set as `VAULT=$(pwd)` at start.)
+(The `<vault-root>` substitution is the actual absolute path of the SpaceLattice.aDNA vault — set as `VAULT=$(pwd)` at start.)
 
 ### Step 4 — Render templates
 
@@ -270,7 +270,7 @@ After successful run:
 Re-running on an already-installed machine:
 
 - Step 1 — same checks, fast
-- Step 2 — detects `spacemacs.aDNA` marker; skips backup
+- Step 2 — detects `SpaceLattice.aDNA` marker; skips backup
 - Step 3 — `git fetch` + `git checkout` to pinned SHA (no-op if already there)
 - Step 4 — re-renders templates (overwrites; safe)
 - Step 5 — symlink check; no-op if correct

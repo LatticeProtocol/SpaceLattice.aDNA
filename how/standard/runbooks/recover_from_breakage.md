@@ -5,7 +5,7 @@ created: 2026-05-03
 updated: 2026-05-03
 last_edited_by: agent_init
 audience: human
-intent: "Restore a working spacemacs.aDNA install after ~/.emacs.d/ or ~/.spacemacs is broken."
+intent: "Restore a working SpaceLattice.aDNA install after ~/.emacs.d/ or ~/.spacemacs is broken."
 time_estimate: "5–20 minutes depending on damage"
 phase_introduced: 3
 tags: [runbook, recovery, breakage, backup, daedalus]
@@ -139,7 +139,7 @@ mv ~/.spacemacs ~/.spacemacs.giveup.$(date -u +%Y%m%dT%H%M%SZ)
 bash <vault-root>/how/standard/skills/skill_install.md
 ```
 
-You don't lose vault data — all your real work is in `~/lattice/spacemacs.aDNA/`. Only the install state on this machine resets.
+You don't lose vault data — all your real work is in `~/lattice/SpaceLattice.aDNA/`. Only the install state on this machine resets.
 
 ## After recovery — record the incident
 

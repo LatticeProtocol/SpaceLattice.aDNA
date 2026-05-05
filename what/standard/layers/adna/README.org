@@ -1,5 +1,5 @@
 #+TITLE: adna layer
-#+AUTHOR: spacemacs.aDNA / Daedalus
+#+AUTHOR: SpaceLattice.aDNA / Daedalus
 #+DATE: 2026-05-03
 #+LANGUAGE: en
 
@@ -11,7 +11,7 @@ activates =adna-mode=, parses the file's YAML frontmatter into buffer-local
 variables, and surfaces the =SPC a= transient menu for triad-aware navigation.
 
 This layer is the "wings" half of the Daedalus metaphor governing
-spacemacs.aDNA — tools that lift the operator above the labyrinth of
+SpaceLattice.aDNA — tools that lift the operator above the labyrinth of
 aDNA context-graph relations rather than just through it.
 
 * Implementation status

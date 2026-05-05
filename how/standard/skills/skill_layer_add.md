@@ -104,7 +104,7 @@ Save the unified diff alongside the ADR: `what/decisions/adr/adr_NNN.diff`.
 ### Step 5 — Dry-run in scratch worktree
 
 ```bash
-SCRATCH=/tmp/spacemacs.aDNA.dryrun-$(date -u +%Y%m%dT%H%M%SZ)
+SCRATCH=/tmp/SpaceLattice.aDNA.dryrun-$(date -u +%Y%m%dT%H%M%SZ)
 cp -r . "$SCRATCH"
 cd "$SCRATCH"
 git apply <vault>/what/decisions/adr/adr_NNN.diff
@@ -128,7 +128,7 @@ Layer add proposal: <layer>
 ADR: what/decisions/adr/adr_NNN_<layer>_layer.md (status: proposed)
 Diff: what/decisions/adr/adr_NNN.diff
 Dry-run: what/decisions/adr/adr_NNN.dryrun.log (exit 0 — green)
-Scratch worktree: /tmp/spacemacs.aDNA.dryrun-<utc>/
+Scratch worktree: /tmp/SpaceLattice.aDNA.dryrun-<utc>/
 
 Operator decision required:
   (a) ACCEPT  → apply diff, set ADR status: accepted, commit, run skill_deploy
