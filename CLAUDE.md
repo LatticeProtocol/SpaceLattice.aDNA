@@ -11,8 +11,8 @@ last_edited_by: agent_init
 tags: [governance, spacemacs, daedalus, battle_station, ide, layered_config, self_improving, genesis]
 ---
 
-# CLAUDE.md — spacemacs.aDNA
-<!-- v6.0 (spacemacs.aDNA fork) | 2026-05-03 -->
+# CLAUDE.md — SpaceLattice.aDNA
+<!-- v6.0 (SpaceLattice.aDNA fork) | 2026-05-03 -->
 
 ## Identity & Personality
 
@@ -33,7 +33,7 @@ This vault uses the **aDNA (Agentic DNA)** knowledge architecture and governs a 
 
 ### Persona note
 
-Daedalus is the locked persona for spacemacs.aDNA per the genesis plan (2026-05-03). To customize for your own fork, edit everything between the `## Identity & Personality` header and the `---` separator below.
+Daedalus is the locked persona for SpaceLattice.aDNA per the genesis plan (2026-05-03). To customize for your own fork, edit everything between the `## Identity & Personality` header and the `---` separator below.
 
 ---
 
@@ -55,7 +55,7 @@ If only ONE indicates first-run (partial onboarding), read the skill file and re
 ## Project Map
 
 ```
-spacemacs.aDNA/
+SpaceLattice.aDNA/
 ├── CLAUDE.md, MANIFEST.md, STATE.md, README.md, CHANGELOG.md, AGENTS.md
 ├── what/                        # WHAT
 │   ├── standard/                # shared, deterministic — the published commons
@@ -77,7 +77,7 @@ spacemacs.aDNA/
 ├── who/                         # WHO
 │   ├── operators/               # who runs this battle station (per-machine)
 │   ├── upstreams/               # Spacemacs maintainers + layer authors
-│   ├── peers/                   # other spacemacs.aDNA forks (lattice federation, Phase 7+)
+│   ├── peers/                   # other SpaceLattice.aDNA forks (lattice federation, Phase 7+)
 │   ├── governance/, team/, coordination/  # inherited
 └── deploy/                      # gitignored — per-deploy receipts (deploy/<hostname>/<utc>.md)
 ```
@@ -249,7 +249,7 @@ Reusable agent recipes and documented procedures in `how/skills/`. Skills have t
 | `skill_sqlite_persistence` | process | Multiple agents, sessions hard to query, learnings accumulating without validation signal |
 | `skill_orchestration_tiers` | process | Multi-file tasks, tier classification, agent spawning, model routing decisions |
 
-**Skills inventory** — spacemacs.aDNA project-specific (Phases 3-7, in `how/standard/skills/`):
+**Skills inventory** — SpaceLattice.aDNA project-specific (Phases 3-7, in `how/standard/skills/`):
 
 | Skill | Type | Phase | Trigger |
 |-------|------|-------|---------|
@@ -261,7 +261,7 @@ Reusable agent recipes and documented procedures in `how/skills/`. Skills have t
 | `skill_self_improve` | agent | 5 | Read recent sessions → detect friction → draft ADR + diff + dry-run → present to operator |
 | `skill_layer_promote` | agent | 6 | `local/` → `standard/` promotion (ADR + sanitization scan) |
 | `skill_overlay_consume` | agent | 6 | Consume third-party Spacemacs distribution. Per-layer ADR-gated disposition |
-| `skill_publish_lattice` | agent | 7 | rsync standard layer + sanitize + tarball + push to `github.com/LatticeProtocol/spacemacs.aDNA` |
+| `skill_publish_lattice` | agent | 7 | rsync standard layer + sanitize + tarball + push to `github.com/LatticeProtocol/SpaceLattice.aDNA` |
 
 ---
 
@@ -419,4 +419,4 @@ When you notice one, mention it to the user at a **natural pause point** (end of
 The `how/quests/` directory contains structured validation experiments ("side-quests") that community members can run with spare agent tokens. At natural session-end points, if the user has spare context budget, you may briefly mention available quests. Never interrupt active work for this. See `what/docs/side_quest_guide.md` for the full participation guide and `how/quests/AGENTS.md` for directory structure.
 
 ---
-<!-- v6.0 (spacemacs.aDNA fork) | 2026-05-03 -->
+<!-- v6.0 (SpaceLattice.aDNA fork) | 2026-05-03 -->

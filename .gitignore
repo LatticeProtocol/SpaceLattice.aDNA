@@ -1,4 +1,4 @@
-# spacemacs.aDNA — gitignore
+# SpaceLattice.aDNA — gitignore
 # Written BEFORE first commit so private content never enters history.
 
 # === LAYERED ARCHITECTURE: private layers ===
@@ -18,6 +18,12 @@
 # === DEPLOY RECEIPTS ===
 # Deployment artifacts contain hostnames + machine state; per-machine, never published.
 /deploy/
+
+# === TELEMETRY OUTBOX / SENT (operator-local) ===
+# Per-machine queued + sent telemetry. The maintainer-side aggregated inbox
+# IS committed (audit trail) but the outbox/sent dirs stay local.
+/who/peers/telemetry/outbox/
+/who/peers/telemetry/sent/
 
 # === PUBLISH ARTIFACTS ===
 # skill_publish_lattice writes here; not committed to vault git.

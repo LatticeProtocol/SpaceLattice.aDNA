@@ -1,6 +1,6 @@
 ;;; keybindings.el --- adna layer keybindings  -*- lexical-binding: t -*-
 ;;
-;; Author:  spacemacs.aDNA / Daedalus
+;; Author:  SpaceLattice.aDNA / Daedalus
 ;; License: GPL-3.0
 ;;
 ;; Spacemacs leader keybindings for the adna layer. Loaded last (after

@@ -20,7 +20,7 @@ requirements:
     - "read git ls-files"
 ---
 
-# skill_health_check — green/red gate for spacemacs.aDNA
+# skill_health_check — green/red gate for SpaceLattice.aDNA
 
 ## Purpose
 
@@ -105,15 +105,15 @@ fi
 
 ```bash
 if [[ -d ~/.emacs.d/.git ]] && [[ -f ~/.spacemacs ]]; then
-  emacs --batch -l ~/.emacs.d/init.el --eval '(message "spacemacs.aDNA boot OK")' 2>&1 | \
-    grep -E "(Error|Warning|spacemacs.aDNA boot OK)" > /tmp/_health.log
+  emacs --batch -l ~/.emacs.d/init.el --eval '(message "SpaceLattice.aDNA boot OK")' 2>&1 | \
+    grep -E "(Error|Warning|SpaceLattice.aDNA boot OK)" > /tmp/_health.log
 
   if grep -q "Error" /tmp/_health.log; then
     echo "RED: emacs batch boot reported errors:"
     cat /tmp/_health.log
     exit 40
   fi
-  if ! grep -q "spacemacs.aDNA boot OK" /tmp/_health.log; then
+  if ! grep -q "SpaceLattice.aDNA boot OK" /tmp/_health.log; then
     echo "RED: emacs batch boot did not reach completion message"
     cat /tmp/_health.log
     exit 41

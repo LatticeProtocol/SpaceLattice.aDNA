@@ -73,4 +73,4 @@ When upstream Spacemacs has notable changes that the vault wants to absorb, run 
 
 ## Reproducibility note
 
-This file's pin discipline is what allows another operator to clone `spacemacs.aDNA` from the LatticeProtocol mirror (Phase 7), run `skill_install`, and arrive at the same battle station as the original. Pin drift breaks reproducibility.
+This file's pin discipline is what allows another operator to clone `SpaceLattice.aDNA` from the LatticeProtocol mirror (Phase 7), run `skill_install`, and arrive at the same battle station as the original. Pin drift breaks reproducibility.

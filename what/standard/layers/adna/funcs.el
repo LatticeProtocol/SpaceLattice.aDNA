@@ -1,6 +1,6 @@
 ;;; funcs.el --- adna layer functions  -*- lexical-binding: t -*-
 ;;
-;; Author:  spacemacs.aDNA / Daedalus
+;; Author:  SpaceLattice.aDNA / Daedalus
 ;; License: GPL-3.0
 ;;
 ;; Interactive commands and helpers for the adna layer. Loaded after config.el.

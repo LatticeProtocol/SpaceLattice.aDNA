@@ -30,7 +30,7 @@ tags: [operator, stanley, daedalus, mac, ml_ops]
 
 ## Role
 
-Single-operator owner of `spacemacs.aDNA`. Genesis architect (2026-05-03). Customizations carried in `what/local/operator.private.el` and `what/local/machine.pins.md` once first install runs.
+Single-operator owner of `SpaceLattice.aDNA`. Genesis architect (2026-05-03). Customizations carried in `what/local/operator.private.el` and `what/local/machine.pins.md` once first install runs.
 
 ## Workflow context
 
