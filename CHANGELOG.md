@@ -21,6 +21,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - **DoD #6 install-from-tarball validated**: regenerated tarball with Phase 8 fixes; extracted to clean ref dir at `/tmp/refclean-<utc>`; ran skill_install steps inline with isolated `HOME=/tmp/refhome-<utc>`; cloned Spacemacs at pinned SHA; rendered templates; symlinked adna layer; **batch boot succeeded in 3.5 min, exit 0**; `(adna/health-check)` returned OK on the ref-clean install. The canonical peer-operator workflow is end-to-end validated.
 - **Phase 8 followup**: dotfile sets `vterm-always-compile-module t` so first-install in batch mode doesn't block on the `vterm-module` interactive compile prompt. This was caught when the ref-clean boot hung waiting for "Compile vterm-module? (y or n)".
 
+### Genesis AAR + ADR 003 (2026-05-05) — closes Standing Order #5
+
+- **Genesis AAR** at `how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md`. Free-standing artifact (no formal mission file existed because genesis was plan-driven). 13/13 deliverables validated, 8-row gap register, 4 technical-debt entries, GO readiness, 8 lessons learned. Closes Standing Order #5 ("every mission gets an AAR").
+- **ADR 003 — Fix skill_install + skill_health_check batch-boot invocation**:
+  - `skill_install.md` step 6 was `emacs --batch -l ~/.spacemacs` — wrong; loads only the dotfile, not Spacemacs's bootstrap. Fixed to `-l ~/.emacs.d/init.el`.
+  - `skill_install.md` step 6 also used `| tee | tail` which SIGPIPE-killed emacs. Fixed to `> $LOG 2>&1` redirect.
+  - `skill_health_check.md` checks D + E carried the same wrong invocation. Fixed.
+- **`build_graph.py` SKIP_DIRS extended**: `.publish-clone` and `dist` now skipped. Without this, running `adna-index-project` after a publish would double-count vault content (the `.publish-clone/` working clone holds a full copy of the published tree). Graph node count corrects from spurious 448 back to actual ~228 nodes.
+
+### Phase 7 step 6 (GitHub publish, 2026-05-05)
+
+- **`LatticeProtocol/spacemacs.aDNA` PUBLIC** at https://github.com/LatticeProtocol/spacemacs.aDNA
+- Tagged `v0.1.0-genesis`
+- Tarball SHA-256: `55b1a04a7e5c99fe...` (size 680197 bytes)
+- Publish receipt: `who/peers/published/20260505T023357Z.md`
+- License: GPL-3.0 (matches Spacemacs upstream)
+
 ### DoD final sweep — all 8 checks GREEN, no deferrals (2026-05-04)
 
 - DoD #1 git repo + triad ✅

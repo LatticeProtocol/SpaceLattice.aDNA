@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Genesis (v0.1.0) — COMPLETE.** All eight phases done (2026-05-03 + 2026-05-04). All 8 DoD checks GREEN with no deferrals: live emacs install validated; ref-clean tarball install validated end-to-end. GitHub push (Phase 7 step 6) still operator-gated — only remaining outbound action.
+**Genesis (v0.1.0) — COMPLETE + AAR ratified.** All eight phases done (2026-05-03 → 2026-05-05). All 8 DoD checks green, no deferrals. Published to `LatticeProtocol/spacemacs.aDNA` (PUBLIC, tag `v0.1.0-genesis`). Genesis AAR written; ADR 003 closes the high-severity audit findings (skill batch-boot invocation + SIGPIPE pipe). Vault is in steady state — improving itself via Phase 5 closed loop on each session's friction.
 
 ## What's Working
 
@@ -75,7 +75,9 @@ The vault now improves itself via the Phase 5 self-improvement loop (operator-ga
 | 2026-05-04 | Phase 7 — `skill_publish_lattice.md`; dry-run publish caught 6 sanitization violations and fixed them; tarball verified by extract+health-check | Phase 7 commit `12d9c7d` + scrub `7aca784` |
 | 2026-05-04 | DoD interim sweep — all 8 checks green within host capability (D/E, install E2E, install-from-tarball deferred until emacs available) | DoD interim commit `68eafd4` |
 | 2026-05-04 | Phase 8 — emacs install + skill_install end-to-end + ADR 002 (initial pin) + 2 elisp bugfixes caught by live boot | Phase 8 commits `63eaac8` + `c3d51c0` |
-| 2026-05-04 | DoD FINAL sweep — all 8 checks green, no deferrals; ref-clean install-from-tarball validated end-to-end | this commit |
+| 2026-05-04 | DoD FINAL sweep — all 8 checks green, no deferrals; ref-clean install-from-tarball validated end-to-end | DoD final commit `1623f9b` |
+| 2026-05-04 | Phase 7 step 6 (GitHub publish) — `LatticeProtocol/spacemacs.aDNA` PUBLIC, tag `v0.1.0-genesis` | publish receipt commit `df25798` |
+| 2026-05-05 | Genesis AAR + ADR 003 — closes Standing Order #5 violation; fixes skill batch-boot invocation + SIGPIPE pipe (audit findings #2/#3/#4) | this commit |
 
 ## Partial-Resume Detection
 
