@@ -121,7 +121,12 @@
   (spacemacs/load-spacemacs-env))
 
 (defun dotspacemacs/user-init ()
-  "Called before layer config. Used here to load operator-private layers from local layer."
+  "Called before layer config. Sets pre-load preferences and pulls in operator-private elisp."
+  ;; vterm: auto-compile the native module on first install (no interactive
+  ;; prompt during batch boot). Required for skill_install to complete in
+  ;; ref-clean envs where the module hasn't been compiled yet.
+  (setq vterm-always-compile-module t)
+
   ;; Load operator's private elisp last (gitignored) — additive only.
   (let ((private-el (expand-file-name "operator.private.el"
                                       "{{LOCAL_LAYER_DIR}}")))
