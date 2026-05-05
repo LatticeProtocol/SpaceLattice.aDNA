@@ -33,7 +33,10 @@ WIKILINK_RE = re.compile(r"\[\[([^\]\n]+)\]\]")
 MD_LINK_RE = re.compile(r"\[[^\]\n]*\]\(([^)\s]+)\)")
 FRONTMATTER_RE = re.compile(r"\A---\n(.*?)\n---\s*\n", re.DOTALL)
 SKIP_DIRS = frozenset({".git", "node_modules", "__pycache__", ".venv", "venv",
-                       ".obsidian", "_archive"})
+                       ".obsidian", "_archive",
+                       # Working clones + publish artifacts — contain copies
+                       # of vault content that would double-count if walked.
+                       ".publish-clone", "dist"})
 
 
 def _json_default(obj):

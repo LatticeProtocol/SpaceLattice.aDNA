@@ -105,7 +105,7 @@ fi
 
 ```bash
 if [[ -d ~/.emacs.d/.git ]] && [[ -f ~/.spacemacs ]]; then
-  emacs --batch -l ~/.spacemacs --eval '(message "spacemacs.aDNA boot OK")' 2>&1 | \
+  emacs --batch -l ~/.emacs.d/init.el --eval '(message "spacemacs.aDNA boot OK")' 2>&1 | \
     grep -E "(Error|Warning|spacemacs.aDNA boot OK)" > /tmp/_health.log
 
   if grep -q "Error" /tmp/_health.log; then
@@ -130,7 +130,7 @@ Phase 4 will add:
 
 ```bash
 if [[ -d ~/.emacs.d/private/layers/adna ]]; then
-  emacs --batch -l ~/.spacemacs --eval '(adna/health-check)' 2>&1 | \
+  emacs --batch -l ~/.emacs.d/init.el --eval '(adna/health-check)' 2>&1 | \
     grep -E "adna/health-check: (OK|FAIL)" > /tmp/_adna.log
 
   grep -q "adna/health-check: FAIL" /tmp/_adna.log && {

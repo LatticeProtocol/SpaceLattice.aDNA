@@ -176,15 +176,19 @@ Idempotent: re-running keeps the same symlink.
 ### Step 6 — First batch boot (validates layers load)
 
 ```bash
-emacs --batch -l ~/.spacemacs 2>&1 | tee -a "$LOG"
-EMACS_EXIT=${PIPESTATUS[0]}
+emacs --batch -l ~/.emacs.d/init.el > "$LOG" 2>&1
+EMACS_EXIT=$?
 if [[ $EMACS_EXIT -ne 0 ]]; then
   echo "Emacs batch boot failed ($EMACS_EXIT). See $LOG"
   exit $EMACS_EXIT
 fi
 ```
 
-Spacemacs's first boot installs the layer packages from ELPA/MELPA. This step takes 2-10 minutes on a fresh machine. The output goes to the install log; agent can grep for "Error" or "package-not-available" markers.
+> **Important**: load `~/.emacs.d/init.el` (Spacemacs's bootstrap), NOT `~/.spacemacs`. `emacs --batch` does NOT auto-load `user-init-file`; loading `.spacemacs` alone only defines the `dotspacemacs/*` functions without triggering bootstrap. See ADR 003.
+>
+> Also: redirect to file via `> "$LOG" 2>&1`, NOT `| tee | tail` — the latter SIGPIPE-kills emacs in some sequences. The operator can `tail "$LOG"` interactively after the run.
+
+Spacemacs's first boot installs the layer packages from ELPA/MELPA. This step takes 2-10 minutes on a fresh machine; ~3.5 min observed on Apple Silicon. The output goes to the install log; agent can grep for "Error" or "package-not-available" markers.
 
 ### Step 7 — Run skill_health_check
 
