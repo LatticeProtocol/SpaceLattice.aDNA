@@ -17,15 +17,18 @@ This file is the **single source of truth for what we build on**. Every install 
 |-------|-------|-------|
 | Repo | `https://github.com/syl20bnr/spacemacs` | Upstream — see `who/upstreams/syl20bnr.md` |
 | Branch | `develop` | Build target per ADR 000 + the brief |
-| Pinned SHA | **PIN PENDING** | First `skill_install` will set this; operator validates current develop tip |
-| Pin date | — | Set when pin lands |
+| Pinned SHA | `e57594e7aa1d459d3428b9b116bb84b344aa6084` | Captured at first install 2026-05-04; ratified by ADR 002 |
+| Pin date | 2026-05-04 | Set on first install |
 
-When pin is `PIN PENDING`, `skill_install` on first run does the following:
+~~When pin is `PIN PENDING`, `skill_install` on first run does the following:~~ (Pin captured 2026-05-04 — first-install bootstrap is past.)
 
-1. Clone `develop` to `~/.emacs.d/`.
-2. Capture `git rev-parse HEAD` from the cloned repo.
-3. Write the SHA back to this file (operator confirms).
-4. From then on, `skill_install` aborts with a diff if upstream `develop` has moved past the pin.
+For future pin updates, run `how/standard/runbooks/update_spacemacs.md` (ADR-gated):
+
+1. Check `git log` on Spacemacs `develop` since the pinned SHA
+2. Read changelog for breaking changes
+3. Propose pin update via successor ADR (referencing ADR 002)
+4. Run `skill_health_check` against the new SHA in a scratch worktree
+5. On approval: update the SHA + pin date in this file; commit with `adr-NNN: bump spacemacs pin`
 
 ## Emacs
 

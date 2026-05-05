@@ -184,16 +184,16 @@ If buffer is not inside a triad leg, jump to what/."
 
 (defun adna/wikilink-at-point ()
   "Return the [[Target]] text at point, or nil."
-  (save-excursion
-    (let ((line-start (line-beginning-position))
-          (line-end (line-end-position)))
-      (goto-char line-start)
-      (cl-loop while (re-search-forward "\\[\\[\\([^]]+\\)\\]\\]" line-end t)
-               for start = (match-beginning 0)
-               for end = (match-end 0)
-               for orig (point)
-               when (and (<= start orig) (>= end orig))
-               return (match-string-no-properties 1)))))
+  (let ((orig (point)))
+    (save-excursion
+      (let ((line-start (line-beginning-position))
+            (line-end (line-end-position)))
+        (goto-char line-start)
+        (cl-loop while (re-search-forward "\\[\\[\\([^]]+\\)\\]\\]" line-end t)
+                 for start = (match-beginning 0)
+                 for end = (match-end 0)
+                 when (and (<= start orig) (>= end orig))
+                 return (match-string-no-properties 1))))))
 
 (defun adna/wikilink-resolve (target)
   "Resolve TARGET wikilink to absolute path within current vault, or nil."

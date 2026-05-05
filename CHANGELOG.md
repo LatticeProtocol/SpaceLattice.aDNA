@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Phase 8 (live install + DoD completion)
+
+- Plan file extended: `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` § Phase 8 added (8 steps).
+- **Tooling install**: `brew tap d12frosted/emacs-plus` + `brew install emacs-plus@29 fd`. Result: GNU Emacs 29.4 + fd 10.4.2 (ripgrep 14.1.1 already present).
+- **`skill_install` end-to-end** (DoD #2): preflight green; clean host (no prior `~/.emacs.d/`); cloned Spacemacs `develop` into `~/.emacs.d/`; rendered `~/.spacemacs` and `~/.emacs.d/private/packages.el` from templates; symlinked `what/standard/layers/adna/` → `~/.emacs.d/private/layers/adna/`; **first batch boot succeeded in 3.5 min** (Spacemacs installed ~40 layer packages from MELPA), exit 0.
+- **Spacemacs SHA captured**: `e57594e7aa1d459d3428b9b116bb84b344aa6084` (develop tip on 2026-05-04). Updated `what/standard/pins.md` (was `PIN PENDING`). ADR 002 ratifies.
+- **`(adna/health-check)`** (DoD #3 E): returned OK in `emacs --batch` invocation.
+- **`M-x adna-index-project`** (DoD #4 elisp side): elisp wrapper invoked Python CLI; `what/standard/index/graph.json` written, 223 nodes, 341 edges.
+- **Two real elisp bugs caught by live boot** and fixed:
+  - `adna/wikilink-at-point` had malformed `cl-loop` (`for orig (point)` missing `=` — actually moved `orig` capture into outer `let` which is cleaner anyway)
+  - `packages.el` redundantly declared `transient` and `vterm`; both are owned by `spacemacs-bootstrap` (transient) and `shell` (vterm) layers. Removed our declarations + `init-transient` / `init-vterm` functions; layer still works because we use `(when (fboundp 'vterm) ...)` defensive check in `adna/spawn-claude-code`.
+- **Deploy receipt** written to `deploy/<host>/<utc>.md` (gitignored — machine-specific audit trail).
+- **Pending in Phase 8**: install-from-tarball validation (DoD #6 full satisfaction). GitHub push (Phase 7 step 6) still operator-gated.
+
+### Phase 7 (complete except GitHub push)
+
 ### Phase 7 (complete except GitHub push)
 
 - **`how/standard/skills/skill_publish_lattice.md`** — 7-step publishing skill: clean-state check, build publish tree (rsync with explicit excludes for `what/local/`, `how/local/`, `who/operators/`, `deploy/`, `dist/`, `.git/`, `how/sessions/active/`, `*.dryrun.log`), sanitization scan via LAYER_CONTRACT § 4, tarball at `dist/<utc>.tar.gz`, extract + health-check the tarball, push to `github.com/LatticeProtocol/spacemacs.aDNA` (REQUIRES OPERATOR CONFIRMATION), publish receipt at `who/peers/published/<utc>.md`.

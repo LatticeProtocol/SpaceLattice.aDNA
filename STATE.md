@@ -5,7 +5,7 @@ created: 2026-05-03
 updated: 2026-05-03
 last_edited_by: agent_init
 last_session: null
-tags: [state, governance, spacemacs, daedalus, genesis, p7]
+tags: [state, governance, spacemacs, daedalus, genesis, p8]
 ---
 
 # Operational State
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Genesis (v0.1.0)** — All seven phases complete (2026-05-03 + 2026-05-04). DoD verification pending. GitHub push (Phase 7 step 6) DEFERRED — operator confirmation required.
+**Genesis (v0.1.0)** — All seven phases complete + Phase 8 (live install) completed (2026-05-03 + 2026-05-04). DoD #2/#3D-E/#4-elisp all green; #6-install-from-tarball pending in this Phase 8. GitHub push (Phase 7 step 6) still operator-gated.
 
 ## What's Working
 
@@ -29,6 +29,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 - **Phase 5** — Self-improvement loop authored at `how/standard/skills/skill_self_improve.md` (~250 lines, 6 detection rules A-F, operator-gated commit). DoD #5 demo run end-to-end: synthetic friction (duplicated `SPC a h` binding) injected into working tree, Rule E fired, ADR 001 drafted (`adr_kind: synthetic_demo`), proposal diff generated, scratch-worktree dry-run health-check green, operator ACCEPTED, diff applied (removed injection), evidence committed. Synthetic friction never entered committed history.
 - **Phase 6** — Layer contract + overlay: full `what/standard/LAYER_CONTRACT.md` (replaces stub) with 7 normative clauses + sanitization scan (Python inline) + license interlock. `skill_layer_promote.md` + `skill_overlay_consume.md` reference contract by clause number. The contract's own sanitization scan ran clean against this vault's `what/standard/` + `how/standard/` after fixing one Clause 1 violation (an operator-home path replaced with the `~/` shorthand).
 - **Phase 7** — Lattice publishing: `skill_publish_lattice.md` authored. Dry-run publish ran end-to-end (rsync publish tree, sanitize, tarball, extract, structural + graph health-check). Sanitize step caught 6 real operator-home path violations across CHANGELOG, STATE, README, ADR 000 — fixed in this same commit. Hostname-literal regex tightened to avoid `.env.local` / `settings.local.json` false positives. GitHub push to `LatticeProtocol/spacemacs.aDNA` DEFERRED until operator confirms.
+- **Phase 8 (live install + DoD completion)** — `brew install emacs-plus@29 fd` (ripgrep already present) → `skill_install` end-to-end → batch boot installed ~40 layer packages from MELPA in 3.5 min, exit 0 → captured Spacemacs SHA `e57594e7` into `pins.md` (ADR 002 ratifies) → `(adna/health-check)` returned OK → `M-x adna-index-project` wrote `graph.json` (223 nodes, 341 edges) via elisp wrapper. Two real elisp bugs caught and fixed by live boot: malformed `cl-loop` in `adna/wikilink-at-point` (`for orig (point)` → outer `let`), and redundant `transient`/`vterm` declarations in `packages.el` (already provided by spacemacs-bootstrap + shell layers). Deploy receipt: `deploy/<host>/<utc>.md` (gitignored).
 - `README.md` (operator-facing 60-second orientation) and `CHANGELOG.md` replace inherited template content
 - `CLAUDE.md` updated: Project Map, Spacemacs Standing Orders (clauses 7-12), expanded Skills Inventory (inherited + project-specific)
 - First commit `50c7084` (Phase 1+2) on `master`; Phase 3 commit pending end of this turn
@@ -42,8 +43,9 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Next Steps
 
-1. **DoD** — 8-check end-to-end verification (D-E require emacs on host; A/B/C/F green; #5 satisfied via Phase 5 demo; #7 verified by sanitization scan)
-2. **Operator confirms** — push tarball + working clone to `github.com/LatticeProtocol/spacemacs.aDNA` (Phase 7 step 6)
+1. **DoD #6 install-from-tarball** — extract latest tarball to clean ref dir, run skill_install with `HOME=$REF`, verify boot + health-check
+2. **Final DoD sweep** — all 8 items green, no asterisks
+3. **Operator confirms** — push tarball + working clone to `github.com/LatticeProtocol/spacemacs.aDNA` (Phase 7 step 6, still gated)
 
 ## Recent Decisions
 

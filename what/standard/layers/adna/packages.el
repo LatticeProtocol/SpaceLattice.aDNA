@@ -10,27 +10,19 @@
 
 (defconst adna-packages
   '(yaml
-    transient
-    vterm
     json
     (markdown-mode :location built-in))
-  "List of packages required by the adna layer.")
+  "List of packages required by the adna layer.
+
+`transient' and `vterm' are NOT listed here even though adna code uses them —
+they're already declared by spacemacs-bootstrap (transient) and shell (vterm)
+layers. Declaring them again would cause init-function ownership warnings
+during boot. We post-init markdown-mode (also built into Spacemacs) below.")
 
 (defun adna/init-yaml ()
   "Initialize yaml package for frontmatter parsing."
   (use-package yaml
     :defer t))
-
-(defun adna/init-transient ()
-  "Initialize transient package for SPC a menu."
-  (use-package transient
-    :defer t))
-
-(defun adna/init-vterm ()
-  "Initialize vterm for SPC c c Claude Code spawn."
-  (use-package vterm
-    :defer t
-    :commands vterm))
 
 (defun adna/init-json ()
   "Json is built-in; nothing to install."
