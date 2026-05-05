@@ -3,17 +3,17 @@ campaign_id: campaign_spacelattice_v1_0
 type: campaign
 title: "SpaceLattice v1.0 — Genesis to Production"
 owner: stanley
-status: planning
+status: execution
 phase_count: 6
-mission_count: TBD (designed by mission_sl_planning_01)
-estimated_sessions: TBD
-calibrated_sessions: TBD
+mission_count: 27
+estimated_sessions: "31-44"
+calibrated_sessions: 38
 estimation_class: governance-broad
 priority: medium
 predecessor: "spacemacs.aDNA genesis (plan-driven; AAR at how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md)"
 created: 2026-05-05
 updated: 2026-05-05
-last_edited_by: agent_init
+last_edited_by: agent_stanley
 ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
 tags: [campaign, spacelattice, v1_0, daedalus, customization_walk, telemetry, lp_fork, sustainability]
 ---
@@ -29,115 +29,141 @@ Take SpaceLattice.aDNA from **v0.2.0** (rename + repositioning + framework outli
 - Genesis (Plan A): `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` § Plan A; AAR at `how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md`
 - Plan B (rename + framework foundation): `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` § Plan B (this campaign opens at Plan B exit)
 
+## Mission tree summary
+
+| Phase | Missions | Count | Sessions est. |
+|-------|----------|-------|---------------|
+| P0 | mission_sl_planning_01 | 1 | 1 (closed) |
+| P1 | p1_01_backlog_cleanup, p1_02_sanitization_warns_adr, p1_03_self_improve_schedule | 3 | 3-4 |
+| P2 | p2_01_sustainability_runbook_teeth, p2_02_telemetry_schema, p2_03_telemetry_submit_skill, p2_04_telemetry_aggregate_skill_and_round_trip | 4 | 5-8 |
+| P3 | p3_01 dotfile-entry-lifecycle, p3_02 dotspacemacs-variables, p3_03 layer-anatomy-api, p3_04 themes-modeline-banner-startup, p3_05 editing-completion-packages, p3_06 perf-evil-fonts, p3_07 wild-workarounds-org, p3_08 languages-keys-perf | 8 | 11-16 |
+| P4 | p4_01 clone-fork, p4_02 distribution-layer, p4_03 theme, p4_04 branding-strings, p4_05 banner-assets, p4_06 news-welcome-dotfile, p4_07 ci-workflows, p4_08 first-rebase-skill-install-update | 8 | 9-13 |
+| P5 | p5_01 doc-pass, p5_02 second-machine-install, p5_03 tag-release-notes | 3 | 3 |
+| **Total** | | **27** | **31-44 (calibrated ~38)** |
+
 ## Phases
 
 ### Phase 0 — Planning (M-Planning-01)
 
-**Single mission**: `mission_sl_planning_01` (this directory's first mission file).
+**Single mission**: `mission_sl_planning_01.md`.
 
 **Objective**: Review integrated context (open audit findings, customization reference, LP fork playbook, LP/aDNA reference repos, sustainability + telemetry frameworks) and design the rest of the campaign — concrete mission tree, scope per mission, estimation, phase-gate criteria.
 
-**Phase exit gate**: Operator approves the mission tree designed by M-Planning-01. The remaining mission files (P1 onwards) are scaffolded by M-Planning-01 with status `planned`; operator triggers each mission individually.
+**Scope**: Closed by `mission_sl_planning_01.md` on 2026-05-05. Produced 26 P1-P5 mission scaffolds, the user-in-the-loop runbook (`how/standard/runbooks/customization_session_protocol.md`), per-phase scope refinement (this section), and phase-gate criteria (each phase below).
+
+**Mission count**: 1 (closed).
+
+**Phase exit gate** — *MET 2026-05-05*:
+- [x] M-Planning-01 closed with full AAR
+- [x] All P1-P5 mission files instantiated with `status: planned`
+- [x] Campaign master: `mission_count`, `estimated_sessions`, `calibrated_sessions`, `status: execution` set
+- [x] Operator approval (this turn)
 
 ### Phase 1 — Audit closure
 
-Close the open audit findings carried forward from genesis:
+Close the open audit findings carried forward from genesis (Gap Register #4, #5, #6; #7 deferred to release notes only).
 
-- **#4** Inherited backlog cleanup (6 idea files from .adna template, currently `status: deferred`)
-- **#5** Sanitization WARNs in inherited L1 upgrade skill (private IPv4 + email) — formally acknowledged via ADR or upstream-fixed
-- **#6** No schedule for `skill_self_improve` — implement scheduling mechanism
-- Genesis open items integrated into v1.0 (this phase closes the standing-order overhang from Plan A)
+**Scope** (3 missions, parallel-capable):
 
-Mission count: TBD by M-Planning-01 (estimate: 2-3 missions).
+- `mission_sl_p1_01_backlog_cleanup` — closes finding #4 (6 inherited backlog `idea_*.md` files; review + adapt-or-archive)
+- `mission_sl_p1_02_sanitization_warns_adr` — closes finding #5 (private IPv4 + email WARNs in inherited `skill_l1_upgrade.md`; ADR-acknowledge or upstream PR)
+- `mission_sl_p1_03_self_improve_schedule` — closes finding #6 (`skill_self_improve` schedule mechanism: launchd / cron / session-end hook + ADR)
+- Finding #7 (peer federation) stays deferred; documented in P5-03 release notes
 
-**Phase exit gate**: All 4 audit findings closed; STATE.md "Active Blockers" empty.
+**Mission count**: 3. Sessions estimate: 3-4.
+
+**Phase exit gate**:
+- [ ] All 3 P1 missions closed with AARs
+- [ ] STATE.md "Active Blockers" empty
+- [ ] Audit findings #4, #5, #6 → closed (recorded in STATE.md)
+- [ ] At least 2 ADRs filed (#5 ADR-or-PR, #6 schedule)
 
 ### Phase 2 — Sustainability + telemetry implementation
 
-Take the framework outlines (`what/standard/sustainability.md` + `what/standard/telemetry.md`) to working code:
+Take the framework outlines (`what/standard/sustainability.md` + `what/standard/telemetry.md`) to working code.
 
-- `update_spacemacs.md` runbook gets concrete teeth (sed patterns, conflict-resolution heuristics)
-- `skill_self_improve` schedule mechanism (cron / launchd / on-trigger)
-- `skill_telemetry_submit` full procedure + sanitization extension
-- `skill_telemetry_aggregate` full procedure
-- GitHub issue template (`.github/ISSUE_TEMPLATE/telemetry.yml`) for the upstream repo
-- First round-trip telemetry test (operator submits demo → maintainer aggregates → ADR drafted → publish round-trip)
-- `who/peers/telemetry/{outbox,sent,inbox}/` structure operationalized
+**Scope** (4 missions, sequenced):
 
-Mission count: TBD by M-Planning-01 (estimate: 3-4 missions).
+- `mission_sl_p2_01_sustainability_runbook_teeth` — `update_spacemacs.md` runbook gets concrete teeth (sed patterns × 5 conflict-prone files, file-disposition heuristics, CI integration design)
+- `mission_sl_p2_02_telemetry_schema` — full JSON Schema for the 4 submission classes; telemetry-specific anonymization extensions; operator + maintainer validation logic; privacy-posture verification
+- `mission_sl_p2_03_telemetry_submit_skill` — `skill_telemetry_submit` from stub to full procedure; `.github/ISSUE_TEMPLATE/telemetry.yml` authored
+- `mission_sl_p2_04_telemetry_aggregate_skill_and_round_trip` — `skill_telemetry_aggregate` from stub to full procedure; **first end-to-end round-trip test** (operator submits → maintainer aggregates → ADR drafted → publish)
 
-**Phase exit gate**: Telemetry round-trip demonstrated end-to-end; sustainability runbook teeth match outline; cron/launchd schedule documented.
+**Mission count**: 4. Sessions estimate: 5-8.
+
+**Phase exit gate**:
+- [ ] All 4 P2 missions closed with AARs
+- [ ] Telemetry schema landed in `what/standard/telemetry.md` (status: outline → active)
+- [ ] `update_spacemacs.md` runbook teeth match outline (sed + heuristics + CI design)
+- [ ] Schedule for `skill_self_improve` documented + working (closed in P1-03; verified at P2 close)
+- [ ] **First telemetry round-trip demonstrated end-to-end** (operator-submitted demo → maintainer aggregation → ADR draft → publish round-trip)
 
 ### Phase 3 — Customization walk-through (user-in-the-loop)
 
-The big one. Systematic walk through the **22 dimensions** documented in `what/context/spacemacs/spacemacs_customization_reference.md`, with operator-in-the-loop at each dimension:
+Systematic walk through the **22 dimensions** of `what/context/spacemacs/spacemacs_customization_reference.md`, with operator-in-the-loop at each dimension. All P3 missions follow the 7-step protocol in `how/standard/runbooks/customization_session_protocol.md` (authored by P0).
 
-- Dotfile entry points (5 functions × lifecycle position)
-- `dotspacemacs-*` variables (~85 variables across 9 groups)
-- Layer anatomy + grammar
-- `configuration-layer/` API surface
-- Theme system + `latticeprotocol-theme` design
-- Modeline (6 themes; LP modeline segment design)
-- Banner system (LP banner asset preparation)
-- Startup buffer / scratch / frame title / which-key
-- Editing styles (vim / emacs / hybrid evaluation)
-- Completion stack (helm / ivy / compleseus choice)
-- Package management knobs
-- Lifecycle ordering verification
-- Performance knobs (LSP, GC, native-comp)
-- Evil & misc toggles
-- Font / icon handling (LP-specific font + icon strategy)
-- Wild customizations survey + which to import
-- Canonical workarounds applied
-- Org-mode power-user setup (operator-tailored)
-- Language stack patterns (operator's actual languages: Python ML, TypeScript, Rust, etc.)
-- Keybinding remap philosophy + operator's `SPC o l` LP prefix
-- Performance-tuning recipes applied
-- LP-specific concerns
+**Scope** (8 missions, sequenced — 22 dimensions grouped):
 
-User-in-the-loop protocol: each customization mission opens with operator review of the dimension's spec section, operator signals preferences, agent drafts changes (per existing skill_layer_add / etc. workflows), operator gates each diff. Mission AAR captures decisions for the operator profile.
+- `mission_sl_p3_01_dotfile_entry_lifecycle` — §1.1 (5 dotfile functions), §1.2 (location resolution), §1.10 (consolidated lifecycle), §2.4 (precise lifecycle table)
+- `mission_sl_p3_02_dotspacemacs_variables` — §1.3 (~85 variables across 9 sub-groups; the "big walk")
+- `mission_sl_p3_03_layer_anatomy_api` — §1.4 (layer anatomy + grammar), §1.5 (`configuration-layer/` API surface)
+- `mission_sl_p3_04_themes_modeline_banner_startup` — §1.6 (theme), §1.7 (modeline; 6 themes), §1.8 (banner + selection logic), §1.9 (startup buffer + scratch + frame title)
+- `mission_sl_p3_05_editing_completion_packages` — §2.1 (editing styles), §2.2 (completion stack), §2.3 (package mgmt knobs)
+- `mission_sl_p3_06_perf_evil_fonts` — §2.5 (performance), §2.6 (evil + misc), §2.7 (font + icon)
+- `mission_sl_p3_07_wild_workarounds_org` — §3.1 (wild combos), §3.2 (10 canonical workarounds), §3.3 (org-mode power-user)
+- `mission_sl_p3_08_languages_keys_perf` — §3.4 (LSP + tree-sitter + DAP), §3.5 (keybinding philosophy + `SPC o l`), §3.6 (perf recipes); P3 phase-gate evidence
 
-Mission count: TBD by M-Planning-01 (estimate: 8-12 missions covering the 22 dimensions in groups).
+**Mission count**: 8. Sessions estimate: 11-16.
 
-**Phase exit gate**: All 22 dimensions reviewed; operator profile (`who/operators/stanley.md`) updated with decisions; `what/local/operator.private.el` populated; standard layer absorbs operator-validated patterns via `skill_layer_promote` for those that should be commons.
+**Phase exit gate**:
+- [ ] All 8 P3 missions closed with AARs
+- [ ] All 22 dimensions reviewed in operator-in-the-loop sessions
+- [ ] `who/operators/stanley.md` operator profile updated with all decisions
+- [ ] `what/local/operator.private.el` populated with operator-specific overrides
+- [ ] Standard layer absorbed validated patterns via `skill_layer_promote` (those eligible for commons)
 
 ### Phase 4 — Fork branding (LP playbook execution)
 
-Execute the LP fork playbook from `what/context/spacemacs/spacemacs_customization_reference.md` § 4B against `LatticeProtocol/spacelattice`:
+Execute the LP fork playbook from `what/context/spacemacs/spacemacs_customization_reference.md` § 4 + `what/standard/fork-strategy.md` against `LatticeProtocol/spacelattice`.
 
-- Local clone of fork to `~/lattice/spacelattice/` (deferred from Plan B per ADR 005)
-- Set up upstream remote + sync workflow
-- New `layers/+distributions/spacemacs-latticeprotocol/` (or rename to `spacelattice` to match repo name; M-Planning-01 decides)
-- New `layers/+themes/latticeprotocol-theme/` with dark + light themes (or `spacelattice-theme`)
-- Branding constants: version, buffer name, banner title, frame title
-- Banner asset replacement (PNG + SVG + ICNS + ASCII text variants)
-- News mechanism: `core/news/news-1.0.0.org`
-- Welcome widget: `lp-welcome` local package
-- Dotfile template: `core/templates/dotspacemacs-template.el` defaults updated
-- CI workflow: `.github/workflows/{ci,upstream-sync}.yml`
-- Rebase cadence operationalized; first weekly rebase against `upstream/develop` succeeds
-- `skill_install` updated to consume the LP fork instead of `syl20bnr/spacemacs`
+**Scope** (8 missions, sequenced):
 
-Mission count: TBD by M-Planning-01 (estimate: 6-9 missions).
+- `mission_sl_p4_01_clone_fork_set_remotes` — local clone of fork; upstream remote set; `lp-develop` branch
+- `mission_sl_p4_02_distribution_layer` — new `layers/+distributions/spacelattice/` (declares dependency on `spacemacs` distribution; LP keybindings `SPC o l`)
+- `mission_sl_p4_03_theme` — new `layers/+themes/latticeprotocol-theme/` (dark + light)
+- `mission_sl_p4_04_branding_strings` — patches to `core/core-spacemacs-buffer.el` (logo title + buffer name), `core/core-versions.el` (`latticeprotocol-version`), `core/core-spacemacs.el` (repository constants); prefer additive `core/lp-branding.el` module
+- `mission_sl_p4_05_banner_assets` — image (PNG + SVG + ICNS) + ASCII text variants 000–003
+- `mission_sl_p4_06_news_welcome_dotfile` — `core/news/news-1.0.0.org` + `lp-welcome.el` widget + `dotspacemacs-template.el` LP defaults
+- `mission_sl_p4_07_ci_workflows` — `.github/workflows/{ci,upstream-sync}.yml`
+- `mission_sl_p4_08_first_rebase_skill_install_update` — first weekly rebase against `upstream/develop`; vault `skill_install.md` updated to clone the LP fork; **P4 phase-gate validation**
 
-**Phase exit gate**: Operator can `gh repo clone LatticeProtocol/spacelattice` + run `skill_install` against the fork + see SpaceLattice branding (banner, modeline, frame title, distribution name). First rebase against upstream succeeds with documented conflict resolutions.
+**Mission count**: 8. Sessions estimate: 9-13.
+
+**Phase exit gate**:
+- [ ] All 8 P4 missions closed with AARs
+- [ ] Operator can `gh repo clone LatticeProtocol/spacelattice` + run `skill_install` against the fork + see SpaceLattice branding (banner, modeline, frame title, distribution name `spacelattice`)
+- [ ] First weekly rebase against `upstream/develop` succeeds with documented conflict resolutions
+- [ ] CI workflow green on Emacs 28.2 + 29.x (matrix per fork-strategy)
 
 ### Phase 5 — Polish + v1.0 release
 
-Final hardening before v1.0:
+Final hardening before v1.0.
 
-- Doc pass: README, MANIFEST, CLAUDE, all skill READMEs reviewed for v1.0 readiness
-- Peer-readiness: install-from-tarball validation (re-run DoD #6 against latest tarball)
-- Install on a second reference machine (operator's secondary host or VM) — true peer scenario
-- All audit findings closed; sanitization scan clean; health-check green across host matrix
-- Tag `v1.0.0` on `LatticeProtocol/SpaceLattice.aDNA`
-- Tag `latticeprotocol-1.0.0` on `LatticeProtocol/spacelattice` (the fork)
-- `core/news/news-1.0.0.org` ships with the fork release
-- Release announcement (informal — README + CHANGELOG entry)
+**Scope** (3 missions, sequenced):
 
-Mission count: TBD by M-Planning-01 (estimate: 3-4 missions).
+- `mission_sl_p5_01_doc_pass` — README, MANIFEST, CLAUDE.md, all skill READMEs reviewed for v1.0 readiness; `~/lattice/CLAUDE.md` workspace row updated; CHANGELOG release entry staged
+- `mission_sl_p5_02_second_machine_install` — true peer install on second host; `skill_install` E2E from clean clone; receipt to `deploy/<host>/`
+- `mission_sl_p5_03_tag_release_notes` — `v1.0.0` tag on vault; `latticeprotocol-1.0.0` tag on fork; `lp-stable` branch; release notes; **campaign AAR**
 
-**Phase exit gate**: v1.0 tagged on both repos; second peer-machine install validated; release notes published; campaign AAR closes.
+**Mission count**: 3. Sessions estimate: 3.
+
+**Phase exit gate**:
+- [ ] All 3 P5 missions closed with AARs
+- [ ] `v1.0.0` tagged on `LatticeProtocol/SpaceLattice.aDNA` (vault) — `gh release` published
+- [ ] `latticeprotocol-1.0.0` tagged on `LatticeProtocol/spacelattice` (fork) — release notes shipped via `core/news/news-1.0.0.org`
+- [ ] Second-machine install validated (P5-02 receipt)
+- [ ] Release notes published (CHANGELOG + README + GitHub release)
+- [ ] Campaign AAR closes the campaign; STATE.md updated
 
 ## Decision points / phase gates
 
@@ -145,7 +171,7 @@ Between each phase, the operator confirms before the next phase opens. Per Stand
 
 ## Estimation classes (per workspace conventions)
 
-This campaign is **governance-broad**: multi-domain (customization + branding + telemetry), multi-host validation, sustained operator-in-the-loop interaction. Per-phase estimates land at M-Planning-01 close.
+This campaign is **governance-broad**: multi-domain (customization + branding + telemetry), multi-host validation, sustained operator-in-the-loop interaction. Per-phase estimates set at M-Planning-01 close. Total calibrated: ~38 sessions.
 
 ## Anti-scope
 
@@ -162,5 +188,7 @@ This campaign is **governance-broad**: multi-domain (customization + branding + 
 - Customization reference: `what/context/spacemacs/spacemacs_customization_reference.md`
 - Sustainability framework: `what/standard/sustainability.md`
 - Telemetry framework: `what/standard/telemetry.md`
+- User-in-the-loop runbook (P3): `how/standard/runbooks/customization_session_protocol.md`
 - Genesis AAR: `how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md`
+- M-Planning-01 AAR: `how/campaigns/campaign_spacelattice_v1_0/missions/artifacts/aar_mission_sl_planning_01.md`
 - Plan B: `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` § Plan B

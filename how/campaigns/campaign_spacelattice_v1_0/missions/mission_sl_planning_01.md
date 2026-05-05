@@ -4,11 +4,13 @@ mission_id: mission_sl_planning_01
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 0
 campaign_mission_number: 1
-status: ready
+status: completed
 mission_class: reconnaissance
 created: 2026-05-05
 updated: 2026-05-05
-last_edited_by: agent_init
+last_edited_by: agent_stanley
+closed: 2026-05-05
+aar: how/campaigns/campaign_spacelattice_v1_0/missions/artifacts/aar_mission_sl_planning_01.md
 tags: [mission, planning, spacelattice, v1_0, integration, reconnaissance]
 ---
 

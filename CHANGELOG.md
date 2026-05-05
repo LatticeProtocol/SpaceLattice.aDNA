@@ -6,6 +6,47 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### M-Planning-01 close — v1.0 campaign Phase 0 done (2026-05-05)
+
+**Headline**: Phase-0 planning mission of `campaign_spacelattice_v1_0` closed. Campaign moves to `status: execution`. 26 P1-P5 mission scaffolds + 1 user-in-the-loop runbook + 10/10 deliverables validated. Full AAR.
+
+**Mission tree designed**:
+- 27 missions total (1 P0 + 3 P1 + 4 P2 + 8 P3 + 8 P4 + 3 P5)
+- Calibrated effort: ~38 sessions (range 31-44)
+- Mission file pattern: `mission_sl_p<phase>_<NN>_<slug>.md` per campaign CLAUDE.md naming convention
+- All scaffolds `status: planned` with `blocked_by` chains forming a clean DAG (P1 parallel-capable; P2-P5 sequential per phase)
+
+**Per-phase scope refinement** (in campaign master):
+- P1 (audit closure): 3 missions close findings #4 (backlog), #5 (sanitization WARNs), #6 (self-improve schedule). #7 (peer federation) deferred to release notes.
+- P2 (sustainability + telemetry): 4 missions — runbook teeth, telemetry schema, submit skill, aggregate skill + first end-to-end round-trip
+- P3 (customization walk-through): 8 missions covering 22 dimensions of `spacemacs_customization_reference.md` per the suggested grouping; all run user-in-the-loop per protocol
+- P4 (fork branding): 8 missions — clone → distribution layer → theme → branding → banner → news+welcome → CI → first rebase
+- P5 (polish + release): 3 missions — doc pass → second-machine install → tag + release notes
+
+**Phase-gate criteria**: Each phase exit gate is now a concrete checklist (P1 4 items, P2 5 items, P3 5 items, P4 4 items, P5 5 items) replacing the prior single-line sketches.
+
+**User-in-the-loop runbook authored**:
+- `how/standard/runbooks/customization_session_protocol.md` — 7-step protocol for all P3 customization missions: open → load reference → structured Q&A → record decisions → draft changes → operator-gates each diff → AAR. Failure modes + cross-cutting rules documented.
+
+**Audit findings closure plan**:
+- #4 → P1-01; #5 → P1-02; #6 → P1-03; #7 deferred-to-release-notes (P5-03)
+
+**LP fork branding execution plan**:
+- 8 sequenced missions per fork-strategy stages and customization reference §4
+
+**Files added**:
+- 26 mission scaffolds at `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_p*.md`
+- `how/standard/runbooks/customization_session_protocol.md`
+- `how/campaigns/campaign_spacelattice_v1_0/missions/artifacts/aar_mission_sl_planning_01.md`
+- `how/sessions/history/2026-05/session_stanley_20260505_225149_planning_01.md`
+
+**Files updated**:
+- `how/campaigns/campaign_spacelattice_v1_0/campaign_spacelattice_v1_0.md` — frontmatter (`status: execution`, `mission_count: 27`, `estimated_sessions: 31-44`, `calibrated_sessions: 38`); per-phase Scope subsections; concrete phase-gate checklists
+- `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_planning_01.md` — `status: completed`
+- `STATE.md` — current phase + next steps + recent decisions/upgrades
+
+**Operator hand-off**: Trigger any P1 mission when ready (P1-01, P1-02, P1-03 are parallel-capable; suggested order P1-01 → P1-03 → P1-02).
+
 ### Plan B — Rename + repositioning + v1.0 campaign foundation (2026-05-05) — v0.2.0 target
 
 **Headline**: vault renamed `spacemacs.aDNA` → `SpaceLattice.aDNA`. Atomic rename ratified by **ADR 005**, which closes 5 coupled decisions (rename, sibling fork repo, LP-stack repositioning, persona-retention, version bump).

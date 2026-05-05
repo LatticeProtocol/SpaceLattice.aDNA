@@ -2,11 +2,10 @@
 type: state
 status: active
 created: 2026-05-03
-updated: 2026-05-03
-last_edited_by: agent_init
-last_session: null
 updated: 2026-05-05
-tags: [state, governance, spacelattice, daedalus, v0_2_0, rename, campaign_v1_0]
+last_edited_by: agent_stanley
+last_session: session_stanley_20260505_225149_planning_01
+tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p0_closed, p1_ready]
 ---
 
 # Operational State
@@ -15,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**SpaceLattice v0.2.0 — Renamed + repositioned + v1.0 campaign foundation.** Genesis closed at v0.1.0; this turn (Plan B) renamed `spacemacs.aDNA` → `SpaceLattice.aDNA` (vault dir + GitHub repo), opened sibling fork `LatticeProtocol/spacelattice` (fork of `syl20bnr/spacemacs`, no local clone yet), persisted operator's Spacemacs Customization Architecture reference doc, drafted sustainability + telemetry framework outlines, scaffolded `campaign_spacelattice_v1_0/` with Planning Mission `mission_sl_planning_01.md` ready to run. Foundational ADR 005 ratifies. v0.2.0 about to tag.
+**SpaceLattice v0.2.0 — campaign v1.0 P0 closed; P1 ready.** Plan B closed at v0.2.0; M-Planning-01 (the planning mission of `campaign_spacelattice_v1_0`) closed 2026-05-05 with full AAR. Campaign now in `status: execution` with 26 P1-P5 mission scaffolds + 1 user-in-the-loop runbook + concrete per-phase scope + concrete phase-gate checklists. Total: 27 missions / ~38 calibrated sessions across 5 execution phases (P1 audit closure → P5 v1.0 release).
 
 ## What's Working
 
@@ -38,27 +37,32 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Active Blockers
 
-None blocking. Open audit findings tracked + integrated into v1.0 campaign:
+None blocking. Open audit findings now scheduled to specific P1 missions:
 
-- #4 Inherited backlog cleanup → 6 ideas marked `status: deferred`; closed by v1.0 P1
-- #5 Sanitization WARNs (private IPv4 + email in inherited L1 upgrade skill) → ADR pending in v1.0 P1
-- #6 No schedule for `skill_self_improve` → architectural; closed by v1.0 P2
-- #7 Peer federation mechanism → deferred to post-v1.0
+- #4 Inherited backlog cleanup (6 ideas) → `mission_sl_p1_01_backlog_cleanup`
+- #5 Sanitization WARNs (private IPv4 + email in inherited L1 upgrade skill) → `mission_sl_p1_02_sanitization_warns_adr`
+- #6 No schedule for `skill_self_improve` → `mission_sl_p1_03_self_improve_schedule`
+- #7 Peer federation mechanism → deferred to post-v1.0; documented in `mission_sl_p5_03_tag_release_notes` release notes
 
 ## Next Steps
 
-The vault is at v0.2.0 (post-rename, pre-v1.0). The next operator action is to **trigger M-Planning-01**:
+The vault is at v0.2.0 with `campaign_spacelattice_v1_0` in `status: execution`. P0 (planning) closed 2026-05-05. The next operator action is to **trigger any P1 mission** (P1-01 / P1-02 / P1-03 are parallel-capable; suggested order P1-01 → P1-03 → P1-02).
 
-1. **Run M-Planning-01** — the planning mission designs the v1.0 campaign mission tree (file: `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_planning_01.md`). Operator triggers when ready ("run M-Planning-01" or equivalent).
+1. **Run any P1 mission** — file paths under `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_p1_*.md`. Each mission has `status: planned`; operator triggers (e.g., "run mission_sl_p1_01_backlog_cleanup" or equivalent) and the agent flips to `status: ready` → `status: in_progress` → `status: completed` per mission file lifecycle.
+2. Between phases, operator gates per Standing Order #1.
 
-After M-Planning-01 closes, P1-P5 missions execute one at a time, operator-gated between phases per Standing Order #1.
+After P1 closes (3 missions, 3-4 sessions), P2 begins (sustainability + telemetry implementation, including first end-to-end telemetry round-trip). Total v1.0 effort: ~38 calibrated sessions across 26 P1-P5 missions.
 
-The vault continues improving itself via the Phase 5 self-improvement loop (operator-gated). First non-synthetic ADR comes from real session friction.
+The vault continues improving itself via the Phase-5 self-improvement loop (operator-gated). First non-synthetic ADR comes from real session friction.
 
 ## Recent Decisions
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-05 | **M-Planning-01 closed** — `campaign_spacelattice_v1_0` enters `status: execution`; 27 missions designed (1 P0 + 3 P1 + 4 P2 + 8 P3 + 8 P4 + 3 P5); 26 P1-P5 scaffolds authored; `customization_session_protocol.md` runbook authored | mission_sl_planning_01 AAR |
+| 2026-05-05 | Audit findings scheduled: #4 → P1-01, #5 → P1-02, #6 → P1-03, #7 → release-notes-only | M-Planning-01 D7 |
+| 2026-05-05 | P3 grouping ratified: 22 dimensions → 8 customization missions per the M-Planning-01 mission spec suggested table | M-Planning-01 D9 |
+| 2026-05-05 | P4 fork-branding sequencing: clone → distribution layer → theme → branding strings → banner → news+welcome → CI → first rebase | M-Planning-01 D8 |
 | 2026-05-05 | **Vault rename: `spacemacs.aDNA` → `SpaceLattice.aDNA`** (filesystem + GitHub) | ADR 005 |
 | 2026-05-05 | **Sibling fork opened: `LatticeProtocol/spacelattice`** (fork of `syl20bnr/spacemacs`) | ADR 005 |
 | 2026-05-05 | **Repositioning**: Lattice-Protocol-aware Spacemacs distribution governed by aDNA | ADR 005 |
@@ -90,7 +94,8 @@ The vault continues improving itself via the Phase 5 self-improvement loop (oper
 | 2026-05-04 | Phase 7 step 6 (GitHub publish) — `LatticeProtocol/SpaceLattice.aDNA` PUBLIC, tag `v0.1.0-genesis` | publish receipt commit `df25798` |
 | 2026-05-05 | Genesis AAR + ADR 003 — closes Standing Order #5 violation; fixes skill batch-boot invocation + SIGPIPE pipe (audit findings #2/#3/#4) | commit `d853a1e` |
 | 2026-05-05 | v0.1.0 published to GitHub mirror (post-AAR + ADR 003) | publish receipt commit `14a642f`, tag v0.1.0 |
-| 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | this commit (v0.2.0) |
+| 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | v0.2.0 commits `f7fbaef` + `07cc12f` |
+| 2026-05-05 | **M-Planning-01 close** — campaign v1.0 P0 closed; 26 P1-P5 mission scaffolds (in `how/campaigns/campaign_spacelattice_v1_0/missions/`); `customization_session_protocol.md` runbook; campaign master updated (`status: execution`, `mission_count: 27`, `calibrated_sessions: 38`, per-phase scope + concrete phase-gate checklists); AAR at `aar_mission_sl_planning_01.md` | this commit |
 
 ## Partial-Resume Detection
 
