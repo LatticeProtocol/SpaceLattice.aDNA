@@ -1,0 +1,58 @@
+;;; packages.el --- spacemacs.aDNA additional packages  -*- mode: emacs-lisp; lexical-binding: t -*-
+;;
+;; Rendered to ~/.emacs.d/private/packages.el by skill_deploy.
+;; Operator-private packages live in what/local/operator.private.el (loaded by
+;; dotspacemacs/user-init in .spacemacs).
+;;
+;; License: GPL-3.0
+
+(defconst spacemacs-adna-packages
+  '(
+    ;; YAML frontmatter parsing for adna layer
+    yaml
+
+    ;; Wikilink + Obsidian round-trip helpers
+    markdown-mode
+    obsidian   ; soft dep — adna layer falls back to direct file ops if absent
+
+    ;; Transient menu engine (built into modern Emacs but pinned for clarity)
+    transient
+
+    ;; Process spawning for Claude Code (SPC c c)
+    vterm
+
+    ;; JSON serialization for adna-index-project graph emission
+    json
+
+    ;; Operator-added packages (rendered from local layer)
+    {{LOCAL_PACKAGES_LIST}}
+    )
+  "spacemacs.aDNA additional packages.")
+
+;; Each package gets an init function. The adna layer's own packages live in
+;; what/standard/layers/adna/packages.el — this file is for whole-vault deps.
+
+(defun spacemacs-adna/init-yaml ()
+  (use-package yaml
+    :defer t))
+
+(defun spacemacs-adna/init-obsidian ()
+  (use-package obsidian
+    :defer t
+    :commands (obsidian-jump obsidian-follow-link-at-point)
+    :config
+    ;; Default vault root resolves to nearest *.aDNA/ ancestor at link-follow time.
+    (setq obsidian-directory nil)))
+
+(defun spacemacs-adna/init-transient ()
+  (use-package transient :defer t))
+
+(defun spacemacs-adna/init-vterm ()
+  (use-package vterm
+    :defer t
+    :commands vterm))
+
+(defun spacemacs-adna/init-json ()
+  (use-package json :defer t))
+
+;;; packages.el ends here
