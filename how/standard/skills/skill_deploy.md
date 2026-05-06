@@ -51,8 +51,21 @@ This skill is **steps 4-8 of `skill_install`**, executed unchanged. See `skill_i
 | 4 | Re-render `dotfile.spacemacs.tmpl` → `~/.spacemacs` and `packages.el.tmpl` → `~/.emacs.d/private/packages.el` |
 | 5 | Refresh `~/.emacs.d/private/layers/adna` symlink |
 | 6 | Batch boot: `emacs --batch -l ~/.spacemacs` (cheaper than first install — packages cached) |
-| 7 | Run `skill_health_check` |
+| 7 | Run `skill_health_check` (checks A-D+) |
 | 8 | Write deploy receipt to `deploy/<hostname>/<utc>.md` |
+| 9 | Determine reload type; instruct operator; run `skill_inspect_live` after reload |
+
+**Step 9 — Reload type + live inspection**
+
+After batch-boot and health-check pass, determine the minimum reload needed based on what changed:
+
+| Changed in template | Operator action | Live check |
+|---------------------|----------------|------------|
+| `dotspacemacs/user-config` body only | `SPC f e R` (hot reload — ~3s) | Run `skill_inspect_live` |
+| `dotspacemacs/init` vars, new layer, new package | `SPC q r` (full restart — ~20s) | Run `skill_inspect_live` |
+| `dotspacemacs/user-init` body | `SPC q r` (full restart) | Run `skill_inspect_live` |
+
+After the operator reloads (or if Spacemacs was already running with the new config), run `skill_inspect_live` to confirm live state matches expectations. A deploy is not complete until `skill_inspect_live` reports GREEN.
 
 ## Post-conditions
 

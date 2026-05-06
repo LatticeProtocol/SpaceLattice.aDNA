@@ -4,7 +4,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-06
 last_edited_by: agent_stanley
-last_session: session_stanley_20260506T_p3_preflight
+last_session: session_stanley_20260506T195728Z_p3_00_closed_loop_validation
 tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p3_active]
 ---
 
@@ -16,9 +16,11 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 **SpaceLattice v0.2.0 — campaign v1.0 P3 ACTIVE.** P2 is complete (all 4 missions closed, all phase-gate criteria met). P2→P3 gate confirmed by operator during comprehensive review session (2026-05-06) — user provided concrete visual selections and implementation instructions for P3 pre-flight.
 
-**P3 pre-flight COMPLETE (2026-05-06):** Dotfile placeholders resolved (theme/font/modeline/banner); doom-modeline adapted to spacemacs-dark (icon nil, `adna-vault` segment); adna layer keybindings refactored to Transient hierarchy (SPC a root + SPC o l LP + SPC c c Claude Code); LP stubs + Claude Code variants added to funcs.el; ADR-012 + ADR-013 accepted. Banner system live (3 variants + banner_active.txt).
+**P3 pre-flight COMPLETE (2026-05-06):** Dotfile placeholders resolved (theme/font/modeline/banner); doom-modeline adapted to spacemacs-dark (icon nil, `adna-vault` segment); adna layer keybindings refactored to Transient hierarchy (SPC a root + SPC o l LP + SPC c c Claude Code); LP stubs + Claude Code variants added to funcs.el; ADR-012 + ADR-013 accepted. Banner system live (3 variants + banner_active.txt). Visual layer deployed and live-inspected: font 150/✓, centaur-tabs star-filter/✓, doom-modeline/✓, projectile/✓.
 
-**Next:** Deploy dotfile to verify Spacemacs starts correctly with new presentation layer. Then P3-01 opens (first customization walk-through mission).
+**P3-00 COMPLETE (2026-05-06):** Closed-loop validation infrastructure live. `skill_inspect_live` + `skill_health_check` D+ + `skill_deploy` Step 9 + ADR-014 accepted. Agent can now inspect running Spacemacs state without operator screenshots (emacsclient + screencapture). Reload-type guidance added to dotfile (SPC f e R vs SPC q r).
+
+**Next:** P3-01 opens — dotfile entry-points + lifecycle ordering (first customization walk-through mission). Use `skill_inspect_live` after each deploy going forward.
 
 ## What's Working
 
@@ -27,7 +29,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 - `what/standard/` documents: `pins.md`, `layers.md`, `dotfile.spacemacs.tmpl`, `packages.el.tmpl`, `adna-bridge.md` (Phase 4 spec), `model-routing.md`, `obsidian-coupling.md`, `LAYER_CONTRACT.md` (stub)
 - `what/local/` private layer enforced — `.gitignore` allows only `*.example` templates and `README.md`; verified via `git check-ignore`
 - `what/standard/layers/adna/README.org` placeholder (elisp implementation in Phase 4)
-- `how/standard/skills/` populated: `skill_install`, `skill_deploy`, `skill_health_check`, `skill_layer_add` (Phase 3 deliverables)
+- `how/standard/skills/` populated: `skill_install`, `skill_deploy`, `skill_health_check`, `skill_layer_add` (Phase 3 deliverables); `skill_inspect_live` added P3-00 — emacsclient + screencapture closed-loop validation
 - `how/standard/runbooks/` populated: `fresh_machine.md`, `update_spacemacs.md`, `recover_from_breakage.md`
 - **Phase 4** — aDNA bridge layer authored: `what/standard/layers/adna/{packages,config,funcs,keybindings}.el`. Python CLI fallback `what/standard/index/build_graph.py` runs end-to-end against this vault — 218 nodes, 331 edges. `skill_adna_index.md` wraps both callers (elisp + Python).
 - **Phase 5** — Self-improvement loop authored at `how/standard/skills/skill_self_improve.md` (~250 lines, 6 detection rules A-F, operator-gated commit). DoD #5 demo run end-to-end: synthetic friction (duplicated `SPC a h` binding) injected into working tree, Rule E fired, ADR 001 drafted (`adr_kind: synthetic_demo`), proposal diff generated, scratch-worktree dry-run health-check green, operator ACCEPTED, diff applied (removed injection), evidence committed. Synthetic friction never entered committed history.
@@ -69,9 +71,7 @@ None blocking. Audit findings status:
 - ✅ Both skills active: `skill_telemetry_submit` + `skill_telemetry_aggregate`
 - ✅ ADR-009 (schema) + ADR-010 (submit) + ADR-011 (aggregate) all accepted
 
-**⚠️ P2→P3 phase gate: operator must confirm before P3 opens.**
-
-**P3 scope** (when gate opens): Customization walk-through — 9 missions (P3-01 through P3-09 + P3-10 layer audit + P3-11 browser integration), 12-17 sessions. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
+**P3 active.** Customization walk-through — 10 missions (P3-00 complete ✅, P3-01 through P3-11 queued), 12-17 sessions. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
 
 **Note**: `skill_self_improve` Stop hook is live. Session count gate at 5 — will be silent until session 5.
 
@@ -81,6 +81,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-06 | **ADR-014 accepted** — Closed-loop validation: `skill_inspect_live` (emacsclient + screencapture); `skill_health_check` D+ live assertions (exits 70-79); `skill_deploy` Step 9 (reload-type guide + live inspection gate); dotfile reload-type annotation | P3-00 session |
 | 2026-05-06 | **ADR-013 accepted** — Keybinding refactor: Transient hierarchy for SPC a (aDNA root), SPC o l (LP), SPC c c (Claude Code); LP stubs + Claude Code variants (plan/loop/review) in funcs.el | P3 pre-flight session |
 | 2026-05-06 | **ADR-012 accepted** — Presentation layer: 4 dotfile placeholders resolved (spacemacs-dark, Source Code Pro 13pt, doom modeline, banner_active.txt); doom-modeline icon nil + adna-vault segment + spacelattice-main format; banner asset system (3 variants) | P3 pre-flight session |
 | 2026-05-06 | **P2→P3 gate confirmed** — operator visual selections: spacemacs-dark theme, doom-modeline adapted, custom ASCII banner, Source Code Pro 13pt, xwidgets rebuild | comprehensive review session |
@@ -126,6 +127,8 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 | 2026-05-05 | Genesis AAR + ADR 003 — closes Standing Order #5 violation; fixes skill batch-boot invocation + SIGPIPE pipe (audit findings #2/#3/#4) | commit `d853a1e` |
 | 2026-05-05 | v0.1.0 published to GitHub mirror (post-AAR + ADR 003) | publish receipt commit `14a642f`, tag v0.1.0 |
 | 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | v0.2.0 commits `f7fbaef` + `07cc12f` |
+| 2026-05-06 | **P3-00 closed** — `skill_inspect_live` (emacsclient + screencapture live inspection); `skill_health_check` D+ (live assertions, exits 70-79); `skill_deploy` Step 9 (reload-type guide + live inspection gate); `dotfile.spacemacs.tmpl` reload annotation; ADR-014 accepted; campaign 30→31 missions, 47→48 sessions. Live state confirmed GREEN without operator screenshot | session_stanley_20260506T195728Z_p3_00_closed_loop_validation |
+| 2026-05-06 | **P3 visual fixes** — centaur-tabs: switched to `excluded-prefixes` API (`"*"` prefix) + `clrhash` invalidation; projectile: `discover-projects-in-search-path` call added; font-height 150 confirmed via live emacsclient query; missing `defun dotspacemacs/user-config` closing paren fixed | this session |
 | 2026-05-06 | **Session wind-down expansion** — dotfile Tier 1 layer expansion (16 new layers: osx, unicode-fonts, nav-flash, ibuffer, tabs, imenu-list, go, javascript, react, epub, pdf, restclient, docker, dap, tree-sitter, claude-code, llm-client); `~/lattice/` default-directory; eww/ace-link/link-hint/avy config; 2 new missions (P3-10 layer audit, P3-11 browser integration); eww context doc; visual inspection backlog idea; campaign 28→30 missions, 39→47 calibrated sessions | this session |
 | 2026-05-06 | **Font warmup** — Source Code Pro installed (`brew install --cask font-source-code-pro`); Spacemacs startup warning resolved | pre-P2 warmup |
 | 2026-05-06 | **P3 pre-flight** — dotfile.spacemacs.tmpl: 4 placeholder resolutions + doom-modeline block; funcs.el: LP stubs × 5 + helper + Claude Code variants × 3; keybindings.el: Transient refactor (3 menus); ADR-012 + ADR-013 accepted; banner system (3 variants + banner_active.txt) | session_stanley_20260506T_p3_preflight |

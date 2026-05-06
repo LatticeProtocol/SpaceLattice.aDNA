@@ -5,16 +5,16 @@ title: "SpaceLattice v1.0 — Genesis to Production"
 owner: stanley
 status: execution
 phase_count: 6
-mission_count: 30
+mission_count: 31
 estimated_sessions: "36-53"
-calibrated_sessions: 47
+calibrated_sessions: 48
 estimation_class: governance-broad
 priority: medium
 predecessor: "spacemacs.aDNA genesis (plan-driven; AAR at how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md)"
 created: 2026-05-05
 updated: 2026-05-06
 last_edited_by: agent_stanley
-p2_progress: "2/4 missions closed (P2-01 ✅ P2-02 ✅)"
+p2_progress: "4/4 missions closed ✅ P2 COMPLETE"
 ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
 tags: [campaign, spacelattice, v1_0, daedalus, customization_walk, telemetry, lp_fork, sustainability]
 ---
@@ -103,8 +103,9 @@ Take the framework outlines (`what/standard/sustainability.md` + `what/standard/
 
 Systematic walk through the **22 dimensions** of `what/context/spacemacs/spacemacs_customization_reference.md`, with operator-in-the-loop at each dimension. All P3 missions follow the 7-step protocol in `how/standard/runbooks/customization_session_protocol.md` (authored by P0).
 
-**Scope** (8 missions, sequenced — 22 dimensions grouped):
+**Scope** (10 missions — P3-00 infrastructure + 22 customization dimensions grouped):
 
+- `mission_sl_p3_00_closed_loop_validation` ✅ — `skill_inspect_live` + `skill_health_check` D+ + `skill_deploy` Step 9; ADR-014 accepted *(added P3 pre-flight 2026-05-06)*
 - `mission_sl_p3_01_dotfile_entry_lifecycle` — §1.1 (5 dotfile functions), §1.2 (location resolution), §1.10 (consolidated lifecycle), §2.4 (precise lifecycle table)
 - `mission_sl_p3_02_dotspacemacs_variables` — §1.3 (~85 variables across 9 sub-groups; the "big walk")
 - `mission_sl_p3_03_layer_anatomy_api` — §1.4 (layer anatomy + grammar), §1.5 (`configuration-layer/` API surface)
@@ -115,10 +116,11 @@ Systematic walk through the **22 dimensions** of `what/context/spacemacs/spacema
 - `mission_sl_p3_08_languages_keys_perf` — §3.4 (LSP + tree-sitter + DAP), §3.5 (keybinding philosophy + `SPC o l`), §3.6 (perf recipes); P3 phase-gate evidence
 - `mission_sl_p3_09_obsidian_plugin_audit` — trim `.obsidian/plugins/` from 15 plugins (~13MB) to essentials (~1.5MB); document optionals; operator UX verification post-trim *(added at P1-01 backlog audit 2026-05-06)*
 
-**Mission count**: 9. Sessions estimate: 12-17.
+**Mission count**: 10 (1 infrastructure + 9 customization walk). Sessions estimate: 12-17.
 
 **Phase exit gate**:
-- [ ] All 9 P3 missions closed with AARs
+- [x] P3-00 closed (infrastructure) ✅
+- [ ] All 9 P3 customization walk missions (P3-01 through P3-09/10/11) closed with AARs
 - [ ] All 22 dimensions reviewed in operator-in-the-loop sessions
 - [ ] `who/operators/stanley.md` operator profile updated with all decisions
 - [ ] `what/local/operator.private.el` populated with operator-specific overrides

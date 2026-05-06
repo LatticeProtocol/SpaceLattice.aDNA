@@ -124,6 +124,43 @@ else
 fi
 ```
 
+### D+. Live state assertions (when running Spacemacs + emacsclient available)
+
+Extends Check D: if an Emacs server socket is found, query the **running instance** and assert SpaceLattice standard values. This catches configuration bugs that batch-boot cannot detect (wrong variable values, filter not firing, layer not activating).
+
+```bash
+EMACS_SOCK=$(find /var/folders -name "server" \
+  -path "*/emacs$(id -u)/*" -type s 2>/dev/null | head -1)
+
+if [[ -n "$EMACS_SOCK" ]]; then
+  LIVE=$(emacsclient -s "$EMACS_SOCK" --eval '
+(format "%s|%s|%s|%s"
+  (face-attribute (quote default) :height)
+  (if (member "*" centaur-tabs-excluded-prefixes) "star-ok" "star-MISSING")
+  (if doom-modeline-mode "doom-ok" "doom-OFF")
+  (if projectile-project-search-path "proj-ok" "proj-MISSING"))
+' 2>/dev/null | tr -d '"')
+
+  FONT=$(echo "$LIVE" | cut -d'|' -f1)
+  TABS=$(echo "$LIVE" | cut -d'|' -f2)
+  DOOM=$(echo "$LIVE" | cut -d'|' -f3)
+  PROJ=$(echo "$LIVE" | cut -d'|' -f4)
+
+  LIVE_FAIL=0
+  [[ "$FONT" != "150" ]] && { echo "RED D+: font height $FONT (want 150)"; LIVE_FAIL=1; }
+  [[ "$TABS" != "star-ok" ]] && { echo "RED D+: centaur-tabs star filter missing"; LIVE_FAIL=1; }
+  [[ "$DOOM" != "doom-ok" ]] && { echo "RED D+: doom-modeline not active"; LIVE_FAIL=1; }
+  [[ "$PROJ" != "proj-ok" ]] && { echo "RED D+: projectile-project-search-path not set"; LIVE_FAIL=1; }
+  [[ $LIVE_FAIL -eq 1 ]] && exit 70
+
+  echo "OK: live assertions green (font=${FONT}, tabs=${TABS}, doom=${DOOM}, proj=${PROJ})"
+else
+  echo "SKIP: no emacs server socket — live assertions skipped (Spacemacs not running)"
+fi
+```
+
+Full live inspection with screenshot: call `skill_inspect_live` (wraps this check with Step 2-5 for visual output).
+
 ### E. adna layer self-test (Phase 4 — when impl lands)
 
 Phase 4 will add:
@@ -167,6 +204,7 @@ For Phase 3, the script doesn't exist yet — skip.
 | 40-49 | Emacs batch boot errors |
 | 50-59 | adna layer health-check failures (Phase 4+) |
 | 60-69 | Graph emission failures (Phase 4+) |
+| 70-79 | Live state assertion failures (D+ check, Phase 3+) |
 
 ## Phase 3 baseline
 
