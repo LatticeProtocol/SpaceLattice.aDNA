@@ -1,10 +1,12 @@
 ---
 type: backlog_idea
-status: deferred
+status: archived
 priority: low
 created: 2026-04-04
-last_edited_by: agent_init
-tags: [backlog, visual, social-media]
+updated: 2026-05-06
+last_edited_by: agent_stanley
+archive_reason: Covered by P4-05 (banner-assets mission) which includes SpaceLattice/Daedalus social-media variants with text overlay. No separate mission needed.
+tags: [backlog, visual, social-media, archived]
 ---
 
 # Idea: Text-on-Banner Variants for Social Media

@@ -1,10 +1,12 @@
 ---
 type: backlog_idea
-status: deferred
+status: archived
 priority: medium
 created: 2026-04-04
-last_edited_by: agent_init
-tags: [backlog, visual, branding]
+updated: 2026-05-06
+last_edited_by: agent_stanley
+archive_reason: Fully covered by P4-05 (banner-assets mission). Logo/favicon/social-preview work scoped there. No separate mission needed.
+tags: [backlog, visual, branding, archived]
 ---
 
 # Idea: Custom Logo & Favicon

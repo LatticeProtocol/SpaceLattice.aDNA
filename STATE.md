@@ -2,10 +2,10 @@
 type: state
 status: active
 created: 2026-05-03
-updated: 2026-05-05
+updated: 2026-05-06
 last_edited_by: agent_stanley
-last_session: session_stanley_20260505_225149_planning_01
-tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p0_closed, p1_ready]
+last_session: session_stanley_20260506_000334_p1_01_backlog_cleanup
+tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p1_in_progress, p1_01_closed]
 ---
 
 # Operational State
@@ -37,21 +37,23 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Active Blockers
 
-None blocking. Open audit findings now scheduled to specific P1 missions:
+None blocking. Audit findings status:
 
-- #4 Inherited backlog cleanup (6 ideas) → `mission_sl_p1_01_backlog_cleanup`
-- #5 Sanitization WARNs (private IPv4 + email in inherited L1 upgrade skill) → `mission_sl_p1_02_sanitization_warns_adr`
-- #6 No schedule for `skill_self_improve` → `mission_sl_p1_03_self_improve_schedule`
+- ~~#4 Inherited backlog cleanup (6 ideas)~~ → **CLOSED** by `mission_sl_p1_01_backlog_cleanup` (2026-05-06)
+- #5 Sanitization WARNs (private IPv4 + email in inherited L1 upgrade skill) → `mission_sl_p1_02_sanitization_warns_adr` (planned)
+- #6 No schedule for `skill_self_improve` → `mission_sl_p1_03_self_improve_schedule` (planned)
 - #7 Peer federation mechanism → deferred to post-v1.0; documented in `mission_sl_p5_03_tag_release_notes` release notes
 
 ## Next Steps
 
-The vault is at v0.2.0 with `campaign_spacelattice_v1_0` in `status: execution`. P0 (planning) closed 2026-05-05. The next operator action is to **trigger any P1 mission** (P1-01 / P1-02 / P1-03 are parallel-capable; suggested order P1-01 → P1-03 → P1-02).
+P1-01 (backlog cleanup) closed 2026-05-06. Two P1 missions remain (parallel-capable; suggested order P1-03 → P1-02):
 
-1. **Run any P1 mission** — file paths under `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_p1_*.md`. Each mission has `status: planned`; operator triggers (e.g., "run mission_sl_p1_01_backlog_cleanup" or equivalent) and the agent flips to `status: ready` → `status: in_progress` → `status: completed` per mission file lifecycle.
-2. Between phases, operator gates per Standing Order #1.
+1. **P1-03** (`mission_sl_p1_03_self_improve_schedule`) — design and ratify the `skill_self_improve` schedule mechanism. Evaluate: launchd plist (macOS), cron (Linux), Claude Code `Stop` hook (session-end agentic trigger). File ADR-007. Closes audit finding #6.
+2. **P1-02** (`mission_sl_p1_02_sanitization_warns_adr`) — audit `skill_l1_upgrade.md` for private IPv4 + email patterns. Choose ADR-acknowledge or upstream-PR path. File ADR-006. Closes audit finding #5.
 
-After P1 closes (3 missions, 3-4 sessions), P2 begins (sustainability + telemetry implementation, including first end-to-end telemetry round-trip). Total v1.0 effort: ~38 calibrated sessions across 26 P1-P5 missions.
+After both close, **P1 phase gate** check (4 items: 3 AARs, empty blockers, findings #4/#5/#6 closed, ≥2 ADRs filed). Then P2 begins (sustainability + telemetry implementation).
+
+Total v1.0 effort: ~39 calibrated sessions across 28 P1-P5 missions (P3-09 added at P1-01).
 
 The vault continues improving itself via the Phase-5 self-improvement loop (operator-gated). First non-synthetic ADR comes from real session friction.
 
@@ -59,6 +61,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-06 | **P1-01 closed** — backlog cleanup: 3 ideas kept-adapted (demo-gif → P5-01, plugin-trim → new P3-09, startup-opt → P5-01); 3 archived (custom-logo + text-banner → P4-05 covered; inner-readme → .adna/ out-of-scope); new mission P3-09 added; campaign total 27 → 28 missions | mission_sl_p1_01_backlog_cleanup AAR |
 | 2026-05-05 | **M-Planning-01 closed** — `campaign_spacelattice_v1_0` enters `status: execution`; 27 missions designed (1 P0 + 3 P1 + 4 P2 + 8 P3 + 8 P4 + 3 P5); 26 P1-P5 scaffolds authored; `customization_session_protocol.md` runbook authored | mission_sl_planning_01 AAR |
 | 2026-05-05 | Audit findings scheduled: #4 → P1-01, #5 → P1-02, #6 → P1-03, #7 → release-notes-only | M-Planning-01 D7 |
 | 2026-05-05 | P3 grouping ratified: 22 dimensions → 8 customization missions per the M-Planning-01 mission spec suggested table | M-Planning-01 D9 |
@@ -95,6 +98,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 | 2026-05-05 | Genesis AAR + ADR 003 — closes Standing Order #5 violation; fixes skill batch-boot invocation + SIGPIPE pipe (audit findings #2/#3/#4) | commit `d853a1e` |
 | 2026-05-05 | v0.1.0 published to GitHub mirror (post-AAR + ADR 003) | publish receipt commit `14a642f`, tag v0.1.0 |
 | 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | v0.2.0 commits `f7fbaef` + `07cc12f` |
+| 2026-05-06 | **P1-01 close** — backlog audit complete; `_archive/` created (3 ideas); 3 ideas kept-adapted with SpaceLattice scope; P3-09 Obsidian plugin audit mission scaffolded; campaign master updated (`mission_count: 28`, `calibrated_sessions: 39`); audit finding #4 closed | this commit |
 | 2026-05-05 | **M-Planning-01 close** — campaign v1.0 P0 closed; 26 P1-P5 mission scaffolds (in `how/campaigns/campaign_spacelattice_v1_0/missions/`); `customization_session_protocol.md` runbook; campaign master updated (`status: execution`, `mission_count: 27`, `calibrated_sessions: 38`, per-phase scope + concrete phase-gate checklists); AAR at `aar_mission_sl_planning_01.md` | this commit |
 
 ## Partial-Resume Detection

@@ -5,9 +5,9 @@ title: "SpaceLattice v1.0 — Genesis to Production"
 owner: stanley
 status: execution
 phase_count: 6
-mission_count: 27
-estimated_sessions: "31-44"
-calibrated_sessions: 38
+mission_count: 28
+estimated_sessions: "32-45"
+calibrated_sessions: 39
 estimation_class: governance-broad
 priority: medium
 predecessor: "spacemacs.aDNA genesis (plan-driven; AAR at how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md)"
@@ -36,10 +36,10 @@ Take SpaceLattice.aDNA from **v0.2.0** (rename + repositioning + framework outli
 | P0 | mission_sl_planning_01 | 1 | 1 (closed) |
 | P1 | p1_01_backlog_cleanup, p1_02_sanitization_warns_adr, p1_03_self_improve_schedule | 3 | 3-4 |
 | P2 | p2_01_sustainability_runbook_teeth, p2_02_telemetry_schema, p2_03_telemetry_submit_skill, p2_04_telemetry_aggregate_skill_and_round_trip | 4 | 5-8 |
-| P3 | p3_01 dotfile-entry-lifecycle, p3_02 dotspacemacs-variables, p3_03 layer-anatomy-api, p3_04 themes-modeline-banner-startup, p3_05 editing-completion-packages, p3_06 perf-evil-fonts, p3_07 wild-workarounds-org, p3_08 languages-keys-perf | 8 | 11-16 |
+| P3 | p3_01 dotfile-entry-lifecycle, p3_02 dotspacemacs-variables, p3_03 layer-anatomy-api, p3_04 themes-modeline-banner-startup, p3_05 editing-completion-packages, p3_06 perf-evil-fonts, p3_07 wild-workarounds-org, p3_08 languages-keys-perf, p3_09 obsidian-plugin-audit | 9 | 12-17 |
 | P4 | p4_01 clone-fork, p4_02 distribution-layer, p4_03 theme, p4_04 branding-strings, p4_05 banner-assets, p4_06 news-welcome-dotfile, p4_07 ci-workflows, p4_08 first-rebase-skill-install-update | 8 | 9-13 |
 | P5 | p5_01 doc-pass, p5_02 second-machine-install, p5_03 tag-release-notes | 3 | 3 |
-| **Total** | | **27** | **31-44 (calibrated ~38)** |
+| **Total** | | **28** | **32-45 (calibrated ~39)** |
 
 ## Phases
 
@@ -112,11 +112,12 @@ Systematic walk through the **22 dimensions** of `what/context/spacemacs/spacema
 - `mission_sl_p3_06_perf_evil_fonts` — §2.5 (performance), §2.6 (evil + misc), §2.7 (font + icon)
 - `mission_sl_p3_07_wild_workarounds_org` — §3.1 (wild combos), §3.2 (10 canonical workarounds), §3.3 (org-mode power-user)
 - `mission_sl_p3_08_languages_keys_perf` — §3.4 (LSP + tree-sitter + DAP), §3.5 (keybinding philosophy + `SPC o l`), §3.6 (perf recipes); P3 phase-gate evidence
+- `mission_sl_p3_09_obsidian_plugin_audit` — trim `.obsidian/plugins/` from 15 plugins (~13MB) to essentials (~1.5MB); document optionals; operator UX verification post-trim *(added at P1-01 backlog audit 2026-05-06)*
 
-**Mission count**: 8. Sessions estimate: 11-16.
+**Mission count**: 9. Sessions estimate: 12-17.
 
 **Phase exit gate**:
-- [ ] All 8 P3 missions closed with AARs
+- [ ] All 9 P3 missions closed with AARs
 - [ ] All 22 dimensions reviewed in operator-in-the-loop sessions
 - [ ] `who/operators/stanley.md` operator profile updated with all decisions
 - [ ] `what/local/operator.private.el` populated with operator-specific overrides
