@@ -184,7 +184,8 @@
   ;; Project-search prefers ripgrep; discover all vaults in ~/lattice/
   (with-eval-after-load 'projectile
     (setq projectile-generic-command "rg --files --hidden --glob '!.git/'")
-    (setq projectile-project-search-path (list (expand-file-name "~/lattice/"))))
+    (setq projectile-project-search-path (list (expand-file-name "~/lattice/")))
+    (projectile-discover-projects-in-search-path))
 
   ;; ── treemacs: ~/lattice/ as default workspace ────────────────────────────
   (with-eval-after-load 'treemacs
@@ -254,13 +255,11 @@
   ;; ── centaur-tabs: hide system buffers ────────────────────────────────────
   ;; Only show real file/project buffers in the tab bar. *Messages*, *scratch*,
   ;; *Info*, etc. are accessible via SPC b but don't pollute the visual tab row.
+  ;; Uses the designed API: excluded-prefixes list + hash invalidation.
   (with-eval-after-load 'centaur-tabs
-    (defun centaur-tabs-hide-tab (x)
-      (let ((name (format "%s" x)))
-        (or (window-dedicated-p (selected-window))
-            (string-match-p "\\`\\*" name))))
-    (when (fboundp 'centaur-tabs-reset-default-group)
-      (centaur-tabs-reset-default-group))))
+    (add-to-list 'centaur-tabs-excluded-prefixes "*")
+    (when (boundp 'centaur-tabs-hide-hash)
+      (clrhash centaur-tabs-hide-hash))))
 
 ;; Do not write anything past this comment. Anything written here is overwritten
 ;; by Emacs on save. Operator customizations belong in
