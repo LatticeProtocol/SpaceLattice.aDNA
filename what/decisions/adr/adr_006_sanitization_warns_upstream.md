@@ -10,8 +10,8 @@ last_edited_by: agent_stanley
 supersedes:
 superseded_by:
 upstream_pr:
-  repo: LatticeProtocol/adna
-  url: pending
+  repo: LatticeProtocol/Agentic-DNA
+  url: https://github.com/LatticeProtocol/Agentic-DNA/pull/3
   status: open
 tags: [adr, decision, sanitization, layer_contract, upstream_pr, p1_02]
 ---
