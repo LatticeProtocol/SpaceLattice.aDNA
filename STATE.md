@@ -52,6 +52,8 @@ None blocking. Audit findings status:
 - ✅ Audit findings #7 → deferred to release notes only (per M-Planning-01)
 - ✅ ≥2 ADRs filed: ADR-006 (sanitization WARNs, P1-02) + ADR-007 (self-improve schedule, P1-03)
 
+**Pre-P2 warmup**: Spacemacs emits a "cannot find specified fonts" warning at startup. Investigate and resolve before opening P2 missions — check `*Messages*` buffer to identify the font, then install it (`brew install --cask font-<name>`) or update `dotfile.spacemacs.tmpl` via ADR.
+
 **P2 opens next** (Sustainability + Telemetry implementation). 4 missions:
 
 1. `mission_sl_p2_01_sustainability_runbook` — expand sustainability runbook (sed targets, file-disposition heuristics, phase update cadence)
