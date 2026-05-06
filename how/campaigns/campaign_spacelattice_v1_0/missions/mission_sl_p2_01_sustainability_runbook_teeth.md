@@ -4,7 +4,7 @@ mission_id: mission_sl_p2_01_sustainability_runbook_teeth
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 2
 campaign_mission_number: 1
-status: planned
+status: completed
 mission_class: implementation
 created: 2026-05-05
 updated: 2026-05-05

@@ -4,8 +4,8 @@ status: active
 created: 2026-05-03
 updated: 2026-05-06
 last_edited_by: agent_stanley
-last_session: session_stanley_20260506_005521_p1_02_sanitization_warns
-tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p1_complete, p2_ready]
+last_session: session_stanley_20260506T011421Z_p2_01_runbook_teeth
+tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p2_in_progress]
 ---
 
 # Operational State
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**SpaceLattice v0.2.0 — campaign v1.0 P0 closed; P1 ready.** Plan B closed at v0.2.0; M-Planning-01 (the planning mission of `campaign_spacelattice_v1_0`) closed 2026-05-05 with full AAR. Campaign now in `status: execution` with 26 P1-P5 mission scaffolds + 1 user-in-the-loop runbook + concrete per-phase scope + concrete phase-gate checklists. Total: 27 missions / ~38 calibrated sessions across 5 execution phases (P1 audit closure → P5 v1.0 release).
+**SpaceLattice v0.2.0 — campaign v1.0 P1 complete; P2 in progress (1/4 missions done).** P2-01 closed 2026-05-06: `update_spacemacs.md` expanded with rebase-conflict teeth (5 detection/re-injection patterns, heuristics table, CI design sketch); ADR-008 accepted; dry-run validation green. Font warmup also complete: Source Code Pro installed.
 
 ## What's Working
 
@@ -52,16 +52,14 @@ None blocking. Audit findings status:
 - ✅ Audit findings #7 → deferred to release notes only (per M-Planning-01)
 - ✅ ≥2 ADRs filed: ADR-006 (sanitization WARNs, P1-02) + ADR-007 (self-improve schedule, P1-03)
 
-**Pre-P2 warmup**: Spacemacs emits a "cannot find specified fonts" warning at startup. Investigate and resolve before opening P2 missions — check `*Messages*` buffer to identify the font, then install it (`brew install --cask font-<name>`) or update `dotfile.spacemacs.tmpl` via ADR.
+**P2 in progress** (Sustainability + Telemetry implementation). Status:
 
-**P2 opens next** (Sustainability + Telemetry implementation). 4 missions:
+- ✅ P2-01 `mission_sl_p2_01_sustainability_runbook_teeth` — CLOSED (2026-05-06): `update_spacemacs.md` conflict-resolution section + ADR-008 + dry-run PASS
+- ⬜ P2-02 `mission_sl_p2_02_telemetry_schema` — **next**: telemetry schema definition (fields, privacy-class annotations, opt-in consent model)
+- ⬜ P2-03 `mission_sl_p2_03_telemetry_submit_skill` — `skill_telemetry_submit.md` authored + tested
+- ⬜ P2-04 `mission_sl_p2_04_telemetry_roundtrip` — opt-in telemetry round-trip dry-run (operator-gated)
 
-1. `mission_sl_p2_01_sustainability_runbook` — expand sustainability runbook (sed targets, file-disposition heuristics, phase update cadence)
-2. `mission_sl_p2_02_telemetry_schema` — telemetry schema definition (fields, privacy-class annotations, opt-in consent model)
-3. `mission_sl_p2_03_telemetry_submit_skill` — `skill_telemetry_submit.md` authored + tested
-4. `mission_sl_p2_04_telemetry_roundtrip` — opt-in telemetry round-trip dry-run (operator-gated)
-
-**Note**: `skill_self_improve` Stop hook is now live. The hook will fire at the end of this session — if it prints a reminder, that's expected behavior (2 sessions accumulated; threshold is 5, so it will be silent until session 5).
+**Note**: `skill_self_improve` Stop hook is live. Session count gate at 5 — will be silent until session 5.
 
 The vault continues improving itself via the Phase-5 self-improvement loop (operator-gated). First non-synthetic ADR comes from real session friction.
 
@@ -108,6 +106,9 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 | 2026-05-05 | Genesis AAR + ADR 003 — closes Standing Order #5 violation; fixes skill batch-boot invocation + SIGPIPE pipe (audit findings #2/#3/#4) | commit `d853a1e` |
 | 2026-05-05 | v0.1.0 published to GitHub mirror (post-AAR + ADR 003) | publish receipt commit `14a642f`, tag v0.1.0 |
 | 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | v0.2.0 commits `f7fbaef` + `07cc12f` |
+| 2026-05-06 | **Font warmup** — Source Code Pro installed (`brew install --cask font-source-code-pro`); Spacemacs startup warning resolved | pre-P2 warmup |
+| 2026-05-06 | **P2-01 closed** — `update_spacemacs.md` expanded: 5 detection/re-injection patterns (core-versions, core-spacemacs-buffer, core-spacemacs, dotspacemacs-template, packages.el) + 7-file heuristics table + CI design sketch (deferred to P4-07); ADR-008 accepted; dry-run PASS; AAR filed | mission_sl_p2_01 AAR |
+| 2026-05-06 | **P2-01 close** — `update_spacemacs.md` rebase-conflict section added; ADR-008 accepted; dry-run PASS; Source Code Pro font installed (startup warning resolved) | session_stanley_20260506T011421Z |
 | 2026-05-06 | **P1-02 close** — sanitization WARNs: `10.42.0.1` → `<lighthouse-ip>` placeholder; `LAYER_CONTRACT.md` § 8 Known False Positives added; ADR-006 accepted; upstream PR pending; scan now 1 acknowledged WARN; P1 phase gate ✅; P2 opens | this commit |
 | 2026-05-06 | **P1-03 close** — `skill_self_improve` schedule: Claude Code Stop hook + session-count gate; `schedule_self_improve_check.sh` authored + verified; `.claude/settings.json` project hook created; ADR-007 accepted; `skill_self_improve.md` Schedule section added; audit finding #6 closed | this commit |
 | 2026-05-06 | **P1-01 close** — backlog audit complete; `_archive/` created (3 ideas); 3 ideas kept-adapted with SpaceLattice scope; P3-09 Obsidian plugin audit mission scaffolded; campaign master updated (`mission_count: 28`, `calibrated_sessions: 39`); audit finding #4 closed | this commit |
