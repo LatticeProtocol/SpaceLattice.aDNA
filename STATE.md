@@ -4,7 +4,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-06
 last_edited_by: agent_stanley
-last_session: session_stanley_20260506T011421Z_p2_01_runbook_teeth
+last_session: session_stanley_20260506T043111Z_p2_03_telemetry_submit
 tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p2_in_progress]
 ---
 
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**SpaceLattice v0.2.0 — campaign v1.0 P2 in progress (2/4 missions done).** P2-02 closed 2026-05-06: `telemetry_schema.json` (JSON Schema Draft-07, 4 submission classes, privacy-posture table per field); telemetry-specific sanitization extensions (5 rules: LS-1 / CS-1 / DE-1 / SHA-1 / VER-1); `adna/telemetry-validate` stub in funcs.el; maintainer parser snippet in skill_telemetry_aggregate; ADR-009 accepted; `telemetry.md` status active.
+**SpaceLattice v0.2.0 — campaign v1.0 P2 in progress (3/4 missions done).** P2-03 closed 2026-05-06: `skill_telemetry_submit.md` stub → full 7-step procedure (consent → collect → sanitize → validate → confirm → submit → audit-write); `--dry-run` + `--withdraw` flags; `.github/ISSUE_TEMPLATE/telemetry.yml` (schema-enforcing GitHub issue form); ADR-010 accepted.
 
 ## What's Working
 
@@ -56,8 +56,8 @@ None blocking. Audit findings status:
 
 - ✅ P2-01 `mission_sl_p2_01_sustainability_runbook_teeth` — CLOSED (2026-05-06): `update_spacemacs.md` conflict-resolution section + ADR-008 + dry-run PASS
 - ✅ P2-02 `mission_sl_p2_02_telemetry_schema` — CLOSED (2026-05-06): `telemetry_schema.json` JSON Schema Draft-07 + privacy-posture table + sanitization extensions × 5 + `adna/telemetry-validate` stub + maintainer parser snippet + ADR-009
-- ⬜ P2-03 `mission_sl_p2_03_telemetry_submit_skill` — **next**: `skill_telemetry_submit.md` from stub to full procedure + `.github/ISSUE_TEMPLATE/telemetry.yml`
-- ⬜ P2-04 `mission_sl_p2_04_telemetry_roundtrip` — opt-in telemetry round-trip dry-run (operator-gated; P2 phase-gate evidence)
+- ✅ P2-03 `mission_sl_p2_03_telemetry_submit_skill` — CLOSED (2026-05-06): `skill_telemetry_submit.md` full 7-step procedure + `.github/ISSUE_TEMPLATE/telemetry.yml` + ADR-010
+- ⬜ P2-04 `mission_sl_p2_04_telemetry_roundtrip` — **next**: `skill_telemetry_aggregate.md` from stub to full procedure + first end-to-end round-trip (P2 phase-gate evidence)
 
 **Note**: `skill_self_improve` Stop hook is live. Session count gate at 5 — will be silent until session 5.
 
@@ -67,6 +67,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-06 | **P2-03 closed** — `skill_telemetry_submit.md` full 7-step procedure (consent/collect/sanitize/validate/confirm/submit/audit-write); `--dry-run` + `--withdraw` flags; `.github/ISSUE_TEMPLATE/telemetry.yml` (schema-enforcing form with 3-checkbox sanitization ack); ADR-010 accepted | session_stanley_20260506T043111Z |
 | 2026-05-06 | **P2-02 closed** — `telemetry_schema.json` (JSON Schema Draft-07, 4 classes); privacy-posture table + 5 sanitization extensions (LS-1/CS-1/DE-1/SHA-1/VER-1); `adna/telemetry-validate` stub in funcs.el; maintainer parser snippet in skill_telemetry_aggregate; ADR-009 accepted; `telemetry.md` status active | session_stanley_20260506T033343Z |
 | 2026-05-06 | **P1-02 closed** — sanitization WARNs: upstream-PR path; `10.42.0.1` → `<lighthouse-ip>` placeholder in `skill_l1_upgrade.md`; `git@github.com` false positive documented in `LAYER_CONTRACT.md § 8`; ADR-006 accepted; P1 phase gate ✅; P2 opens | mission_sl_p1_02_sanitization_warns_adr AAR |
 | 2026-05-06 | **P1-03 closed** — `skill_self_improve` schedule ratified: Claude Code Stop hook + session-count gate (threshold 5); ADR-007 accepted; `.claude/settings.json` created; check script verified; audit finding #6 closed | mission_sl_p1_03_self_improve_schedule AAR |
@@ -109,6 +110,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 | 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | v0.2.0 commits `f7fbaef` + `07cc12f` |
 | 2026-05-06 | **Session wind-down expansion** — dotfile Tier 1 layer expansion (16 new layers: osx, unicode-fonts, nav-flash, ibuffer, tabs, imenu-list, go, javascript, react, epub, pdf, restclient, docker, dap, tree-sitter, claude-code, llm-client); `~/lattice/` default-directory; eww/ace-link/link-hint/avy config; 2 new missions (P3-10 layer audit, P3-11 browser integration); eww context doc; visual inspection backlog idea; campaign 28→30 missions, 39→47 calibrated sessions | this session |
 | 2026-05-06 | **Font warmup** — Source Code Pro installed (`brew install --cask font-source-code-pro`); Spacemacs startup warning resolved | pre-P2 warmup |
+| 2026-05-06 | **P2-03 closed** — `skill_telemetry_submit.md` stub → full 7-step operator submission procedure; `.github/ISSUE_TEMPLATE/telemetry.yml` created; ADR-010 accepted | session_stanley_20260506T043111Z |
 | 2026-05-06 | **P2-02 closed** — `telemetry_schema.json` (JSON Schema Draft-07, 4 classes); privacy-posture table; 5 sanitization extension rules; `adna/telemetry-validate` stub; maintainer parser snippet; ADR-009 accepted; `telemetry.md` status active | session_stanley_20260506T033343Z |
 | 2026-05-06 | **P2-01 closed** — `update_spacemacs.md` expanded: 5 detection/re-injection patterns (core-versions, core-spacemacs-buffer, core-spacemacs, dotspacemacs-template, packages.el) + 7-file heuristics table + CI design sketch (deferred to P4-07); ADR-008 accepted; dry-run PASS; AAR filed | mission_sl_p2_01 AAR |
 | 2026-05-06 | **P2-01 close** — `update_spacemacs.md` rebase-conflict section added; ADR-008 accepted; dry-run PASS; Source Code Pro font installed (startup warning resolved) | session_stanley_20260506T011421Z |
