@@ -103,7 +103,7 @@
    ;; Adapts to spacemacs-dark faces (icon nil = text-only, theme-agnostic).
    dotspacemacs-mode-line-theme 'doom
    dotspacemacs-colorize-cursor-according-to-state t
-   dotspacemacs-default-font '("Source Code Pro" :size 15 :weight normal :width normal)
+   dotspacemacs-default-font '("Source Code Pro" :size 15.0 :weight normal :width normal)
    dotspacemacs-leader-key "SPC"
    dotspacemacs-emacs-command-key "SPC"
    dotspacemacs-ex-command-key ":"
@@ -238,6 +238,11 @@
           doom-modeline-checker-simple-format t
           doom-modeline-vcs-max-length 16))
 
+  ;; ── font size guard ──────────────────────────────────────────────────────
+  ;; Belt-and-suspenders: ensures 15pt even if unicode-fonts/osx layer overrides
+  ;; dotspacemacs-default-font after init. height 150 = 15pt in 1/10pt units.
+  (set-face-attribute 'default nil :height 150)
+
   ;; ── centaur-tabs: hide system buffers ────────────────────────────────────
   ;; Only show real file/project buffers in the tab bar. *Messages*, *scratch*,
   ;; *Info*, etc. are accessible via SPC b but don't pollute the visual tab row.
@@ -245,7 +250,7 @@
     (defun centaur-tabs-hide-tab (x)
       (let ((name (format "%s" x)))
         (or (window-dedicated-p (selected-window))
-            (string-match-p "\\`\\*" name)))))
+            (string-match-p "\\`\\*" name))))))
 
 ;; Do not write anything past this comment. Anything written here is overwritten
 ;; by Emacs on save. Operator customizations belong in
