@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash how/standard/skills/schedule_self_improve_check.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

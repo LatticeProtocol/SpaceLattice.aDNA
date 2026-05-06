@@ -3,10 +3,10 @@ type: skill
 skill_type: agent
 status: active
 created: 2026-05-04
-updated: 2026-05-04
-last_edited_by: agent_init
+updated: 2026-05-06
+last_edited_by: agent_stanley
 category: improvement
-trigger: "Periodically (operator may schedule via cron/launchd) or manually when operator notices recurring friction. Reads sessions, detects patterns, drafts ADR + diff + dry-run health-check, presents bundle."
+trigger: "Automatically suggested by Claude Code Stop hook when session count since last self-improve ADR >= SELF_IMPROVE_THRESHOLD (default 5). Also triggered manually when operator notices recurring friction. See ## Schedule section and ADR-007."
 phase_introduced: 5
 tags: [skill, self_improve, adr, daedalus, gate]
 requirements:
@@ -281,6 +281,49 @@ echo "deferred_until: $(date -u -v+7d +%F)" >> what/decisions/adr/adr_NNN_<slug>
 3. **One proposal per session.** If multiple frictions are detected, propose the strongest signal; queue others for next session (with `next_proposal:` field in operator profile).
 4. **Cooldown.** Don't re-propose a rejected ADR for 30 days unless the rejection reason changes (operator can clear the cooldown manually).
 5. **Read sessions before proposing.** First-run mode (no sessions yet) is allowed but should weight vault-state-only signals (Rules D/E/F) higher than session-derived (A/B/C).
+
+## Schedule
+
+Ratified by ADR-007 (2026-05-06). The schedule mechanism is a **Claude Code `Stop` hook + session-count gate**.
+
+### Contract
+
+| Property | Value |
+|----------|-------|
+| **Trigger** | Claude Code session end (`Stop` hook in `.claude/settings.json`) |
+| **Mechanism** | `bash how/standard/skills/schedule_self_improve_check.sh` |
+| **Fires when** | Session-count since last self-improve ADR ≥ `SELF_IMPROVE_THRESHOLD` (default: 5) |
+| **Action** | Prints a one-line reminder to operator stdout — does NOT auto-run the skill |
+| **Platform** | All (macOS + Linux; hook is a shell script) |
+| **Privacy** | Reads only session file timestamps and ADR frontmatter. No data transmitted. |
+
+### How it works
+
+At session end, the hook calls `schedule_self_improve_check.sh`. The script:
+1. Finds the most recent self-improve ADR in `what/decisions/adr/` (by tag grep)
+2. Counts session files in `how/sessions/history/` newer than that ADR
+3. If count ≥ threshold: prints reminder to stdout; otherwise silent
+
+### Configuring the threshold
+
+```bash
+# In ~/.zshrc or ~/.bashrc — sets tighter (3-session) cadence
+export SELF_IMPROVE_THRESHOLD=3
+```
+
+Default 5 sessions is calibrated for weekly-or-so session cadence with occasional multi-session work days. Lower for tighter feedback; raise for quieter operation.
+
+### Fallback (no Claude Code hook)
+
+On air-gapped systems or when running outside Claude Code:
+
+```bash
+# Manual: run the check script directly after any session
+bash how/standard/skills/schedule_self_improve_check.sh
+
+# Cron alternative (weekly, Monday 09:00):
+# 0 9 * * 1 cd /path/to/SpaceLattice.aDNA && bash how/standard/skills/schedule_self_improve_check.sh
+```
 
 ## Demonstration (Phase 5 / DoD #5)
 

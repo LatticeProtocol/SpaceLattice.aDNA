@@ -44,7 +44,9 @@ secrets.env
 *.private.el
 
 # === CLAUDE CODE / AGENTIC TOOLING (per-session state) ===
-.claude/
+# .claude/settings.json is project governance (hooks) — tracked.
+# .claude/settings.local.json is operator-private — gitignored.
+.claude/settings.local.json
 .mcp.json
 
 # === SCRATCH WORKTREES from skill_self_improve / skill_health_check ===
