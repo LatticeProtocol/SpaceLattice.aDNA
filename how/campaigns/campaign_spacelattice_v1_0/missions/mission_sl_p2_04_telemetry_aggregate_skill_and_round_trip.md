@@ -4,13 +4,15 @@ mission_id: mission_sl_p2_04_telemetry_aggregate_skill_and_round_trip
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 2
 campaign_mission_number: 4
-status: planned
+status: completed
 mission_class: integration
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-06
 last_edited_by: agent_stanley
-tags: [mission, planned, spacelattice, v1_0, p2, telemetry, aggregate, round_trip, phase_gate]
-blocked_by: [mission_sl_p2_03_telemetry_submit_skill]
+tags: [mission, completed, spacelattice, v1_0, p2, telemetry, aggregate, round_trip, phase_gate]
+blocked_by: []
+completed_at: 2026-05-06
+session: session_stanley_20260506T053454Z_p2_04_telemetry_aggregate
 ---
 
 # Mission — P2-04: skill_telemetry_aggregate + first round-trip (P2 phase-gate)
@@ -48,5 +50,18 @@ P2-03 closed.
 ## Reference
 
 - `what/standard/telemetry.md` (post-p2_02 schema + framework)
-- `how/standard/skills/skill_telemetry_aggregate.md` (current stub)
-- `who/peers/telemetry/inbox/` (initial empty)
+- `how/standard/skills/skill_telemetry_aggregate.md` (promoted to active — ADR-011)
+- `who/peers/telemetry/inbox/20260506T053941Z_aggregate.md` (round-trip evidence)
+- `who/peers/telemetry/inbox/demo_adr_draft_p2_04.md` (loop-closed evidence)
+- ADR-011: `what/decisions/adr/adr_011_skill_telemetry_aggregate.md`
+
+## Completion notes
+
+All deliverables completed in session `session_stanley_20260506T053454Z_p2_04_telemetry_aggregate` (2026-05-06):
+
+- ✅ `skill_telemetry_aggregate.md` — stub → full 7-step procedure; `status: active`; ADR-011 ratifies
+- ✅ `adr_011_skill_telemetry_aggregate.md` — accepted
+- ✅ Round-trip test: GitHub Issue #1 submitted (operator side); parsed + aggregated (maintainer side); inbox entry committed
+- ✅ Demo ADR draft: `who/peers/telemetry/inbox/demo_adr_draft_p2_04.md` committed
+- ✅ P2 phase-gate evidence: all 7 criteria met
+- ✅ AAR: `missions/artifacts/aar_mission_sl_p2_04.md`

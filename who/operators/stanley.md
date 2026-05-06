@@ -23,6 +23,12 @@ layer_preferences:
   - markdown
 os: macOS
 shell: zsh
+telemetry_consent: true
+telemetry_classes:
+  friction_signal: true
+  adr_proposal: true
+  customization_share: false
+  perf_metric: false
 tags: [operator, stanley, daedalus, mac, ml_ops]
 ---
 

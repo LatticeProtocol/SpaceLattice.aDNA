@@ -4,8 +4,8 @@ status: active
 created: 2026-05-03
 updated: 2026-05-06
 last_edited_by: agent_stanley
-last_session: session_stanley_20260506T043111Z_p2_03_telemetry_submit
-tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p2_in_progress]
+last_session: session_stanley_20260506T053454Z_p2_04_telemetry_aggregate
+tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p2_complete]
 ---
 
 # Operational State
@@ -14,7 +14,9 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**SpaceLattice v0.2.0 — campaign v1.0 P2 in progress (3/4 missions done).** P2-03 closed 2026-05-06: `skill_telemetry_submit.md` stub → full 7-step procedure (consent → collect → sanitize → validate → confirm → submit → audit-write); `--dry-run` + `--withdraw` flags; `.github/ISSUE_TEMPLATE/telemetry.yml` (schema-enforcing GitHub issue form); ADR-010 accepted.
+**SpaceLattice v0.2.0 — campaign v1.0 P2 COMPLETE.** P2-04 closed 2026-05-06: `skill_telemetry_aggregate.md` stub → full 7-step maintainer procedure (poll → parse → dedup → aggregate → pattern → write → state-update); ADR-011 accepted; first end-to-end telemetry round-trip executed — GitHub Issue #1 submitted (operator side), parsed + aggregated (maintainer side), inbox entry committed, demo ADR draft committed. All P2 phase-gate criteria met.
+
+**⚠️ P2→P3 phase gate: operator confirmation required before P3 (customization walk-through) opens.**
 
 ## What's Working
 
@@ -57,7 +59,17 @@ None blocking. Audit findings status:
 - ✅ P2-01 `mission_sl_p2_01_sustainability_runbook_teeth` — CLOSED (2026-05-06): `update_spacemacs.md` conflict-resolution section + ADR-008 + dry-run PASS
 - ✅ P2-02 `mission_sl_p2_02_telemetry_schema` — CLOSED (2026-05-06): `telemetry_schema.json` JSON Schema Draft-07 + privacy-posture table + sanitization extensions × 5 + `adna/telemetry-validate` stub + maintainer parser snippet + ADR-009
 - ✅ P2-03 `mission_sl_p2_03_telemetry_submit_skill` — CLOSED (2026-05-06): `skill_telemetry_submit.md` full 7-step procedure + `.github/ISSUE_TEMPLATE/telemetry.yml` + ADR-010
-- ⬜ P2-04 `mission_sl_p2_04_telemetry_roundtrip` — **next**: `skill_telemetry_aggregate.md` from stub to full procedure + first end-to-end round-trip (P2 phase-gate evidence)
+- ✅ P2-04 `mission_sl_p2_04_telemetry_aggregate_skill_and_round_trip` — CLOSED (2026-05-06): `skill_telemetry_aggregate.md` full 7-step procedure + ADR-011 + first end-to-end round-trip (Issue #1) + inbox entry committed + demo ADR draft committed
+
+**P2 COMPLETE (2026-05-06)** — all 4 P2 missions closed. Phase-gate criteria:
+- ✅ P2-01, P2-02, P2-03, P2-04 all completed with AARs
+- ✅ End-to-end telemetry round-trip demonstrated (Issue #1, inbox committed)
+- ✅ Both skills active: `skill_telemetry_submit` + `skill_telemetry_aggregate`
+- ✅ ADR-009 (schema) + ADR-010 (submit) + ADR-011 (aggregate) all accepted
+
+**⚠️ P2→P3 phase gate: operator must confirm before P3 opens.**
+
+**P3 scope** (when gate opens): Customization walk-through — 9 missions (P3-01 through P3-09 + P3-10 layer audit + P3-11 browser integration), 12-17 sessions. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
 
 **Note**: `skill_self_improve` Stop hook is live. Session count gate at 5 — will be silent until session 5.
 
@@ -67,6 +79,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-06 | **P2-04 closed** — `skill_telemetry_aggregate.md` stub → full 7-step maintainer procedure (poll/parse/dedup/aggregate/pattern/write/state-update); ADR-011 accepted; round-trip: Issue #1 submitted + parsed + inbox `20260506T053941Z_aggregate.md` committed + demo ADR draft committed; `.gitignore` + `stanley.md` + `_state.json` updated; P2 phase-gate COMPLETE | session_stanley_20260506T053454Z |
 | 2026-05-06 | **P2-03 closed** — `skill_telemetry_submit.md` full 7-step procedure (consent/collect/sanitize/validate/confirm/submit/audit-write); `--dry-run` + `--withdraw` flags; `.github/ISSUE_TEMPLATE/telemetry.yml` (schema-enforcing form with 3-checkbox sanitization ack); ADR-010 accepted | session_stanley_20260506T043111Z |
 | 2026-05-06 | **P2-02 closed** — `telemetry_schema.json` (JSON Schema Draft-07, 4 classes); privacy-posture table + 5 sanitization extensions (LS-1/CS-1/DE-1/SHA-1/VER-1); `adna/telemetry-validate` stub in funcs.el; maintainer parser snippet in skill_telemetry_aggregate; ADR-009 accepted; `telemetry.md` status active | session_stanley_20260506T033343Z |
 | 2026-05-06 | **P1-02 closed** — sanitization WARNs: upstream-PR path; `10.42.0.1` → `<lighthouse-ip>` placeholder in `skill_l1_upgrade.md`; `git@github.com` false positive documented in `LAYER_CONTRACT.md § 8`; ADR-006 accepted; P1 phase gate ✅; P2 opens | mission_sl_p1_02_sanitization_warns_adr AAR |
@@ -110,6 +123,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 | 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | v0.2.0 commits `f7fbaef` + `07cc12f` |
 | 2026-05-06 | **Session wind-down expansion** — dotfile Tier 1 layer expansion (16 new layers: osx, unicode-fonts, nav-flash, ibuffer, tabs, imenu-list, go, javascript, react, epub, pdf, restclient, docker, dap, tree-sitter, claude-code, llm-client); `~/lattice/` default-directory; eww/ace-link/link-hint/avy config; 2 new missions (P3-10 layer audit, P3-11 browser integration); eww context doc; visual inspection backlog idea; campaign 28→30 missions, 39→47 calibrated sessions | this session |
 | 2026-05-06 | **Font warmup** — Source Code Pro installed (`brew install --cask font-source-code-pro`); Spacemacs startup warning resolved | pre-P2 warmup |
+| 2026-05-06 | **P2-04 closed** — `skill_telemetry_aggregate.md` full 7-step maintainer procedure; ADR-011; first round-trip (Issue #1); inbox `20260506T053941Z_aggregate.md` committed; demo ADR draft; `who/peers/telemetry/` dir structure created; `_state.json` gitignored; `stanley.md` consent fields added | session_stanley_20260506T053454Z |
 | 2026-05-06 | **P2-03 closed** — `skill_telemetry_submit.md` stub → full 7-step operator submission procedure; `.github/ISSUE_TEMPLATE/telemetry.yml` created; ADR-010 accepted | session_stanley_20260506T043111Z |
 | 2026-05-06 | **P2-02 closed** — `telemetry_schema.json` (JSON Schema Draft-07, 4 classes); privacy-posture table; 5 sanitization extension rules; `adna/telemetry-validate` stub; maintainer parser snippet; ADR-009 accepted; `telemetry.md` status active | session_stanley_20260506T033343Z |
 | 2026-05-06 | **P2-01 closed** — `update_spacemacs.md` expanded: 5 detection/re-injection patterns (core-versions, core-spacemacs-buffer, core-spacemacs, dotspacemacs-template, packages.el) + 7-file heuristics table + CI design sketch (deferred to P4-07); ADR-008 accepted; dry-run PASS; AAR filed | mission_sl_p2_01 AAR |

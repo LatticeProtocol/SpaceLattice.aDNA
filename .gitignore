@@ -22,8 +22,10 @@
 # === TELEMETRY OUTBOX / SENT (operator-local) ===
 # Per-machine queued + sent telemetry. The maintainer-side aggregated inbox
 # IS committed (audit trail) but the outbox/sent dirs stay local.
+# _state.json tracks last-processed issue ID for idempotent re-runs (machine-local).
 /who/peers/telemetry/outbox/
 /who/peers/telemetry/sent/
+/who/peers/telemetry/inbox/_state.json
 
 # === PUBLISH ARTIFACTS ===
 # skill_publish_lattice writes here; not committed to vault git.

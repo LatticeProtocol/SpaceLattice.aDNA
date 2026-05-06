@@ -1,59 +1,77 @@
 ---
 type: skill
 skill_type: agent
-status: stub_with_parser
+status: active
 created: 2026-05-05
 updated: 2026-05-06
 last_edited_by: agent_stanley
 category: telemetry
 trigger: "Maintainer-side: periodic poll of upstream LatticeProtocol/SpaceLattice.aDNA telemetry-labeled issues. Aggregates fleet signals into who/peers/telemetry/inbox/ for cross-fleet pattern analysis."
 phase_introduced: 8
-implementation_status: stub_design_pending_v1_0_p2_mission
-tags: [skill, telemetry, aggregate, maintainer, upstream, agentic_sre, stub, daedalus]
+implementation_status: active
+tags: [skill, telemetry, aggregate, maintainer, upstream, agentic_sre, daedalus]
 requirements:
   tools: [gh, python3, "PyYAML"]
   context:
     - what/standard/telemetry.md
+    - what/standard/telemetry_schema.json
   permissions:
-    - "gh api repos/LatticeProtocol/SpaceLattice.aDNA/issues (read-only against the upstream)"
+    - "gh api repos/LatticeProtocol/SpaceLattice.aDNA/issues (read-only)"
     - "write who/peers/telemetry/inbox/"
-    - "(does not submit ADRs; companion skill skill_self_improve_aggregate proposes those, also TBD)"
+    - "write who/peers/telemetry/inbox/_state.json (gitignored)"
 ---
 
-# skill_telemetry_aggregate — aggregate fleet telemetry (STUB)
+# skill_telemetry_aggregate — aggregate fleet telemetry
 
-## Purpose (stub)
+## Purpose
 
-Maintainer-side skill that polls the upstream `LatticeProtocol/SpaceLattice.aDNA` repo's telemetry-labeled issues, aggregates them into `who/peers/telemetry/inbox/<utc>.md` audit-trail files, and surfaces cross-fleet patterns to drive upstream ADR proposals.
+Maintainer-side skill that polls the upstream `LatticeProtocol/SpaceLattice.aDNA` repo's telemetry-labeled issues, parses and validates each payload, de-duplicates against previously-processed issues, aggregates fleet signals into a committed audit batch, and surfaces cross-fleet patterns that may trigger upstream ADR proposals.
 
 The fleet-loop counterpart of operator-side `skill_telemetry_submit`.
 
-## Status
+**Hard constraints:**
 
-**STUB** — full procedure designed by M-Planning-01 (v1.0 campaign Phase 0) and implemented in Phase 2.
+- **Read-only against upstream.** Never modifies, closes, or labels telemetry issues autonomously.
+- **Audit trail committed.** Aggregate output lands in `who/peers/telemetry/inbox/` and is committed — peers can verify what has been aggregated.
+- **De-dup by issue ID.** `_state.json` (gitignored) tracks the last-processed issue ID; re-runs are idempotent.
+- **Maintainer gates the next step.** This skill aggregates and surfaces patterns; ADR proposals from patterns require maintainer review and approval.
 
-## Outline (placeholder for full implementation)
+## Flags
 
-### Steps (intent only — full procedure in Phase 2)
+| Flag | Behavior |
+|------|----------|
+| _(none)_ | Full run — poll, parse, dedup, aggregate, detect patterns, write inbox, update state |
+| `--dry-run` | Runs Steps 1–4, prints parsed records and any pattern detections, stops without writing to inbox or updating `_state.json` |
+| `--since <iso8601>` | Filter issues created after the given ISO 8601 timestamp (overrides `_state.json` for the batch window) |
 
-1. **Poll issues**: `gh api repos/LatticeProtocol/SpaceLattice.aDNA/issues?labels=telemetry&state=all --paginate`
-2. **Parse and validate each issue body** — see § Maintainer parser snippet below
-3. **Validate schema**: skip malformed (log and label `telemetry-malformed` for human review)
-4. **Aggregate** by signal class, time window, signal count
-5. **Write audit batch**: `who/peers/telemetry/inbox/<utc>_aggregate.md` with frontmatter:
-   ```yaml
-   type: telemetry_aggregate
-   batch_window: <ISO8601_start>/<ISO8601_end>
-   issue_count: <N>
-   signals_by_class: {...}
-   patterns_detected: [...]
-   ```
-6. **Pattern detection**: if N+ operators hit the same friction signal, surface as `pattern_<id>.md` in inbox
-7. **Hand off to `skill_self_improve_aggregate`** (companion skill, also TBD): drafts upstream ADR proposing fleet-level fix
+---
 
-## Maintainer parser snippet
+## Step 1 — Poll
 
-The following Python snippet implements steps 2–3 above. It parses a GitHub issue body (structured JSON payload inside a fenced code block), validates the `type` field, routes to a per-class handler, and rejects malformed payloads. Used at P2-04 round-trip test and by the full skill implementation.
+Fetch all telemetry-labeled issues from the upstream repo, paginating to catch large fleets:
+
+```bash
+gh api "repos/LatticeProtocol/SpaceLattice.aDNA/issues?labels=telemetry&state=all" \
+  --paginate \
+  > /tmp/telemetry_issues.json
+
+echo "Fetched $(python3 -c "import json; print(len(json.load(open('/tmp/telemetry_issues.json'))))" ) issues"
+```
+
+If the `telemetry` label does not exist on the upstream repo:
+
+```bash
+gh label create telemetry \
+  --repo LatticeProtocol/SpaceLattice.aDNA \
+  --color 0075ca \
+  --description "Fleet telemetry submission from SpaceLattice.aDNA operators"
+```
+
+---
+
+## Step 2 — Parse and validate
+
+Run the parser against each issue. The parser extracts the JSON payload from the issue body (wrapped in a fenced code block by `skill_telemetry_submit`), validates the `type` field, routes to a per-class handler, and rejects malformed payloads to a separate rejected/ audit trail.
 
 ```python
 import json
@@ -66,7 +84,6 @@ KNOWN_TYPES = {"friction_signal", "adr_proposal", "customization_share", "perf_m
 
 def extract_json_payload(issue_body: str) -> dict | None:
     """Extract the first JSON block from a GitHub issue body."""
-    # GitHub issue bodies may wrap the payload in a fenced code block
     pattern = re.compile(r"```json\s*\n(.*?)\n```", re.DOTALL)
     m = pattern.search(issue_body)
     raw = m.group(1) if m else issue_body.strip()
@@ -76,11 +93,8 @@ def extract_json_payload(issue_body: str) -> dict | None:
         return None
 
 def validate_type(payload: dict) -> str | None:
-    """Return submission type if valid, else None."""
     t = payload.get("type")
-    if t not in KNOWN_TYPES:
-        return None
-    return t
+    return t if t in KNOWN_TYPES else None
 
 def handle_friction_signal(payload: dict, issue_id: int) -> dict:
     return {"issue_id": issue_id, "class": "friction_signal",
@@ -115,8 +129,14 @@ HANDLERS = {
     "perf_metric": handle_perf_metric,
 }
 
+def _write_rejected(rejected_dir: Path, issue_id: int, reason: str, raw) -> None:
+    rejected_dir.mkdir(parents=True, exist_ok=True)
+    utc = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    out = rejected_dir / f"{utc}_issue_{issue_id}.json"
+    out.write_text(json.dumps({"issue_id": issue_id, "reason": reason, "raw": raw}, indent=2))
+    print(f"REJECTED issue #{issue_id}: {reason} → {out}", file=sys.stderr)
+
 def process_issue(issue: dict, rejected_dir: Path) -> dict | None:
-    """Parse one GitHub API issue object. Returns structured record or None."""
     issue_id = issue.get("number", 0)
     body = issue.get("body", "")
     payload = extract_json_payload(body)
@@ -127,58 +147,210 @@ def process_issue(issue: dict, rejected_dir: Path) -> dict | None:
     if submission_type is None:
         _write_rejected(rejected_dir, issue_id, "unknown_type", payload)
         return None
-    handler = HANDLERS[submission_type]
-    return handler(payload, issue_id)
-
-def _write_rejected(rejected_dir: Path, issue_id: int, reason: str, raw) -> None:
-    """Append rejected issue to who/peers/telemetry/inbox/rejected/ audit trail."""
-    rejected_dir.mkdir(parents=True, exist_ok=True)
-    utc = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    out = rejected_dir / f"{utc}_issue_{issue_id}.json"
-    out.write_text(json.dumps({"issue_id": issue_id, "reason": reason, "raw": raw},
-                               indent=2))
-    print(f"REJECTED issue #{issue_id}: {reason} → {out}", file=sys.stderr)
+    return HANDLERS[submission_type](payload, issue_id)
 ```
 
-Usage in the full skill (step 2):
-```python
-import subprocess, json
-from pathlib import Path
+Usage:
 
-issues_json = subprocess.check_output([
-    "gh", "api",
-    "repos/LatticeProtocol/SpaceLattice.aDNA/issues",
-    "--field", "labels=telemetry",
-    "--field", "state=all",
-    "--paginate"
-])
-issues = json.loads(issues_json)
+```python
+issues = json.load(open("/tmp/telemetry_issues.json"))
 rejected_dir = Path("who/peers/telemetry/inbox/rejected")
 records = [r for issue in issues
              if (r := process_issue(issue, rejected_dir)) is not None]
 print(f"Parsed {len(records)} valid records from {len(issues)} issues")
 ```
 
-### Hard rules (stub)
+---
 
-1. **Read-only against upstream.** Doesn't modify telemetry issues; doesn't auto-close them.
-2. **Audit trail symmetric.** Aggregate output is committed (not gitignored) so peers can verify what's been aggregated.
-3. **De-dup by issue ID.** Re-running the skill processes only new issues since last batch.
-4. **Maintainer gates the next step.** This skill aggregates; ADR proposals from aggregates require maintainer approval.
+## Step 3 — De-dup
+
+Load `who/peers/telemetry/inbox/_state.json` (gitignored) to find the last-processed issue ID. Skip issues with `issue_id ≤ last_processed_id`.
+
+```python
+import json
+from pathlib import Path
+
+STATE_PATH = Path("who/peers/telemetry/inbox/_state.json")
+
+def load_state() -> dict:
+    if STATE_PATH.exists():
+        return json.loads(STATE_PATH.read_text())
+    return {"last_processed_issue_id": 0, "last_run_utc": None}
+
+state = load_state()
+last_id = state["last_processed_issue_id"]
+new_records = [r for r in records if r["issue_id"] > last_id]
+print(f"De-dup: {len(records)} parsed, {len(new_records)} new (last_id={last_id})")
+```
+
+If `new_records` is empty, the skill exits cleanly: "No new telemetry issues since last run."
+
+---
+
+## Step 4 — Aggregate
+
+Group records by submission class and count. Build the aggregate metadata:
+
+```python
+from collections import Counter
+
+by_class = Counter(r["class"] for r in new_records)
+max_issue_id = max(r["issue_id"] for r in new_records) if new_records else last_id
+
+utc_now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+batch_start = state.get("last_run_utc") or "epoch"
+batch_end = datetime.now(timezone.utc).isoformat()
+
+aggregate = {
+    "batch_window": f"{batch_start}/{batch_end}",
+    "issue_count": len(new_records),
+    "signals_by_class": dict(by_class),
+    "new_issue_ids": [r["issue_id"] for r in new_records],
+    "records": new_records,
+}
+print(f"Aggregate: {aggregate['signals_by_class']}")
+```
+
+---
+
+## Step 5 — Pattern detection
+
+For each `friction_signal` record, group by `signal` (signal_class value). If ≥5 records share the same signal, emit a pattern file:
+
+```python
+PATTERN_THRESHOLD = 5
+
+friction = [r for r in new_records if r["class"] == "friction_signal"]
+signal_counts = Counter(r["signal"] for r in friction)
+
+patterns_detected = []
+for signal_class, count in signal_counts.items():
+    if count >= PATTERN_THRESHOLD:
+        pattern_id = f"pattern_{signal_class}"
+        pattern_file = Path(f"who/peers/telemetry/inbox/{pattern_id}.md")
+        pattern_content = f"""---
+type: telemetry_pattern
+pattern_id: {pattern_id}
+signal_class: {signal_class}
+occurrence_count: {count}
+detected_at: {utc_now}
+threshold: {PATTERN_THRESHOLD}
+status: pending_maintainer_review
+---
+
+# Pattern Detected: {signal_class}
+
+{count} operators reported `{signal_class}` friction. Exceeds threshold of {PATTERN_THRESHOLD}.
+
+## Affected issues
+
+{chr(10).join(f"- Issue #{r['issue_id']} (SHA: {r.get('sha', 'unknown')}, OS: {r.get('os', 'unknown')})" for r in friction if r["signal"] == signal_class)}
+
+## Recommended next step
+
+Review issues above and draft an upstream ADR via `skill_self_improve` (fleet-aware) or manually.
+"""
+        pattern_file.write_text(pattern_content)
+        patterns_detected.append(pattern_id)
+        print(f"PATTERN: {pattern_id} — {count} occurrences (threshold {PATTERN_THRESHOLD})")
+
+if not patterns_detected:
+    print("No pattern threshold exceeded — no pattern files emitted")
+
+aggregate["patterns_detected"] = patterns_detected
+```
+
+---
+
+## Step 6 — Write audit batch (committed)
+
+Write the aggregate batch file to `who/peers/telemetry/inbox/` and commit it:
+
+```python
+inbox_file = Path(f"who/peers/telemetry/inbox/{utc_now}_aggregate.md")
+inbox_content = f"""---
+type: telemetry_aggregate
+batch_window: {aggregate['batch_window']}
+issue_count: {aggregate['issue_count']}
+signals_by_class: {json.dumps(aggregate['signals_by_class'])}
+patterns_detected: {json.dumps(aggregate['patterns_detected'])}
+aggregated_at: {utc_now}
+---
+
+# Telemetry Aggregate — {utc_now}
+
+**Batch window**: `{aggregate['batch_window']}`
+**Issues processed**: {aggregate['issue_count']}
+**By class**: {aggregate['signals_by_class']}
+**Patterns detected**: {aggregate['patterns_detected'] or 'none'}
+
+## Records
+
+"""
+for r in aggregate["records"]:
+    inbox_content += f"- Issue #{r['issue_id']} — `{r['class']}`: {r}\n"
+
+inbox_file.write_text(inbox_content)
+print(f"Inbox batch written: {inbox_file}")
+```
+
+Then commit the inbox entry and any pattern files:
+
+```bash
+git add who/peers/telemetry/inbox/
+git commit -m "telemetry: aggregate batch $UTC_NOW ($N issues, classes: $CLASSES)"
+```
+
+---
+
+## Step 7 — Update `_state.json` (gitignored)
+
+Record the highest processed issue ID and run timestamp so the next invocation de-dups correctly:
+
+```python
+new_state = {
+    "last_processed_issue_id": max_issue_id,
+    "last_run_utc": datetime.now(timezone.utc).isoformat(),
+}
+STATE_PATH.write_text(json.dumps(new_state, indent=2))
+print(f"State updated: last_processed_issue_id={max_issue_id}")
+```
+
+`_state.json` is gitignored — it tracks machine-local idempotency state and is not part of the committed audit trail.
+
+---
+
+## Demo invocation (dry-run)
+
+A safe end-to-end demonstration that does not write to inbox or update state:
+
+```bash
+# 1. Fetch issues
+gh api repos/LatticeProtocol/SpaceLattice.aDNA/issues \
+  --field labels=telemetry --field state=all --paginate > /tmp/telemetry_issues.json
+
+# 2. Parse (Python from Step 2 above)
+python3 - <<'PY'
+import json
+from pathlib import Path
+# ... paste Steps 2-4 code here with dry_run=True ...
+issues = json.load(open("/tmp/telemetry_issues.json"))
+print(f"Would process {len(issues)} issues")
+# Step 3 dedup, Step 4 aggregate — print only, no writes
+PY
+
+# 3. No inbox write, no _state.json update
+echo "Dry-run complete — no files written"
+```
+
+---
 
 ## Reference
 
 - Framework: `what/standard/telemetry.md`
-- Companion skill: `how/standard/skills/skill_telemetry_submit.md` (operator side)
-- Bridge to self-improve: future `skill_self_improve_aggregate` (upstream version of self-improve, fleet-aware)
-- Implementation timeline: v1.0 campaign Phase 2 (designed by M-Planning-01)
-
-## Implementation note for the planning mission
-
-This skill's full implementation should:
-
-1. Run idempotently — re-runs catch up from last batch
-2. Track last-processed issue ID in `who/peers/telemetry/inbox/_state.json` (gitignored)
-3. Provide cross-fleet correlation primitives (group by spacemacs_sha + os + signal_class)
-4. Emit pattern_*.md files with severity scoring (P+M operators see same friction → priority bumps)
-5. Include opt-in for maintainer to ping operators if their issue needs more info (via issue comment, not separate channel)
+- Schema: `what/standard/telemetry_schema.json` (ADR-009)
+- Sanitization: `what/standard/LAYER_CONTRACT.md` §4
+- Companion skill (operator side): `how/standard/skills/skill_telemetry_submit.md`
+- Self-improvement bridge: `how/standard/skills/skill_self_improve.md` (local); future `skill_self_improve_aggregate` (fleet-aware, post-v1.0)
+- Ratifying decision: ADR-011
+- Implementation mission: `mission_sl_p2_04_telemetry_aggregate_skill_and_round_trip`

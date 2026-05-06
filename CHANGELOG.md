@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### P2-04 close — skill_telemetry_aggregate + first round-trip (2026-05-06)
+
+**Headline**: P2-04 closed. `skill_telemetry_aggregate.md` promoted from stub to full 7-step maintainer procedure. First end-to-end telemetry round-trip executed. **P2 phase-gate COMPLETE** — all 4 P2 missions closed.
+
+**skill_telemetry_aggregate.md** (full procedure, ADR-011):
+- Step 1: Poll via `gh api "...?labels=telemetry&state=all" --paginate`
+- Step 2: Parse + validate — per-class handlers, rejected/ audit trail
+- Step 3: De-dup by issue ID via gitignored `_state.json`
+- Step 4: Aggregate — group by class, build batch metadata
+- Step 5: Pattern detection — ≥5 same `signal_class` → `pattern_<id>.md`
+- Step 6: Write `who/peers/telemetry/inbox/<utc>_aggregate.md` (committed)
+- Step 7: Update `_state.json` (gitignored idempotency state)
+- Flags: `--dry-run`, `--since <iso8601>`
+
+**Round-trip evidence**:
+- GitHub Issue #1 submitted: `LatticeProtocol/SpaceLattice.aDNA/issues/1` (operator side, `friction_signal: package_load_fail`, SHA `e57594e7`)
+- Maintainer aggregation: `who/peers/telemetry/inbox/20260506T053941Z_aggregate.md` (committed)
+- Pattern detection: threshold not triggered (1 issue, threshold=5) — logged correctly
+- Demo ADR draft: `who/peers/telemetry/inbox/demo_adr_draft_p2_04.md` (loop-closed evidence)
+
+**Infrastructure updates**:
+- `who/peers/telemetry/` directory structure created: `inbox/`, `sent/`, `outbox/`
+- `.gitignore`: added `who/peers/telemetry/inbox/_state.json`
+- `who/operators/stanley.md`: added `telemetry_consent: true` + per-class opt-ins
+- `telemetry` label created on upstream repo (`LatticeProtocol/SpaceLattice.aDNA`)
+- ADR-011 accepted; AAR at `missions/artifacts/aar_mission_sl_p2_04.md`
+
 ### M-Planning-01 close — v1.0 campaign Phase 0 done (2026-05-05)
 
 **Headline**: Phase-0 planning mission of `campaign_spacelattice_v1_0` closed. Campaign moves to `status: execution`. 26 P1-P5 mission scaffolds + 1 user-in-the-loop runbook + 10/10 deliverables validated. Full AAR.
