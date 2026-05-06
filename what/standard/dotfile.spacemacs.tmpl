@@ -181,9 +181,17 @@
   ;; Lattice workspace root — all finds, terminals, and projects anchor here
   (cd (expand-file-name "~/lattice/"))
 
-  ;; Project-search prefers ripgrep
+  ;; Project-search prefers ripgrep; discover all vaults in ~/lattice/
   (with-eval-after-load 'projectile
-    (setq projectile-generic-command "rg --files --hidden --glob '!.git/'"))
+    (setq projectile-generic-command "rg --files --hidden --glob '!.git/'")
+    (setq projectile-project-search-path (list (expand-file-name "~/lattice/"))))
+
+  ;; ── treemacs: ~/lattice/ as default workspace ────────────────────────────
+  (with-eval-after-load 'treemacs
+    (let ((lattice (expand-file-name "~/lattice")))
+      (when (and (file-directory-p lattice)
+                 (fboundp 'treemacs-add-project-to-workspace))
+        (treemacs-add-project-to-workspace lattice "Lattice"))))
 
   ;; Magit performance
   (with-eval-after-load 'magit
@@ -250,7 +258,9 @@
     (defun centaur-tabs-hide-tab (x)
       (let ((name (format "%s" x)))
         (or (window-dedicated-p (selected-window))
-            (string-match-p "\\`\\*" name))))))
+            (string-match-p "\\`\\*" name))))
+    (when (fboundp 'centaur-tabs-reset-default-group)
+      (centaur-tabs-reset-default-group))))
 
 ;; Do not write anything past this comment. Anything written here is overwritten
 ;; by Emacs on save. Operator customizations belong in
