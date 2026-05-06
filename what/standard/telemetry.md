@@ -1,9 +1,9 @@
 ---
 type: framework
-status: outline
+status: active
 created: 2026-05-05
-updated: 2026-05-05
-last_edited_by: agent_init
+updated: 2026-05-06
+last_edited_by: agent_stanley
 implementation_phase: v1_0_campaign_p2
 ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
 channel_choice: github_issues_with_telemetry_label
@@ -20,6 +20,41 @@ SpaceLattice.aDNA is designed to **improve itself** in two loops:
 2. **Fleet loop** — telemetry from peer operators (with permission) flows back to the upstream vault repo, drives **agentic SRE** at the maintainer side, produces ADRs that ship in subsequent publishes. *(This document defines the frame; full implementation in v1.0 campaign Phase 2.)*
 
 The operator is **always** the gate. No telemetry is submitted without explicit per-submission consent. Default opt-out.
+
+## Schema file
+
+The canonical machine-readable schema for all telemetry submissions lives at:
+
+```
+what/standard/telemetry_schema.json
+```
+
+JSON Schema Draft-07. Four submission classes defined as `$defs` entries, dispatched via `oneOf`. Each field is annotated with its privacy class (ANON / PSEUDO / IDENT) in the `description` property. Ratified by ADR-009.
+
+To validate a payload file:
+```bash
+python3 -c "
+import json, sys
+schema = json.load(open('what/standard/telemetry_schema.json'))
+payload = json.load(open(sys.argv[1]))
+print('type:', payload.get('type', '(missing)'))
+" path/to/payload.json
+```
+
+Full jsonschema validation (requires `pip install jsonschema`):
+```bash
+python3 -c "
+import json, jsonschema, sys
+schema = json.load(open('what/standard/telemetry_schema.json'))
+payload = json.load(open(sys.argv[1]))
+jsonschema.validate(payload, schema)
+print('valid')
+" path/to/payload.json
+```
+
+The elisp operator-side stub `adna/telemetry-validate` in `what/standard/layers/adna/funcs.el` wraps the basic parse check. Full jsonschema validation is deferred to Phase 4 (P4 layer hardening).
+
+---
 
 ## Channel: GitHub Issues with `telemetry` label
 
@@ -64,9 +99,9 @@ Per LAYER_CONTRACT § 4 sanitization scan. Before submission:
 
 If sanitization fails (FAIL pattern matched), submission aborts. Operator decides whether to edit-and-retry or skip.
 
-## Submission contents (schema outline)
+## Submission contents (illustration — canonical schema in `telemetry_schema.json`)
 
-The full schema is designed by M-Planning-01 (v1.0 campaign Phase 2). Outline:
+The YAML blocks below are illustrative shapes; the canonical, validated source is `what/standard/telemetry_schema.json` (JSON Schema Draft-07, ratified ADR-009). Privacy class annotations on each field use: **ANON** (no operator-linkable data), **PSEUDO** (hash/enum, linkable only with a key), **IDENT** (never permitted).
 
 ### Friction signals (default-on if telemetry enabled)
 
@@ -117,6 +152,78 @@ emacs_memory_mb: <mb>
 package_count: <count>
 layer_count: <count>
 ```
+
+## Telemetry-specific sanitization extensions
+
+Beyond the base LAYER_CONTRACT § 4 scan, telemetry payloads have additional sanitization requirements before submission. These extend (not replace) the base rules:
+
+| Rule ID | Field | Constraint | Rationale |
+|---------|-------|------------|-----------|
+| LS-1 | `layer_set_hash` | Hash MUST be computed from sorted layer **filenames only** — no file content, no absolute paths | Content hashing would fingerprint private configurations; filename-only hash is anonymous enough for fleet correlation |
+| CS-1 | `content_hash` | MUST be salted+truncated SHA-256 (`SHA256(operator_salt + content)[:12]` hex chars) | Prevents rainbow-table reversal of shared customizations; salt is operator-local and never submitted |
+| DE-1 | `detection_evidence` | One sentence maximum; no file paths, no hostnames, no variable names that embed paths | Human-written text is the highest-risk field in `adr_proposal` — enforced length + content rule |
+| SHA-1 | `spacemacs_sha`, all classes | 40-char lowercase hex only — no `git@[github.com]:...` prefix, no branch names | URL-style SHA refs could leak repository topology |
+| VER-1 | `emacs_version` | `N.N` or `N.N.N` format only — no build dates, no distribution names | Build-date strings can fingerprint specific package manager installs |
+
+These rules are checked by `adna/telemetry-validate` (operator side) and the maintainer-side parser in `skill_telemetry_aggregate` before aggregation.
+
+## Privacy posture per field
+
+Every field from all 4 submission classes. Privacy classes: **ANON** = no operator-linkable data; **PSEUDO** = hash or small enum (linkable only with a key or prior knowledge); **IDENT** = never permitted in telemetry payloads.
+
+### friction_signal
+
+| Field | Privacy class | Notes |
+|-------|--------------|-------|
+| `type` | ANON | Const discriminator — "friction_signal" |
+| `detected_via_rule` | ANON | Enum A–F; alphabetic labels carry no operator context |
+| `signal_class` | ANON | 5-value enum; no operator identity |
+| `signal_count` | ANON | Integer; aggregate observation count |
+| `spacemacs_sha` | ANON | 40-char public commit SHA; see rule SHA-1 |
+| `emacs_version` | ANON | Version triplet; see rule VER-1 |
+| `os` | ANON | 3-value enum (macOS / linux / wsl2) |
+| `layer_set_hash` | PSEUDO | 16-hex truncated hash of filenames only; see rule LS-1; correlation key for fleet matching |
+
+### adr_proposal
+
+| Field | Privacy class | Notes |
+|-------|--------------|-------|
+| `type` | ANON | Const discriminator |
+| `adr_id_local` | PSEUDO | Numeric sequence (`adr_NNN_slug`) — sequence may correlate multiple submissions from same operator |
+| `title` | PSEUDO | Operator-written text; sanitization mandatory; no paths/hostnames/names |
+| `target_layer` | ANON | 2-value enum (standard / local) |
+| `proposed_by` | ANON | 2-value enum (agent_self_improve / operator_manual) |
+| `detection_evidence` | PSEUDO | Operator/agent-written text; 200-char max; see rule DE-1 |
+| `diff_summary.files_changed` | ANON | Integer |
+| `diff_summary.lines_added` | ANON | Integer |
+| `diff_summary.lines_removed` | ANON | Integer |
+| `operator_decision` | ANON | 3-value enum (accepted / rejected / deferred) |
+
+### customization_share
+
+| Field | Privacy class | Notes |
+|-------|--------------|-------|
+| `type` | ANON | Const discriminator |
+| `target` | ANON | 4-value enum; no operator identity |
+| `content_hash` | PSEUDO | Salted+truncated 12-hex hash; see rule CS-1; linkable for de-dup only |
+| `content_summary` | PSEUDO | Operator-written text; 100-char max; sanitization mandatory |
+| `operator_motivation` | PSEUDO | Optional operator-written text; 200-char max; sanitization mandatory |
+
+### perf_metric
+
+| Field | Privacy class | Notes |
+|-------|--------------|-------|
+| `type` | ANON | Const discriminator |
+| `boot_time_ms` | ANON | Integer; hardware-influenced but not personally identifying |
+| `gcs_during_boot` | ANON | Integer |
+| `emacs_memory_mb` | ANON | Numeric; system-influenced |
+| `package_count` | ANON | Integer |
+| `layer_count` | ANON | Integer |
+| `spacemacs_sha` | ANON | 40-char public commit SHA; see rule SHA-1 |
+| `emacs_version` | ANON | Version triplet; see rule VER-1 |
+| `os` | ANON | 3-value enum |
+
+**IDENT fields**: no field in any submission class is classified IDENT. Operator identity (username, hostname, email, paths) is stripped by LAYER_CONTRACT § 4 sanitization before any payload is built. Fields that could approach IDENT (e.g., free-text `operator_motivation`) are capped at 200 chars and mandatory-sanitized — classified PSEUDO, not IDENT.
 
 ## Aggregation flow (upstream side)
 
@@ -196,12 +303,15 @@ This is the **agentic SRE loop**: telemetry-driven, operator-gated, deterministi
 
 (Inbox is committed because it's the upstream's aggregated audit trail; outbox/sent are operator-local.)
 
-## Privacy posture
+## Privacy posture (principles)
+
+Full per-field classification: see § Privacy posture per field above.
 
 - **Operator owns submission cadence** — no auto-submit, no agent override
-- **Anonymization mandatory** — sanitization scan runs first; FAIL aborts
+- **Anonymization mandatory** — sanitization scan (LAYER_CONTRACT § 4 + telemetry-specific extensions above) runs first; FAIL aborts
 - **Audit trail symmetric** — operator can verify what was submitted (`who/peers/telemetry/sent/<utc>.md` mirrors the issue body); maintainer's aggregated inbox is also tracked
 - **Right to delete** — operators can `gh issue delete` their own telemetry issues; maintainer-side aggregate inbox carries the issue ID for traceability but the ADR-derived patterns won't include the original issue if deleted (must run aggregate again)
+- **No IDENT fields** — no field in any submission class carries operator identity; see per-field table
 
 ## Cadence (initial proposal; M-Planning-01 confirms)
 
@@ -225,14 +335,19 @@ skill_self_improve → ADR committed in local vault
 
 The two skills are independent. Self-improve works without telemetry; telemetry works without auto-self-improve. Together they close the agentic SRE loop.
 
-## Implementation deferred to v1.0 campaign Phase 2
+## Implementation status (v1.0 P2)
 
-- Schema details (full YAML / JSON Schema)
-- `skill_telemetry_submit` complete procedure (currently stub)
-- `skill_telemetry_aggregate` complete procedure (currently stub)
-- Sanitization scan extension (telemetry-specific patterns beyond LAYER_CONTRACT § 4)
-- First round-trip test: operator submits demo telemetry → maintainer aggregates → ADR drafted → publish round-trip
-- GitHub issue template (`.github/ISSUE_TEMPLATE/telemetry.yml`) authored
+| Deliverable | Mission | Status |
+|-------------|---------|--------|
+| JSON Schema (full, Draft-07) | P2-02 | ✅ `what/standard/telemetry_schema.json` — ADR-009 |
+| Telemetry-specific sanitization extensions | P2-02 | ✅ § Telemetry-specific sanitization extensions above |
+| Privacy-posture table per field | P2-02 | ✅ § Privacy posture per field above |
+| Operator-side validator stub (`adna/telemetry-validate`) | P2-02 | ✅ `what/standard/layers/adna/funcs.el` |
+| Maintainer-side parser snippet | P2-02 | ✅ `how/standard/skills/skill_telemetry_aggregate.md` |
+| `skill_telemetry_submit` complete procedure | P2-03 | ⬜ next mission |
+| `skill_telemetry_aggregate` complete procedure | P2-03/P2-04 | ⬜ planned |
+| GitHub issue template (`.github/ISSUE_TEMPLATE/telemetry.yml`) | P2-03 | ⬜ planned |
+| First round-trip test | P2-04 | ⬜ planned (phase-gate evidence) |
 
 ## References
 

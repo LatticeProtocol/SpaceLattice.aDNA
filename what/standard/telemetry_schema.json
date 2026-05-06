@@ -1,0 +1,214 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/LatticeProtocol/SpaceLattice.aDNA/what/standard/telemetry_schema.json",
+  "title": "SpaceLattice.aDNA Telemetry Schema",
+  "description": "JSON Schema for all telemetry submission classes. Ratified by ADR-009. Privacy class annotated per field: ANON=no operator-linkable data; PSEUDO=hash or enum (linkable only with a key); IDENT=never permitted in telemetry.",
+  "oneOf": [
+    { "$ref": "#/$defs/friction_signal" },
+    { "$ref": "#/$defs/adr_proposal" },
+    { "$ref": "#/$defs/customization_share" },
+    { "$ref": "#/$defs/perf_metric" }
+  ],
+  "$defs": {
+    "friction_signal": {
+      "title": "friction_signal",
+      "description": "A friction event detected by skill_self_improve. Default-on if telemetry enabled.",
+      "type": "object",
+      "required": ["type", "detected_via_rule", "signal_class", "signal_count", "spacemacs_sha", "emacs_version", "os", "layer_set_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "friction_signal",
+          "description": "[ANON] Submission class discriminator."
+        },
+        "detected_via_rule": {
+          "type": "string",
+          "enum": ["A", "B", "C", "D", "E", "F"],
+          "description": "[ANON] Which skill_self_improve detection rule fired. Rules are alphabetic labels with no operator-specific information."
+        },
+        "signal_class": {
+          "type": "string",
+          "enum": ["layer_load_error", "slow_op", "repeated_manual_fix", "layer_conflict", "duplicated_keybind"],
+          "description": "[ANON] Category of friction. Enum values carry no operator identity."
+        },
+        "signal_count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "[ANON] Number of times this signal was observed in recent sessions."
+        },
+        "spacemacs_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$",
+          "description": "[ANON] 40-character lowercase hex SHA of operator's pinned Spacemacs commit. No repo URL prefix. Pre-public commit SHAs are inherently non-identifying."
+        },
+        "emacs_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+          "description": "[ANON] GNU Emacs version string (e.g. '29.4'). No build metadata."
+        },
+        "os": {
+          "type": "string",
+          "enum": ["macOS", "linux", "wsl2"],
+          "description": "[ANON] Operating system family. Three-value enum; no sub-version leaks."
+        },
+        "layer_set_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$",
+          "description": "[PSEUDO] 16-hex-char truncated SHA-256 of sorted layer filenames only (not content or paths). Allows correlation across operators with similar configs without exposing file content. Sanitization rule: hash MUST be computed from filenames only — see telemetry.md § Telemetry-specific sanitization extensions."
+        }
+      }
+    },
+    "adr_proposal": {
+      "title": "adr_proposal",
+      "description": "An operator-accepted or operator-rejected ADR drafted by skill_self_improve. Default-on if telemetry enabled.",
+      "type": "object",
+      "required": ["type", "adr_id_local", "title", "target_layer", "proposed_by", "detection_evidence", "diff_summary", "operator_decision"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "adr_proposal",
+          "description": "[ANON] Submission class discriminator."
+        },
+        "adr_id_local": {
+          "type": "string",
+          "pattern": "^adr_[0-9]{3}_[a-z0-9_]+$",
+          "description": "[PSEUDO] Local ADR ID (e.g. 'adr_009_telemetry_schema_lock_in'). The numeric portion may correlate across multiple submissions from the same operator. Slug is operator-chosen text — sanitization mandatory (no paths, hostnames, or PII)."
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "[PSEUDO] Short ADR title. Operator-authored — sanitization mandatory before submission. No file paths, hostnames, or personal names."
+        },
+        "target_layer": {
+          "type": "string",
+          "enum": ["standard", "local"],
+          "description": "[ANON] Which layer the ADR targets."
+        },
+        "proposed_by": {
+          "type": "string",
+          "enum": ["agent_self_improve", "operator_manual"],
+          "description": "[ANON] Whether the ADR was drafted by the self-improve agent or manually authored by the operator."
+        },
+        "detection_evidence": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "[PSEUDO] One-sentence anonymized description of the friction that triggered this ADR. No file paths, hostnames, or operator-specific identifiers. Enforced by telemetry.md § sanitization extensions rule DE-1."
+        },
+        "diff_summary": {
+          "type": "object",
+          "required": ["files_changed", "lines_added", "lines_removed"],
+          "additionalProperties": false,
+          "description": "[ANON] Numeric summary of the ADR's patch. No file names or content.",
+          "properties": {
+            "files_changed": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "[ANON] Number of files changed."
+            },
+            "lines_added": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "[ANON] Lines added."
+            },
+            "lines_removed": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "[ANON] Lines removed."
+            }
+          }
+        },
+        "operator_decision": {
+          "type": "string",
+          "enum": ["accepted", "rejected", "deferred"],
+          "description": "[ANON] What the operator decided about this ADR."
+        }
+      }
+    },
+    "customization_share": {
+      "title": "customization_share",
+      "description": "A voluntarily shared customization. Default-OFF — requires explicit opt-in beyond master consent switch.",
+      "type": "object",
+      "required": ["type", "target", "content_hash", "content_summary"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "customization_share",
+          "description": "[ANON] Submission class discriminator."
+        },
+        "target": {
+          "type": "string",
+          "enum": ["dotspacemacs_init", "layers_added", "leader_keys_added", "theme_overrides"],
+          "description": "[ANON] Which customization surface this share covers."
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{12}$",
+          "description": "[PSEUDO] 12-hex-char salted+truncated SHA-256 of the customization content. Salt is operator-local (not submitted). Truncation prevents rainbow-table reversal. Allows de-duplication at the fleet level without exposing content. See telemetry.md § sanitization extensions rule CS-1."
+        },
+        "content_summary": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "[PSEUDO] One-line operator-authored description of the customization. No file paths, hostnames, or personal names. Sanitization mandatory."
+        },
+        "operator_motivation": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "[PSEUDO] Optional. Why the operator made this customization. No file paths, hostnames, or personal names. Sanitization mandatory."
+        }
+      }
+    },
+    "perf_metric": {
+      "title": "perf_metric",
+      "description": "Startup and runtime performance measurements. Default-OFF — requires explicit opt-in beyond master consent switch.",
+      "type": "object",
+      "required": ["type", "boot_time_ms", "gcs_during_boot", "emacs_memory_mb", "package_count", "layer_count", "spacemacs_sha", "emacs_version", "os"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "perf_metric",
+          "description": "[ANON] Submission class discriminator."
+        },
+        "boot_time_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "[ANON] Wall-clock milliseconds from Emacs launch to ready prompt."
+        },
+        "gcs_during_boot": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "[ANON] Number of garbage collections during startup."
+        },
+        "emacs_memory_mb": {
+          "type": "number",
+          "minimum": 0,
+          "description": "[ANON] Emacs process RSS in megabytes after startup."
+        },
+        "package_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "[ANON] Total installed packages (from package-alist length)."
+        },
+        "layer_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "[ANON] Number of active Spacemacs layers."
+        },
+        "spacemacs_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$",
+          "description": "[ANON] 40-character lowercase hex SHA of pinned Spacemacs commit. No repo URL."
+        },
+        "emacs_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+          "description": "[ANON] GNU Emacs version string."
+        },
+        "os": {
+          "type": "string",
+          "enum": ["macOS", "linux", "wsl2"],
+          "description": "[ANON] Operating system family."
+        }
+      }
+    }
+  }
+}

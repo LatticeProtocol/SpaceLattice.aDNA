@@ -14,6 +14,7 @@ predecessor: "spacemacs.aDNA genesis (plan-driven; AAR at how/missions/artifacts
 created: 2026-05-05
 updated: 2026-05-06
 last_edited_by: agent_stanley
+p2_progress: "2/4 missions closed (P2-01 ✅ P2-02 ✅)"
 ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
 tags: [campaign, spacelattice, v1_0, daedalus, customization_walk, telemetry, lp_fork, sustainability]
 ---
@@ -93,7 +94,7 @@ Take the framework outlines (`what/standard/sustainability.md` + `what/standard/
 
 **Phase exit gate**:
 - [ ] All 4 P2 missions closed with AARs
-- [ ] Telemetry schema landed in `what/standard/telemetry.md` (status: outline → active)
+- [x] Telemetry schema landed — `what/standard/telemetry_schema.json` (JSON Schema Draft-07, ADR-009); `telemetry.md` status: active (P2-02 closed 2026-05-06)
 - [ ] `update_spacemacs.md` runbook teeth match outline (sed + heuristics + CI design)
 - [ ] Schedule for `skill_self_improve` documented + working (closed in P1-03; verified at P2 close)
 - [ ] **First telemetry round-trip demonstrated end-to-end** (operator-submitted demo → maintainer aggregation → ADR draft → publish round-trip)

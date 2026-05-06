@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**SpaceLattice v0.2.0 — campaign v1.0 P1 complete; P2 in progress (1/4 missions done).** P2-01 closed 2026-05-06: `update_spacemacs.md` expanded with rebase-conflict teeth (5 detection/re-injection patterns, heuristics table, CI design sketch); ADR-008 accepted; dry-run validation green. Font warmup also complete: Source Code Pro installed.
+**SpaceLattice v0.2.0 — campaign v1.0 P2 in progress (2/4 missions done).** P2-02 closed 2026-05-06: `telemetry_schema.json` (JSON Schema Draft-07, 4 submission classes, privacy-posture table per field); telemetry-specific sanitization extensions (5 rules: LS-1 / CS-1 / DE-1 / SHA-1 / VER-1); `adna/telemetry-validate` stub in funcs.el; maintainer parser snippet in skill_telemetry_aggregate; ADR-009 accepted; `telemetry.md` status active.
 
 ## What's Working
 
@@ -55,9 +55,9 @@ None blocking. Audit findings status:
 **P2 in progress** (Sustainability + Telemetry implementation). Status:
 
 - ✅ P2-01 `mission_sl_p2_01_sustainability_runbook_teeth` — CLOSED (2026-05-06): `update_spacemacs.md` conflict-resolution section + ADR-008 + dry-run PASS
-- ⬜ P2-02 `mission_sl_p2_02_telemetry_schema` — **next**: telemetry schema definition (fields, privacy-class annotations, opt-in consent model)
-- ⬜ P2-03 `mission_sl_p2_03_telemetry_submit_skill` — `skill_telemetry_submit.md` authored + tested
-- ⬜ P2-04 `mission_sl_p2_04_telemetry_roundtrip` — opt-in telemetry round-trip dry-run (operator-gated)
+- ✅ P2-02 `mission_sl_p2_02_telemetry_schema` — CLOSED (2026-05-06): `telemetry_schema.json` JSON Schema Draft-07 + privacy-posture table + sanitization extensions × 5 + `adna/telemetry-validate` stub + maintainer parser snippet + ADR-009
+- ⬜ P2-03 `mission_sl_p2_03_telemetry_submit_skill` — **next**: `skill_telemetry_submit.md` from stub to full procedure + `.github/ISSUE_TEMPLATE/telemetry.yml`
+- ⬜ P2-04 `mission_sl_p2_04_telemetry_roundtrip` — opt-in telemetry round-trip dry-run (operator-gated; P2 phase-gate evidence)
 
 **Note**: `skill_self_improve` Stop hook is live. Session count gate at 5 — will be silent until session 5.
 
@@ -67,6 +67,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-06 | **P2-02 closed** — `telemetry_schema.json` (JSON Schema Draft-07, 4 classes); privacy-posture table + 5 sanitization extensions (LS-1/CS-1/DE-1/SHA-1/VER-1); `adna/telemetry-validate` stub in funcs.el; maintainer parser snippet in skill_telemetry_aggregate; ADR-009 accepted; `telemetry.md` status active | session_stanley_20260506T033343Z |
 | 2026-05-06 | **P1-02 closed** — sanitization WARNs: upstream-PR path; `10.42.0.1` → `<lighthouse-ip>` placeholder in `skill_l1_upgrade.md`; `git@github.com` false positive documented in `LAYER_CONTRACT.md § 8`; ADR-006 accepted; P1 phase gate ✅; P2 opens | mission_sl_p1_02_sanitization_warns_adr AAR |
 | 2026-05-06 | **P1-03 closed** — `skill_self_improve` schedule ratified: Claude Code Stop hook + session-count gate (threshold 5); ADR-007 accepted; `.claude/settings.json` created; check script verified; audit finding #6 closed | mission_sl_p1_03_self_improve_schedule AAR |
 | 2026-05-06 | **P1-01 closed** — backlog cleanup: 3 ideas kept-adapted (demo-gif → P5-01, plugin-trim → new P3-09, startup-opt → P5-01); 3 archived (custom-logo + text-banner → P4-05 covered; inner-readme → .adna/ out-of-scope); new mission P3-09 added; campaign total 27 → 28 missions | mission_sl_p1_01_backlog_cleanup AAR |
@@ -108,6 +109,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 | 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | v0.2.0 commits `f7fbaef` + `07cc12f` |
 | 2026-05-06 | **Session wind-down expansion** — dotfile Tier 1 layer expansion (16 new layers: osx, unicode-fonts, nav-flash, ibuffer, tabs, imenu-list, go, javascript, react, epub, pdf, restclient, docker, dap, tree-sitter, claude-code, llm-client); `~/lattice/` default-directory; eww/ace-link/link-hint/avy config; 2 new missions (P3-10 layer audit, P3-11 browser integration); eww context doc; visual inspection backlog idea; campaign 28→30 missions, 39→47 calibrated sessions | this session |
 | 2026-05-06 | **Font warmup** — Source Code Pro installed (`brew install --cask font-source-code-pro`); Spacemacs startup warning resolved | pre-P2 warmup |
+| 2026-05-06 | **P2-02 closed** — `telemetry_schema.json` (JSON Schema Draft-07, 4 classes); privacy-posture table; 5 sanitization extension rules; `adna/telemetry-validate` stub; maintainer parser snippet; ADR-009 accepted; `telemetry.md` status active | session_stanley_20260506T033343Z |
 | 2026-05-06 | **P2-01 closed** — `update_spacemacs.md` expanded: 5 detection/re-injection patterns (core-versions, core-spacemacs-buffer, core-spacemacs, dotspacemacs-template, packages.el) + 7-file heuristics table + CI design sketch (deferred to P4-07); ADR-008 accepted; dry-run PASS; AAR filed | mission_sl_p2_01 AAR |
 | 2026-05-06 | **P2-01 close** — `update_spacemacs.md` rebase-conflict section added; ADR-008 accepted; dry-run PASS; Source Code Pro font installed (startup warning resolved) | session_stanley_20260506T011421Z |
 | 2026-05-06 | **P1-02 close** — sanitization WARNs: `10.42.0.1` → `<lighthouse-ip>` placeholder; `LAYER_CONTRACT.md` § 8 Known False Positives added; ADR-006 accepted; upstream PR pending; scan now 1 acknowledged WARN; P1 phase gate ✅; P2 opens | this commit |

@@ -304,4 +304,42 @@ Used by skill_health_check Check E. In batch mode, exits 0/non-0."
       (message "adna/health-check: OK")
       t))))
 
+;;; ============================================================================
+;;; Telemetry validation (Phase 2 stub — full jsonschema in Phase 4)
+;;; ============================================================================
+
+(defun adna/vault-root ()
+  "Return vault root for use in telemetry functions (alias of `adna/--root-or-error')."
+  (adna/--root-or-error))
+
+(defun adna/telemetry-validate (payload-file)
+  "Validate PAYLOAD-FILE against telemetry_schema.json before submission.
+Returns t on success, signals `user-error' on failure.
+
+Phase 2 stub: confirms the schema file loads and that PAYLOAD-FILE is
+valid JSON with a known `type' field. Full jsonschema validation
+(field-level constraints) deferred to Phase 4 layer hardening."
+  (let* ((schema-path (expand-file-name "what/standard/telemetry_schema.json"
+                                        (adna/vault-root)))
+         (known-types '("friction_signal" "adr_proposal"
+                        "customization_share" "perf_metric")))
+    (unless (file-exists-p schema-path)
+      (user-error "Telemetry schema not found: %s" schema-path))
+    (unless (file-exists-p payload-file)
+      (user-error "Payload file not found: %s" payload-file))
+    (let* ((payload-str (with-temp-buffer
+                          (insert-file-contents payload-file)
+                          (buffer-string)))
+           (payload (condition-case err
+                        (json-read-from-string payload-str)
+                      (error (user-error "Payload is not valid JSON: %s" err))))
+           (submission-type (cdr (assoc 'type payload))))
+      (unless submission-type
+        (user-error "Payload missing required field: type"))
+      (unless (member (format "%s" submission-type) known-types)
+        (user-error "Unknown submission type %S; expected one of: %s"
+                    submission-type (mapconcat #'identity known-types ", ")))
+      (message "adna/telemetry-validate: OK (type=%s)" submission-type)
+      t)))
+
 ;;; funcs.el ends here

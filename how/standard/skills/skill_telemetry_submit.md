@@ -3,8 +3,8 @@ type: skill
 skill_type: agent
 status: stub
 created: 2026-05-05
-updated: 2026-05-05
-last_edited_by: agent_init
+updated: 2026-05-06
+last_edited_by: agent_stanley
 category: telemetry
 trigger: "Operator wants to submit anonymized telemetry to the SpaceLattice.aDNA upstream channel — typically after a skill_self_improve cycle landed an ADR worth sharing with the fleet."
 phase_introduced: 8
@@ -46,7 +46,7 @@ This stub exists so:
 1. **Check consent**: read `who/operators/<operator>.md` for `telemetry_consent: true` and per-class opt-ins
 2. **Build payload**: from operator's recent ADRs, friction signals, perf metrics (per consent classes)
 3. **Anonymize**: run LAYER_CONTRACT § 4 sanitization scan + telemetry-specific extensions
-4. **Validate schema**: against the JSON Schema (designed by M-Planning-01)
+4. **Validate schema**: against `what/standard/telemetry_schema.json` (JSON Schema Draft-07, ADR-009). Operator-side check via `M-x adna/telemetry-validate` or `python3 -c "import json,jsonschema; ..."` (full invocation in `telemetry.md` § Schema file)
 5. **Confirm with operator**: show full payload, ask "Submit? [y/N]"
 6. **Submit**: `gh issue create --repo LatticeProtocol/SpaceLattice.aDNA --label telemetry --title <title> --body <body>`
 7. **Record in outbox**: `who/peers/telemetry/sent/<utc>.md` (gitignored audit copy)
