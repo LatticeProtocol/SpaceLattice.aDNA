@@ -5,14 +5,14 @@ title: "SpaceLattice v1.0 — Genesis to Production"
 owner: stanley
 status: execution
 phase_count: 6
-mission_count: 28
-estimated_sessions: "32-45"
-calibrated_sessions: 39
+mission_count: 30
+estimated_sessions: "36-53"
+calibrated_sessions: 47
 estimation_class: governance-broad
 priority: medium
 predecessor: "spacemacs.aDNA genesis (plan-driven; AAR at how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md)"
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-06
 last_edited_by: agent_stanley
 ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
 tags: [campaign, spacelattice, v1_0, daedalus, customization_walk, telemetry, lp_fork, sustainability]

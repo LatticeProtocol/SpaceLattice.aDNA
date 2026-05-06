@@ -23,23 +23,51 @@
      (treemacs :variables treemacs-use-follow-mode t)
      git
      version-control
+     ibuffer                                         ; grouped buffer list (C-x C-b)
+     (tabs :variables tabs-group-by-project-name t) ; centaur-tabs — project-grouped tabs
+     imenu-list                                      ; outline side panel (SPC b i)
+     nav-flash                                       ; flash current line after navigation
+
+     ;; === OS & fonts ===
+     osx                                             ; macOS modifier keys + system integration
+     unicode-fonts                                   ; color emoji + full Unicode coverage on macOS
 
      ;; === languages ===
      (lsp :variables lsp-headerline-breadcrumb-enable t)
      (python :variables python-backend 'lsp python-fill-column 100)
      (typescript :variables typescript-fmt-on-save t)
      (rust :variables rust-backend 'lsp rust-format-on-save t)
+     (go :variables go-backend 'lsp go-format-before-save t)
+     (javascript :variables javascript-backend 'lsp node-add-modules-path t)
+     react                                           ; extends javascript layer
      shell-scripts
      emacs-lisp
      (markdown :variables markdown-live-preview-engine 'vmd)
-     (org :variables org-want-todo-bindings t)
+     (org :variables org-want-todo-bindings t
+                      org-enable-roam-support t)
      yaml
+     csv
+     toml
+     graphviz                                        ; .dot file editing + live preview
+     mermaid                                         ; .mmd diagrams (requires mermaid-cli)
+     (latex :variables latex-build-command "LatexMk"
+                       latex-backend 'lsp)           ; requires texlive + texlab LSP
+     pdf                                             ; pdf-tools — native PDF rendering
+     epub                                            ; nov.el — epub reader
 
      ;; === tools ===
      (shell :variables shell-default-shell 'vterm shell-default-position 'bottom)
      multiple-cursors
      spell-checking
      syntax-checking
+     restclient                                      ; HTTP REPL via .http files (SPC m s s)
+     docker                                          ; Dockerfile + docker-compose support
+     (dap :variables dap-python-debugger 'debugpy)  ; Debug Adapter Protocol — all language debuggers
+     tree-sitter                                     ; Emacs 29+ treesit — structured syntax highlighting
+
+     ;; === AI + agentic ===
+     claude-code                                     ; Claude Code CLI integration (official Spacemacs layer)
+     (llm-client :variables llm-client-enable-gptel t) ; gptel — Claude/OpenAI/Ollama from any buffer
 
      ;; === SpaceLattice.aDNA bridge ===
      adna
@@ -47,7 +75,10 @@
      ;; === operator-added local layers (loaded by user-init from what/local/) ===
      {{LOCAL_LAYER_LIST}}
      )
-   dotspacemacs-additional-packages '()
+   ;; Packages not in any layer:
+   ;;   link-hint  — Vimium-style overlay on all visible links (SPC j o / SPC j O)
+   ;;   ace-link   — 'o' in eww/info/help jumps to any visible link
+   dotspacemacs-additional-packages '(link-hint ace-link)
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
    dotspacemacs-install-packages 'used-only))
@@ -142,13 +173,51 @@
   (when (fboundp 'adna/setup-global-hooks)
     (adna/setup-global-hooks))
 
+  ;; Lattice workspace root — all finds, terminals, and projects anchor here
+  (cd (expand-file-name "~/lattice/"))
+
   ;; Project-search prefers ripgrep
   (with-eval-after-load 'projectile
     (setq projectile-generic-command "rg --files --hidden --glob '!.git/'"))
 
   ;; Magit performance
   (with-eval-after-load 'magit
-    (setq magit-refresh-status-buffer nil)))
+    (setq magit-refresh-status-buffer nil))
+
+  ;; ── Jump navigation (Vimium-style) ──────────────────────────────────────
+  ;; avy-goto-char-timer: type any sequence → 0.5s pause → decision tree
+  ;; This is the closest Emacs equivalent to Vimium's link-following overlay.
+  (with-eval-after-load 'avy
+    (setq avy-timeout-seconds 0.3))         ; snappier than default 0.5
+  ;; Remap SPC j J to char-timer (more Vimium-like than default char-2)
+  (spacemacs/set-leader-keys "jJ" #'avy-goto-char-timer)
+
+  ;; link-hint: Vimium-style overlay on all visible links in any buffer
+  (with-eval-after-load 'link-hint
+    (spacemacs/set-leader-keys "jo" #'link-hint-open-link)
+    (spacemacs/set-leader-keys "jO" #'link-hint-copy-link))
+
+  ;; ── eww browser ─────────────────────────────────────────────────────────
+  ;; SpaceLattice browser stack:
+  ;;   eww         — text-heavy pages, docs, programmatic URL fetch
+  ;;   xwidget     — JS pages when Emacs compiled --with-xwidgets
+  ;;   external    — complex web apps (override per-buffer with & in eww)
+  (with-eval-after-load 'eww
+    ;; ace-link: press 'o' in eww to overlay letters on all visible links
+    (when (fboundp 'ace-link-eww)
+      (define-key eww-mode-map (kbd "o") #'ace-link-eww))
+    ;; v in eww opens current URL in external browser
+    (define-key eww-mode-map (kbd "v") #'eww-open-in-new-buffer))
+
+  ;; Route URLs: docs/GitHub → eww; auth/SPA → external browser
+  (setq browse-url-browser-function
+        '((".*claude\\.ai.*"            . browse-url-default-browser)
+          (".*atlassian\\.net.*"        . browse-url-default-browser)
+          (".*slack\\.com.*"            . browse-url-default-browser)
+          (".*"                         . eww-browse-url)))
+
+  ;; adna-mode: open wikilinks with eww when URL, else find-file
+  (setq adna-browse-url-function #'eww-browse-url))
 
 ;; Do not write anything past this comment. Anything written here is overwritten
 ;; by Emacs on save. Operator customizations belong in
