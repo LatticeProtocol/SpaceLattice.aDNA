@@ -91,14 +91,20 @@
    dotspacemacs-check-for-update nil
    dotspacemacs-elpa-subdirectory 'emacs-version
    dotspacemacs-editing-style 'vim
-   dotspacemacs-startup-banner 'official
+   ;; Banner: LP-branded ASCII text. skill_deploy substitutes {{VAULT_ROOT}}.
+   ;; Swap banner_active.txt symlink to change banner without dotfile redeploy.
+   dotspacemacs-startup-banner "{{VAULT_ROOT}}/what/standard/assets/banner_active.txt"
    dotspacemacs-startup-lists '((recents . 5) (projects . 7))
    dotspacemacs-startup-buffer-responsive t
    dotspacemacs-show-startup-list-numbers t
-   dotspacemacs-themes '({{THEME_PRIMARY}} {{THEME_FALLBACK}})
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   ;; Stock spacemacs-dark theme — LP-consistent, no extra packages needed.
+   ;; doom-modeline (below) adapts to this theme's faces automatically.
+   dotspacemacs-themes '(spacemacs-dark spacemacs-light)
+   ;; doom-modeline: superior info density + aDNA vault segment.
+   ;; Adapts to spacemacs-dark faces (icon nil = text-only, theme-agnostic).
+   dotspacemacs-mode-line-theme 'doom
    dotspacemacs-colorize-cursor-according-to-state t
-   dotspacemacs-default-font '("{{FONT_FAMILY}}" :size {{FONT_SIZE}} :weight normal :width normal)
+   dotspacemacs-default-font '("Source Code Pro" :size 13 :weight normal :width normal)
    dotspacemacs-leader-key "SPC"
    dotspacemacs-emacs-command-key "SPC"
    dotspacemacs-ex-command-key ":"
@@ -217,7 +223,33 @@
           (".*"                         . eww-browse-url)))
 
   ;; adna-mode: open wikilinks with eww when URL, else find-file
-  (setq adna-browse-url-function #'eww-browse-url))
+  (setq adna-browse-url-function #'eww-browse-url)
+
+  ;; ── doom-modeline ────────────────────────────────────────────────────────
+  ;; icon nil = text-only; inherits spacemacs-dark faces, no extra icon fonts needed.
+  (with-eval-after-load 'doom-modeline
+    (setq doom-modeline-height 25
+          doom-modeline-bar-width 4
+          doom-modeline-icon nil
+          doom-modeline-buffer-file-name-style 'truncate-with-project
+          doom-modeline-minor-modes nil
+          doom-modeline-enable-word-count nil
+          doom-modeline-buffer-encoding nil
+          doom-modeline-checker-simple-format t
+          doom-modeline-vcs-max-length 16)
+    (when (fboundp 'doom-modeline-def-segment)
+      (doom-modeline-def-segment adna-vault
+        "Show ⬡vault-name when buffer is inside an aDNA vault."
+        (when (and (bound-and-true-p adna-mode)
+                   (bound-and-true-p adna-vault-root))
+          (let ((name (file-name-nondirectory
+                       (directory-file-name adna-vault-root))))
+            (propertize (format " ⬡%s " name)
+                        'face '(:inherit success :weight bold)))))
+      (doom-modeline-def-modeline 'spacelattice-main
+        '(bar matches buffer-info remote-host buffer-position)
+        '(adna-vault misc-info lsp checker major-mode process))
+      (doom-modeline-set-modeline 'spacelattice-main t))))
 
 ;; Do not write anything past this comment. Anything written here is overwritten
 ;; by Emacs on save. Operator customizations belong in

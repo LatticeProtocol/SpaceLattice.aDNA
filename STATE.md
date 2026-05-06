@@ -4,8 +4,8 @@ status: active
 created: 2026-05-03
 updated: 2026-05-06
 last_edited_by: agent_stanley
-last_session: session_stanley_20260506T053454Z_p2_04_telemetry_aggregate
-tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p2_complete]
+last_session: session_stanley_20260506T_p3_preflight
+tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p3_active]
 ---
 
 # Operational State
@@ -14,9 +14,11 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**SpaceLattice v0.2.0 — campaign v1.0 P2 COMPLETE.** P2-04 closed 2026-05-06: `skill_telemetry_aggregate.md` stub → full 7-step maintainer procedure (poll → parse → dedup → aggregate → pattern → write → state-update); ADR-011 accepted; first end-to-end telemetry round-trip executed — GitHub Issue #1 submitted (operator side), parsed + aggregated (maintainer side), inbox entry committed, demo ADR draft committed. All P2 phase-gate criteria met.
+**SpaceLattice v0.2.0 — campaign v1.0 P3 ACTIVE.** P2 is complete (all 4 missions closed, all phase-gate criteria met). P2→P3 gate confirmed by operator during comprehensive review session (2026-05-06) — user provided concrete visual selections and implementation instructions for P3 pre-flight.
 
-**⚠️ P2→P3 phase gate: operator confirmation required before P3 (customization walk-through) opens.**
+**P3 pre-flight COMPLETE (2026-05-06):** Dotfile placeholders resolved (theme/font/modeline/banner); doom-modeline adapted to spacemacs-dark (icon nil, `adna-vault` segment); adna layer keybindings refactored to Transient hierarchy (SPC a root + SPC o l LP + SPC c c Claude Code); LP stubs + Claude Code variants added to funcs.el; ADR-012 + ADR-013 accepted. Banner system live (3 variants + banner_active.txt).
+
+**Next:** Deploy dotfile to verify Spacemacs starts correctly with new presentation layer. Then P3-01 opens (first customization walk-through mission).
 
 ## What's Working
 
@@ -79,6 +81,9 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-06 | **ADR-013 accepted** — Keybinding refactor: Transient hierarchy for SPC a (aDNA root), SPC o l (LP), SPC c c (Claude Code); LP stubs + Claude Code variants (plan/loop/review) in funcs.el | P3 pre-flight session |
+| 2026-05-06 | **ADR-012 accepted** — Presentation layer: 4 dotfile placeholders resolved (spacemacs-dark, Source Code Pro 13pt, doom modeline, banner_active.txt); doom-modeline icon nil + adna-vault segment + spacelattice-main format; banner asset system (3 variants) | P3 pre-flight session |
+| 2026-05-06 | **P2→P3 gate confirmed** — operator visual selections: spacemacs-dark theme, doom-modeline adapted, custom ASCII banner, Source Code Pro 13pt, xwidgets rebuild | comprehensive review session |
 | 2026-05-06 | **P2-04 closed** — `skill_telemetry_aggregate.md` stub → full 7-step maintainer procedure (poll/parse/dedup/aggregate/pattern/write/state-update); ADR-011 accepted; round-trip: Issue #1 submitted + parsed + inbox `20260506T053941Z_aggregate.md` committed + demo ADR draft committed; `.gitignore` + `stanley.md` + `_state.json` updated; P2 phase-gate COMPLETE | session_stanley_20260506T053454Z |
 | 2026-05-06 | **P2-03 closed** — `skill_telemetry_submit.md` full 7-step procedure (consent/collect/sanitize/validate/confirm/submit/audit-write); `--dry-run` + `--withdraw` flags; `.github/ISSUE_TEMPLATE/telemetry.yml` (schema-enforcing form with 3-checkbox sanitization ack); ADR-010 accepted | session_stanley_20260506T043111Z |
 | 2026-05-06 | **P2-02 closed** — `telemetry_schema.json` (JSON Schema Draft-07, 4 classes); privacy-posture table + 5 sanitization extensions (LS-1/CS-1/DE-1/SHA-1/VER-1); `adna/telemetry-validate` stub in funcs.el; maintainer parser snippet in skill_telemetry_aggregate; ADR-009 accepted; `telemetry.md` status active | session_stanley_20260506T033343Z |
@@ -123,6 +128,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 | 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | v0.2.0 commits `f7fbaef` + `07cc12f` |
 | 2026-05-06 | **Session wind-down expansion** — dotfile Tier 1 layer expansion (16 new layers: osx, unicode-fonts, nav-flash, ibuffer, tabs, imenu-list, go, javascript, react, epub, pdf, restclient, docker, dap, tree-sitter, claude-code, llm-client); `~/lattice/` default-directory; eww/ace-link/link-hint/avy config; 2 new missions (P3-10 layer audit, P3-11 browser integration); eww context doc; visual inspection backlog idea; campaign 28→30 missions, 39→47 calibrated sessions | this session |
 | 2026-05-06 | **Font warmup** — Source Code Pro installed (`brew install --cask font-source-code-pro`); Spacemacs startup warning resolved | pre-P2 warmup |
+| 2026-05-06 | **P3 pre-flight** — dotfile.spacemacs.tmpl: 4 placeholder resolutions + doom-modeline block; funcs.el: LP stubs × 5 + helper + Claude Code variants × 3; keybindings.el: Transient refactor (3 menus); ADR-012 + ADR-013 accepted; banner system (3 variants + banner_active.txt) | session_stanley_20260506T_p3_preflight |
 | 2026-05-06 | **P2-04 closed** — `skill_telemetry_aggregate.md` full 7-step maintainer procedure; ADR-011; first round-trip (Issue #1); inbox `20260506T053941Z_aggregate.md` committed; demo ADR draft; `who/peers/telemetry/` dir structure created; `_state.json` gitignored; `stanley.md` consent fields added | session_stanley_20260506T053454Z |
 | 2026-05-06 | **P2-03 closed** — `skill_telemetry_submit.md` stub → full 7-step operator submission procedure; `.github/ISSUE_TEMPLATE/telemetry.yml` created; ADR-010 accepted | session_stanley_20260506T043111Z |
 | 2026-05-06 | **P2-02 closed** — `telemetry_schema.json` (JSON Schema Draft-07, 4 classes); privacy-posture table; 5 sanitization extension rules; `adna/telemetry-validate` stub; maintainer parser snippet; ADR-009 accepted; `telemetry.md` status active | session_stanley_20260506T033343Z |

@@ -6,6 +6,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### P3 pre-flight — presentation layer + Transient keybindings (2026-05-06)
+
+**Headline**: P2→P3 gate confirmed by operator. P3 pre-flight complete: dotfile placeholders resolved, doom-modeline adapted to spacemacs-dark, adna layer keybindings refactored to Transient hierarchy, LP stubs + Claude Code variants added.
+
+**Dotfile `what/standard/dotfile.spacemacs.tmpl`** (ADR-012):
+- `dotspacemacs-startup-banner` → `"{{VAULT_ROOT}}/what/standard/assets/banner_active.txt"` (was `'official`)
+- `dotspacemacs-themes` → `'(spacemacs-dark spacemacs-light)` (was `{{THEME_PRIMARY}}` placeholder)
+- `dotspacemacs-mode-line-theme` → `'doom` (was `spacemacs :separator wave`)
+- `dotspacemacs-default-font` → `'("Source Code Pro" :size 13 ...)` (was `{{FONT_FAMILY}} {{FONT_SIZE}}` placeholders)
+- Added doom-modeline user-config block: `icon nil` (text-only, spacemacs-dark faces), `adna-vault` segment (⬡vault-name), `spacelattice-main` modeline format
+
+**Banner system** (ADR-012):
+- `what/standard/assets/banner_active.txt` — active banner (v2_monolith LP box design)
+- `what/standard/assets/banner_v1_dot_field.txt` — lattice dot field
+- `what/standard/assets/banner_v2_monolith.txt` — LP monolith with ╔══╗ border
+- `what/standard/assets/banner_v3_signal.txt` — dashed border ▶◀ signal style
+
+**adna layer keybindings `keybindings.el`** (ADR-013):
+- Replaced flat `spacemacs/set-leader-keys` with three Transient menus
+- `adna/menu` (SPC a): Navigate / Skills & Graph / Links & Sessions / LP & Claude → groups
+- `adna/lp-menu` (SPC a l + SPC o l): Run / Publish & Index / Browse groups + back
+- `adna/claude-menu` (SPC a , + SPC c c): Launch / Review groups + back
+
+**adna layer functions `funcs.el`** (ADR-013):
+- `adna/--spawn-vterm-command` — shared vterm/eshell dispatch helper
+- LP stubs: `adna/lp-run-lattice`, `adna/lp-job-status`, `adna/lp-publish`, `adna/lp-open-marketplace`, `adna/lp-federation-graph`
+- Claude Code variants: `adna/spawn-claude-plan` (`--plan`), `adna/spawn-claude-loop` (`--loop`), `adna/spawn-claude-review` (`/review`)
+
+**ADRs filed**: ADR-012 (presentation layer), ADR-013 (keybinding Transient refactor)
+
+---
+
 ### P2-04 close — skill_telemetry_aggregate + first round-trip (2026-05-06)
 
 **Headline**: P2-04 closed. `skill_telemetry_aggregate.md` promoted from stub to full 7-step maintainer procedure. First end-to-end telemetry round-trip executed. **P2 phase-gate COMPLETE** — all 4 P2 missions closed.

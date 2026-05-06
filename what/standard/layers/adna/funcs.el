@@ -342,4 +342,83 @@ valid JSON with a known `type' field. Full jsonschema validation
       (message "adna/telemetry-validate: OK (type=%s)" submission-type)
       t)))
 
+;;; ============================================================================
+;;; LP command stubs (SPC o l / SPC a l — Phase 3 namespace reservation)
+;;; ============================================================================
+
+(defun adna/--spawn-vterm-command (command buffer-name)
+  "Run COMMAND in a vterm buffer named BUFFER-NAME (falls back to eshell)."
+  (cond
+   ((fboundp 'vterm)
+    (let ((vterm-buffer-name buffer-name))
+      (vterm)
+      (vterm-send-string command)
+      (vterm-send-return)))
+   (t
+    (eshell)
+    (insert command)
+    (eshell-send-input))))
+
+(defun adna/lp-run-lattice ()
+  "Run a lattice via latlab CLI (prompts for lattice name)."
+  (interactive)
+  (let* ((name (read-string "Lattice name: "))
+         (cmd (format "latlab lattice run %s" (shell-quote-argument name))))
+    (adna/--spawn-vterm-command cmd "*lp:run*")))
+
+(defun adna/lp-job-status ()
+  "Show recent latlab job status."
+  (interactive)
+  (adna/--spawn-vterm-command "latlab job status" "*lp:jobs*"))
+
+(defun adna/lp-publish ()
+  "Publish current lattice via latlab CLI."
+  (interactive)
+  (let* ((root (adna/--root-or-error))
+         (cmd (format "latlab lattice publish %s" (shell-quote-argument root))))
+    (adna/--spawn-vterm-command cmd "*lp:publish*")))
+
+(defun adna/lp-open-marketplace ()
+  "Open Lattice Protocol marketplace/registry in eww."
+  (interactive)
+  (eww "https://github.com/LatticeProtocol/lattice-protocol"))
+
+(defun adna/lp-federation-graph ()
+  "Show federation graph via latlab CLI."
+  (interactive)
+  (adna/--spawn-vterm-command "latlab federation graph" "*lp:federation*"))
+
+;;; ============================================================================
+;;; Claude Code variants (plan mode, loop mode, review)
+;;; ============================================================================
+
+(defun adna/spawn-claude-plan ()
+  "Spawn Claude Code in plan mode at nearest aDNA root."
+  (interactive)
+  (let* ((root (adna/--root-or-error))
+         (vault-name (file-name-nondirectory (directory-file-name root)))
+         (default-directory root)
+         (cmd (concat adna-claude-code-command " --plan")))
+    (adna/--spawn-vterm-command cmd (format "*claude-plan:%s*" vault-name))))
+
+(defun adna/spawn-claude-loop ()
+  "Spawn Claude Code in loop mode at nearest aDNA root."
+  (interactive)
+  (let* ((root (adna/--root-or-error))
+         (vault-name (file-name-nondirectory (directory-file-name root)))
+         (default-directory root)
+         (task (read-string "Loop task: "))
+         (cmd (format "%s --loop %s" adna-claude-code-command (shell-quote-argument task))))
+    (adna/--spawn-vterm-command cmd (format "*claude-loop:%s*" vault-name))))
+
+(defun adna/spawn-claude-review ()
+  "Spawn Claude Code to review current file."
+  (interactive)
+  (let* ((root (adna/--root-or-error))
+         (vault-name (file-name-nondirectory (directory-file-name root)))
+         (file (or buffer-file-name (user-error "Buffer has no file")))
+         (default-directory root)
+         (cmd (format "%s /review %s" adna-claude-code-command (shell-quote-argument file))))
+    (adna/--spawn-vterm-command cmd (format "*claude-review:%s*" vault-name))))
+
 ;;; funcs.el ends here
