@@ -224,3 +224,17 @@ Friction observed in the contract itself (e.g., a pattern that's too aggressive 
 ## 7. Reversibility
 
 Each clause can be amended via successor ADR. The supersession chain preserves audit history. Removing a clause requires an ADR with `pattern_spec_change: clause_<N>_removed` and explicit consequences analysis.
+
+## 8. Known False Positives
+
+The sanitization scan (§ 4) is intentionally broad. Some patterns are expected to fire on legitimate content. These are documented here so operators understand which WARNs are anticipated and acknowledged at publish-time.
+
+**Notation convention**: when documenting email-like patterns in this section, use bracket notation around the domain part (e.g., `user@[domain.tld]`) to prevent this file itself from triggering the email scanner. The scanner's email regex requires `[A-Za-z0-9.-]+` after `@` — brackets break that match.
+
+| Pattern | Content | File | Rationale | ADR |
+|---------|---------|------|-----------|-----|
+| Email address | `git@[github.com]` (git SSH remote URL) | `how/skills/skill_l1_upgrade.md` | Git SSH URLs match the email regex (`user@[domain.tld]`) but carry no privacy risk. The SSH remote form is pedagogically correct and necessary. Note: `[...]` notation used here to prevent the scanner from matching these documentation examples. | ADR-006 |
+
+**Operator acknowledgment**: when `skill_publish_lattice` Step 3 emits a WARN for a pattern listed in this table, the operator may proceed after confirming the match is in the known-false-positives list. The publish receipt's `sanitization_scan` field should read `clean-with-acknowledged-warns` in this case.
+
+To propose a new entry: open an ADR referencing this section. Entries here represent `standard/` content that can never be fixed (pedagogically correct content that happens to match a WARN pattern). Content that _can_ be fixed (e.g., real private IPs or real email addresses) must be fixed — not documented here.
