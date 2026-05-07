@@ -20,7 +20,8 @@ requirements:
     - what/local/ (optional, may not exist on first run)
   permissions:
     - "write ~/.emacs.d/"
-    - "write ~/.spacemacs"
+    - "write <vault-root>/init.el"
+    - "write <shell-rc> (~/.zshrc or ~/.bashrc) — SPACEMACSDIR export"
     - "write deploy/"
     - "read what/standard/"
     - "read what/local/ if present"
@@ -70,18 +71,17 @@ If any tool missing, abort with the OS-specific install hint from `what/standard
 ```bash
 UTC=$(date -u +%Y%m%dT%H%M%SZ)
 
-# Detect prior SpaceLattice.aDNA installation (carries marker in ~/.spacemacs)
+# Detect prior SpaceLattice.aDNA installation (marker in vault's init.el)
 SPACEMACS_OURS=0
-if [[ -f ~/.spacemacs ]]; then
-  if grep -q "SpaceLattice.aDNA standard dotfile" ~/.spacemacs; then
+if [[ -f "$VAULT/init.el" ]]; then
+  if grep -q "SpaceLattice.aDNA standard dotfile" "$VAULT/init.el"; then
     SPACEMACS_OURS=1
   fi
 fi
 
-if [[ -e ~/.emacs.d || -f ~/.spacemacs ]] && [[ $SPACEMACS_OURS -eq 0 ]]; then
-  [[ -d ~/.emacs.d ]] && mv ~/.emacs.d ~/.emacs.d.bak.$UTC
-  [[ -f ~/.spacemacs ]] && mv ~/.spacemacs ~/.spacemacs.bak.$UTC
-  echo "Backups: ~/.emacs.d.bak.$UTC + ~/.spacemacs.bak.$UTC" >> "$LOG"
+if [[ -d ~/.emacs.d ]] && [[ $SPACEMACS_OURS -eq 0 ]]; then
+  mv ~/.emacs.d ~/.emacs.d.bak.$UTC
+  echo "Backup: ~/.emacs.d.bak.$UTC" >> "$LOG"
 fi
 ```
 
@@ -114,31 +114,58 @@ cd <vault-root>
 
 (The `<vault-root>` substitution is the actual absolute path of the SpaceLattice.aDNA vault — set as `VAULT=$(pwd)` at start.)
 
+### Step 3.5 — Set SPACEMACSDIR in shell profile
+
+Spacemacs resolves the dotfile location by checking `$SPACEMACSDIR/init.el` first (§1.2). Write the export to the operator's shell rc so it persists across sessions, and export it now for the current process.
+
+```bash
+# Determine shell rc file
+if [[ -f "$HOME/.zshrc" ]]; then
+  SHELL_RC="$HOME/.zshrc"
+elif [[ -f "$HOME/.bashrc" ]]; then
+  SHELL_RC="$HOME/.bashrc"
+else
+  SHELL_RC=""
+  echo "WARNING: no .zshrc or .bashrc found; set SPACEMACSDIR=$VAULT manually" >> "$LOG"
+fi
+
+SPACEMACS_EXPORT="export SPACEMACSDIR=\"$VAULT\""
+if [[ -n "$SHELL_RC" ]]; then
+  if ! grep -q "SPACEMACSDIR" "$SHELL_RC"; then
+    printf '\n# SpaceLattice.aDNA — vault-resident dotfile\n%s\n' "$SPACEMACS_EXPORT" >> "$SHELL_RC"
+    echo "SPACEMACSDIR written to $SHELL_RC" >> "$LOG"
+  else
+    echo "SPACEMACSDIR already in $SHELL_RC — skipping" >> "$LOG"
+  fi
+fi
+
+# Export for the current session so subsequent steps can use it
+export SPACEMACSDIR="$VAULT"
+```
+
+Idempotent: if `SPACEMACSDIR` is already present in the rc, this step is a no-op.
+
 ### Step 4 — Render templates
 
 ```bash
 mkdir -p ~/.emacs.d/private
 
-# Render dotfile.spacemacs.tmpl → ~/.spacemacs
+# Render dotfile.spacemacs.tmpl → <vault-root>/init.el
+# Spacemacs finds it via $SPACEMACSDIR (set in Step 3.5).
+# Most paths now use dotspacemacs-directory at runtime — only LOCAL_LAYER_LIST
+# remains as a static substitution (empty by default).
 python3 - "$VAULT" <<'PY'
-import sys, os, pathlib
+import sys, pathlib
 vault = pathlib.Path(sys.argv[1])
 tmpl = (vault / "what/standard/dotfile.spacemacs.tmpl").read_text()
 
-# Substitution table — defaults; operator.private.el overrides at runtime
 substitutions = {
-    "{{LAYER_PATH_LIST}}": '"~/.emacs.d/private/layers/"',
-    "{{LOCAL_LAYER_LIST}}": "",  # operator-added layers loaded by user-init
-    "{{THEME_PRIMARY}}": "spacemacs-dark",
-    "{{THEME_FALLBACK}}": "spacemacs-light",
-    "{{FONT_FAMILY}}": "Source Code Pro",
-    "{{FONT_SIZE}}": "13",
-    "{{LOCAL_LAYER_DIR}}": str(vault / "what/local"),
+    "{{LOCAL_LAYER_LIST}}": "",  # operator-added layer names; edit to add private layers
 }
 for k, v in substitutions.items():
     tmpl = tmpl.replace(k, v)
-pathlib.Path(os.path.expanduser("~/.spacemacs")).write_text(tmpl)
-print(f"Rendered ~/.spacemacs from {vault.name}")
+(vault / "init.el").write_text(tmpl)
+print(f"Rendered {vault}/init.el from dotfile.spacemacs.tmpl")
 PY
 
 # Render packages.el.tmpl → ~/.emacs.d/private/packages.el
@@ -232,7 +259,8 @@ skill_install completed end-to-end. See preflight log for tooling versions and E
 ## What was installed
 
 - ~/.emacs.d/ → Spacemacs at SHA $(cd ~/.emacs.d && git rev-parse HEAD)
-- ~/.spacemacs ← rendered from \`what/standard/dotfile.spacemacs.tmpl\`
+- $VAULT/init.el ← rendered from \`what/standard/dotfile.spacemacs.tmpl\` (gitignored)
+- SPACEMACSDIR=$VAULT written to shell rc
 - ~/.emacs.d/private/packages.el ← rendered from \`what/standard/packages.el.tmpl\`
 - ~/.emacs.d/private/layers/adna → symlink to vault's \`what/standard/layers/adna/\`
 
@@ -248,7 +276,8 @@ echo "Deploy receipt: $RECEIPT"
 After successful run:
 
 - `~/.emacs.d/` is a Spacemacs clone at the pinned SHA
-- `~/.spacemacs` is rendered from this vault's template
+- `<vault>/init.el` is rendered from this vault's template (gitignored)
+- `SPACEMACSDIR=<vault>` exported in shell rc — Spacemacs finds `<vault>/init.el` on next launch
 - `~/.emacs.d/private/layers/adna/` is a symlink to `<vault>/what/standard/layers/adna/`
 - `how/local/machine_runbooks/last_install.log` captures the install transcript (gitignored)
 - `deploy/<hostname>/<utc>.md` records the receipt (gitignored)
@@ -261,7 +290,7 @@ After successful run:
 | Backup fail | Original `~/.emacs.d/` + `~/.spacemacs` intact | Free disk; re-run |
 | Clone fail | Backup taken; `~/.emacs.d/` may be partial | `rm -rf ~/.emacs.d`; re-run |
 | Pin mismatch | Backup taken; `~/.emacs.d/` at wrong SHA | Update `pins.md` (via ADR) or re-run with corrected pin |
-| Template render fail | Backup taken; `~/.emacs.d/` cloned but `~/.spacemacs` missing | Re-run from Step 4 |
+| Template render fail | Backup taken; `~/.emacs.d/` cloned but `<vault>/init.el` missing | Re-run from Step 4 |
 | Batch boot fail | Everything in place but Emacs errored | Read log, fix layer config, re-run from Step 4 |
 | Health check fail | Everything in place but unhealthy | Read `recover_from_breakage.md`, possibly restore from backup |
 
@@ -270,7 +299,8 @@ After successful run:
 Re-running on an already-installed machine:
 
 - Step 1 — same checks, fast
-- Step 2 — detects `SpaceLattice.aDNA` marker; skips backup
+- Step 2 — detects `SpaceLattice.aDNA` marker in `<vault>/init.el`; skips backup
+- Step 3.5 — detects `SPACEMACSDIR` already in shell rc; skips write
 - Step 3 — `git fetch` + `git checkout` to pinned SHA (no-op if already there)
 - Step 4 — re-renders templates (overwrites; safe)
 - Step 5 — symlink check; no-op if correct

@@ -4,7 +4,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-06
 last_edited_by: agent_stanley
-last_session: session_stanley_20260506T195728Z_p3_00_closed_loop_validation
+last_session: session_stanley_20260506T204850Z_p3_01_dotfile_entry_lifecycle
 tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p3_active]
 ---
 
@@ -20,7 +20,9 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 **P3-00 COMPLETE (2026-05-06):** Closed-loop validation infrastructure live. `skill_inspect_live` + `skill_health_check` D+ + `skill_deploy` Step 9 + ADR-014 accepted. Agent can now inspect running Spacemacs state without operator screenshots (emacsclient + screencapture). Reload-type guidance added to dotfile (SPC f e R vs SPC q r).
 
-**Next:** P3-01 opens — dotfile entry-points + lifecycle ordering (first customization walk-through mission). Use `skill_inspect_live` after each deploy going forward.
+**P3-01 COMPLETE (2026-05-06):** Vault-resident deployment model — ADR-015 accepted. `$SPACEMACSDIR` → vault root; `skill_install` writes one export line to shell rc; render target is `<vault>/init.el` (gitignored). All `{{PLACEHOLDER}}` substitutions eliminated except `{{LOCAL_LAYER_LIST}}`; `dotspacemacs-directory`-relative paths throughout. `dotspacemacs/user-config` now carries `§P3-01`–`§P3-11` section scaffold. `.spacemacs.env.example` added for env var documentation.
+
+**Next:** P3-02 — dotspacemacs variables (populate `§P3-02` section; walk customization reference dimensions for dotspacemacs-* variable landing zones). Use `skill_inspect_live` after each deploy going forward.
 
 ## What's Working
 
@@ -71,7 +73,7 @@ None blocking. Audit findings status:
 - ✅ Both skills active: `skill_telemetry_submit` + `skill_telemetry_aggregate`
 - ✅ ADR-009 (schema) + ADR-010 (submit) + ADR-011 (aggregate) all accepted
 
-**P3 active.** Customization walk-through — 10 missions (P3-00 complete ✅, P3-01 through P3-11 queued), 12-17 sessions. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
+**P3 active.** Customization walk-through — 10 missions (P3-00 ✅, P3-01 ✅, P3-02 through P3-11 queued), 11-16 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
 
 **Note**: `skill_self_improve` Stop hook is live. Session count gate at 5 — will be silent until session 5.
 
@@ -81,6 +83,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-06 | **ADR-015 accepted** — Vault-resident deployment model: `$SPACEMACSDIR` → vault root; `<vault>/init.el` as render target (gitignored); `dotspacemacs-directory`-relative paths eliminate all machine-specific substitutions except `{{LOCAL_LAYER_LIST}}`; `user-config` section scaffold §P3-01–§P3-11; user-env policy (`spacemacs/load-spacemacs-env` retained); landing-zone rule (Knob C) | P3-01 session |
 | 2026-05-06 | **ADR-014 accepted** — Closed-loop validation: `skill_inspect_live` (emacsclient + screencapture); `skill_health_check` D+ live assertions (exits 70-79); `skill_deploy` Step 9 (reload-type guide + live inspection gate); dotfile reload-type annotation | P3-00 session |
 | 2026-05-06 | **ADR-013 accepted** — Keybinding refactor: Transient hierarchy for SPC a (aDNA root), SPC o l (LP), SPC c c (Claude Code); LP stubs + Claude Code variants (plan/loop/review) in funcs.el | P3 pre-flight session |
 | 2026-05-06 | **ADR-012 accepted** — Presentation layer: 4 dotfile placeholders resolved (spacemacs-dark, Source Code Pro 13pt, doom modeline, banner_active.txt); doom-modeline icon nil + adna-vault segment + spacelattice-main format; banner asset system (3 variants) | P3 pre-flight session |
@@ -127,6 +130,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 | 2026-05-05 | Genesis AAR + ADR 003 — closes Standing Order #5 violation; fixes skill batch-boot invocation + SIGPIPE pipe (audit findings #2/#3/#4) | commit `d853a1e` |
 | 2026-05-05 | v0.1.0 published to GitHub mirror (post-AAR + ADR 003) | publish receipt commit `14a642f`, tag v0.1.0 |
 | 2026-05-05 | **Plan B — Rename + repositioning + v1.0 campaign foundation**: vault `spacemacs.aDNA` → `SpaceLattice.aDNA`; GitHub repo renamed; sibling fork `LatticeProtocol/spacelattice` opened; customization reference + LP positioning + sustainability + telemetry frameworks persisted; campaign `campaign_spacelattice_v1_0/` scaffolded with `mission_sl_planning_01.md` ready; ADR 005 ratifies | v0.2.0 commits `f7fbaef` + `07cc12f` |
+| 2026-05-06 | **P3-01 closed** — ADR-015 accepted; `skill_install` Step 3.5 (SPACEMACSDIR export); `skill_deploy` render target → `<vault>/init.el`; `dotfile.spacemacs.tmpl` substitutions eliminated; `§P3-01`–`§P3-11` section scaffold; `.spacemacs.env.example` created; 5 knobs A–E in `stanley.md` | session_stanley_20260506T204850Z_p3_01_dotfile_entry_lifecycle |
 | 2026-05-06 | **P3-00 closed** — `skill_inspect_live` (emacsclient + screencapture live inspection); `skill_health_check` D+ (live assertions, exits 70-79); `skill_deploy` Step 9 (reload-type guide + live inspection gate); `dotfile.spacemacs.tmpl` reload annotation; ADR-014 accepted; campaign 30→31 missions, 47→48 sessions. Live state confirmed GREEN without operator screenshot | session_stanley_20260506T195728Z_p3_00_closed_loop_validation |
 | 2026-05-06 | **P3 visual fixes** — centaur-tabs: switched to `excluded-prefixes` API (`"*"` prefix) + `clrhash` invalidation; projectile: `discover-projects-in-search-path` call added; font-height 150 confirmed via live emacsclient query; missing `defun dotspacemacs/user-config` closing paren fixed | this session |
 | 2026-05-06 | **Session wind-down expansion** — dotfile Tier 1 layer expansion (16 new layers: osx, unicode-fonts, nav-flash, ibuffer, tabs, imenu-list, go, javascript, react, epub, pdf, restclient, docker, dap, tree-sitter, claude-code, llm-client); `~/lattice/` default-directory; eww/ace-link/link-hint/avy config; 2 new missions (P3-10 layer audit, P3-11 browser integration); eww context doc; visual inspection backlog idea; campaign 28→30 missions, 39→47 calibrated sessions | this session |

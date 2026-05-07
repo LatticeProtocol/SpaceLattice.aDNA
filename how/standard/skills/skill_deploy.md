@@ -17,7 +17,7 @@ requirements:
     - what/standard/layers/adna/
     - what/local/ (optional)
   permissions:
-    - "write ~/.spacemacs"
+    - "write <vault-root>/init.el"
     - "write ~/.emacs.d/private/"
     - "write deploy/"
 ---
@@ -30,7 +30,7 @@ Faster cousin of `skill_install`. When `~/.emacs.d/` is already present and at t
 
 Use cases:
 
-- Operator edited `what/standard/dotfile.spacemacs.tmpl` and wants the change live
+- Operator edited `what/standard/dotfile.spacemacs.tmpl` and wants the change live in `<vault>/init.el`
 - Operator added a layer to `what/local/operator.private.el` and wants it loaded
 - Operator promoted something from `local/` to `standard/` (via `skill_layer_promote`) — deploy reflects the merged state
 
@@ -48,7 +48,7 @@ This skill is **steps 4-8 of `skill_install`**, executed unchanged. See `skill_i
 
 | # | Action |
 |---|--------|
-| 4 | Re-render `dotfile.spacemacs.tmpl` → `~/.spacemacs` and `packages.el.tmpl` → `~/.emacs.d/private/packages.el` |
+| 4 | Re-render `dotfile.spacemacs.tmpl` → `<vault>/init.el` and `packages.el.tmpl` → `~/.emacs.d/private/packages.el` |
 | 5 | Refresh `~/.emacs.d/private/layers/adna` symlink |
 | 6 | Batch boot: `emacs --batch -l ~/.spacemacs` (cheaper than first install — packages cached) |
 | 7 | Run `skill_health_check` (checks A-D+) |
@@ -75,11 +75,11 @@ Same as `skill_install` post-conditions, except `~/.emacs.d/` is unchanged (stil
 
 If batch boot fails after a deploy:
 
-1. The deploy left `~/.spacemacs` in a bad state but didn't touch `~/.emacs.d/`
+1. The deploy left `<vault>/init.el` in a bad state but didn't touch `~/.emacs.d/`
 2. The fix is to revert `what/standard/dotfile.spacemacs.tmpl` (or the local-layer change) and re-deploy
-3. Or restore `~/.spacemacs` from the previous deploy's backup file
+3. Or restore from the vault's git history: `git checkout HEAD -- what/standard/dotfile.spacemacs.tmpl` then re-deploy
 
-`skill_deploy` does NOT take a fresh backup of `~/.spacemacs` since `skill_install` already created the canonical backup. If the operator needs a deploy-time backup, they invoke `skill_install` instead (which always backs up if the marker check fails).
+`skill_deploy` does NOT take a fresh backup of `<vault>/init.el` since it is always re-renderable from the tracked template. If `~/.emacs.d/` state is suspect, invoke `skill_install` instead (which backs up and re-clones).
 
 ## Idempotency
 

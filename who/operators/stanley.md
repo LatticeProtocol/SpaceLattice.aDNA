@@ -49,6 +49,28 @@ Single-operator owner of `SpaceLattice.aDNA`. Genesis architect (2026-05-03). Cu
 
 To be populated when `skill_install` runs and `what/local/` is bootstrapped from `what/local/*.example` templates.
 
+## Mission p3_01_dotfile_entry_lifecycle (closed 2026-05-06)
+
+### Knob A — Dotfile location
+- **Decision**: `$SPACEMACSDIR` → vault root (`~/lattice/SpaceLattice.aDNA/`). `init.el` rendered at vault root by `skill_deploy` (gitignored). `dotspacemacs-directory` auto-equals vault root.
+- **Reason**: Fully self-contained vault deployment — any lattice user clones SpaceLattice.aDNA and runs `skill_install`; only `export SPACEMACSDIR=...` lands in their shell profile. All config is vault-resident; `~/.emacs.d/` holds only the Spacemacs framework + packages.
+
+### Knob B — user-env usage
+- **Decision**: Keep `(spacemacs/load-spacemacs-env)` default. Add `what/local/.spacemacs.env.example` template. Optionally augment with `exec-path-from-shell-copy-envs` for PATH portability in GUI Emacs.
+- **Reason**: With Knob A, `.spacemacs.env` naturally lives at vault root (gitignored, operator-private). No change to function body needed at this time.
+
+### Knob C — user-init / user-config landing zone rule
+- **Decision**: Three-line rule: (1) ELPA/archive config → `user-init`; (2) mode hooks that must fire on command-line-opened files → `user-init` (FAQ caveat, §2.4 position 4 vs 13); (3) everything else → `user-config`.
+- **Reason**: Maps directly to §2.4 lifecycle positions. Simple enough to apply without consulting reference each time.
+
+### Knob D — user-config section structure
+- **Decision**: Topical `;;;` section headers in `user-config` mapped 1:1 to P3 missions (§P3-01 through §P3-11). `with-eval-after-load` wrappers within each section. Empty sections get a `(populated by mission P3-XX)` stub.
+- **Reason**: Each P3 mission owns its section. No ambiguity about where to add new config.
+
+### Knob E — dotspacemacs-directory for asset paths
+- **Decision**: Use `(list (concat dotspacemacs-directory "what/local/"))` for `dotspacemacs-configuration-layer-path`. Use `(concat dotspacemacs-directory "what/local")` for private-elisp path. Remove `{{VAULT_ROOT}}` / `{{LOCAL_LAYER_DIR}}` / `{{LAYER_PATH_LIST}}` substitutions from `skill_deploy`. Banner stays `'official` — custom ASCII assets in `what/standard/assets/` deferred to P4 fork branding.
+- **Reason**: With Knob A, `dotspacemacs-directory` IS the vault root. Template is portable across operators with no machine-specific render step. Banner reverted to official during P3-01 session — operator prefers standard Spacemacs logo at v0.x stage.
+
 ## Promotion log (local → standard)
 
 | Date | Promoted | ADR | Notes |
