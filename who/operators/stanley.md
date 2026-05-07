@@ -3,8 +3,8 @@ type: operator
 name: Stanley
 status: active
 created: 2026-05-03
-updated: 2026-05-03
-last_edited_by: agent_init
+updated: 2026-05-07
+last_edited_by: agent_stanley
 hostname: null
 primary_models:
   - claude-opus-4-7
@@ -70,6 +70,21 @@ To be populated when `skill_install` runs and `what/local/` is bootstrapped from
 ### Knob E — dotspacemacs-directory for asset paths
 - **Decision**: Use `(list (concat dotspacemacs-directory "what/local/"))` for `dotspacemacs-configuration-layer-path`. Use `(concat dotspacemacs-directory "what/local")` for private-elisp path. Remove `{{VAULT_ROOT}}` / `{{LOCAL_LAYER_DIR}}` / `{{LAYER_PATH_LIST}}` substitutions from `skill_deploy`. Banner stays `'official` — custom ASCII assets in `what/standard/assets/` deferred to P4 fork branding.
 - **Reason**: With Knob A, `dotspacemacs-directory` IS the vault root. Template is portable across operators with no machine-specific render step. Banner reverted to official during P3-01 session — operator prefers standard Spacemacs logo at v0.x stage.
+
+## Mission p3_02_dotspacemacs_variables (in_progress — resumed next session)
+
+### §1.3.1 Layer / package management — CONFIRMED (2026-05-07)
+
+All current template values confirmed correct. No changes.
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-excluded-packages` | `'()` — leave empty | No current pain point; exclusions can cause subtle breakage if layers depend on them internally |
+| `dotspacemacs-frozen-packages` | `'()` — leave empty | Freeze reactively (after a bad MELPA update breaks something); pre-emptive freezing creates maintenance debt |
+| `dotspacemacs-distribution` | `'spacemacs` — confirmed | Home buffer + `spacemacs/*` namespace used by adna layer; `spacemacs-base` saves ~200ms but not worth the friction |
+| All other §1.3.1 vars | Confirmed at template defaults | `layer-path`, `lazy-install`, `install-packages`, `additional-packages` all already correct from pre-flight |
+
+**Next**: §1.3.2 ELPA / version / dump — GC tuning and LSP read buffer size are the substantive decisions.
 
 ## Promotion log (local → standard)
 

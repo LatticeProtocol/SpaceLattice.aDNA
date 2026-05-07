@@ -4,7 +4,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-06
 last_edited_by: agent_stanley
-last_session: session_stanley_20260506T204850Z_p3_01_dotfile_entry_lifecycle
+last_session: session_stanley_20260506T_p3_02_dotspacemacs_variables
 tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p3_active]
 ---
 
@@ -22,7 +22,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 **P3-01 COMPLETE (2026-05-06):** Vault-resident deployment model — ADR-015 accepted. `$SPACEMACSDIR` → vault root; `skill_install` writes one export line to shell rc; render target is `<vault>/init.el` (gitignored). All `{{PLACEHOLDER}}` substitutions eliminated except `{{LOCAL_LAYER_LIST}}`; `dotspacemacs-directory`-relative paths throughout. `dotspacemacs/user-config` now carries `§P3-01`–`§P3-11` section scaffold. `.spacemacs.env.example` added for env var documentation.
 
-**Next:** P3-02 — dotspacemacs variables (populate `§P3-02` section; walk customization reference dimensions for dotspacemacs-* variable landing zones). Use `skill_inspect_live` after each deploy going forward.
+**P3-02 in progress.** §1.3.1 (layer/package management) confirmed — all 9 variables correct at current template values, no changes. Decisions recorded in `stanley.md`. **Next sub-group: §1.3.2** ELPA/version/dump — GC tuning + LSP read buffer size are the two substantive decisions pending. Mission continues next session.
 
 ## What's Working
 
