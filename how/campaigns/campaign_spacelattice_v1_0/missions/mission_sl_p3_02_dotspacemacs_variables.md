@@ -62,4 +62,8 @@ P3-01 closed.
 - §1.3.4 Startup buffer / banner / lists — **CONFIRMED** (2026-05-07)
   - All 13 variables confirmed at template defaults. No changes.
 
-- **Next**: §1.3.5 themes / modeline / fonts / cursor
+- §1.3.5 Themes / modeline / fonts / cursor — **CONFIRMED** (2026-05-07)
+  - All 5 variables confirmed at template values. No changes.
+  - 4 pre-confirmed ADR-012; dotspacemacs-default-icons-font → all-the-icons implicit default
+
+- **Next**: §1.3.6 layouts / sessions

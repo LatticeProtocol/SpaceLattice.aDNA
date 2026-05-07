@@ -134,6 +134,18 @@ All variables confirmed at template defaults. No changes.
 | `dotspacemacs-scratch-buffer-unkillable` | `nil` — confirmed | No accidental-kill habit to guard against |
 | `dotspacemacs-initial-scratch-message` | `nil` — confirmed | No noise |
 
+### §1.3.5 Themes / modeline / fonts / cursor — CONFIRMED (2026-05-07)
+
+All variables confirmed at template values. No changes.
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-themes` | `'(spacemacs-dark spacemacs-light)` — confirmed | Pre-confirmed ADR-012 |
+| `dotspacemacs-mode-line-theme` | `'doom` — confirmed | Pre-confirmed ADR-012; adna vault segment deferred to P4 |
+| `dotspacemacs-colorize-cursor-according-to-state` | `t` — confirmed | Visual evil-state indicator is useful |
+| `dotspacemacs-default-font` | `'("Source Code Pro" :size 15.0 ...)` — confirmed | Pre-confirmed ADR-012; belt-and-suspenders guard in §P3-06 |
+| `dotspacemacs-default-icons-font` | `'all-the-icons` — confirmed (implicit) | Consistent with standard template; nerd-icons revisit deferred to P4 |
+
 ## Promotion log (local → standard)
 
 | Date | Promoted | ADR | Notes |
