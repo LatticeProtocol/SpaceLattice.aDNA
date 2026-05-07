@@ -59,4 +59,7 @@ P3-01 closed.
 - §1.3.3 Editing style & leaders — **CONFIRMED** (2026-05-07)
   - All 8 variables confirmed at template defaults. No changes.
 
-- **Next**: §1.3.4 startup buffer / banner / lists
+- §1.3.4 Startup buffer / banner / lists — **CONFIRMED** (2026-05-07)
+  - All 13 variables confirmed at template defaults. No changes.
+
+- **Next**: §1.3.5 themes / modeline / fonts / cursor

@@ -114,6 +114,26 @@ All variables confirmed at template defaults. No changes.
 | `dotspacemacs-major-mode-emacs-leader-key` | `"C-M-m"` — confirmed | TTY default; `,` covers this in normal state |
 | `dotspacemacs-distinguish-gui-tab` | `nil` — confirmed | No conflicting TAB/C-i bindings to separate |
 
+### §1.3.4 Startup buffer / banner / lists — CONFIRMED (2026-05-07)
+
+All variables confirmed at template defaults. No changes.
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-startup-banner` | `'official` — confirmed | Pre-confirmed P3-01 Knob E; custom assets deferred to P4 |
+| `dotspacemacs-startup-banner-scale` | `'auto` — confirmed | No fixed scale needed |
+| `dotspacemacs-startup-lists` | `'((recents . 5) (projects . 7))` — confirmed | Agenda/todos deferred; easy to add later |
+| `dotspacemacs-startup-buffer-responsive` | `t` — confirmed | Re-render on resize |
+| `dotspacemacs-show-startup-list-numbers` | `t` — confirmed | Numeric keyboard jump |
+| `dotspacemacs-startup-buffer-show-version` | `t` — confirmed | Useful at a glance |
+| `dotspacemacs-startup-buffer-multi-digit-delay` | `0.4` — confirmed | Snappy enough |
+| `dotspacemacs-startup-buffer-show-icons` | `nil` — confirmed | Defer to P4; icon font mixing adds install complexity |
+| `dotspacemacs-new-empty-buffer-major-mode` | `'text-mode` — confirmed | org-mode surprising for scratch |
+| `dotspacemacs-scratch-mode` | `'text-mode` — confirmed | org-roam is better home for persistent notes |
+| `dotspacemacs-scratch-buffer-persistent` | `nil` — confirmed | org-roam handles persistent notes |
+| `dotspacemacs-scratch-buffer-unkillable` | `nil` — confirmed | No accidental-kill habit to guard against |
+| `dotspacemacs-initial-scratch-message` | `nil` — confirmed | No noise |
+
 ## Promotion log (local → standard)
 
 | Date | Promoted | ADR | Notes |
