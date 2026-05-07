@@ -146,6 +146,19 @@ All variables confirmed at template values. No changes.
 | `dotspacemacs-default-font` | `'("Source Code Pro" :size 15.0 ...)` — confirmed | Pre-confirmed ADR-012; belt-and-suspenders guard in §P3-06 |
 | `dotspacemacs-default-icons-font` | `'all-the-icons` — confirmed (implicit) | Consistent with standard template; nerd-icons revisit deferred to P4 |
 
+### §1.3.6 Layouts / sessions — CONFIRMED (2026-05-07)
+
+All variables confirmed at template defaults. No changes.
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-default-layout-name` | `"Default"` — confirmed | Custom layout name deferred to P4; layout intelligence mission will design this deliberately |
+| `dotspacemacs-display-default-layout` | `nil` — confirmed | Reduces modeline noise; appears on non-default layouts |
+| `dotspacemacs-auto-resume-layouts` | `nil` — confirmed | Fresh workspace per session; `SPC l L` restores manually |
+| `dotspacemacs-auto-generate-layout-names` | `nil` — confirmed | Named layouts more intentional; auto-naming produces noise |
+
+Note: layout system will be extended in P4 via the Agentic Layout Intelligence mission (see `how/backlog/idea_agentic_layout_system.md`).
+
 ## Promotion log (local → standard)
 
 | Date | Promoted | ADR | Notes |

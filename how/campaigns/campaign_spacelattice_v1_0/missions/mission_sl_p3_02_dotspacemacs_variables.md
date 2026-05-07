@@ -66,4 +66,8 @@ P3-01 closed.
   - All 5 variables confirmed at template values. No changes.
   - 4 pre-confirmed ADR-012; dotspacemacs-default-icons-font → all-the-icons implicit default
 
-- **Next**: §1.3.6 layouts / sessions
+- §1.3.6 Layouts / sessions — **CONFIRMED** (2026-05-07)
+  - All 4 variables confirmed at template defaults. No changes.
+  - Agentic layout system backlog item created → P4 mission stub seeded
+
+- **Next**: §1.3.7 files / autosave / rollback (next session)
