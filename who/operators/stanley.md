@@ -99,6 +99,21 @@ All current template values confirmed correct. No changes.
 
 Both changes landed in `what/standard/dotfile.spacemacs.tmpl` (standard template, ADR-016). No operator-private overrides needed.
 
+### §1.3.3 Editing style & leaders — CONFIRMED (2026-05-07)
+
+All variables confirmed at template defaults. No changes.
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-editing-style` | `'vim` — confirmed | Modal editing is the battle-station baseline |
+| `dotspacemacs-leader-key` | `"SPC"` — confirmed | Standard; Transient tree (ADR-013) built on it |
+| `dotspacemacs-emacs-command-key` | `"SPC"` — confirmed | Standard (`SPC SPC` → `M-x`) |
+| `dotspacemacs-ex-command-key` | `":"` — confirmed | Standard Vim ex-command key |
+| `dotspacemacs-emacs-leader-key` | `"M-m"` — confirmed | Conventional emacs/insert-state fallback |
+| `dotspacemacs-major-mode-leader-key` | `","` — confirmed | Ergonomic major-mode leader in normal state |
+| `dotspacemacs-major-mode-emacs-leader-key` | `"C-M-m"` — confirmed | TTY default; `,` covers this in normal state |
+| `dotspacemacs-distinguish-gui-tab` | `nil` — confirmed | No conflicting TAB/C-i bindings to separate |
+
 ## Promotion log (local → standard)
 
 | Date | Promoted | ADR | Notes |

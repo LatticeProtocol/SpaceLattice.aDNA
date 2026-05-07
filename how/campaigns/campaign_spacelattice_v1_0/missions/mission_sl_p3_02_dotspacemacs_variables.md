@@ -56,4 +56,7 @@ P3-01 closed.
   - `dotspacemacs-read-process-output-max` → `(* 4 1024 1024)` — ADR-016
   - Both landed in `what/standard/dotfile.spacemacs.tmpl`
 
-- **Next**: §1.3.3 editing style + leader keys
+- §1.3.3 Editing style & leaders — **CONFIRMED** (2026-05-07)
+  - All 8 variables confirmed at template defaults. No changes.
+
+- **Next**: §1.3.4 startup buffer / banner / lists
