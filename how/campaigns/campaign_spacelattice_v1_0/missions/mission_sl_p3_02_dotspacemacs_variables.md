@@ -7,7 +7,7 @@ campaign_mission_number: 2
 status: in_progress
 mission_class: implementation
 created: 2026-05-05
-updated: 2026-05-06
+updated: 2026-05-07
 last_edited_by: agent_stanley
 tags: [mission, planned, spacelattice, v1_0, p3, customization, dotspacemacs_variables, user_in_loop]
 blocked_by: [mission_sl_p3_01_dotfile_entry_lifecycle]
@@ -42,3 +42,18 @@ P3-01 closed.
 
 - `what/context/spacemacs/spacemacs_customization_reference.md` §1.3 (all 10 sub-sections)
 - `how/standard/runbooks/customization_session_protocol.md`
+
+## Progress
+
+- §1.3.1 Layer / package management — **CONFIRMED** (2026-05-07)
+  - All variables confirmed at template defaults. No changes.
+  - `dotspacemacs-distribution` → `'spacemacs` (Home buffer + adna namespace worth the cost)
+  - `dotspacemacs-excluded-packages` / `dotspacemacs-frozen-packages` → `'()` (reactive, not pre-emptive)
+
+- §1.3.2 ELPA / version / dump — **CONFIRMED + 2 changes** (2026-05-07)
+  - 6 variables confirmed at template defaults
+  - `dotspacemacs-gc-cons` → `'(200000000 0.1)` — ADR-016
+  - `dotspacemacs-read-process-output-max` → `(* 4 1024 1024)` — ADR-016
+  - Both landed in `what/standard/dotfile.spacemacs.tmpl`
+
+- **Next**: §1.3.3 editing style + leader keys

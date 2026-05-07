@@ -90,6 +90,8 @@
   (setq-default
    dotspacemacs-elpa-https t
    dotspacemacs-elpa-timeout 5
+   dotspacemacs-gc-cons '(200000000 0.1)
+   dotspacemacs-read-process-output-max (* 4 1024 1024)
    dotspacemacs-check-for-update nil
    dotspacemacs-elpa-subdirectory 'emacs-version
    dotspacemacs-editing-style 'vim

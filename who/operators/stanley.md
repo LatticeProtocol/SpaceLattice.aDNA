@@ -84,7 +84,20 @@ All current template values confirmed correct. No changes.
 | `dotspacemacs-distribution` | `'spacemacs` — confirmed | Home buffer + `spacemacs/*` namespace used by adna layer; `spacemacs-base` saves ~200ms but not worth the friction |
 | All other §1.3.1 vars | Confirmed at template defaults | `layer-path`, `lazy-install`, `install-packages`, `additional-packages` all already correct from pre-flight |
 
-**Next**: §1.3.2 ELPA / version / dump — GC tuning and LSP read buffer size are the substantive decisions.
+### §1.3.2 ELPA / version / dump — CONFIRMED + 2 changes (2026-05-07)
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-elpa-https` | `t` — confirmed | Keep; forced on `develop` for security |
+| `dotspacemacs-elpa-timeout` | `5` — confirmed | Adequate on reliable connections |
+| `dotspacemacs-gc-cons` | `'(200000000 0.1)` — **changed** (was 100 MB) | 2× default; heavy LSP + ML use makes GC pauses noticeable at 100 MB; ADR-016 |
+| `dotspacemacs-read-process-output-max` | `(* 4 1024 1024)` — **changed** (was 1 MB) | 4× default; LSP throughput on large Python/TypeScript/Rust projects; ADR-016 |
+| `dotspacemacs-use-spacelpa` | `nil` — confirmed | Experimental; vault pins SHA via machine.pins.md |
+| `dotspacemacs-verify-spacelpa-archives` | `t` — confirmed | Moot with Spacelpa off but correct default |
+| `dotspacemacs-check-for-update` | `nil` — confirmed | Vault-pinned SHA governs updates; not background polling |
+| `dotspacemacs-elpa-subdirectory` | `'emacs-version` — confirmed | Per-version isolation prevents stale byte-compiled packages |
+
+Both changes landed in `what/standard/dotfile.spacemacs.tmpl` (standard template, ADR-016). No operator-private overrides needed.
 
 ## Promotion log (local → standard)
 
