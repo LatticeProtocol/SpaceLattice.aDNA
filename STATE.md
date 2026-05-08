@@ -2,9 +2,9 @@
 type: state
 status: active
 created: 2026-05-03
-updated: 2026-05-06
+updated: 2026-05-07
 last_edited_by: agent_stanley
-last_session: session_stanley_20260506T_p3_02_dotspacemacs_variables
+last_session: session_stanley_20260507T071737Z_p3_02_1_3_2
 tags: [state, governance, spacelattice, daedalus, v0_2_0, campaign_v1_0, p3_active]
 ---
 
@@ -22,7 +22,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 **P3-01 COMPLETE (2026-05-06):** Vault-resident deployment model — ADR-015 accepted. `$SPACEMACSDIR` → vault root; `skill_install` writes one export line to shell rc; render target is `<vault>/init.el` (gitignored). All `{{PLACEHOLDER}}` substitutions eliminated except `{{LOCAL_LAYER_LIST}}`; `dotspacemacs-directory`-relative paths throughout. `dotspacemacs/user-config` now carries `§P3-01`–`§P3-11` section scaffold. `.spacemacs.env.example` added for env var documentation.
 
-**P3-02 in progress.** §1.3.1 (layer/package management) confirmed — all 9 variables correct at current template values, no changes. Decisions recorded in `stanley.md`. **Next sub-group: §1.3.2** ELPA/version/dump — GC tuning + LSP read buffer size are the two substantive decisions pending. Mission continues next session.
+**P3-02 in progress.** §1.3.1–§1.3.6 confirmed (2026-05-07): layer/pkg management, ELPA/version/dump, editing style/leaders, startup buffer/banner/lists, themes/modeline/fonts/cursor, layout system. Two non-default changes accepted: gc-cons 200 MB + LSP buffer 4 MB (ADR-016). All decisions recorded in `stanley.md`. **Next sub-group: §1.3.7** files/autosave/rollback. Sub-groups §1.3.7–§1.3.10 remain; P3-02 AAR after §1.3.10.
 
 ## What's Working
 
@@ -83,6 +83,10 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-07 | **ADR-016 accepted** — GC threshold 200 MB (`dotspacemacs-gc-cons '(200000000 0.1)`), LSP read buffer 4 MB (`dotspacemacs-read-process-output-max (* 4 1024 1024)`): both as shared template defaults for heavy LSP/ML use; `dotfile.spacemacs.tmpl` updated | P3-02 §1.3.2 session |
+| 2026-05-07 | **§1.3.1–§1.3.6 confirmed** — 6 of 10 P3-02 sub-groups complete; all variables at template defaults except gc-cons + LSP buffer (ADR-016); operator decisions recorded in `who/operators/stanley.md` | P3-02 session |
+| 2026-05-07 | **Layout intelligence system seeded** — `how/backlog/idea_agentic_layout_system.md` (3-layer design: 8 named layouts + context guide + campaign protocol integration); `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_p4_layout_intelligence.md` (P4 mission stub, 2 sessions estimated) | P3-02 session |
+| 2026-05-07 | **skill_publish_lattice upstream fix tracked** — `how/backlog/idea_skill_publish_lattice_git_fix.md` filed; fix is template-level (aDNA campaign M05 in aDNA.aDNA vault); SpaceLattice.aDNA will consume fix when aDNA v7.0 ships | P3-02 session |
 | 2026-05-06 | **ADR-015 accepted** — Vault-resident deployment model: `$SPACEMACSDIR` → vault root; `<vault>/init.el` as render target (gitignored); `dotspacemacs-directory`-relative paths eliminate all machine-specific substitutions except `{{LOCAL_LAYER_LIST}}`; `user-config` section scaffold §P3-01–§P3-11; user-env policy (`spacemacs/load-spacemacs-env` retained); landing-zone rule (Knob C) | P3-01 session |
 | 2026-05-06 | **ADR-014 accepted** — Closed-loop validation: `skill_inspect_live` (emacsclient + screencapture); `skill_health_check` D+ live assertions (exits 70-79); `skill_deploy` Step 9 (reload-type guide + live inspection gate); dotfile reload-type annotation | P3-00 session |
 | 2026-05-06 | **ADR-013 accepted** — Keybinding refactor: Transient hierarchy for SPC a (aDNA root), SPC o l (LP), SPC c c (Claude Code); LP stubs + Claude Code variants (plan/loop/review) in funcs.el | P3 pre-flight session |
@@ -116,6 +120,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Upgrade | Source |
 |------|---------|--------|
+| 2026-05-07 | **P3-02 §1.3.2–§1.3.6** — `dotfile.spacemacs.tmpl`: gc-cons 200 MB + LSP buffer 4 MB (ADR-016); `who/operators/stanley.md`: §1.3.2–§1.3.6 decision tables appended; `how/backlog/idea_agentic_layout_system.md` + `idea_skill_publish_lattice_git_fix.md` created; `missions/mission_sl_p4_layout_intelligence.md` seeded; ADR-016 committed | sessions `20260507T071737Z` + wind-down |
 | 2026-05-03 | Phase 1 — Forked from `.adna/` template; identity customized (Daedalus); workspace integration | Phase 1 |
 | 2026-05-03 | Phase 2 — Triad scaffold (305 files, 40,420 insertions); first commit `50c7084` | Phase 2 |
 | 2026-05-03 | Phase 3 — `skill_install` + `skill_deploy` + `skill_health_check` + `skill_layer_add` + 3 runbooks | Phase 3 commit `3c38e14` |
