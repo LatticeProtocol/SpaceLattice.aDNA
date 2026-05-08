@@ -315,6 +315,48 @@ Change landed in `what/standard/dotfile.spacemacs.tmpl` (ADR-020).
 | `dotspacemacs-show-transient-state-title` | `t` (default confirmed) | Standard |
 | `dotspacemacs-show-transient-state-color-guide` | `t` (default confirmed) | Standard |
 
+## Mission p3_05_editing_completion_packages (completed 2026-05-08)
+
+### §2.1 Editing style
+
+| Decision | Value | Rationale |
+|----------|-------|-----------|
+| `dotspacemacs-editing-style` | `'vim` — confirmed | Pure Evil modal editing is the battle-station baseline. Normal/Insert/Visual state model. No tunable variants needed at this time. |
+| Tunable `:variables` | None | `evil-want-Y-yank-to-eol`, `evil-escape-key-sequence` — revisit in P3-06 (§2.6 Evil knobs). |
+| Leader keys | All defaults confirmed | `SPC` / `M-m` / `,` — already recorded in P3-02 §1.3.3. |
+| `dotspacemacs-distinguish-gui-tab` | `nil` — confirmed | No conflicting TAB/C-i bindings; already recorded in P3-02. |
+
+**Decision**: editing style is `'vim` with no `:variables` overrides. All leader keys stay at Spacemacs defaults. Evil-escape sequence (`fd` default) and other Evil toggles deferred to P3-06 §2.6.
+
+### §2.2 Completion stack
+
+| Decision | Value | Rationale |
+|----------|-------|-----------|
+| Completion framework | `helm` — confirmed | Mature, deepest Spacemacs integration, largest action set. Already present in `dotspacemacs-configuration-layers`. |
+| ivy | Not included | Redundant with helm; some Spacemacs features are helm-only anyway. |
+| compleseus | Not included | Modern but still some rough edges in Spacemacs layer; reconsider post-v1.0 if compleseus layer matures. |
+| "Last layer wins" rule | Noted | If multiple completion layers listed, last one wins. Template has only `helm` — no conflict possible. |
+
+**Decision**: `helm` is the sole completion framework. No other completion layers in `dotspacemacs-configuration-layers`. Template already reflects this; no change needed.
+
+### §2.3 Package management
+
+| Knob | Decision | Location | Rationale |
+|------|----------|----------|-----------|
+| `dotspacemacs-install-packages` | `'used-only` — confirmed | `dotspacemacs/layers` | Install only packages used by active layers; delete orphans on startup. Keeps ELPA dir clean. Already confirmed in P3-02 §1.3.1. |
+| `dotspacemacs-frozen-packages` | `'()` — confirmed | `dotspacemacs/layers` | No proactive freezing; freeze reactively after a bad MELPA update. Already confirmed in P3-02 §1.3.1. |
+| `dotspacemacs-additional-packages` | `'()` — confirmed | `dotspacemacs/layers` | No packages outside layers at this time. |
+| `configuration-layer-elpa-archives` | Default (MELPA + org + gnu) — confirmed | `dotspacemacs/user-init` | No custom mirrors needed. L2 HPC offline mirror deferred to future hardening mission if needed. |
+| `package-archive-priorities` | Default (not set) — confirmed | `dotspacemacs/user-init` | MELPA naturally wins; no priority overrides required. |
+| Per-package archive pinning | None at this time | `dotspacemacs-additional-packages :pin` | Use if a specific package needs MELPA-stable pin after a bad release. |
+| Quelpa recipes | None at this time | `dotspacemacs-additional-packages :location (recipe ...)` | Available for packages not on MELPA; no current need. |
+| Rollback | Available — noted for reference | `SPC f e r` / `configuration-layer/rollback` | Path: `~/.emacs.d/.cache/.rollback/<emacs-version>/develop/<timestamp>/`. Use after a bad MELPA update that `frozen-packages` didn't guard. |
+| `dotspacemacs-use-spacelpa` | `nil` — confirmed | `dotspacemacs/init` | Experimental lock-file mechanism; vault SHA pinning via `machine.pins.md` is the governance-level equivalent. |
+
+**Lifecycle placement rule (from Knob C, P3-01)**: `configuration-layer-elpa-archives` and `package-archive-priorities` land in `user-init` (lifecycle position 4); `dotspacemacs-frozen-packages` and `dotspacemacs-install-packages` land in `dotspacemacs/layers` (position 1). No changes to template needed — both already in correct positions.
+
+**Finding**: All three primary P3-05 decisions (editing-style, completion-engine, install-packages) are Spacemacs defaults. No ADR issued — no drift from standard.
+
 ## Promotion log (local → standard)
 
 | Date | Promoted | ADR | Notes |

@@ -4,7 +4,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_session: session_sl_p3_04_2026_05_08
+last_session: session_sl_p3_05_2026_05_08
 tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_active, research_integration]
 ---
 
@@ -27,6 +27,8 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 **P3-03 COMPLETE (2026-05-08).** Layer anatomy + configuration-layer/ API surface walk. Pre-audit surfaced 5 findings: `layers.el` added (`declare-layer-dependencies spacemacs-bootstrap`); `json` grammar fixed to `(json :location built-in)`; README.org updated from Phase-2 placeholder to live implementation table (16 keybindings, 5-file status; author line fixed for ADR-017 rename); `adna-claude-code-command` exposed as `:variables` in dotfile template; distribution name `'spacemacs-latticeprotocol` confirmed for P4-02. All 8 decision blocks (A–H) + §1.5 API familiarity recorded in `who/operators/stanley.md`.
 
 **P3-04 COMPLETE (2026-05-08).** Themes + modeline + banner + startup walk. Theming layer added to standard (ADR-021); frame-title-format changed to buffer + project format (ADR-022); doom-modeline-icon enabled in `what/local/operator.private.el` (first use of operator.private.el). P4-05 (banner assets) → stub/skip: operator confirmed `'official` Spacemacs image is permanent. P4-03 pre-figuring: doom-one + modus-vivendi candidates recorded. All §1.6–§1.9 decisions in `who/operators/stanley.md`.
+
+**P3-05 COMPLETE (2026-05-08).** Editing styles + completion stack + package management walk. All three primary decisions (editing-style `'vim`, completion `helm`, install-packages `'used-only`) confirmed at Spacemacs defaults — zero drift from standard, no ADR issued. §2.1 editing style: pure Evil, no `:variables` overrides; Evil knobs deferred to P3-06 §2.6. §2.2 completion: `helm` sole framework, no ivy/compleseus. §2.3 package management: default ELPA archives, no frozen packages, no quelpa recipes, no additional packages outside layers. All decisions in `who/operators/stanley.md` P3-05 block. AAR confirms pre-session question protocol is the efficient pattern for operator-in-the-loop missions.
 
 **Campaign research integration (2026-05-07):** 3 research sources integrated — macOS platform (xenodium.com), performance config batch (emacsredux.com, ADR-018), claude-code-ide.el MCP bridge (ADR-019). 5 new missions added (p3_12 macOS platform, p3_13 perf hardening, p3_14 org-mode deep config, p4_09 claude-code-ide layer, p4_10 agent command tree). Campaign count: 31 → 36. Vault rename ADR-017 verified complete. Key artifacts seeded: `what/context/platform_macos.md`, `how/standard/runbooks/macos_setup.md`, `what/standard/layers/claude-code-ide/` (skeleton), `what/context/agent_command_tree.md`, `what/context/org_mode_config.md` (stub).
 
@@ -79,9 +81,9 @@ None blocking. Audit findings status:
 - ✅ Both skills active: `skill_telemetry_submit` + `skill_telemetry_aggregate`
 - ✅ ADR-009 (schema) + ADR-010 (submit) + ADR-011 (aggregate) all accepted
 
-**P3 active.** Customization walk-through — 13 missions (P3-00 ✅, P3-01 ✅, P3-02 ✅, P3-03 ✅, P3-04 ✅, P3-05 next, P3-06 through P3-14 queued), 10-16 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`. P4-05 (banner assets) reclassified to stub/skip — no custom banner work needed.
+**P3 active.** Customization walk-through — 15 missions (P3-00 ✅, P3-01 ✅, P3-02 ✅, P3-03 ✅, P3-04 ✅, P3-05 ✅, P3-06 next, P3-07 through P3-14 queued), 9-15 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`. P4-05 (banner assets) reclassified to stub/skip — no custom banner work needed.
 
-**Immediate next**: P3-05 editing/completion/packages. Then P3-06 performance/evil/fonts → P3-07 through P3-11 → P3-12 (macOS platform review), P3-13 (perf hardening operator gate), P3-14 (org-mode deep config).
+**Immediate next**: P3-06 performance/evil/fonts (§2.5 gc-cons/lazy-install/quickstart, §2.6 evil-escape/undo-system/folding, §2.7 font fallback chains/icon font). Then P3-07 through P3-11 → P3-12 (macOS platform review), P3-13 (perf hardening operator gate), P3-14 (org-mode deep config).
 
 **P4 queue additions**: P4-09 (complete claude-code-ide layer — `skill_install`/`skill_deploy` wiring + live acceptance test), P4-10 (agent command tree — `SPC a x` transient + `skill_adna_index` update).
 
@@ -93,6 +95,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-08 | **P3-05 complete** — Editing styles + completion stack + package management: `'vim` editing style (pure Evil, no `:variables`); `helm` sole completion framework; `'used-only` install policy; default ELPA archives; empty frozen-packages + additional-packages; no quelpa recipes. Zero drift from standard — no ADR issued. §2.1/§2.2/§2.3 decisions in operator profile | P3-05 session |
 | 2026-05-08 | **P3-04 complete** — Themes + modeline + banner + startup: `theming` layer added (ADR-021); frame-title-format → buffer + project (ADR-022); doom-modeline-icon `t` in `operator.private.el` (first use); P4-05 → stub/skip (official banner permanent); P4-03 pre-figuring: doom-one + modus-vivendi; §1.6–§1.9 decisions in operator profile | P3-04 session |
 | 2026-05-08 | **P3-03 complete** — Layer anatomy + API walk: `layers.el` added (declare-layer-dependencies spacemacs-bootstrap), `json` → `(json :location built-in)`, README.org live-implementation table, `adna-claude-code-command` as `:variables`, distribution name `'spacemacs-latticeprotocol` confirmed; 8 decision blocks + §1.5 familiarity in operator profile | P3-03 session |
 | 2026-05-07 | **ADR-017 accepted** — Rename vault + GitHub repo: SpaceLattice.aDNA → Spacemacs.aDNA; modeline format `spacelattice-main` → `adna-main`; campaign historical ID preserved | rename session |
@@ -136,6 +139,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Upgrade | Source |
 |------|---------|--------|
+| 2026-05-08 | **P3-05 editing + completion + packages** — §2.1 `'vim` (no `:variables`); §2.2 `helm` sole completion; §2.3 `'used-only` + default ELPA archives + empty frozen/additional-packages; operator profile P3-05 decision block; no ADR needed (all defaults) | session_sl_p3_05_2026_05_08 |
 | 2026-05-08 | **P3-04 themes + modeline + banner + startup** — `theming` layer in `dotspacemacs-configuration-layers` (ADR-021); `dotspacemacs-frame-title-format` → buffer + project (ADR-022); `what/local/operator.private.el` created (doom-modeline-icon t); operator profile P3-04 decision blocks; P4-05 scope cleared | session_sl_p3_04_2026_05_08 |
 | 2026-05-08 | **P3-03 layer anatomy walk** — `layers.el` added; packages.el `json` grammar fixed; README.org updated (Phase-2 placeholder → live table); dotfile template exposes `adna-claude-code-command` as `:variables`; operator profile blocks A–H + §1.5 | session_sl_p3_03_2026_05_08 |
 | 2026-05-07 | **Campaign review + research integration** — rename verified (ADR-017); macOS platform context + runbook seeded; perf hardening batch in dotfile §P3-13 (ADR-018); claude-code-ide layer skeleton at `what/standard/layers/claude-code-ide/` (ADR-019); agent command tree context authored; org-mode config stub seeded; 5 new campaign mission files (p3_12/13/14, p4_09/10); campaign count 31 → 36 | session_stanley_20260507T_campaign_review |
