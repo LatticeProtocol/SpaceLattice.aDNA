@@ -36,7 +36,7 @@ tags: [operator, stanley, daedalus, mac, ml_ops]
 
 ## Role
 
-Single-operator owner of `SpaceLattice.aDNA`. Genesis architect (2026-05-03). Customizations carried in `what/local/operator.private.el` and `what/local/machine.pins.md` once first install runs.
+Single-operator owner of `Spacemacs.aDNA`. Genesis architect (2026-05-03). Customizations carried in `what/local/operator.private.el` and `what/local/machine.pins.md` once first install runs.
 
 ## Workflow context
 
@@ -52,8 +52,8 @@ To be populated when `skill_install` runs and `what/local/` is bootstrapped from
 ## Mission p3_01_dotfile_entry_lifecycle (closed 2026-05-06)
 
 ### Knob A — Dotfile location
-- **Decision**: `$SPACEMACSDIR` → vault root (`~/lattice/SpaceLattice.aDNA/`). `init.el` rendered at vault root by `skill_deploy` (gitignored). `dotspacemacs-directory` auto-equals vault root.
-- **Reason**: Fully self-contained vault deployment — any lattice user clones SpaceLattice.aDNA and runs `skill_install`; only `export SPACEMACSDIR=...` lands in their shell profile. All config is vault-resident; `~/.emacs.d/` holds only the Spacemacs framework + packages.
+- **Decision**: `$SPACEMACSDIR` → vault root (`~/lattice/Spacemacs.aDNA/`). `init.el` rendered at vault root by `skill_deploy` (gitignored). `dotspacemacs-directory` auto-equals vault root.
+- **Reason**: Fully self-contained vault deployment — any lattice user clones Spacemacs.aDNA and runs `skill_install`; only `export SPACEMACSDIR=...` lands in their shell profile. All config is vault-resident; `~/.emacs.d/` holds only the Spacemacs framework + packages.
 
 ### Knob B — user-env usage
 - **Decision**: Keep `(spacemacs/load-spacemacs-env)` default. Add `what/local/.spacemacs.env.example` template. Optionally augment with `exec-path-from-shell-copy-envs` for PATH portability in GUI Emacs.

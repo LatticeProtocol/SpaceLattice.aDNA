@@ -24,7 +24,7 @@ Tag v1.0.0 on both repos (vault + fork). Publish release notes. Update `lp-stabl
 
 ## Deliverables
 
-- `git tag -a v1.0.0` on `LatticeProtocol/SpaceLattice.aDNA` (vault) — `gh release create` with release notes from CHANGELOG.md
+- `git tag -a v1.0.0` on `LatticeProtocol/Spacemacs.aDNA` (vault) — `gh release create` with release notes from CHANGELOG.md
 - `git tag -a latticeprotocol-1.0.0` on `LatticeProtocol/spacelattice` (fork) — release ships with `core/news/news-1.0.0.org`
 - `lp-stable` branch on fork updated to mirror the tag
 - README + CHANGELOG.md updated with v1.0 release announcement

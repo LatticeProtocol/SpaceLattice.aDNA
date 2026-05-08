@@ -6,7 +6,7 @@ created: 2026-05-03
 updated: 2026-05-03
 last_edited_by: agent_init
 category: install
-trigger: "Operator wants to install SpaceLattice.aDNA on a fresh machine, or machine state shows ~/.emacs.d/ is empty/missing, or first deploy after fork."
+trigger: "Operator wants to install Spacemacs.aDNA on a fresh machine, or machine state shows ~/.emacs.d/ is empty/missing, or first deploy after fork."
 phase_introduced: 3
 tags: [skill, install, spacemacs, deploy, idempotent, daedalus]
 requirements:
@@ -27,11 +27,11 @@ requirements:
     - "read what/local/ if present"
 ---
 
-# skill_install — install SpaceLattice.aDNA on a fresh machine
+# skill_install — install Spacemacs.aDNA on a fresh machine
 
 ## Purpose
 
-Take a host from "no Spacemacs" to "working SpaceLattice.aDNA battle station with the `adna` layer loaded and the `SPC a` transient available." Idempotent: rerunning produces the same end state without destroying prior work.
+Take a host from "no Spacemacs" to "working Spacemacs.aDNA battle station with the `adna` layer loaded and the `SPC a` transient available." Idempotent: rerunning produces the same end state without destroying prior work.
 
 ## Pre-conditions
 
@@ -71,10 +71,10 @@ If any tool missing, abort with the OS-specific install hint from `what/standard
 ```bash
 UTC=$(date -u +%Y%m%dT%H%M%SZ)
 
-# Detect prior SpaceLattice.aDNA installation (marker in vault's init.el)
+# Detect prior Spacemacs.aDNA installation (marker in vault's init.el)
 SPACEMACS_OURS=0
 if [[ -f "$VAULT/init.el" ]]; then
-  if grep -q "SpaceLattice.aDNA standard dotfile" "$VAULT/init.el"; then
+  if grep -q "Spacemacs.aDNA standard dotfile" "$VAULT/init.el"; then
     SPACEMACS_OURS=1
   fi
 fi
@@ -112,7 +112,7 @@ fi
 cd <vault-root>
 ```
 
-(The `<vault-root>` substitution is the actual absolute path of the SpaceLattice.aDNA vault — set as `VAULT=$(pwd)` at start.)
+(The `<vault-root>` substitution is the actual absolute path of the Spacemacs.aDNA vault — set as `VAULT=$(pwd)` at start.)
 
 ### Step 3.5 — Set SPACEMACSDIR in shell profile
 
@@ -132,7 +132,7 @@ fi
 SPACEMACS_EXPORT="export SPACEMACSDIR=\"$VAULT\""
 if [[ -n "$SHELL_RC" ]]; then
   if ! grep -q "SPACEMACSDIR" "$SHELL_RC"; then
-    printf '\n# SpaceLattice.aDNA — vault-resident dotfile\n%s\n' "$SPACEMACS_EXPORT" >> "$SHELL_RC"
+    printf '\n# Spacemacs.aDNA — vault-resident dotfile\n%s\n' "$SPACEMACS_EXPORT" >> "$SHELL_RC"
     echo "SPACEMACSDIR written to $SHELL_RC" >> "$LOG"
   else
     echo "SPACEMACSDIR already in $SHELL_RC — skipping" >> "$LOG"
@@ -299,7 +299,7 @@ After successful run:
 Re-running on an already-installed machine:
 
 - Step 1 — same checks, fast
-- Step 2 — detects `SpaceLattice.aDNA` marker in `<vault>/init.el`; skips backup
+- Step 2 — detects `Spacemacs.aDNA` marker in `<vault>/init.el`; skips backup
 - Step 3.5 — detects `SPACEMACSDIR` already in shell rc; skips write
 - Step 3 — `git fetch` + `git checkout` to pinned SHA (no-op if already there)
 - Step 4 — re-renders templates (overwrites; safe)

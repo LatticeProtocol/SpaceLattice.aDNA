@@ -2,7 +2,7 @@
 type: decision
 adr_id: adr_005
 adr_number: 5
-title: "Rename to SpaceLattice.aDNA + open sibling Spacemacs fork + reposition under LatticeProtocol stack"
+title: "Rename to Spacemacs.aDNA + open sibling Spacemacs fork + reposition under LatticeProtocol stack"
 status: accepted
 proposed_by: agent_init
 target_layer: standard
@@ -10,9 +10,9 @@ target_files:
   - "(rename, all 39 tracked files referencing literal 'spacemacs.aDNA' token)"
   - what/decisions/adr/adr_005_rename_to_spacelattice.md
 ratifies:
-  - "vault rename: spacemacs.aDNA -> SpaceLattice.aDNA (filesystem + GitHub)"
+  - "vault rename: spacemacs.aDNA -> Spacemacs.aDNA (filesystem + GitHub)"
   - "sibling code repo open: LatticeProtocol/spacelattice (fork of syl20bnr/spacemacs)"
-  - "repositioning: SpaceLattice as Lattice-Protocol-aware Spacemacs distribution governed by aDNA"
+  - "repositioning: Spacemacs as Lattice-Protocol-aware Spacemacs distribution governed by aDNA"
   - "persona retained: Daedalus"
   - "version bump: v0.1.0 (genesis) -> v0.2.0 (rename + repositioning)"
 created: 2026-05-05
@@ -24,7 +24,7 @@ superseded_by:
 tags: [decision, adr, rename, repositioning, fork, lattice_protocol, daedalus, v0_2_0]
 ---
 
-# ADR 005 — Rename to SpaceLattice.aDNA + sibling Spacemacs fork + LP repositioning
+# ADR 005 — Rename to Spacemacs.aDNA + sibling Spacemacs fork + LP repositioning
 
 ## Status
 
@@ -34,7 +34,7 @@ tags: [decision, adr, rename, repositioning, fork, lattice_protocol, daedalus, v
 
 Genesis (Plan A) shipped the vault as `spacemacs.aDNA` v0.1.0, governing a Spacemacs-based agentic battle station. The operator's broader intent — formed during genesis but only now articulable — is for this vault to position as a **Lattice-Protocol-aware Spacemacs distribution governed by aDNA**, not just a generic Spacemacs config governance vault. Three inadequacies in ADR 000 surface:
 
-1. **Naming**: `spacemacs.aDNA` connotes "spacemacs governed by aDNA" but obscures the lattice-protocol relationship. The intended audience (developers doing agentic software engineering with aDNA + Lattice Protocol) reads `SpaceLattice.aDNA` as evocative of both Spacemacs and the lattice graph the aDNA architecture is built around.
+1. **Naming**: `spacemacs.aDNA` connotes "spacemacs governed by aDNA" but obscures the lattice-protocol relationship. The intended audience (developers doing agentic software engineering with aDNA + Lattice Protocol) reads `Spacemacs.aDNA` as evocative of both Spacemacs and the lattice graph the aDNA architecture is built around.
 
 2. **Sibling code repo policy**: ADR 000 §1 stated "Vault is self-contained. No sibling code repo." This was correct at genesis when no Spacemacs branding work was contemplated. The operator's Spacemacs Customization Architecture reference doc (now persisted at `what/context/spacemacs/spacemacs_customization_reference.md`) lays out concretely how a LatticeProtocol fork of Spacemacs would be branded (banner, distribution layer, theme, version constants, news mechanism, license posture). Executing on that vision requires a forked Spacemacs codebase — necessitating a sibling code repo.
 
@@ -44,15 +44,15 @@ This ADR closes all three at once.
 
 ## Decisions
 
-### 1. Vault rename: `spacemacs.aDNA` → `SpaceLattice.aDNA`
+### 1. Vault rename: `spacemacs.aDNA` → `Spacemacs.aDNA`
 
-**Filesystem**: `mv ~/lattice/spacemacs.aDNA ~/lattice/SpaceLattice.aDNA` (atomic).
+**Filesystem**: `mv ~/lattice/spacemacs.aDNA ~/lattice/Spacemacs.aDNA` (atomic).
 
-**GitHub repo**: `gh repo rename SpaceLattice.aDNA --repo LatticeProtocol/spacemacs.aDNA --yes`. GitHub auto-creates a redirect from the old name; existing operator clones remain functional.
+**GitHub repo**: `gh repo rename Spacemacs.aDNA --repo LatticeProtocol/spacemacs.aDNA --yes`. GitHub auto-creates a redirect from the old name; existing operator clones remain functional.
 
-**Internal references**: bulk `sed` replaces the literal token `spacemacs.aDNA` → `SpaceLattice.aDNA` across 39 tracked files (governance, skills, runbooks, ADRs, layer code, templates, who/operators+upstreams+peers, publish receipts). The `.spacemacs` dotfile template's `LOCAL_LAYER_DIR` placeholder is re-rendered against the new path; the `~/.emacs.d/private/layers/adna` symlink is recreated against the new vault root.
+**Internal references**: bulk `sed` replaces the literal token `spacemacs.aDNA` → `Spacemacs.aDNA` across 39 tracked files (governance, skills, runbooks, ADRs, layer code, templates, who/operators+upstreams+peers, publish receipts). The `.spacemacs` dotfile template's `LOCAL_LAYER_DIR` placeholder is re-rendered against the new path; the `~/.emacs.d/private/layers/adna` symlink is recreated against the new vault root.
 
-**Workspace integration**: `~/lattice/CLAUDE.md` row + tree entry updated to `SpaceLattice.aDNA`.
+**Workspace integration**: `~/lattice/CLAUDE.md` row + tree entry updated to `Spacemacs.aDNA`.
 
 ### 2. Sibling code repo: `LatticeProtocol/spacelattice` (fork of `syl20bnr/spacemacs`)
 
@@ -60,19 +60,19 @@ This ADR closes all three at once.
 
 The fork repo on GitHub mirrors upstream `develop` at fork time. **Local clone deferred** to the v1.0 campaign's first execution mission (M-Planning-01). Branding work (per the LP fork playbook in the customization reference) follows in dedicated missions during P4 of the v1.0 campaign.
 
-**Naming choice**: `spacelattice` (lowercase) follows the workspace convention for sibling code repos — precedent: `rareharness` (sibling of `RareHarness.aDNA`), `lattice-video-forge` (sibling of `VideoForge.aDNA`). The vault remains `SpaceLattice.aDNA` (governance, aDNA pattern).
+**Naming choice**: `spacelattice` (lowercase) follows the workspace convention for sibling code repos — precedent: `rareharness` (sibling of `RareHarness.aDNA`), `lattice-video-forge` (sibling of `VideoForge.aDNA`). The vault remains `Spacemacs.aDNA` (governance, aDNA pattern).
 
 This supersedes ADR 000 §1's "vault is self-contained, no sibling code repo" clause.
 
 ### 3. Repositioning under LatticeProtocol stack
 
-`SpaceLattice.aDNA` positions as the **agentic-IDE governance vault** in the LatticeProtocol stack:
+`Spacemacs.aDNA` positions as the **agentic-IDE governance vault** in the LatticeProtocol stack:
 
 | Layer | Repo | Role |
 |-------|------|------|
 | Runtime | `LatticeProtocol/lattice-protocol` (private) | Federated AI computing — the Python-based executable core (L1/L2/L3 tiers, marketplace, ledger, CLI) |
 | Knowledge architecture standard | `LatticeProtocol/Agentic-DNA` (public, alias `LatticeProtocol/adna`) | The aDNA template — `who/`/`what/`/`how/` triad, skills, context library |
-| **Agentic IDE** | **`LatticeProtocol/SpaceLattice.aDNA`** (public, this vault) | **Spacemacs distribution governed by aDNA — the developer surface for working with the LatticeProtocol stack** |
+| **Agentic IDE** | **`LatticeProtocol/Spacemacs.aDNA`** (public, this vault) | **Spacemacs distribution governed by aDNA — the developer surface for working with the LatticeProtocol stack** |
 | Spacemacs runtime fork | `LatticeProtocol/spacelattice` (public, opened this turn) | A fork of `syl20bnr/spacemacs` that the vault governs; branding + distribution layer + theme follow in v1.0 campaign |
 
 The full LP positioning is documented in `what/standard/lp-positioning.md`.
@@ -85,11 +85,11 @@ The labyrinth metaphor scales: the lattice graph IS a labyrinth; the wings are t
 
 Genesis was tagged `v0.1.0-genesis` (initial publish) and `v0.1.0` (post-AAR / post-ADR-003 fixes). This ADR + accompanying changes are a semver minor bump — no breaking API, but substantive scope expansion (rename, sibling repo, repositioning, campaign foundation, sustainability + telemetry frameworks).
 
-Tag at end of this turn: `v0.2.0` on `LatticeProtocol/SpaceLattice.aDNA`. Legacy tags `v0.1.0-genesis` and `v0.1.0` are preserved.
+Tag at end of this turn: `v0.2.0` on `LatticeProtocol/Spacemacs.aDNA`. Legacy tags `v0.1.0-genesis` and `v0.1.0` are preserved.
 
 ## Consequences
 
-- All operator-facing strings reflect the SpaceLattice identity.
+- All operator-facing strings reflect the Spacemacs identity.
 - The standard layer is now positioned with explicit LP-stack context — peer operators understand they're working with the developer-surface piece of LatticeProtocol.
 - Future branding work has a target (the `spacelattice` fork) ready to be cloned and customized per the LP fork playbook.
 - The v1.0 campaign (`how/campaigns/campaign_spacelattice_v1_0/`) is scaffolded; M-Planning-01 designs the rest.
@@ -107,9 +107,9 @@ Tag at end of this turn: `v0.2.0` on `LatticeProtocol/SpaceLattice.aDNA`. Legacy
 
 4. **Skip the fork repo open in this turn**. Rejected: deferring repo creation makes the v1.0 campaign's downstream missions harder to scope (they'd need to open the fork before they could plan against it). GitHub-side fork is fast (~10 sec); deferring local clone is reasonable.
 
-5. **Use `SpaceLattice.aDNA` as both vault repo and fork repo**. Rejected: collision impossible (same `LatticeProtocol/<repo>` namespace). Workspace convention is lowercase sibling code repo.
+5. **Use `Spacemacs.aDNA` as both vault repo and fork repo**. Rejected: collision impossible (same `LatticeProtocol/<repo>` namespace). Workspace convention is lowercase sibling code repo.
 
-6. **Fork target `LatticeProtocol/SpaceLattice` (no `.aDNA` suffix, no lowercase)**. Considered as alternative naming. Rejected for fork: `.aDNA` suffix in workspace convention applies to *governance vaults*, not to code repos. The aDNA pattern is in the vault; the code repo is sibling, lowercase.
+6. **Fork target `LatticeProtocol/Spacemacs` (no `.aDNA` suffix, no lowercase)**. Considered as alternative naming. Rejected for fork: `.aDNA` suffix in workspace convention applies to *governance vaults*, not to code repos. The aDNA pattern is in the vault; the code repo is sibling, lowercase.
 
 ## Reversibility
 
@@ -118,7 +118,7 @@ Tag at end of this turn: `v0.2.0` on `LatticeProtocol/SpaceLattice.aDNA`. Legacy
 | Filesystem rename | Trivial (`mv` again); GitHub redirect from old name persists indefinitely |
 | Workspace CLAUDE.md row | Trivial edit |
 | 39-file content sed | Trivial reverse-sed |
-| GitHub vault rename | `gh repo rename spacemacs.aDNA --repo LatticeProtocol/SpaceLattice.aDNA` reverts |
+| GitHub vault rename | `gh repo rename spacemacs.aDNA --repo LatticeProtocol/Spacemacs.aDNA` reverts |
 | Sibling fork repo | `gh repo delete LatticeProtocol/spacelattice` (operator-confirmed, public-repo-deletion ritual applies) |
 | Persona, version | n/a (no rollback needed; both are forward decisions) |
 
@@ -127,12 +127,12 @@ Successor ADR can amend any decision.
 ## Verification (post-execution this turn)
 
 - `git ls-files | xargs grep -l 'spacemacs\.aDNA'` returns empty
-- `gh repo view LatticeProtocol/SpaceLattice.aDNA` shows new name + PUBLIC visibility
+- `gh repo view LatticeProtocol/Spacemacs.aDNA` shows new name + PUBLIC visibility
 - `gh repo view LatticeProtocol/spacelattice` shows fork relationship to `syl20bnr/spacemacs`
-- `~/.spacemacs` `LOCAL_LAYER_DIR` points at `/Users/stanley/lattice/SpaceLattice.aDNA/what/local`
+- `~/.spacemacs` `LOCAL_LAYER_DIR` points at `/Users/stanley/lattice/Spacemacs.aDNA/what/local`
 - `~/.emacs.d/private/layers/adna` symlink target is the renamed vault path
 - `emacs --batch -l ~/.emacs.d/init.el --eval '(adna/health-check)'` returns OK
-- `cd .publish-clone && git remote -v` shows `LatticeProtocol/SpaceLattice.aDNA.git`
+- `cd .publish-clone && git remote -v` shows `LatticeProtocol/Spacemacs.aDNA.git`
 - Workspace `~/lattice/CLAUDE.md` row + tree entry updated
 
 ## References

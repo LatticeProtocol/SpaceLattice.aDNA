@@ -20,7 +20,7 @@ blocked_by: [mission_sl_p3_08_languages_keys_perf]
 
 ## Objective
 
-Systematically audit every layer in the expansion list — one by one — for: inclusion/exclusion decision, configuration variables, external dependency requirements, context representation in the vault, and integration into the SpaceLattice operational pattern. Each layer that passes audit gets added to the dotfile (standard or local) via `skill_layer_add` (ADR-gated). Each rejected layer gets a documented rationale.
+Systematically audit every layer in the expansion list — one by one — for: inclusion/exclusion decision, configuration variables, external dependency requirements, context representation in the vault, and integration into the Spacemacs operational pattern. Each layer that passes audit gets added to the dotfile (standard or local) via `skill_layer_add` (ADR-gated). Each rejected layer gets a documented rationale.
 
 ## Background
 

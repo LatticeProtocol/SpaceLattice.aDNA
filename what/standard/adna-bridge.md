@@ -111,7 +111,7 @@ Walks the triad of the current vault, parses every `*.md` and `*.org` and `*.yam
 ```json
 {
   "version": "1.0",
-  "vault": "SpaceLattice.aDNA",
+  "vault": "Spacemacs.aDNA",
   "generated": "2026-05-03T18:55:23Z",
   "nodes": [
     { "id": "what/decisions/adr/adr_000_vault_identity.md",

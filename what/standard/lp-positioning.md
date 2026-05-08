@@ -5,10 +5,10 @@ created: 2026-05-05
 updated: 2026-05-05
 last_edited_by: agent_init
 ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
-tags: [positioning, lattice_protocol, adna, spacelattice, daedalus]
+tags: [positioning, lattice_protocol, adna, spacemacs, daedalus]
 ---
 
-# LatticeProtocol Stack — Where SpaceLattice.aDNA Sits
+# LatticeProtocol Stack — Where Spacemacs.aDNA Sits
 
 ## The stack
 
@@ -27,7 +27,7 @@ tags: [positioning, lattice_protocol, adna, spacelattice, daedalus]
 │  └────────────────────────┘  └────────────────────────────────┘│
 │            ↓ forked via skill_project_fork           ↑          │
 │  ┌────────────────────────────────────────────────────────────┐│
-│  │      SpaceLattice.aDNA  ← this vault                       ││
+│  │      Spacemacs.aDNA  ← this vault                       ││
 │  │                                                            ││
 │  │  Agentic IDE governance vault                              ││
 │  │  - Spacemacs distribution governed by aDNA                 ││
@@ -51,24 +51,24 @@ tags: [positioning, lattice_protocol, adna, spacelattice, daedalus]
 |------|------|------|---------|
 | [`LatticeProtocol/lattice-protocol`](https://github.com/LatticeProtocol/lattice-protocol) | Code (Python, **PRIVATE**) | Federated AI computing — protocol layer, federation, marketplace, ledger, CLI. v0.1.0-alpha. The *executable core* that aDNA vaults orchestrate against. | MIT |
 | [`LatticeProtocol/Agentic-DNA`](https://github.com/LatticeProtocol/Agentic-DNA) (= alias `LatticeProtocol/adna`) | Template (PUBLIC) | The aDNA standard template — `who/`/`what/`/`how/` triad, skill recipes, context library. Cloned at `~/lattice/adna/`; symlinked at `~/lattice/.adna/`. **Do not modify** — updated via `git pull` upstream. | MIT |
-| [`LatticeProtocol/SpaceLattice.aDNA`](https://github.com/LatticeProtocol/SpaceLattice.aDNA) (this vault) | Governance vault (PUBLIC) | The agentic IDE governance layer — Spacemacs distribution + aDNA layered architecture + self-improvement + sustainability + telemetry. **The developer surface for working with the LatticeProtocol stack.** | GPL-3.0 (matches Spacemacs upstream) |
-| [`LatticeProtocol/spacelattice`](https://github.com/LatticeProtocol/spacelattice) | Code (sibling fork, PUBLIC) | Fork of `syl20bnr/spacemacs`. The Spacemacs runtime SpaceLattice.aDNA governs. Branding work follows v1.0 campaign Phase 4. | GPL-3.0 |
+| [`LatticeProtocol/Spacemacs.aDNA`](https://github.com/LatticeProtocol/Spacemacs.aDNA) (this vault) | Governance vault (PUBLIC) | The agentic IDE governance layer — Spacemacs distribution + aDNA layered architecture + self-improvement + sustainability + telemetry. **The developer surface for working with the LatticeProtocol stack.** | GPL-3.0 (matches Spacemacs upstream) |
+| [`LatticeProtocol/spacelattice`](https://github.com/LatticeProtocol/spacelattice) | Code (sibling fork, PUBLIC) | Fork of `syl20bnr/spacemacs`. The Spacemacs runtime Spacemacs.aDNA governs. Branding work follows v1.0 campaign Phase 4. | GPL-3.0 |
 
 ## How they relate
 
-### `lattice-protocol` ← consumed by → `SpaceLattice.aDNA`
+### `lattice-protocol` ← consumed by → `Spacemacs.aDNA`
 
-The lattice-protocol library is what operators using SpaceLattice for ML ops actually invoke. Examples (forward-looking):
+The lattice-protocol library is what operators using Spacemacs for ML ops actually invoke. Examples (forward-looking):
 
-- An ML researcher in SpaceLattice opens a `.lattice.yaml` definition; SpaceLattice's adna layer parses frontmatter; from there, `M-x lp/run-lattice` (future binding) shells to `latlab lattice run` from the lattice-protocol CLI
-- A federated training job submitted from L1 (the SpaceLattice machine) to L2 (Dell HPC); SpaceLattice surfaces job state via `M-x lp/job-status`
-- The marketplace registry (`latlab lattice publish`) is invokable from SpaceLattice via leader bindings
+- An ML researcher in Spacemacs opens a `.lattice.yaml` definition; Spacemacs's adna layer parses frontmatter; from there, `M-x lp/run-lattice` (future binding) shells to `latlab lattice run` from the lattice-protocol CLI
+- A federated training job submitted from L1 (the Spacemacs machine) to L2 (Dell HPC); Spacemacs surfaces job state via `M-x lp/job-status`
+- The marketplace registry (`latlab lattice publish`) is invokable from Spacemacs via leader bindings
 
-The *integration* of lattice-protocol functionality into SpaceLattice is part of the v1.0 campaign (estimated Phase 3 customization-walk-throughs + Phase 4 fork branding).
+The *integration* of lattice-protocol functionality into Spacemacs is part of the v1.0 campaign (estimated Phase 3 customization-walk-throughs + Phase 4 fork branding).
 
-### `Agentic-DNA` (template) ← forked by → `SpaceLattice.aDNA`
+### `Agentic-DNA` (template) ← forked by → `Spacemacs.aDNA`
 
-SpaceLattice.aDNA was cut from Agentic-DNA via `skill_project_fork` (genesis 2026-05-03). It inherits:
+Spacemacs.aDNA was cut from Agentic-DNA via `skill_project_fork` (genesis 2026-05-03). It inherits:
 
 - The triad (`who/`/`what/`/`how/`)
 - Workspace-level skills (`how/skills/skill_*.md`)
@@ -83,22 +83,22 @@ It adds (per ADR 000):
 - The adna Spacemacs layer (`what/standard/layers/adna/`)
 - Sibling fork repo (`LatticeProtocol/spacelattice`, opened 2026-05-05 per ADR 005)
 
-### `spacelattice` (fork) ← governed by → `SpaceLattice.aDNA` vault
+### `spacelattice` (fork) ← governed by → `Spacemacs.aDNA` vault
 
 Sibling-coupling pattern matching `RareHarness.aDNA ↔ rareharness/` and `VideoForge.aDNA ↔ lattice-video-forge/`. Vault carries: design, ADRs, skills, runbooks, knowledge. Code repo carries: actual Spacemacs distribution code.
 
 Coordinated PRs / ADRs keep them in sync. Standing rule: every change to `what/standard/` in vault is ADR-gated; every change to `LatticeProtocol/spacelattice` is PR-gated upstream of the rebase cadence.
 
-## Where SpaceLattice fits in the existing workspace ecosystem
+## Where Spacemacs fits in the existing workspace ecosystem
 
 In `~/lattice/`:
 
-| Pattern | Examples | SpaceLattice's place |
+| Pattern | Examples | Spacemacs's place |
 |---------|----------|------------------------|
-| Forge.aDNA | SiteForge, ComfyForge, CanvasForge, VideoForge | Different — SpaceLattice is not an artifact-producing forge |
-| Platform.aDNA | RareHarness | Different — SpaceLattice doesn't deploy to partners |
-| Org-Vault.aDNA | lattice-labs, wga, context_commons, RareArchive, WilhelmAI | Different — SpaceLattice is not the operational home of an org |
-| **Project (informal)** | (was) spacemacs.aDNA | SpaceLattice now sits here. Could promote to formal **Tooling.aDNA** or **AgenticIDE.aDNA** pattern category if/when N=2 tooling vaults emerge |
+| Forge.aDNA | SiteForge, ComfyForge, CanvasForge, VideoForge | Different — Spacemacs is not an artifact-producing forge |
+| Platform.aDNA | RareHarness | Different — Spacemacs doesn't deploy to partners |
+| Org-Vault.aDNA | lattice-labs, wga, context_commons, RareArchive, WilhelmAI | Different — Spacemacs is not the operational home of an org |
+| **Project (informal)** | (was) spacemacs.aDNA | Spacemacs now sits here. Could promote to formal **Tooling.aDNA** or **AgenticIDE.aDNA** pattern category if/when N=2 tooling vaults emerge |
 
 ## Operator audience
 
@@ -112,7 +112,7 @@ Developers doing **agentic software engineering** with the LatticeProtocol stack
 
 ## The Daedalus persona, revisited
 
-ADR 000 picked Daedalus for the labyrinth + adaptive-wings metaphors. Both scale cleanly to the SpaceLattice rename:
+ADR 000 picked Daedalus for the labyrinth + adaptive-wings metaphors. Both scale cleanly to the Spacemacs rename:
 
 - **The Labyrinth** is now the **lattice graph**: aDNA context graphs + lattice-protocol federation graphs + cross-vault wikilink graphs
 - **The wings** are now the **agentic IDE uplift**: `SPC a` transient + `SPC c c` Claude Code spawn + `M-x adna-index-project` + Obsidian round-trip + (future) lattice-protocol command bindings
@@ -120,7 +120,7 @@ ADR 000 picked Daedalus for the labyrinth + adaptive-wings metaphors. Both scale
 
 Persona stays. ADR 005 § Decision 4 ratifies.
 
-## What's *not* in scope for SpaceLattice.aDNA
+## What's *not* in scope for Spacemacs.aDNA
 
 - Lattice-protocol library development (lives in `lattice-protocol` repo)
 - Agentic-DNA template development (lives in `adna` repo)
@@ -128,7 +128,7 @@ Persona stays. ADR 005 § Decision 4 ratifies.
 - Platform deployment topology (RareHarness handles that pattern)
 - Org-Vault organizational governance (lattice-labs, WilhelmAI, etc.)
 
-SpaceLattice does one thing: govern the agentic IDE. The other repos do their things. Coordination is via cross-vault references + workspace CLAUDE.md routing.
+Spacemacs does one thing: govern the agentic IDE. The other repos do their things. Coordination is via cross-vault references + workspace CLAUDE.md routing.
 
 ## References
 

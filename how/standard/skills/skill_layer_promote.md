@@ -118,7 +118,7 @@ git checkout -- .  # restore working tree; diff is captured
 ### Step 5 — Dry-run
 
 ```bash
-SCRATCH=/tmp/SpaceLattice.aDNA.dryrun-$(date -u +%Y%m%dT%H%M%SZ)
+SCRATCH=/tmp/Spacemacs.aDNA.dryrun-$(date -u +%Y%m%dT%H%M%SZ)
 cp -r . "$SCRATCH"
 cd "$SCRATCH"
 git apply <vault>/what/decisions/adr/adr_NNN.diff

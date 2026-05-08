@@ -5,7 +5,7 @@ priority: medium
 created: 2026-04-04
 updated: 2026-05-06
 last_edited_by: agent_stanley
-archive_reason: Out of scope. The target (.adna/README.md) lives inside the base template. SpaceLattice Standing Rule 1 prohibits modification of .adna/. Archived rather than adapted.
+archive_reason: Out of scope. The target (.adna/README.md) lives inside the base template. Spacemacs Standing Rule 1 prohibits modification of .adna/. Archived rather than adapted.
 tags: [backlog, documentation, quality, archived]
 ---
 

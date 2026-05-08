@@ -47,7 +47,7 @@ Patch `what/standard/layers/adna/funcs.el` — replace the malformed `cl-loop` f
 | Stage | Artifact | Status |
 |-------|----------|--------|
 | Operator friction detected | ADR-003 (local) | ✅ Committed |
-| Operator submission | GitHub Issue #1 (`LatticeProtocol/SpaceLattice.aDNA`) | ✅ Submitted |
+| Operator submission | GitHub Issue #1 (`LatticeProtocol/Spacemacs.aDNA`) | ✅ Submitted |
 | Maintainer aggregation | `inbox/20260506T053941Z_aggregate.md` | ✅ Committed |
 | Pattern detection | threshold=5, count=1 — not triggered | ✅ Logged (no false positive) |
 | ADR draft | This file | ✅ Demo evidence only |

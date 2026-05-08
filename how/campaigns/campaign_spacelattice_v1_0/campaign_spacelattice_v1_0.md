@@ -1,7 +1,7 @@
 ---
 campaign_id: campaign_spacelattice_v1_0
 type: campaign
-title: "SpaceLattice v1.0 — Genesis to Production"
+title: "Spacemacs v1.0 — Genesis to Production"
 owner: stanley
 status: execution
 phase_count: 6
@@ -19,11 +19,11 @@ ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
 tags: [campaign, spacelattice, v1_0, daedalus, customization_walk, telemetry, lp_fork, sustainability]
 ---
 
-# Campaign — SpaceLattice v1.0 (Genesis to Production)
+# Campaign — Spacemacs v1.0 (Genesis to Production)
 
 ## Mission statement
 
-Take SpaceLattice.aDNA from **v0.2.0** (rename + repositioning + framework outlines) to **v1.0.0** (production-ready agentic IDE governance vault for developers doing agentic software engineering with the LatticeProtocol stack — with sibling `LatticeProtocol/spacelattice` Spacemacs fork branded and operational, sustainability + telemetry frameworks live, and a complete customization walk validated with operator-in-the-loop).
+Take Spacemacs.aDNA from **v0.2.0** (rename + repositioning + framework outlines) to **v1.0.0** (production-ready agentic IDE governance vault for developers doing agentic software engineering with the LatticeProtocol stack — with sibling `LatticeProtocol/spacelattice` Spacemacs fork branded and operational, sustainability + telemetry frameworks live, and a complete customization walk validated with operator-in-the-loop).
 
 ## Predecessors
 
@@ -145,7 +145,7 @@ Execute the LP fork playbook from `what/context/spacemacs/spacemacs_customizatio
 
 **Phase exit gate**:
 - [ ] All 8 P4 missions closed with AARs
-- [ ] Operator can `gh repo clone LatticeProtocol/spacelattice` + run `skill_install` against the fork + see SpaceLattice branding (banner, modeline, frame title, distribution name `spacelattice`)
+- [ ] Operator can `gh repo clone LatticeProtocol/spacelattice` + run `skill_install` against the fork + see Spacemacs branding (banner, modeline, frame title, distribution name `spacelattice`)
 - [ ] First weekly rebase against `upstream/develop` succeeds with documented conflict resolutions
 - [ ] CI workflow green on Emacs 28.2 + 29.x (matrix per fork-strategy)
 
@@ -163,7 +163,7 @@ Final hardening before v1.0.
 
 **Phase exit gate**:
 - [ ] All 3 P5 missions closed with AARs
-- [ ] `v1.0.0` tagged on `LatticeProtocol/SpaceLattice.aDNA` (vault) — `gh release` published
+- [ ] `v1.0.0` tagged on `LatticeProtocol/Spacemacs.aDNA` (vault) — `gh release` published
 - [ ] `latticeprotocol-1.0.0` tagged on `LatticeProtocol/spacelattice` (fork) — release notes shipped via `core/news/news-1.0.0.org`
 - [ ] Second-machine install validated (P5-02 receipt)
 - [ ] Release notes published (CHANGELOG + README + GitHub release)

@@ -22,21 +22,21 @@ requirements:
     - "write who/peers/published/"
     - "execute skill_health_check"
     - "execute sanitization scan from LAYER_CONTRACT.md"
-    - "git push to github.com/LatticeProtocol/SpaceLattice.aDNA (REQUIRES OPERATOR CONFIRMATION)"
+    - "git push to github.com/LatticeProtocol/Spacemacs.aDNA (REQUIRES OPERATOR CONFIRMATION)"
 ---
 
 # skill_publish_lattice — share standard layer with peers
 
 ## Purpose
 
-Produce a clean, sanitized tarball of `standard/` content + governance + structure, suitable for peer operators to clone, install, and arrive at the same battle station. Mirror to `github.com/LatticeProtocol/SpaceLattice.aDNA` per ADR 000.
+Produce a clean, sanitized tarball of `standard/` content + governance + structure, suitable for peer operators to clone, install, and arrive at the same battle station. Mirror to `github.com/LatticeProtocol/Spacemacs.aDNA` per ADR 000.
 
 ## Two artifact paths
 
 | Artifact | Purpose | Lifecycle |
 |----------|---------|-----------|
 | Tarball at `dist/<utc>.tar.gz` | Offline shipping; reproducible build | Gitignored; rebuilt on each publish |
-| GitHub mirror at `github.com/LatticeProtocol/SpaceLattice.aDNA` | Public commons; canonical for peer operators | Push-only (we never pull from mirror back into vault) |
+| GitHub mirror at `github.com/LatticeProtocol/Spacemacs.aDNA` | Public commons; canonical for peer operators | Push-only (we never pull from mirror back into vault) |
 
 ## What's published vs what's withheld
 
@@ -78,7 +78,7 @@ git status --porcelain | grep -v '^??' && {
 
 ```bash
 UTC=$(date -u +%Y%m%dT%H%M%SZ)
-PUBLISH=/tmp/SpaceLattice.aDNA.publish-$UTC
+PUBLISH=/tmp/Spacemacs.aDNA.publish-$UTC
 mkdir -p $PUBLISH
 
 rsync -a \
@@ -121,23 +121,23 @@ If the scan fails with WARN-level only, operator must acknowledge before proceed
 
 ```bash
 mkdir -p dist
-TARBALL=dist/SpaceLattice.aDNA-$UTC.tar.gz
-tar -czf $TARBALL -C /tmp SpaceLattice.aDNA.publish-$UTC
+TARBALL=dist/Spacemacs.aDNA-$UTC.tar.gz
+tar -czf $TARBALL -C /tmp Spacemacs.aDNA.publish-$UTC
 echo "Tarball: $TARBALL"
 ls -la $TARBALL
 ```
 
-The tarball preserves the publish tree's name (`SpaceLattice.aDNA.publish-<utc>`) when extracted. Operator runs `tar -tzf` to inspect contents.
+The tarball preserves the publish tree's name (`Spacemacs.aDNA.publish-<utc>`) when extracted. Operator runs `tar -tzf` to inspect contents.
 
 ### Step 5 — Health check the tarball
 
 Extract to a fresh dir and run `skill_health_check` against the extracted state:
 
 ```bash
-EXTRACT=/tmp/SpaceLattice.aDNA.tarball-test-$UTC
+EXTRACT=/tmp/Spacemacs.aDNA.tarball-test-$UTC
 mkdir -p $EXTRACT
 tar -xzf $TARBALL -C $EXTRACT
-cd $EXTRACT/SpaceLattice.aDNA.publish-$UTC
+cd $EXTRACT/Spacemacs.aDNA.publish-$UTC
 
 # Run the structural checks (A, B, C) — D-F may not run without emacs
 bash how/standard/skills/skill_health_check.md
@@ -155,7 +155,7 @@ cd <vault>
 **This step is hard-to-reverse.** A public push is visible to the world; even a force-push afterwards leaves traces (GitHub event log, mirrors). The skill MUST prompt the operator before executing.
 
 ```bash
-echo "About to push to github.com/LatticeProtocol/SpaceLattice.aDNA"
+echo "About to push to github.com/LatticeProtocol/Spacemacs.aDNA"
 echo "Tarball SHA-256: $(shasum -a 256 $TARBALL | cut -d' ' -f1)"
 echo "Continue? [y/N]"
 read -r CONFIRM
@@ -166,20 +166,20 @@ read -r CONFIRM
 
 ```bash
 # Create the public repo via gh (requires GH_TOKEN with repo scope, or interactive auth)
-gh repo create LatticeProtocol/SpaceLattice.aDNA --public \
+gh repo create LatticeProtocol/Spacemacs.aDNA --public \
   --description "Agentic battle station — Spacemacs governed by aDNA. Persona: Daedalus." \
-  --homepage "https://github.com/LatticeProtocol/SpaceLattice.aDNA"
+  --homepage "https://github.com/LatticeProtocol/Spacemacs.aDNA"
 
 # Initialize the publish working clone
 mkdir -p .publish-clone
 cd .publish-clone
 git init
-git remote add origin https://github.com/LatticeProtocol/SpaceLattice.aDNA.git
+git remote add origin https://github.com/LatticeProtocol/Spacemacs.aDNA.git
 rsync -a --delete \
   --exclude='.git/' \
   $PUBLISH/ ./
 git add .
-git commit -m "Initial publish: SpaceLattice.aDNA $UTC
+git commit -m "Initial publish: Spacemacs.aDNA $UTC
 
 From vault commit: $(cd .. && git rev-parse HEAD)
 Genesis: 2026-05-03
@@ -204,7 +204,7 @@ rsync -a --delete \
   $PUBLISH/ ./
 git add .
 git diff --cached --stat
-git commit -m "Publish: SpaceLattice.aDNA $UTC
+git commit -m "Publish: Spacemacs.aDNA $UTC
 
 From vault commit: $(cd .. && git rev-parse HEAD)
 "
@@ -230,7 +230,7 @@ publisher_user: \$(id -un)
 tarball: $TARBALL
 tarball_sha256: $(shasum -a 256 $TARBALL | cut -d' ' -f1)
 vault_commit: $(git rev-parse HEAD)
-github_target: github.com/LatticeProtocol/SpaceLattice.aDNA
+github_target: github.com/LatticeProtocol/Spacemacs.aDNA
 github_tag: v<N>
 sanitization_scan: clean
 health_check: green

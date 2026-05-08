@@ -27,7 +27,7 @@ Local clone of `LatticeProtocol/spacelattice` to `~/lattice/spacelattice/`. Set 
 - `git clone --depth 50 -b develop git@github.com:LatticeProtocol/spacelattice.git ~/lattice/spacelattice`
 - `git remote add upstream https://github.com/syl20bnr/spacemacs.git` + `git fetch upstream`
 - `git checkout -B lp-develop upstream/develop` + `git push -u origin lp-develop`
-- `~/lattice/CLAUDE.md` workspace table + tree updated with `spacelattice/` row (sibling code repo for SpaceLattice.aDNA)
+- `~/lattice/CLAUDE.md` workspace table + tree updated with `spacelattice/` row (sibling code repo for Spacemacs.aDNA)
 - Vault update: `what/standard/pins.md` records the fork's `lp-develop` HEAD SHA at clone time
 - ADR: `adr_012_<slug>.md` ratifying the local clone topology + branch model
 

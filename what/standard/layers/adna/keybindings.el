@@ -1,6 +1,6 @@
 ;;; keybindings.el --- adna layer keybindings  -*- lexical-binding: t -*-
 ;;
-;; Author:  SpaceLattice.aDNA / Daedalus
+;; Author:  Spacemacs.aDNA / Daedalus
 ;; License: GPL-3.0
 ;;
 ;; Transient-based leader keybindings for the adna layer. Loaded last
@@ -12,7 +12,7 @@
 ;; ── aDNA vault menu (SPC a) ────────────────────────────────────────────────
 
 (transient-define-prefix adna/menu ()
-  "⬡ SpaceLattice — aDNA Vault Navigation"
+  "⬡ Spacemacs — aDNA Vault Navigation"
   [["Navigate"
     ("m" "Manifest"      adna/open-manifest)
     ("c" "CLAUDE.md"     adna/open-claude)

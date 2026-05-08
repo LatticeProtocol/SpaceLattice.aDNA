@@ -1,6 +1,6 @@
 ;;; config.el --- adna layer config  -*- lexical-binding: t -*-
 ;;
-;; Author:  SpaceLattice.aDNA / Daedalus
+;; Author:  Spacemacs.aDNA / Daedalus
 ;; License: GPL-3.0
 ;;
 ;; Variables, customization options, minor-mode definition for the adna layer.
@@ -48,7 +48,7 @@ Set per-buffer when adna-mode activates; nil if not inside a vault.")
 ;;; ============================================================================
 
 (defgroup adna nil
-  "SpaceLattice.aDNA configuration group."
+  "Spacemacs.aDNA configuration group."
   :group 'tools
   :prefix "adna-")
 

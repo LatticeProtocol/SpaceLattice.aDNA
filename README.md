@@ -1,4 +1,4 @@
-# SpaceLattice.aDNA
+# Spacemacs.aDNA
 
 > Agentic battle station — a Spacemacs-based IDE governed by the aDNA knowledge architecture, optimized for serious ML ops, agentic coding, and aDNA context-graph navigation.
 >
@@ -31,8 +31,8 @@ After install, you get:
 When Phase 3 + 7 land, install will be:
 
 ```bash
-git clone https://github.com/LatticeProtocol/SpaceLattice.aDNA.git ~/lattice/SpaceLattice.aDNA
-cd ~/lattice/SpaceLattice.aDNA
+git clone https://github.com/LatticeProtocol/Spacemacs.aDNA.git ~/lattice/Spacemacs.aDNA
+cd ~/lattice/Spacemacs.aDNA
 # Run skill_install (Phase 3) — checks deps, backs up ~/.emacs.d/ + ~/.spacemacs,
 # clones Spacemacs at pinned SHA, renders templates, first-boots Emacs in batch,
 # runs skill_health_check, writes deploy receipt to deploy/<hostname>/<utc>.md.
@@ -43,12 +43,12 @@ Until then, the vault is being scaffolded interactively — see the plan at `~/.
 ## Layout
 
 ```
-SpaceLattice.aDNA/
+Spacemacs.aDNA/
 ├── MANIFEST.md, CLAUDE.md, STATE.md, AGENTS.md, README.md
 ├── who/
 │   ├── operators/     who runs this battle station
 │   ├── upstreams/     Spacemacs maintainers + layer authors
-│   └── peers/         other SpaceLattice.aDNA forks
+│   └── peers/         other Spacemacs.aDNA forks
 ├── what/
 │   ├── standard/      shared commons (pins, layers, dotfile, adna layer source, specs)
 │   ├── local/         your machine (gitignored except .example templates + README)

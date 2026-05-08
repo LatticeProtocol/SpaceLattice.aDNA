@@ -20,7 +20,7 @@ blocked_by: [mission_sl_p4_07_ci_workflows]
 
 ## Objective
 
-Execute the first weekly rebase against `upstream/develop` — validates the rebase strategy + conflict-resolution heuristics from P2-01. Document conflicts encountered and resolutions applied. Update vault `skill_install.md` to clone `LatticeProtocol/spacelattice` instead of `syl20bnr/spacemacs`. **P4 phase-gate evidence**: operator can clone fork + run `skill_install` + see SpaceLattice branding (banner, modeline, frame title, distribution name).
+Execute the first weekly rebase against `upstream/develop` — validates the rebase strategy + conflict-resolution heuristics from P2-01. Document conflicts encountered and resolutions applied. Update vault `skill_install.md` to clone `LatticeProtocol/spacelattice` instead of `syl20bnr/spacemacs`. **P4 phase-gate evidence**: operator can clone fork + run `skill_install` + see Spacemacs branding (banner, modeline, frame title, distribution name).
 
 ## Deliverables
 
@@ -28,7 +28,7 @@ Execute the first weekly rebase against `upstream/develop` — validates the reb
 - Vault-side rebase receipt: `how/standard/runbooks/rebase_log_<utc>.md` documenting outcome + insights
 - `how/standard/skills/skill_install.md` updated: clone target → `LatticeProtocol/spacelattice`; `what/standard/pins.md` updated to fork's `lp-develop` SHA
 - ADR: `adr_019_<slug>.md` ratifying the install-source switch
-- **P4 phase-gate validation**: clean install on host shows SpaceLattice branding + first rebase succeeds with documented conflict resolutions
+- **P4 phase-gate validation**: clean install on host shows Spacemacs branding + first rebase succeeds with documented conflict resolutions
 - AAR (mission close + P4 phase close coverage)
 
 ## Estimated effort

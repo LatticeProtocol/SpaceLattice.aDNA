@@ -28,7 +28,7 @@ meaning the template relied on Spacemacs upstream defaults:
 - `dotspacemacs-read-process-output-max`: `(* 1024 1024)` — 1 MB LSP chunk size
 
 The standard template already includes the `lsp` layer targeting Python, TypeScript, Rust,
-Go, and JavaScript — all of which benefit from a larger LSP read buffer. The SpaceLattice
+Go, and JavaScript — all of which benefit from a larger LSP read buffer. The Spacemacs
 operator profile (ML ops, biomedical pipelines, agentic coding across multiple vaults) makes
 heavy LSP use the expected baseline, not an edge case.
 
@@ -57,7 +57,7 @@ Python/TypeScript/Rust projects, 4 MB is the widely-recommended sweet spot. The 
 `(* 4 1024 1024)` is kept for readability.
 
 Both values are standard-template changes (not operator-private) because the LSP layer is
-already in the standard template and these values benefit all SpaceLattice operators, not just
+already in the standard template and these values benefit all Spacemacs operators, not just
 Stanley.
 
 ## Consequences

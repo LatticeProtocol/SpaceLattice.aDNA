@@ -32,7 +32,7 @@ The canonical list lives in `what/standard/layers.md`. Phase 2 baseline:
 - `helm` — Selection framework (alternative: `ivy`)
 - `auto-completion` — Company-mode
 
-The `adna` layer (in `what/standard/layers/adna/`) is SpaceLattice.aDNA's own contribution — not from upstream.
+The `adna` layer (in `what/standard/layers/adna/`) is Spacemacs.aDNA's own contribution — not from upstream.
 
 ## Engagement
 

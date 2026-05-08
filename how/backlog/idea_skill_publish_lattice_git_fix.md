@@ -17,7 +17,7 @@ promoted_to_mission: mission_adna_infra_planning_01
 
 ## Origin
 
-Surfaced during P3-02 §1.3.6 session wind-down (2026-05-07). The SpaceLattice vault has no
+Surfaced during P3-02 §1.3.6 session wind-down (2026-05-07). The Spacemacs vault has no
 configured git remote because `skill_publish_lattice` uses a detached `.publish-clone/` workaround
 instead of configuring the vault's own git repo as the origin.
 
@@ -57,7 +57,7 @@ This is a template-level fix that benefits ALL vaults using the publish skill:
 ## Impact
 
 - All vaults using `skill_publish_lattice` get maintainable git origins
-- SpaceLattice can then `git remote add origin github.com/LatticeProtocol/SpaceLattice.aDNA`
+- Spacemacs can then `git remote add origin github.com/LatticeProtocol/Spacemacs.aDNA`
   and use normal git ops for all maintenance
 - `.publish-clone/` pattern eliminated from the template
 
@@ -65,4 +65,4 @@ This is a template-level fix that benefits ALL vaults using the publish skill:
 
 Being addressed by `campaign_adna_v2_infrastructure` M04 in `aDNA.aDNA/`.
 Track progress there. This backlog item can be closed when the aDNA template ships the fix
-and SpaceLattice updates its instance.
+and Spacemacs updates its instance.

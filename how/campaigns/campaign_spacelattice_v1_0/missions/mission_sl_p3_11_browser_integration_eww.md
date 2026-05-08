@@ -20,11 +20,11 @@ blocked_by: [mission_sl_p3_10_layer_expansion_audit]
 
 ## Objective
 
-Validate, configure, and document the full SpaceLattice browser stack (eww + xwidget-webkit) in a live Emacs session. Establish eww as a first-class agentic tool — documented in the context graph — so agents can programmatically open URLs, capture web content, and interact with local dev servers without leaving Emacs.
+Validate, configure, and document the full Spacemacs browser stack (eww + xwidget-webkit) in a live Emacs session. Establish eww as a first-class agentic tool — documented in the context graph — so agents can programmatically open URLs, capture web content, and interact with local dev servers without leaving Emacs.
 
 ## Background
 
-eww is Emacs's built-in web browser. SpaceLattice.aDNA treats it as the primary browser for text-heavy pages, docs lookup, and agentic URL fetching. The dotfile configures `browse-url-browser-function` routing and `ace-link` integration. xwidget-webkit is the JavaScript-capable alternative when compiled with `--with-xwidgets`. Context doc: `what/context/spacemacs/eww_browser_xwidget_integration.md`.
+eww is Emacs's built-in web browser. Spacemacs.aDNA treats it as the primary browser for text-heavy pages, docs lookup, and agentic URL fetching. The dotfile configures `browse-url-browser-function` routing and `ace-link` integration. xwidget-webkit is the JavaScript-capable alternative when compiled with `--with-xwidgets`. Context doc: `what/context/spacemacs/eww_browser_xwidget_integration.md`.
 
 The Vimium-style navigation stack (avy-goto-char-timer, link-hint, ace-link) is also validated in this mission.
 

@@ -22,7 +22,7 @@ Accepted
 
 P3-01 (dotfile entry-points + lifecycle ordering) surfaced an architectural question: where should the rendered dotfile live? The genesis placed it at `~/.spacemacs` via `skill_deploy` substituting `{{VAULT_ROOT}}` and other `{{PLACEHOLDER}}` tokens into `dotfile.spacemacs.tmpl`. This scatters operator config into the home directory and requires machine-specific substitution at every deploy.
 
-The operator's stated goal (P3-01 session, 2026-05-06): **"A fully modular deployment that would set up an in-place SpaceLattice version of Emacs directly in any lattice user's home lattice dir."**
+The operator's stated goal (P3-01 session, 2026-05-06): **"A fully modular deployment that would set up an in-place Spacemacs version of Emacs directly in any lattice user's home lattice dir."**
 
 Spacemacs's resolution order (§1.2 of the customization reference):
 1. `$SPACEMACSDIR/init.el` (env var wins if set)

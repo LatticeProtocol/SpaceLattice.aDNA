@@ -84,9 +84,9 @@ Fix both files:
 ### `skill_health_check.md` check D
 
 ```diff
-- emacs --batch -l ~/.spacemacs --eval '(message "SpaceLattice.aDNA boot OK")' 2>&1 | \
-+ emacs --batch -l ~/.emacs.d/init.el --eval '(message "SpaceLattice.aDNA boot OK")' 2>&1 | \
-    grep -E "(Error|Warning|SpaceLattice.aDNA boot OK)" > /tmp/_health.log
+- emacs --batch -l ~/.spacemacs --eval '(message "Spacemacs.aDNA boot OK")' 2>&1 | \
++ emacs --batch -l ~/.emacs.d/init.el --eval '(message "Spacemacs.aDNA boot OK")' 2>&1 | \
+    grep -E "(Error|Warning|Spacemacs.aDNA boot OK)" > /tmp/_health.log
 ```
 
 ### `skill_health_check.md` check E

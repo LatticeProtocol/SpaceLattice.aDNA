@@ -20,7 +20,7 @@ requirements:
     - "read git ls-files"
 ---
 
-# skill_health_check — green/red gate for SpaceLattice.aDNA
+# skill_health_check — green/red gate for Spacemacs.aDNA
 
 ## Purpose
 
@@ -105,15 +105,15 @@ fi
 
 ```bash
 if [[ -d ~/.emacs.d/.git ]] && [[ -f ~/.spacemacs ]]; then
-  emacs --batch -l ~/.emacs.d/init.el --eval '(message "SpaceLattice.aDNA boot OK")' 2>&1 | \
-    grep -E "(Error|Warning|SpaceLattice.aDNA boot OK)" > /tmp/_health.log
+  emacs --batch -l ~/.emacs.d/init.el --eval '(message "Spacemacs.aDNA boot OK")' 2>&1 | \
+    grep -E "(Error|Warning|Spacemacs.aDNA boot OK)" > /tmp/_health.log
 
   if grep -q "Error" /tmp/_health.log; then
     echo "RED: emacs batch boot reported errors:"
     cat /tmp/_health.log
     exit 40
   fi
-  if ! grep -q "SpaceLattice.aDNA boot OK" /tmp/_health.log; then
+  if ! grep -q "Spacemacs.aDNA boot OK" /tmp/_health.log; then
     echo "RED: emacs batch boot did not reach completion message"
     cat /tmp/_health.log
     exit 41
@@ -126,7 +126,7 @@ fi
 
 ### D+. Live state assertions (when running Spacemacs + emacsclient available)
 
-Extends Check D: if an Emacs server socket is found, query the **running instance** and assert SpaceLattice standard values. This catches configuration bugs that batch-boot cannot detect (wrong variable values, filter not firing, layer not activating).
+Extends Check D: if an Emacs server socket is found, query the **running instance** and assert Spacemacs standard values. This catches configuration bugs that batch-boot cannot detect (wrong variable values, filter not firing, layer not activating).
 
 ```bash
 EMACS_SOCK=$(find /var/folders -name "server" \

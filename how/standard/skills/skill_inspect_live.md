@@ -86,7 +86,7 @@ echo "$REPORT"
 
 ### Step 3 — Assert expected values
 
-Parse the report and assert SpaceLattice standard values:
+Parse the report and assert Spacemacs standard values:
 
 ```python
 import subprocess, sys, re

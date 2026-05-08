@@ -8,7 +8,7 @@ operator: stanley
 intent: "P3-02: Walk §1.3 dotspacemacs-* variables (10 sub-groups). One group per round per customization_session_protocol. Record decisions in who/operators/stanley.md under mission p3_02. ADR-gate any standard-layer changes."
 mission: mission_sl_p3_02_dotspacemacs_variables
 campaign: campaign_spacelattice_v1_0
-tags: [session, active, spacelattice, p3, dotspacemacs, variables, user_in_loop]
+tags: [session, active, spacemacs, p3, dotspacemacs, variables, user_in_loop]
 ---
 
 # Session — P3-02: dotspacemacs-* Variables Walk

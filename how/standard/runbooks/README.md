@@ -9,7 +9,7 @@ tags: [runbooks, how, standard, human]
 
 # how/standard/runbooks/
 
-Human-runnable procedures for SpaceLattice.aDNA. Phase 3 populates with the initial four; later phases add more.
+Human-runnable procedures for Spacemacs.aDNA. Phase 3 populates with the initial four; later phases add more.
 
 ## Runbooks (planned)
 

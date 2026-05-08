@@ -32,7 +32,7 @@ Without a canonical aggregation path:
 
 Ratify `how/standard/skills/skill_telemetry_aggregate.md` as the canonical maintainer-side telemetry aggregation path. The skill implements a seven-step sequence:
 
-1. **Poll** — `gh api repos/LatticeProtocol/SpaceLattice.aDNA/issues?labels=telemetry&state=all --paginate`; creates the `telemetry` label if absent
+1. **Poll** — `gh api repos/LatticeProtocol/Spacemacs.aDNA/issues?labels=telemetry&state=all --paginate`; creates the `telemetry` label if absent
 2. **Parse + validate** — extracts JSON payload from issue body, validates `type` field, routes to per-class handler; rejects malformed payloads to `who/peers/telemetry/inbox/rejected/` audit trail
 3. **De-dup** — loads `who/peers/telemetry/inbox/_state.json` (gitignored); skips issues already processed in prior runs; idempotent
 4. **Aggregate** — groups new records by submission class; builds batch metadata (window, count, signals_by_class)
@@ -57,7 +57,7 @@ Additionally:
 
 ### Negative
 
-- Requires `gh` CLI authenticated against `github.com/LatticeProtocol/SpaceLattice.aDNA` on the maintainer's machine
+- Requires `gh` CLI authenticated against `github.com/LatticeProtocol/Spacemacs.aDNA` on the maintainer's machine
 - Pattern threshold (5) is a rough initial calibration — may produce false positives (rare fleet, same operator re-submitting) or miss real patterns (large fleet, high diversity). Revisable by ADR.
 - The companion skill `skill_self_improve_aggregate` (fleet-aware ADR proposal generation) is post-v1.0 scope; the current skill surfaces patterns but does not auto-draft ADRs
 

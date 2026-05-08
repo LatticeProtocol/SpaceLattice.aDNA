@@ -83,7 +83,7 @@ Body:
 ### 3. Dry-run in scratch worktree
 
 ```bash
-SCRATCH=/tmp/SpaceLattice.aDNA.bumppin-$(date -u +%Y%m%dT%H%M%SZ)
+SCRATCH=/tmp/Spacemacs.aDNA.bumppin-$(date -u +%Y%m%dT%H%M%SZ)
 cp -r . "$SCRATCH"
 cd "$SCRATCH"
 
@@ -202,7 +202,7 @@ grep -q '(defconst latticeprotocol-version' core/core-versions.el \
 # Re-inject (after upstream version bump clobbers our defconst):
 sed -i.bak '/^(defconst spacemacs-version/a\
 (defconst latticeprotocol-version "1.0.0"\
-  "SpaceLattice fork version.")' core/core-versions.el \
+  "Spacemacs fork version.")' core/core-versions.el \
   && rm core/core-versions.el.bak
 ```
 
@@ -216,7 +216,7 @@ grep -q "(require 'lp-branding)" core/core-spacemacs-buffer.el \
   && echo "P2 OK" || echo "P2 MISSING — run re-injection"
 
 # Re-inject (rebase drops our EOF load line):
-printf '\n;; SpaceLattice.aDNA branding overlay\n(require '"'"'lp-branding)\n' \
+printf '\n;; Spacemacs.aDNA branding overlay\n(require '"'"'lp-branding)\n' \
   >> core/core-spacemacs-buffer.el
 ```
 
@@ -259,8 +259,8 @@ grep -q "lp-branding" layers/+distributions/spacemacs/packages.el \
   && echo "P5 OK" || echo "P5 MISSING — run re-injection"
 
 # Re-inject (LP entries after LP-owned sentinel comment):
-# Prerequisite: P4 work adds "; SpaceLattice.aDNA additions" comment as insertion anchor.
-sed -i.bak '/;; SpaceLattice.aDNA additions/,/lp-branding/{/lp-branding/!{/;; SpaceLattice.aDNA additions/a\
+# Prerequisite: P4 work adds "; Spacemacs.aDNA additions" comment as insertion anchor.
+sed -i.bak '/;; Spacemacs.aDNA additions/,/lp-branding/{/lp-branding/!{/;; Spacemacs.aDNA additions/a\
   lp-branding\
   latticeprotocol-theme
 }}' layers/+distributions/spacemacs/packages.el \
@@ -298,14 +298,14 @@ EOF
 # Apply pattern 1:
 sed -i.bak '/^(defconst spacemacs-version/a\
 (defconst latticeprotocol-version "1.0.0"\
-  "SpaceLattice fork version.")' "$SCRATCH/core-versions.el" \
+  "Spacemacs fork version.")' "$SCRATCH/core-versions.el" \
   && rm "$SCRATCH/core-versions.el.bak"
 
 # Verify:
 grep -A2 'latticeprotocol-version' "$SCRATCH/core-versions.el"
 # Expected output:
 #   (defconst latticeprotocol-version "1.0.0"
-#     "SpaceLattice fork version.")
+#     "Spacemacs fork version.")
 
 rm -rf "$SCRATCH"
 ```
@@ -367,6 +367,6 @@ Steps:
 
 ### References
 
-- Heuristics: `SpaceLattice.aDNA/how/standard/runbooks/update_spacemacs.md` §Handling upstream rebase conflicts
-- Health check: `SpaceLattice.aDNA/how/standard/skills/skill_health_check.md`
+- Heuristics: `Spacemacs.aDNA/how/standard/runbooks/update_spacemacs.md` §Handling upstream rebase conflicts
+- Health check: `Spacemacs.aDNA/how/standard/skills/skill_health_check.md`
 ```

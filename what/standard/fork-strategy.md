@@ -6,7 +6,7 @@ updated: 2026-05-05
 last_edited_by: agent_init
 implementation_phase: v1_0_campaign_p4
 ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
-tags: [strategy, fork, spacelattice, latticeprotocol, branding]
+tags: [strategy, fork, spacemacs, latticeprotocol, branding]
 ---
 
 # Fork Strategy — `LatticeProtocol/spacelattice`
@@ -19,7 +19,7 @@ The fork is the **runtime target** that operators ride. The vault governs; the f
 
 | Repo | Role | What lives here |
 |------|------|------------------|
-| `LatticeProtocol/SpaceLattice.aDNA` (this vault) | Governance | ADRs, skills, runbooks, the `adna` Spacemacs layer, `pins.md`, layer contracts, knowledge / context library |
+| `LatticeProtocol/Spacemacs.aDNA` (this vault) | Governance | ADRs, skills, runbooks, the `adna` Spacemacs layer, `pins.md`, layer contracts, knowledge / context library |
 | `LatticeProtocol/spacelattice` (sibling fork) | Runtime | The actual Spacemacs codebase — forked from `syl20bnr/spacemacs` at pinned SHA — with LP-specific branding / distribution layer / theme / version constants overlaid |
 
 ## Stages
@@ -44,8 +44,8 @@ Per LP fork playbook (`what/context/spacemacs/spacemacs_customization_reference.
 
 | Surface | Action |
 |---------|--------|
-| Banner image | Replace `core/banners/img/spacemacs.png` with SpaceLattice asset |
-| Banner text | Replace `core/banners/000-banner.txt` with SpaceLattice ASCII art |
+| Banner image | Replace `core/banners/img/spacemacs.png` with Spacemacs asset |
+| Banner text | Replace `core/banners/000-banner.txt` with Spacemacs ASCII art |
 | Logo title | Patch `spacemacs-buffer-logo-title` → `"[L A T T I C E   P R O T O C O L]"` (or similar) |
 | Buffer name | Patch `spacemacs-buffer-name` → `"*spacelattice*"` |
 | Distribution name | New `dotspacemacs-distribution 'spacemacs-latticeprotocol` default in template |
@@ -60,11 +60,11 @@ Per LP fork playbook (`what/context/spacemacs/spacemacs_customization_reference.
 Once branding is shipped:
 - `skill_install` updated to clone `LatticeProtocol/spacelattice` instead of `syl20bnr/spacemacs`
 - `pins.md` tracks the fork's `develop` (we still consume upstream via fork rebase)
-- Operators get the SpaceLattice distribution at install time
+- Operators get the Spacemacs distribution at install time
 
 ### Stage 4 — peer adoption + telemetry feedback
 
-When peer operators adopt SpaceLattice, the telemetry feedback loop (`what/standard/telemetry.md`) drives evolution. Friction signals across the fleet inform fork-side ADRs.
+When peer operators adopt Spacemacs, the telemetry feedback loop (`what/standard/telemetry.md`) drives evolution. Friction signals across the fleet inform fork-side ADRs.
 
 ## Rebase cadence
 
@@ -89,15 +89,15 @@ Never collide with `spacemacs/`, `spacemacs|`, `spacemacs-` upstream symbols.
 
 ## Reserved leader keys
 
-Per LP fork playbook §4B.5: SpaceLattice owns `SPC o l` (under the `SPC o` user-reserved prefix). Never bind under `SPC h`, `SPC f`, `SPC b`, `SPC p`, `SPC m`, `SPC w`, `SPC SPC`, `SPC :`, or root SPC keys (Spacemacs reserves these).
+Per LP fork playbook §4B.5: Spacemacs owns `SPC o l` (under the `SPC o` user-reserved prefix). Never bind under `SPC h`, `SPC f`, `SPC b`, `SPC p`, `SPC m`, `SPC w`, `SPC SPC`, `SPC :`, or root SPC keys (Spacemacs reserves these).
 
 ## Relationship to vault's standard layer
 
 The vault's `what/standard/layers/adna/` is the **`adna` Spacemacs layer** — the editor-side bridge to aDNA vaults. It lives in the vault (governance) and is symlinked into `~/.emacs.d/private/layers/adna/` at deploy time.
 
-The fork's `layers/+distributions/spacemacs-latticeprotocol/` is the **LP distribution** — the SpaceLattice flavor of Spacemacs. It lives in the fork (runtime) and is selected via `dotspacemacs-distribution 'spacemacs-latticeprotocol`.
+The fork's `layers/+distributions/spacemacs-latticeprotocol/` is the **LP distribution** — the Spacemacs flavor of Spacemacs. It lives in the fork (runtime) and is selected via `dotspacemacs-distribution 'spacemacs-latticeprotocol`.
 
-Both work together: the operator's `~/.spacemacs` declares the LP distribution AND the `adna` layer. The first gives them SpaceLattice branding + curated layer set; the second gives them aDNA-vault awareness inside Emacs.
+Both work together: the operator's `~/.spacemacs` declares the LP distribution AND the `adna` layer. The first gives them Spacemacs branding + curated layer set; the second gives them aDNA-vault awareness inside Emacs.
 
 ## Implementation deferred
 

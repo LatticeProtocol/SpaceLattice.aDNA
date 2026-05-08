@@ -8,7 +8,7 @@ operator: stanley
 intent: "P3-01: Walk customization dimensions §1.1 (5 dotfile functions), §1.2 (location resolution), §1.10 (lifecycle), §2.4 (ordering table). Record decisions in who/operators/stanley.md. Gate any standard-layer changes via ADR + diff."
 mission: mission_sl_p3_01_dotfile_entry_lifecycle
 campaign: campaign_spacelattice_v1_0
-tags: [session, active, spacelattice, p3, dotfile, lifecycle, user_in_loop]
+tags: [session, active, spacemacs, p3, dotfile, lifecycle, user_in_loop]
 ---
 
 # Session — P3-01: Dotfile Entry-Points + Lifecycle Ordering

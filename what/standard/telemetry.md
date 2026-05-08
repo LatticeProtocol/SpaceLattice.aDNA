@@ -14,7 +14,7 @@ tags: [framework, telemetry, feedback_loop, agentic_sre, operator_gated, daedalu
 
 ## Purpose
 
-SpaceLattice.aDNA is designed to **improve itself** in two loops:
+Spacemacs.aDNA is designed to **improve itself** in two loops:
 
 1. **Local loop** — `skill_self_improve` reads operator sessions, detects friction, drafts ADRs, operator gates. *(Already implemented; closes locally.)*
 2. **Fleet loop** — telemetry from peer operators (with permission) flows back to the upstream vault repo, drives **agentic SRE** at the maintainer side, produces ADRs that ship in subsequent publishes. *(This document defines the frame; full implementation in v1.0 campaign Phase 2.)*
@@ -66,7 +66,7 @@ Per ADR 005 lock-in. Operator submits via `skill_telemetry_submit` — a wrapper
 - Includes a structured frontmatter-like body
 - Confirms with operator before submission (no auto-submit)
 
-Maintainer-side aggregation via `skill_telemetry_aggregate` — runs `gh api repos/LatticeProtocol/SpaceLattice.aDNA/issues?labels=telemetry` to pull all telemetry issues, batch-process, drive upstream ADRs.
+Maintainer-side aggregation via `skill_telemetry_aggregate` — runs `gh api repos/LatticeProtocol/Spacemacs.aDNA/issues?labels=telemetry` to pull all telemetry issues, batch-process, drive upstream ADRs.
 
 ## Permission model
 
@@ -229,7 +229,7 @@ Every field from all 4 submission classes. Privacy classes: **ANON** = no operat
 
 Maintainer agent at the upstream vault repo:
 
-1. Periodic poll: `gh api repos/LatticeProtocol/SpaceLattice.aDNA/issues?labels=telemetry&state=all`
+1. Periodic poll: `gh api repos/LatticeProtocol/Spacemacs.aDNA/issues?labels=telemetry&state=all`
 2. Parse each issue body (structured frontmatter)
 3. Validate schema; reject malformed
 4. Append to `who/peers/telemetry/inbox/<utc>.md` (committed audit trail; aggregated, not raw)

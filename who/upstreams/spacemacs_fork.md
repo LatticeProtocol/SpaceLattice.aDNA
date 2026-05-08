@@ -22,7 +22,7 @@ tags: [upstream, spacemacs, fork, latticeprotocol, spacelattice, gpl_3]
 
 The LatticeProtocol-owned fork of [`syl20bnr/spacemacs`](https://github.com/syl20bnr/spacemacs). Opened on GitHub at fork-time SHA `e57594e7aa1d459d3428b9b116bb84b344aa6084` (matches `what/standard/pins.md` ADR-002 pin).
 
-This is the **runtime** target the SpaceLattice.aDNA vault governs. The vault is the governance layer (skills, ADRs, layered architecture, knowledge); the fork is the executable Spacemacs distribution that operators clone into `~/.emacs.d/` (or ride via `~/.emacs.d/.private/...` when SpaceLattice is fully integrated as a distribution).
+This is the **runtime** target the Spacemacs.aDNA vault governs. The vault is the governance layer (skills, ADRs, layered architecture, knowledge); the fork is the executable Spacemacs distribution that operators clone into `~/.emacs.d/` (or ride via `~/.emacs.d/.private/...` when Spacemacs is fully integrated as a distribution).
 
 ## Current state (this turn)
 
@@ -43,7 +43,7 @@ This is the **runtime** target the SpaceLattice.aDNA vault governs. The vault is
 Per LP fork playbook §4A (touchpoint map) + §4B (concrete fork playbook), we'll touch:
 
 1. **Distribution layer**: new `layers/+distributions/spacemacs-latticeprotocol/` with `(configuration-layer/declare-layer-dependencies '(spacemacs))` + selective overrides
-2. **Banner**: replace `core/banners/img/spacemacs.png` + `000-banner.txt` with SpaceLattice/LP visuals; update `spacemacs-buffer-logo-title`
+2. **Banner**: replace `core/banners/img/spacemacs.png` + `000-banner.txt` with Spacemacs/LP visuals; update `spacemacs-buffer-logo-title`
 3. **Theme**: ship `latticeprotocol-theme` package as `:location local` under `layers/+themes/`
 4. **Version constants**: new `latticeprotocol-version` defconst alongside `spacemacs-version`
 5. **News mechanism**: `core/news/news-X.Y.Z.org` for LP releases
@@ -54,7 +54,7 @@ The LP fork playbook also covers rebase strategy (rebase weekly against `upstrea
 
 ## License
 
-GPL-3.0 (matches Spacemacs upstream). All code in the fork follows GPL-3.0. The Spacemacs logo (Nasser Alshammari, CC BY-SA 4.0) is replaced by SpaceLattice branding in the v1.0 campaign — until then, attribution preserved.
+GPL-3.0 (matches Spacemacs upstream). All code in the fork follows GPL-3.0. The Spacemacs logo (Nasser Alshammari, CC BY-SA 4.0) is replaced by Spacemacs branding in the v1.0 campaign — until then, attribution preserved.
 
 ## Engagement protocol
 

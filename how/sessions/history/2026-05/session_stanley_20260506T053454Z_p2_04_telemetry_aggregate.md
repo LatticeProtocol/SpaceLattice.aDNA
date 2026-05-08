@@ -8,7 +8,7 @@ updated: 2026-05-06
 last_edited_by: agent_stanley
 mission: mission_sl_p2_04_telemetry_aggregate_skill_and_round_trip
 campaign: campaign_spacelattice_v1_0
-tags: [session, active, spacelattice, p2, telemetry, aggregate, round_trip, phase_gate]
+tags: [session, active, spacemacs, p2, telemetry, aggregate, round_trip, phase_gate]
 ---
 
 # Session — P2-04: skill_telemetry_aggregate + first round-trip

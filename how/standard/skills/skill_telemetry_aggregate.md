@@ -6,7 +6,7 @@ created: 2026-05-05
 updated: 2026-05-06
 last_edited_by: agent_stanley
 category: telemetry
-trigger: "Maintainer-side: periodic poll of upstream LatticeProtocol/SpaceLattice.aDNA telemetry-labeled issues. Aggregates fleet signals into who/peers/telemetry/inbox/ for cross-fleet pattern analysis."
+trigger: "Maintainer-side: periodic poll of upstream LatticeProtocol/Spacemacs.aDNA telemetry-labeled issues. Aggregates fleet signals into who/peers/telemetry/inbox/ for cross-fleet pattern analysis."
 phase_introduced: 8
 implementation_status: active
 tags: [skill, telemetry, aggregate, maintainer, upstream, agentic_sre, daedalus]
@@ -16,7 +16,7 @@ requirements:
     - what/standard/telemetry.md
     - what/standard/telemetry_schema.json
   permissions:
-    - "gh api repos/LatticeProtocol/SpaceLattice.aDNA/issues (read-only)"
+    - "gh api repos/LatticeProtocol/Spacemacs.aDNA/issues (read-only)"
     - "write who/peers/telemetry/inbox/"
     - "write who/peers/telemetry/inbox/_state.json (gitignored)"
 ---
@@ -25,7 +25,7 @@ requirements:
 
 ## Purpose
 
-Maintainer-side skill that polls the upstream `LatticeProtocol/SpaceLattice.aDNA` repo's telemetry-labeled issues, parses and validates each payload, de-duplicates against previously-processed issues, aggregates fleet signals into a committed audit batch, and surfaces cross-fleet patterns that may trigger upstream ADR proposals.
+Maintainer-side skill that polls the upstream `LatticeProtocol/Spacemacs.aDNA` repo's telemetry-labeled issues, parses and validates each payload, de-duplicates against previously-processed issues, aggregates fleet signals into a committed audit batch, and surfaces cross-fleet patterns that may trigger upstream ADR proposals.
 
 The fleet-loop counterpart of operator-side `skill_telemetry_submit`.
 
@@ -51,7 +51,7 @@ The fleet-loop counterpart of operator-side `skill_telemetry_submit`.
 Fetch all telemetry-labeled issues from the upstream repo, paginating to catch large fleets:
 
 ```bash
-gh api "repos/LatticeProtocol/SpaceLattice.aDNA/issues?labels=telemetry&state=all" \
+gh api "repos/LatticeProtocol/Spacemacs.aDNA/issues?labels=telemetry&state=all" \
   --paginate \
   > /tmp/telemetry_issues.json
 
@@ -62,9 +62,9 @@ If the `telemetry` label does not exist on the upstream repo:
 
 ```bash
 gh label create telemetry \
-  --repo LatticeProtocol/SpaceLattice.aDNA \
+  --repo LatticeProtocol/Spacemacs.aDNA \
   --color 0075ca \
-  --description "Fleet telemetry submission from SpaceLattice.aDNA operators"
+  --description "Fleet telemetry submission from Spacemacs.aDNA operators"
 ```
 
 ---
@@ -326,7 +326,7 @@ A safe end-to-end demonstration that does not write to inbox or update state:
 
 ```bash
 # 1. Fetch issues
-gh api repos/LatticeProtocol/SpaceLattice.aDNA/issues \
+gh api repos/LatticeProtocol/Spacemacs.aDNA/issues \
   --field labels=telemetry --field state=all --paginate > /tmp/telemetry_issues.json
 
 # 2. Parse (Python from Step 2 above)

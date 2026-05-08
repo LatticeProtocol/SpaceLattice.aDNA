@@ -9,7 +9,7 @@ tags: [skills, how, standard, agentic, procedures]
 
 # how/standard/skills/
 
-Agent procedures specific to SpaceLattice.aDNA. Phase 3-7 of the genesis plan populates this directory.
+Agent procedures specific to Spacemacs.aDNA. Phase 3-7 of the genesis plan populates this directory.
 
 ## Skills inventory (planned)
 
@@ -23,7 +23,7 @@ Agent procedures specific to SpaceLattice.aDNA. Phase 3-7 of the genesis plan po
 | `skill_self_improve.md` | 5 | Read recent sessions → detect friction → draft ADR + diff + dry-run → present to operator |
 | `skill_layer_promote.md` | 6 | Operator-approved promotion `local/` → `standard/`. ADR + sanitization scan |
 | `skill_overlay_consume.md` | 6 | Consume third-party Spacemacs distribution. Per-layer ADR-gated disposition |
-| `skill_publish_lattice.md` | 7 | rsync standard layer + sanitize + tarball + push to `github.com/LatticeProtocol/SpaceLattice.aDNA` |
+| `skill_publish_lattice.md` | 7 | rsync standard layer + sanitize + tarball + push to `github.com/LatticeProtocol/Spacemacs.aDNA` |
 
 ## Skill format
 

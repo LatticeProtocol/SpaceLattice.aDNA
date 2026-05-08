@@ -5,7 +5,7 @@ created: 2026-05-03
 updated: 2026-05-03
 last_edited_by: agent_init
 audience: human
-intent: "Take a new machine from zero to working SpaceLattice.aDNA battle station."
+intent: "Take a new machine from zero to working Spacemacs.aDNA battle station."
 time_estimate: "10–25 minutes (mostly Spacemacs first-boot package install)"
 phase_introduced: 3
 tags: [runbook, install, fresh, human, daedalus]
@@ -16,7 +16,7 @@ tags: [runbook, install, fresh, human, daedalus]
 ## When to follow
 
 - Brand new laptop / VM / Linux box
-- Existing machine where you want SpaceLattice.aDNA but Spacemacs is not yet installed
+- Existing machine where you want Spacemacs.aDNA but Spacemacs is not yet installed
 - Recovery after `recover_from_breakage.md` decided to start over
 
 ## Pre-conditions
@@ -67,13 +67,13 @@ rg --version | head -1
 fd --version
 ```
 
-### 2. Clone the SpaceLattice.aDNA vault
+### 2. Clone the Spacemacs.aDNA vault
 
 ```bash
 mkdir -p ~/lattice
 cd ~/lattice
-git clone https://github.com/LatticeProtocol/SpaceLattice.aDNA.git
-cd SpaceLattice.aDNA
+git clone https://github.com/LatticeProtocol/Spacemacs.aDNA.git
+cd Spacemacs.aDNA
 ```
 
 > Note: the GitHub repo is published in **Phase 7** of the genesis plan. Until then, copy the vault directory directly from the originating machine.
@@ -85,7 +85,7 @@ The skill is at `how/standard/skills/skill_install.md`. Inline-execute its steps
 ```bash
 # Either run inside Claude Code (it will read the skill and execute):
 claude
-# > Please run skill_install for SpaceLattice.aDNA on this machine.
+# > Please run skill_install for Spacemacs.aDNA on this machine.
 
 # Or follow the steps in skill_install.md by hand.
 ```
@@ -98,7 +98,7 @@ The skill backs up any existing `~/.emacs.d/` and `~/.spacemacs`, clones Spacema
 emacs &
 ```
 
-You should see Spacemacs's startup buffer. Hit `SPC f f` to open file picker. Try opening `~/lattice/SpaceLattice.aDNA/CLAUDE.md`. The `adna-mode` minor mode should activate (visible in mode-line as `aDNA`). Hit `SPC a` — the transient menu should appear.
+You should see Spacemacs's startup buffer. Hit `SPC f f` to open file picker. Try opening `~/lattice/Spacemacs.aDNA/CLAUDE.md`. The `adna-mode` minor mode should activate (visible in mode-line as `aDNA`). Hit `SPC a` — the transient menu should appear.
 
 If `SPC a` doesn't bind: layer didn't load. Check the install log at `how/local/machine_runbooks/last_install.log`.
 
@@ -116,7 +116,7 @@ mkdir -p ~/.claude
 ### 6. Wire Obsidian (optional)
 
 ```bash
-# Open ~/lattice/SpaceLattice.aDNA/ in Obsidian as a vault
+# Open ~/lattice/Spacemacs.aDNA/ in Obsidian as a vault
 # Install the Advanced URI community plugin
 # In what/local/operator.private.el (after creating from .example):
 #   (setq adna-obsidian-roundtrip-enabled t)
@@ -126,7 +126,7 @@ mkdir -p ~/.claude
 ### 7. Bootstrap your local layer
 
 ```bash
-cd ~/lattice/SpaceLattice.aDNA/what/local
+cd ~/lattice/Spacemacs.aDNA/what/local
 for f in *.example; do
   target="${f%.example}"
   [[ -f "$target" ]] || cp "$f" "$target"
@@ -161,7 +161,7 @@ If something went wrong:
 
 # Or: nuke and start over:
 rm -rf ~/.emacs.d ~/.spacemacs
-# (your data is in ~/lattice/SpaceLattice.aDNA/, untouched by ~/.emacs.d/ ops)
+# (your data is in ~/lattice/Spacemacs.aDNA/, untouched by ~/.emacs.d/ ops)
 ```
 
 ## Time breakdown (typical)

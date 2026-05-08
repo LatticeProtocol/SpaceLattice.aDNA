@@ -32,11 +32,11 @@ Root cause: `emacs --batch` loads the dotfile in headless mode and exits. It can
 
 The Emacs server has been running the entire time (`dotspacemacs-enable-server t` in `dotfile.spacemacs.tmpl`). `emacsclient` can connect to it and eval arbitrary elisp, giving the agent full read access to the running IDE's state — including font height, tab filter lists, doom-modeline activation, projectile paths, and buffer lists. macOS `screencapture` provides visual capture without requiring the operator to share screenshots.
 
-Operator explicitly requested this improvement: "we need you to be able to inspect/run/validate the changes to the SpaceLattice.aDNA context graph system and the version of spacemacs that it builds/operates/runs yourself so that we won't need to be taking screen shots and having you double check."
+Operator explicitly requested this improvement: "we need you to be able to inspect/run/validate the changes to the Spacemacs.aDNA context graph system and the version of spacemacs that it builds/operates/runs yourself so that we won't need to be taking screen shots and having you double check."
 
 ## Decision
 
-Add a closed-loop validation layer to the SpaceLattice.aDNA skill stack:
+Add a closed-loop validation layer to the Spacemacs.aDNA skill stack:
 
 **1. `skill_inspect_live` (new skill)** — Standalone live inspection using emacsclient + screencapture:
 - Dynamically discovers the emacs server socket (`/var/folders/.../emacs<uid>/server`)

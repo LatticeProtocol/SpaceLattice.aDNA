@@ -25,7 +25,7 @@ During P3 pre-flight review, `what/standard/dotfile.spacemacs.tmpl` was found to
 User-in-the-loop consultation (P3 pre-flight session 2026-05-06) produced concrete visual selections:
 - Theme: stock `spacemacs-dark` / `spacemacs-light` (no doom-themes dependency)
 - Modeline: `doom-modeline` adapted to spacemacs-dark faces via `doom-modeline-icon nil` (text-only, inherits spacemacs faces, no icon font required)
-- Banner: custom ASCII SpaceLattice text at `{{VAULT_ROOT}}/what/standard/assets/banner_active.txt` (symlink-swappable)
+- Banner: custom ASCII Spacemacs text at `{{VAULT_ROOT}}/what/standard/assets/banner_active.txt` (symlink-swappable)
 - Font: Source Code Pro 13pt
 
 ## Decision
@@ -39,7 +39,7 @@ User-in-the-loop consultation (P3 pre-flight session 2026-05-06) produced concre
 2. **Add doom-modeline configuration** in `dotspacemacs/user-config` via `with-eval-after-load 'doom-modeline`:
    - `doom-modeline-icon nil` — text-only; inherits spacemacs-dark faces
    - Custom `adna-vault` segment — shows `⬡vault-name` with `success` face weight bold when `adna-mode` is active
-   - Custom `spacelattice-main` modeline format: left: `bar matches buffer-info remote-host buffer-position`; right: `adna-vault misc-info lsp checker major-mode process`
+   - Custom `adna-main` modeline format: left: `bar matches buffer-info remote-host buffer-position`; right: `adna-vault misc-info lsp checker major-mode process`
 
 3. **Add banner asset files** at `what/standard/assets/`:
    - `banner_v1_dot_field.txt` — lattice dot-field design

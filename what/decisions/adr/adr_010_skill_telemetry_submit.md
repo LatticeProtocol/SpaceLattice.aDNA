@@ -26,7 +26,7 @@ P2-03 addresses *how* an operator constructs, validates, and submits that payloa
 - Schema compliance would be unverifiable before submission
 - Submission auditing (local receipts) would be inconsistent across forks
 
-The submission channel (GitHub Issues, label `telemetry`, repo `LatticeProtocol/SpaceLattice.aDNA`) was ratified in ADR-005. ADR-009 locks the schema. This ADR locks the execution path.
+The submission channel (GitHub Issues, label `telemetry`, repo `LatticeProtocol/Spacemacs.aDNA`) was ratified in ADR-005. ADR-009 locks the schema. This ADR locks the execution path.
 
 ## Decision
 
@@ -37,7 +37,7 @@ Ratify `how/standard/skills/skill_telemetry_submit.md` as the canonical operator
 3. **Sanitize** — LAYER_CONTRACT §4 base scan + telemetry-specific extensions; FAIL aborts
 4. **Validate** — `jsonschema` against `what/standard/telemetry_schema.json`; FAIL aborts
 5. **Confirm** — operator sees the full payload and explicitly approves; supports `--dry-run` flag
-6. **Submit** — `gh issue create` against `LatticeProtocol/SpaceLattice.aDNA` with `telemetry` label
+6. **Submit** — `gh issue create` against `LatticeProtocol/Spacemacs.aDNA` with `telemetry` label
 7. **Audit-write** — local receipt written to `who/peers/telemetry/sent/<utc>.md` (gitignored)
 
 Additionally, create `.github/ISSUE_TEMPLATE/telemetry.yml` in this vault so GitHub's web UI enforces the same schema and sanitization acknowledgments for out-of-band submissions.
@@ -57,7 +57,7 @@ The `--withdraw <issue-number>` flag closes a previously-submitted issue via `gh
 
 ### Negative
 
-- Requires `gh` CLI authenticated against `github.com/LatticeProtocol/SpaceLattice.aDNA`
+- Requires `gh` CLI authenticated against `github.com/LatticeProtocol/Spacemacs.aDNA`
 - Requires `python3` + `jsonschema` library on the operator's machine
 - Operators who lose their local `sent/` receipts cannot recover submission history (by design — receipts are local audit trail, not shared)
 

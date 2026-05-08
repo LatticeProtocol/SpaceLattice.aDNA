@@ -16,7 +16,7 @@ ratifies:
   - ci_design_sketch: sync-upstream.yml + UPSTREAM_SYNC_CONFLICT_REPORT.md (authored in P4-07)
 supersedes:
 superseded_by:
-tags: [adr, accepted, sustainability, runbook, p2, spacelattice]
+tags: [adr, accepted, sustainability, runbook, p2, spacemacs]
 ---
 
 # ADR-008: Expand update_spacemacs.md with rebase-conflict teeth
@@ -27,7 +27,7 @@ Accepted
 
 ## Context
 
-`how/standard/runbooks/update_spacemacs.md` was authored in the SpaceLattice genesis as a skeleton covering the pin-bump workflow (steps 1-7: fetch, ADR, dry-run, update, commit, install, smoke-test). It did not cover the harder problem: handling merge conflicts that arise when `git rebase upstream/develop` runs on the LP fork (`LatticeProtocol/spacelattice`).
+`how/standard/runbooks/update_spacemacs.md` was authored in the Spacemacs genesis as a skeleton covering the pin-bump workflow (steps 1-7: fetch, ADR, dry-run, update, commit, install, smoke-test). It did not cover the harder problem: handling merge conflicts that arise when `git rebase upstream/develop` runs on the LP fork (`LatticeProtocol/spacelattice`).
 
 The sustainability framework (`what/standard/sustainability.md` §Stay-current process) lists "upstream rebase conflict resolution" as a weekly cadence activity with a reference to `what/context/spacemacs/spacemacs_customization_reference.md §4B.5` for the conflict-prone file list. But no concrete detection checks, re-injection patterns, or CI design existed.
 
@@ -64,7 +64,7 @@ Append a new `## Handling upstream rebase conflicts` section to `update_spacemac
 ### Negative
 
 - Patterns P3 and P4 require manual review; the anchor lines in `core/core-spacemacs.el` may shift across upstream versions. This is flagged explicitly in the runbook.
-- Pattern 5 depends on a sentinel comment (`; SpaceLattice.aDNA additions`) that P4 must add to the packages.el file. Until P4 lands, pattern 5 requires manual insertion of the sentinel.
+- Pattern 5 depends on a sentinel comment (`; Spacemacs.aDNA additions`) that P4 must add to the packages.el file. Until P4 lands, pattern 5 requires manual insertion of the sentinel.
 
 ### Neutral
 

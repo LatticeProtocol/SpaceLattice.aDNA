@@ -5,10 +5,10 @@ priority: high
 created: 2026-05-06
 updated: 2026-05-06
 last_edited_by: agent_stanley
-tags: [backlog, visual-inspection, health-check, ux, qa, spacelattice]
+tags: [backlog, visual-inspection, health-check, ux, qa, spacemacs]
 ---
 
-# Idea: Visual Inspection Protocol for SpaceLattice
+# Idea: Visual Inspection Protocol for Spacemacs
 
 ## Problem
 

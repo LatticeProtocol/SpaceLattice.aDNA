@@ -27,7 +27,7 @@ Promote `how/standard/skills/skill_telemetry_submit.md` from stub to full proced
 - Full `skill_telemetry_submit.md` (replaces stub) with step-by-step:
   - Collect → validate (schema) → sanitize (LAYER_CONTRACT § 4 + telemetry extensions) → confirm-with-operator → submit-via-gh-cli → audit-write → tag
   - Failure modes: sanitization FAIL → ABORT; gh auth missing → fail with remediation; schema mismatch → fail with diff
-- `.github/ISSUE_TEMPLATE/telemetry.yml` (GitHub issue form enforcing the schema, suitable for the upstream `LatticeProtocol/SpaceLattice.aDNA` repo)
+- `.github/ISSUE_TEMPLATE/telemetry.yml` (GitHub issue form enforcing the schema, suitable for the upstream `LatticeProtocol/Spacemacs.aDNA` repo)
 - `.gitignore` confirms `who/peers/telemetry/{outbox,sent}/` are gitignored (operator-local)
 - ADR: `adr_010_<slug>.md` ratifying the submit-skill lock-in
 - Demo invocation against a test telemetry payload (operator confirms; demo issue can be deleted post-validation)

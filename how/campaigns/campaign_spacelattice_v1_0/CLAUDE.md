@@ -8,9 +8,9 @@ last_edited_by: agent_init
 tags: [governance, campaign, spacelattice, v1_0]
 ---
 
-# Campaign CLAUDE.md — SpaceLattice v1.0
+# Campaign CLAUDE.md — Spacemacs v1.0
 
-This file is the agent's governance overlay scoped to `campaign_spacelattice_v1_0`. The vault's project-level CLAUDE.md (`/Users/stanley/lattice/SpaceLattice.aDNA/CLAUDE.md`) is canonical; this file adds campaign-specific direction.
+This file is the agent's governance overlay scoped to `campaign_spacelattice_v1_0`. The vault's project-level CLAUDE.md (`/Users/stanley/lattice/Spacemacs.aDNA/CLAUDE.md`) is canonical; this file adds campaign-specific direction.
 
 ## Campaign master
 
@@ -71,5 +71,5 @@ Every mission ends with an AAR per Standing Order #5. Use `template_aar.md` for 
 ## Reference
 
 - Master: `campaign_spacelattice_v1_0.md` (in this dir)
-- Project CLAUDE.md: `/Users/stanley/lattice/SpaceLattice.aDNA/CLAUDE.md`
+- Project CLAUDE.md: `/Users/stanley/lattice/Spacemacs.aDNA/CLAUDE.md`
 - Plan: `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` § Plan B

@@ -43,4 +43,4 @@ Operator-supplied 2026-05-05; verbatim text persisted as in-vault context. ADR 0
 - `what/standard/fork-strategy.md` — high-level strategy (this dir's reference is the *spec*)
 - `what/standard/lp-positioning.md` — LP-stack placement
 - `what/standard/pins.md` — pinned Spacemacs SHA we build against
-- `who/upstreams/spacelattice_fork.md` — fork provenance + rebase cadence
+- `who/upstreams/spacemacs_fork.md` — fork provenance + rebase cadence

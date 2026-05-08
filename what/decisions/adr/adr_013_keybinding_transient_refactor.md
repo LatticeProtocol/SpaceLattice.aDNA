@@ -22,7 +22,7 @@ Accepted
 
 `what/standard/layers/adna/keybindings.el` used flat `spacemacs/set-leader-keys` bindings under `SPC a`. This approach works but provides no visual grouping — the which-key popup renders a flat undifferentiated list. As the command surface grows (LP stubs, Claude Code variants), a flat list becomes hard to scan.
 
-The Transient library (Emacs 28+ built-in, backport available) provides popup menus with grouped labeled columns, which-key interoperability, and recursive sub-menus. It is used by Magit and Claude Code (`/plan`, `/loop`) internally, making it a natural fit for SpaceLattice's battle-station context.
+The Transient library (Emacs 28+ built-in, backport available) provides popup menus with grouped labeled columns, which-key interoperability, and recursive sub-menus. It is used by Magit and Claude Code (`/plan`, `/loop`) internally, making it a natural fit for Spacemacs's battle-station context.
 
 User-in-the-loop consultation (P3 pre-flight session 2026-05-06) selected the Transient refactor explicitly ("for decision 7 do the rebuild").
 

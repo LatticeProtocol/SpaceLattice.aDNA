@@ -13,7 +13,7 @@ tags: [framework, sustainability, stay_current, troubleshoot, upgrade, daedalus]
 
 ## Purpose
 
-SpaceLattice.aDNA is an **agentic context fork** of Spacemacs/Emacs — a governance vault + sibling code repo (`LatticeProtocol/spacelattice`) that tracks upstream `syl20bnr/spacemacs` and the broader Emacs ecosystem. This document defines the operating posture: how we stay current, troubleshoot downstream, upgrade, and integrate findings during routine operation.
+Spacemacs.aDNA is an **agentic context fork** of Spacemacs/Emacs — a governance vault + sibling code repo (`LatticeProtocol/spacelattice`) that tracks upstream `syl20bnr/spacemacs` and the broader Emacs ecosystem. This document defines the operating posture: how we stay current, troubleshoot downstream, upgrade, and integrate findings during routine operation.
 
 This is the **outline**. Concrete schedules, automation, and runbook teeth are designed by M-Planning-01 and implemented in v1.0 campaign Phase 2.
 
@@ -70,7 +70,7 @@ If a pattern emerges across 2+ sessions (operator hits same issue repeatedly), `
 
 ### Tier 3 — Cross-vault coordination
 
-If the issue affects multiple vaults in the workspace (e.g., a Python-layer regression that hits both SpaceLattice and other aDNA projects), file a coord note at `~/lattice/lattice-labs/who/coordination/` (per workspace convention). Sister-vault operators see it.
+If the issue affects multiple vaults in the workspace (e.g., a Python-layer regression that hits both Spacemacs and other aDNA projects), file a coord note at `~/lattice/lattice-labs/who/coordination/` (per workspace convention). Sister-vault operators see it.
 
 ### Tier 4 — Upstream contribution
 

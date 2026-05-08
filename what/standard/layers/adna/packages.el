@@ -1,7 +1,7 @@
 ;;; packages.el --- adna layer  -*- lexical-binding: t -*-
 ;;
-;; Author:  SpaceLattice.aDNA / Daedalus
-;; URL:     https://github.com/LatticeProtocol/SpaceLattice.aDNA
+;; Author:  Spacemacs.aDNA / Daedalus
+;; URL:     https://github.com/LatticeProtocol/Spacemacs.aDNA
 ;; License: GPL-3.0
 ;;
 ;; Spacemacs layer manifest. Spacemacs loads this file first when activating

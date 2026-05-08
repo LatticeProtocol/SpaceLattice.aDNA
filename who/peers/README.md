@@ -9,7 +9,7 @@ tags: [peers, who, spacemacs, lattice]
 
 # who/peers/
 
-Other SpaceLattice.aDNA forks — peer operators who installed the battle station from `github.com/LatticeProtocol/SpaceLattice.aDNA` (Phase 7 publish target) and run it on their own machines.
+Other Spacemacs.aDNA forks — peer operators who installed the battle station from `github.com/LatticeProtocol/Spacemacs.aDNA` (Phase 7 publish target) and run it on their own machines.
 
 Each peer entry captures:
 - Who they are

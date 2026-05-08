@@ -16,7 +16,7 @@ tags: [upstream, spacemacs, maintainer, syl20bnr]
 
 ## Role
 
-Original creator and lead maintainer of [Spacemacs](https://github.com/syl20bnr/spacemacs). The `develop` branch is the canonical build target for `SpaceLattice.aDNA`; the SHA we pin lives in `what/standard/pins.md`.
+Original creator and lead maintainer of [Spacemacs](https://github.com/syl20bnr/spacemacs). The `develop` branch is the canonical build target for `Spacemacs.aDNA`; the SHA we pin lives in `what/standard/pins.md`.
 
 ## What we depend on
 

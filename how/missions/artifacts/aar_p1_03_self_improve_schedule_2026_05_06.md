@@ -6,7 +6,7 @@ date: 2026-05-06
 created: 2026-05-06
 updated: 2026-05-06
 last_edited_by: agent_stanley
-tags: [aar, p1, self_improve, schedule, stop_hook, adr_007, spacelattice]
+tags: [aar, p1, self_improve, schedule, stop_hook, adr_007, spacemacs]
 ---
 
 # AAR — P1-03: skill_self_improve schedule

@@ -10,7 +10,7 @@ mission: mission_sl_p2_01_sustainability_runbook_teeth
 campaign: campaign_spacelattice_v1_0
 last_edited_by: agent_stanley
 updated: 2026-05-06
-tags: [session, p2, sustainability, runbook, spacelattice]
+tags: [session, p2, sustainability, runbook, spacemacs]
 ---
 
 # Session — P2-01 Runbook Teeth

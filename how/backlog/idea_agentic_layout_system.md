@@ -21,7 +21,7 @@ the aDNA context graph and agentic workflow, not just a Spacemacs configuration 
 
 ## Problem
 
-The current SpaceLattice dotfile sets four layout variables to defaults and leaves layout
+The current Spacemacs dotfile sets four layout variables to defaults and leaves layout
 management to the operator's muscle memory. This misses the core value proposition: an
 agentic IDE should know *which layout to use* based on the work at hand, be able to switch
 layouts programmatically, and guide the operator toward the right window arrangement for each
@@ -88,7 +88,7 @@ Every campaign design session includes a layout planning step:
 ## Campaign Protocol Impact
 
 This mission changes the campaign design ritual: agents running P0 (planning) for any future
-SpaceLattice-hosted campaign will load the layout guide and output a `layout_plan` section in
+Spacemacs-hosted campaign will load the layout guide and output a `layout_plan` section in
 the campaign doc. This is a low-overhead addition — the guide is a single context file load,
 and the output is a short table.
 

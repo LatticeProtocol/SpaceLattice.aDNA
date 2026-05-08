@@ -29,7 +29,7 @@ This is the mission the operator triggers AFTER Plan B's foundation work commits
 
 | Pre-condition | Source |
 |---------------|--------|
-| Phase A-G of Plan B complete and committed | `/Users/stanley/lattice/SpaceLattice.aDNA/CHANGELOG.md` shows v0.2.0 |
+| Phase A-G of Plan B complete and committed | `/Users/stanley/lattice/Spacemacs.aDNA/CHANGELOG.md` shows v0.2.0 |
 | Customization reference loaded | `what/context/spacemacs/spacemacs_customization_reference.md` |
 | LP positioning doc | `what/standard/lp-positioning.md` |
 | Sustainability outline | `what/standard/sustainability.md` |
@@ -59,7 +59,7 @@ The mission consumes:
 4. **Reference repos**:
    - `LatticeProtocol/lattice-protocol` (private, Python runtime)
    - `LatticeProtocol/Agentic-DNA` / `LatticeProtocol/adna` (public template)
-   - `LatticeProtocol/SpaceLattice.aDNA` (this vault, just renamed)
+   - `LatticeProtocol/Spacemacs.aDNA` (this vault, just renamed)
    - `LatticeProtocol/spacelattice` (sibling fork, opened in Plan B Phase B)
 
 5. **Framework outlines** — sustainability + telemetry; this mission converts outlines to concrete mission scopes
@@ -108,7 +108,7 @@ For each phase, document the concrete exit-gate condition (currently sketched in
 - P1 exit: 4 audit findings closed; STATE.md "Active Blockers" empty
 - P2 exit: telemetry round-trip demonstrated; sustainability runbook teeth match outline; schedule documented
 - P3 exit: 22 dimensions reviewed; operator profile updated; what/local/operator.private.el populated; standard layer absorbed validated patterns
-- P4 exit: operator can clone fork + run skill_install + see SpaceLattice branding
+- P4 exit: operator can clone fork + run skill_install + see Spacemacs branding
 - P5 exit: v1.0 tagged on both repos; second-machine install validated; release notes published
 
 ### 5. Telemetry schema design

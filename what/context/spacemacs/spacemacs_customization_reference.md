@@ -1111,4 +1111,4 @@ emacs -nw -Q -l init.el --eval "(dotspacemacs/test-dotfile)"
 - **Lattice Protocol runtime**: https://github.com/LatticeProtocol/lattice-protocol
 - **Agentic-DNA template**: https://github.com/LatticeProtocol/adna (alias for `Agentic-DNA`)
 
-These repos ground the LP-stack positioning of this fork. See `what/standard/lp-positioning.md` for how SpaceLattice.aDNA fits in.
+These repos ground the LP-stack positioning of this fork. See `what/standard/lp-positioning.md` for how Spacemacs.aDNA fits in.

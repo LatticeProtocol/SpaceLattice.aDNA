@@ -8,7 +8,7 @@ updated: 2026-05-06
 last_edited_by: agent_stanley
 tier: 1
 intent: "Execute P2-03: promote skill_telemetry_submit from stub to full procedure; author GitHub issue template; draft ADR-010; close mission"
-tags: [session, active, spacelattice, v1_0, p2, telemetry, submit_skill]
+tags: [session, active, spacemacs, v1_0, p2, telemetry, submit_skill]
 ---
 
 # Session — P2-03: skill_telemetry_submit

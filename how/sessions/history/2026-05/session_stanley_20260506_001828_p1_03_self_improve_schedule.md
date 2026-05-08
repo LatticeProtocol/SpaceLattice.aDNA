@@ -9,7 +9,7 @@ created: 2026-05-06
 updated: 2026-05-06
 last_edited_by: agent_stanley
 operator: stanley
-tags: [session, p1, self_improve, schedule, adr_007, spacelattice]
+tags: [session, p1, self_improve, schedule, adr_007, spacemacs]
 ---
 
 # Session — P1-03: skill_self_improve schedule

@@ -20,7 +20,7 @@ blocked_by: [mission_sl_p3_08_languages_keys_perf]
 
 ## Objective
 
-SpaceLattice.aDNA ships an `.obsidian/` config with 15 plugins (~13MB, ~87% of `.obsidian/`). Most plugins are cosmetic and not required for aDNA wikilink navigation or context-graph operation. Trim the shipped set to essentials, document optionals, and verify Obsidian UX is intact post-trim.
+Spacemacs.aDNA ships an `.obsidian/` config with 15 plugins (~13MB, ~87% of `.obsidian/`). Most plugins are cosmetic and not required for aDNA wikilink navigation or context-graph operation. Trim the shipped set to essentials, document optionals, and verify Obsidian UX is intact post-trim.
 
 ## Deliverables
 

@@ -21,7 +21,7 @@ Full 7-step aggregate skill authored and end-to-end round-trip executed in a sin
 
 ## Finding
 
-The `telemetry` label on `LatticeProtocol/SpaceLattice.aDNA` must be pre-created before `skill_telemetry_submit` can add it to issues. Label was absent before this session; created via `gh label create` in Step 4 setup. The skill now documents this guard.
+The `telemetry` label on `LatticeProtocol/Spacemacs.aDNA` must be pre-created before `skill_telemetry_submit` can add it to issues. Label was absent before this session; created via `gh label create` in Step 4 setup. The skill now documents this guard.
 
 ## Change
 
@@ -39,7 +39,7 @@ Updated `who/peers/telemetry/inbox/_state.json` to gitignore (added to `.gitigno
 
 - ✅ `skill_telemetry_aggregate.md` status: `stub_with_parser` → `active`
 - ✅ ADR-011 `status: accepted`
-- ✅ GitHub Issue #1 submitted (https://github.com/LatticeProtocol/SpaceLattice.aDNA/issues/1)
+- ✅ GitHub Issue #1 submitted (https://github.com/LatticeProtocol/Spacemacs.aDNA/issues/1)
 - ✅ `who/peers/telemetry/inbox/20260506T053941Z_aggregate.md` committed
 - ✅ `who/peers/telemetry/inbox/demo_adr_draft_p2_04.md` committed
 - ✅ Mission `status: completed`; AAR filed (this file)

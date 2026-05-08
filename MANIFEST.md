@@ -10,11 +10,11 @@ last_edited_by: agent_init
 tags: [manifest, governance, spacemacs, daedalus, battle_station, ide, layered_config, self_improving, genesis]
 ---
 
-# SpaceLattice.aDNA — Project Manifest
+# Spacemacs.aDNA — Project Manifest
 
 ## Project Identity
 
-**SpaceLattice.aDNA** — Agentic battle station for ML ops, agentic coding, and aDNA context-graph navigation. The vault governs a Spacemacs-based IDE; Spacemacs is the *subject*, not a wrapper around it.
+**Spacemacs.aDNA** — Agentic battle station for ML ops, agentic coding, and aDNA context-graph navigation. The vault governs a Spacemacs-based IDE; Spacemacs is the *subject*, not a wrapper around it.
 
 The vault carries a layered configuration architecture (`standard/` shared, `local/` private, `overlay/` third-party) and a self-improving loop where the agent observes session friction, drafts ADRs with diffs and dry-run health checks, and proposes them through an operator approval gate. The operator is always the gate; the agent never auto-commits to `standard/`.
 
@@ -22,10 +22,10 @@ Persona: **Daedalus** — master craftsman, builder of the Labyrinth (context-gr
 
 ## Architecture
 
-This project uses the **aDNA (Agentic DNA)** knowledge architecture with three additional layered subdirs unique to SpaceLattice.aDNA:
+This project uses the **aDNA (Agentic DNA)** knowledge architecture with three additional layered subdirs unique to Spacemacs.aDNA:
 
 ```
-SpaceLattice.aDNA/
+Spacemacs.aDNA/
 ├── what/
 │   ├── standard/          # shared, deterministic, reproducible — the published commons
 │   ├── local/             # gitignored — operator/machine-specific
@@ -46,7 +46,7 @@ SpaceLattice.aDNA/
 └── who/
     ├── operators/         # current machine's operator profile
     ├── upstreams/         # Spacemacs maintainers, layer authors
-    ├── peers/             # other SpaceLattice.aDNA forks once they exist
+    ├── peers/             # other Spacemacs.aDNA forks once they exist
     ├── governance/        # (inherited)
     ├── team/              # (inherited)
     └── coordination/      # (inherited)
@@ -97,7 +97,7 @@ The vault includes a Spacemacs layer at `what/standard/layers/adna/` that:
 |----------|-----------|------|
 | **Agents** | `CLAUDE.md` (auto-loaded) | `STATE.md` → `how/sessions/active/` → work |
 | **Operators (humans)** | `README.md` | copy-paste install command → `what/standard/layers.md` |
-| **Peer forkers** | `https://github.com/LatticeProtocol/SpaceLattice.aDNA` (planned) | `skill_install` from extracted tarball |
+| **Peer forkers** | `https://github.com/LatticeProtocol/Spacemacs.aDNA` (planned) | `skill_install` from extracted tarball |
 
 ## Active Phase
 

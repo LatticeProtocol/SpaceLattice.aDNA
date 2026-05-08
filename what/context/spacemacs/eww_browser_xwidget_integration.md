@@ -4,15 +4,15 @@ status: active
 created: 2026-05-06
 updated: 2026-05-06
 last_edited_by: agent_stanley
-tags: [context, eww, browser, xwidget, webkit, web, agentic, spacelattice]
+tags: [context, eww, browser, xwidget, webkit, web, agentic, spacemacs]
 load_when: ["eww configuration", "browser integration", "web browsing in emacs", "P3-11 mission", "skill_layer_add eww"]
 ---
 
-# SpaceLattice Browser Integration — eww + xwidget-webkit
+# Spacemacs Browser Integration — eww + xwidget-webkit
 
 ## Purpose
 
-SpaceLattice.aDNA treats Emacs as a **first-class browser environment**. The goal is not to replace a modern browser for all tasks, but to enable:
+Spacemacs.aDNA treats Emacs as a **first-class browser environment**. The goal is not to replace a modern browser for all tasks, but to enable:
 
 1. **Docs lookup** — reading developer docs, API references, GitHub READMEs without leaving Emacs
 2. **Programmatic web interaction** — Claude Code / agent tasks that need to fetch or navigate web content
@@ -50,14 +50,14 @@ M-x eww RET https://example.com RET
 ;; [[https://example.com]]  →  RET to open in eww (with browse-url routing)
 ```
 
-### Key bindings (SpaceLattice config)
+### Key bindings (Spacemacs config)
 
 | Key | Action |
 |-----|--------|
 | `o` | `ace-link-eww` — Vimium-style overlay on all visible links |
 | `RET` | Follow link under cursor |
 | `&` | Open current URL in external browser |
-| `v` | Open in new eww buffer (overridden in SpaceLattice config) |
+| `v` | Open in new eww buffer (overridden in Spacemacs config) |
 | `b` | Back |
 | `f` | Forward |
 | `H` | History |
@@ -90,7 +90,7 @@ M-x eww RET https://example.com RET
 (eww-browse-url "https://docs.python.org/3/")
 ```
 
-### Browse-url routing (SpaceLattice standard)
+### Browse-url routing (Spacemacs standard)
 
 Configured in `dotfile.spacemacs.tmpl` `user-config`. Routes auth/SPA URLs to external browser, everything else to eww:
 
@@ -149,7 +149,7 @@ Works in: `eww-mode`, `Info-mode`, `help-mode`, `woman-mode`, `org-mode`, `compi
 
 Press `o` in any of these modes → letters appear over all visible links → type to jump.
 
-Configured in SpaceLattice `user-config`:
+Configured in Spacemacs `user-config`:
 ```elisp
 (with-eval-after-load 'eww
   (define-key eww-mode-map (kbd "o") #'ace-link-eww))
@@ -161,7 +161,7 @@ Package: `link-hint` (in `dotspacemacs-additional-packages`).
 
 Unlike `ace-link` (mode-specific), `link-hint` works in any buffer that has link-type text (org links, eww URLs, file paths, buttons, etc.).
 
-SpaceLattice bindings (configured in `user-config`):
+Spacemacs bindings (configured in `user-config`):
 ```elisp
 (spacemacs/set-leader-keys "jo" #'link-hint-open-link)
 (spacemacs/set-leader-keys "jO" #'link-hint-copy-link)

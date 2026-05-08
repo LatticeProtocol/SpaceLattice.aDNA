@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/LatticeProtocol/SpaceLattice.aDNA/what/standard/telemetry_schema.json",
-  "title": "SpaceLattice.aDNA Telemetry Schema",
+  "$id": "https://github.com/LatticeProtocol/Spacemacs.aDNA/what/standard/telemetry_schema.json",
+  "title": "Spacemacs.aDNA Telemetry Schema",
   "description": "JSON Schema for all telemetry submission classes. Ratified by ADR-009. Privacy class annotated per field: ANON=no operator-linkable data; PSEUDO=hash or enum (linkable only with a key); IDENT=never permitted in telemetry.",
   "oneOf": [
     { "$ref": "#/$defs/friction_signal" },
