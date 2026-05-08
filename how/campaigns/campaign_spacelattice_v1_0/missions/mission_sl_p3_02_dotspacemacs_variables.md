@@ -4,10 +4,10 @@ mission_id: mission_sl_p3_02_dotspacemacs_variables
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 3
 campaign_mission_number: 2
-status: in_progress
+status: completed
 mission_class: implementation
 created: 2026-05-05
-updated: 2026-05-07
+updated: 2026-05-08
 last_edited_by: agent_stanley
 tags: [mission, planned, spacelattice, v1_0, p3, customization, dotspacemacs_variables, user_in_loop]
 blocked_by: [mission_sl_p3_01_dotfile_entry_lifecycle]
@@ -70,4 +70,29 @@ P3-01 closed.
   - All 4 variables confirmed at template defaults. No changes.
   - Agentic layout system backlog item created → P4 mission stub seeded
 
-- **Next**: §1.3.7 files / autosave / rollback (next session)
+- §1.3.7 Files / autosave / rollback — **CONFIRMED** (2026-05-08)
+  - All 4 variables confirmed at template defaults. No changes.
+  - `large-file-size 1`, `auto-save-location 'cache`, `max-rollback-slots 5`, `paste-transient-state nil`
+
+- §1.3.8 which-key / cycling / windowing — **CONFIRMED** (2026-05-08)
+  - All 8 variables confirmed at defaults (4 existing + 4 new). No changes.
+  - New vars confirmed: `enable-cycling nil`, `maximize-window-keep-side-windows t`, `enable-load-hints nil`, `enable-package-quickstart nil`
+
+- §1.3.9 Frame appearance — **CONFIRMED + 1 change** (2026-05-08)
+  - 10 existing variables confirmed at template defaults. No changes.
+  - `dotspacemacs-scroll-bar-while-scrolling` → `t` (default, new) — confirmed
+  - `dotspacemacs-background-transparency` → `100` — ADR-020 (non-default; default 90)
+  - Change landed in `what/standard/dotfile.spacemacs.tmpl`
+
+- §1.3.10 Editing knobs — **CONFIRMED** (2026-05-08)
+  - 5 existing non-defaults confirmed: `line-numbers` (plist), `enable-server t`, `persistent-server t`, `search-tools` (no ack), `whitespace-cleanup 'trailing`
+  - 10 existing defaults confirmed. No changes.
+  - 4 new vars confirmed at defaults: `activate-smartparens-mode t`, `undo-system 'undo-redo`, `use-SPC-as-y nil`, `swap-number-row nil`
+
+## AAR
+
+- **Worked**: 7-step operator-in-the-loop protocol scaled cleanly to 10 sub-groups across 2 sessions. One group per round kept cognitive load manageable.
+- **Didn't**: Reference doc and template were out of sync — 10 new vars appeared in the reference but not in the template. Caught and decided inline; template patched for 1 (ADR-020).
+- **Finding**: `dotspacemacs-background-transparency` is a commonly overlooked var; opaque default (100) is better for code-focused setups than upstream 90.
+- **Change**: Future P3-02-style missions should explicitly cross-check reference vs. template variable counts at mission open to surface gaps early.
+- **Follow-up**: None blocking. `skill_health_check` on next `skill_deploy` validates ADR-020 template edit. P3-03 next.

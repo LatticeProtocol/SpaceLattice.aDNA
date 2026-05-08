@@ -2,9 +2,9 @@
 type: state
 status: active
 created: 2026-05-03
-updated: 2026-05-07
+updated: 2026-05-08
 last_edited_by: agent_stanley
-last_session: session_stanley_20260507T_campaign_review
+last_session: session_2026_05_08_p3_02_finish
 tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_active, research_integration]
 ---
 
@@ -22,7 +22,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 **P3-01 COMPLETE (2026-05-06):** Vault-resident deployment model — ADR-015 accepted. `$SPACEMACSDIR` → vault root; `skill_install` writes one export line to shell rc; render target is `<vault>/init.el` (gitignored). All `{{PLACEHOLDER}}` substitutions eliminated except `{{LOCAL_LAYER_LIST}}`; `dotspacemacs-directory`-relative paths throughout. `dotspacemacs/user-config` now carries `§P3-01`–`§P3-11` section scaffold. `.spacemacs.env.example` added for env var documentation.
 
-**P3-02 in progress.** §1.3.1–§1.3.6 confirmed (2026-05-07): layer/pkg management, ELPA/version/dump, editing style/leaders, startup buffer/banner/lists, themes/modeline/fonts/cursor, layout system. Two non-default changes accepted: gc-cons 200 MB + LSP buffer 4 MB (ADR-016). All decisions recorded in `stanley.md`. **Next sub-group: §1.3.7** files/autosave/rollback. Sub-groups §1.3.7–§1.3.10 remain; P3-02 AAR after §1.3.10.
+**P3-02 COMPLETE (2026-05-08).** All 10 sub-groups confirmed (§1.3.1–§1.3.10). Three non-default changes total: gc-cons 200 MB + LSP buffer 4 MB (ADR-016); background-transparency 100 (ADR-020). All decisions recorded in `who/operators/stanley.md`. AAR filed at `how/missions/artifacts/aar_p3_02_dotspacemacs_variables.md`. Template diff/reference sync gap surfaced — future variable walks should cross-check counts at mission open.
 
 **Campaign research integration (2026-05-07):** 3 research sources integrated — macOS platform (xenodium.com), performance config batch (emacsredux.com, ADR-018), claude-code-ide.el MCP bridge (ADR-019). 5 new missions added (p3_12 macOS platform, p3_13 perf hardening, p3_14 org-mode deep config, p4_09 claude-code-ide layer, p4_10 agent command tree). Campaign count: 31 → 36. Vault rename ADR-017 verified complete. Key artifacts seeded: `what/context/platform_macos.md`, `how/standard/runbooks/macos_setup.md`, `what/standard/layers/claude-code-ide/` (skeleton), `what/context/agent_command_tree.md`, `what/context/org_mode_config.md` (stub).
 
@@ -75,9 +75,9 @@ None blocking. Audit findings status:
 - ✅ Both skills active: `skill_telemetry_submit` + `skill_telemetry_aggregate`
 - ✅ ADR-009 (schema) + ADR-010 (submit) + ADR-011 (aggregate) all accepted
 
-**P3 active.** Customization walk-through — 13 missions (P3-00 ✅, P3-01 ✅, P3-02 in-progress, P3-03 through P3-14 queued), 14-20 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
+**P3 active.** Customization walk-through — 13 missions (P3-00 ✅, P3-01 ✅, P3-02 ✅, P3-03 next, P3-04 through P3-14 queued), 12-18 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
 
-**Immediate next**: P3-02 §1.3.7–§1.3.10 (files/autosave/rollback → evil/misc → font/icon → layout-mgmt/perf), then AAR. Then P3-03 layer anatomy → continue P3 walk → NEW P3-12 (macOS platform review), P3-13 (perf hardening operator gate), P3-14 (org-mode deep config).
+**Immediate next**: P3-03 layer anatomy / API walk. Then continue P3 walk → P3-04 themes/modeline/banner/startup → P3-05 through P3-11 → NEW P3-12 (macOS platform review), P3-13 (perf hardening operator gate), P3-14 (org-mode deep config).
 
 **P4 queue additions**: P4-09 (complete claude-code-ide layer — `skill_install`/`skill_deploy` wiring + live acceptance test), P4-10 (agent command tree — `SPC a x` transient + `skill_adna_index` update).
 

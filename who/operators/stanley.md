@@ -3,7 +3,7 @@ type: operator
 name: Stanley
 status: active
 created: 2026-05-03
-updated: 2026-05-07
+updated: 2026-05-08
 last_edited_by: agent_stanley
 hostname: null
 primary_models:
@@ -71,7 +71,7 @@ To be populated when `skill_install` runs and `what/local/` is bootstrapped from
 - **Decision**: Use `(list (concat dotspacemacs-directory "what/local/"))` for `dotspacemacs-configuration-layer-path`. Use `(concat dotspacemacs-directory "what/local")` for private-elisp path. Remove `{{VAULT_ROOT}}` / `{{LOCAL_LAYER_DIR}}` / `{{LAYER_PATH_LIST}}` substitutions from `skill_deploy`. Banner stays `'official` — custom ASCII assets in `what/standard/assets/` deferred to P4 fork branding.
 - **Reason**: With Knob A, `dotspacemacs-directory` IS the vault root. Template is portable across operators with no machine-specific render step. Banner reverted to official during P3-01 session — operator prefers standard Spacemacs logo at v0.x stage.
 
-## Mission p3_02_dotspacemacs_variables (in_progress — resumed next session)
+## Mission p3_02_dotspacemacs_variables (completed 2026-05-08)
 
 ### §1.3.1 Layer / package management — CONFIRMED (2026-05-07)
 
@@ -158,6 +158,76 @@ All variables confirmed at template defaults. No changes.
 | `dotspacemacs-auto-generate-layout-names` | `nil` — confirmed | Named layouts more intentional; auto-naming produces noise |
 
 Note: layout system will be extended in P4 via the Agentic Layout Intelligence mission (see `how/backlog/idea_agentic_layout_system.md`).
+
+### §1.3.7 Files / autosave / rollback — CONFIRMED (2026-05-08)
+
+All 4 variables confirmed at template defaults. No changes.
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-large-file-size` | `1` — confirmed | 1 MB is conservative; revisit if large logs/CSVs become routine in Spacemacs |
+| `dotspacemacs-auto-save-file-location` | `'cache` — confirmed | Keeps project trees clean; `~/.emacs.d/cache/auto-save/` out of sight |
+| `dotspacemacs-max-rollback-slots` | `5` — confirmed | Adequate history depth; not a routine rollback workflow |
+| `dotspacemacs-enable-paste-transient-state` | `nil` — confirmed | Standard vim paste behavior; kill-ring cycling via `C-j`/`C-k` adds keybinding surface with low ROI |
+
+### §1.3.8 which-key / cycling / windowing — CONFIRMED (2026-05-08)
+
+All 8 variables confirmed at defaults (4 existing + 4 new). No changes.
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-which-key-delay` | `0.4` — confirmed | Snappy without being intrusive |
+| `dotspacemacs-which-key-position` | `'bottom` — confirmed | Standard; full-width visibility |
+| `dotspacemacs-switch-to-buffer-prefers-purpose` | `nil` — confirmed | No purpose-based window management in use |
+| `dotspacemacs-loading-progress-bar` | `t` — confirmed | Useful feedback during boot |
+| `dotspacemacs-enable-cycling` | `nil` — confirmed (new) | vim `C-o`/`C-i` cover history navigation; cycling adds keybinding surface |
+| `dotspacemacs-maximize-window-keep-side-windows` | `t` (default) — confirmed (new) | treemacs preserved on `SPC w m`; important for agentic coding flow |
+| `dotspacemacs-enable-load-hints` | `nil` — confirmed (new) | macOS no-op (Windows-only optimization) |
+| `dotspacemacs-enable-package-quickstart` | `nil` — confirmed (new) | homebrew + custom layer setup prone to stale-autoload issues with quickstart |
+
+### §1.3.9 Frame appearance — CONFIRMED + 1 change (2026-05-08)
+
+10 existing variables confirmed at template defaults. 2 new variables added.
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-fullscreen-at-startup` | `nil` — confirmed | Maximize (`t` for `maximized-at-startup`) preferred over native fullscreen |
+| `dotspacemacs-fullscreen-use-non-native` | `nil` — confirmed | Not using fullscreen; moot |
+| `dotspacemacs-maximized-at-startup` | `t` — confirmed | Full workspace real estate on boot |
+| `dotspacemacs-undecorated-at-startup` | `nil` — confirmed | Keep title bar for macOS window management |
+| `dotspacemacs-active-transparency` | `90` — confirmed | Subtle transparency; keep for now |
+| `dotspacemacs-inactive-transparency` | `90` — confirmed | Matching inactive opacity |
+| `dotspacemacs-background-transparency` | `100` — **changed** (default 90) | Opaque background; no bleed-through behind code text; ADR-020 |
+| `dotspacemacs-scroll-bar-while-scrolling` | `t` (default) — confirmed (new) | Autohide scrollbar is low-clutter position indicator |
+| `dotspacemacs-show-transient-state-title` | `t` — confirmed | Readable TS header |
+| `dotspacemacs-show-transient-state-color-guide` | `t` — confirmed | Color hints in TS keys are helpful |
+| `dotspacemacs-mode-line-unicode-symbols` | `t` — confirmed | Unicode glyphs render correctly on macOS with all-the-icons |
+| `dotspacemacs-smooth-scrolling` | `t` — confirmed | No jarring recenter on scroll edge |
+
+Change landed in `what/standard/dotfile.spacemacs.tmpl` (ADR-020).
+
+### §1.3.10 Editing knobs — CONFIRMED (2026-05-08)
+
+19 variables total. 15 existing (5 non-default + 10 at default) all confirmed. 4 new variables confirmed at defaults.
+
+**Existing non-defaults confirmed:**
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-line-numbers` | `'(:relative t :enabled-for-modes prog-mode text-mode)` — confirmed | Relative line numbers in code/text; absolute elsewhere (e.g., terminals, org agenda) |
+| `dotspacemacs-enable-server` | `t` — confirmed | emacsclient integration (P3-00 closed-loop validation relies on it) |
+| `dotspacemacs-persistent-server` | `t` — confirmed | Quit functions keep server alive; required for emacsclient workflow |
+| `dotspacemacs-search-tools` | `'("rg" "ag" "grep")` — confirmed | `ack` dropped; `rg` is the standard in lattice ML pipelines |
+| `dotspacemacs-whitespace-cleanup` | `'trailing` — confirmed | Clean trailing whitespace on save; not overly aggressive |
+
+**New variables confirmed at defaults:**
+
+| Variable | Decision | Rationale |
+|---|---|---|
+| `dotspacemacs-activate-smartparens-mode` | `t` (default) — confirmed | Auto-pairing on; strict mode off (already confirmed); right balance |
+| `dotspacemacs-undo-system` | `'undo-redo` (default) — confirmed | Emacs 29+ native linear undo; evil integrates cleanly; no background process |
+| `dotspacemacs-use-SPC-as-y` | `nil` (default) — confirmed | SPC is leader key; double-duty on prompts creates confusion + accidental confirmations |
+| `dotspacemacs-swap-number-row` | `nil` (default) — confirmed | Standard US QWERTY layout |
 
 ## Promotion log (local → standard)
 
