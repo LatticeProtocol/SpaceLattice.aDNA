@@ -5,6 +5,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
+last_mission: mission_sl_p3_07_wild_workarounds_org
 hostname: null
 primary_models:
   - claude-opus-4-7
@@ -389,6 +390,52 @@ Change landed in `what/standard/dotfile.spacemacs.tmpl` (ADR-020).
 | `dotspacemacs-fullscreen-at-startup` | `nil` | Default; maximized (not native fullscreen) is preferred |
 | `dotspacemacs-undecorated-at-startup` | `nil` | Keep macOS title bar |
 | `background-transparency` | 100 | Already locked ADR-020 |
+
+## Mission p3_07_wild_workarounds_org (completed 2026-05-08)
+
+### §3.1 Layer stacks adopted
+
+| Stack | Layers | Notes |
+|-------|--------|-------|
+| Python/DS extras | `ipython-notebook` | ein — Jupyter notebooks in Emacs; pairs with base `python` layer |
+| Notes / org-roam v2 | via org layer variables | `org-enable-roam-support t`, `org-enable-roam-protocol t` |
+| DevOps | `kubernetes`, `ansible` | docker already in standard layers |
+| Web extras | `html` | react + javascript already in standard; html adds web-mode for templates |
+| Email | `mu4e` | Requires `brew install mu` + isync (mbsync) for maildir sync; async ops enabled |
+| Clojure / Data-R / C-C++ / Themes-heavy | Not adopted | Not in current workflow |
+
+### §3.2 Workarounds adopted
+
+| Workaround | Decision | Where |
+|-----------|----------|-------|
+| exec-path-from-shell | Adopted — `exec-path-from-shell-check-startup-files nil` + `initialize` | `dotfile.spacemacs.tmpl` user-init |
+| LSP file-watcher limit | Adopted — `lsp-enable-file-watchers nil`, `lsp-idle-delay 0.5` | `dotfile.spacemacs.tmpl` §P3-07 |
+| org double-loading guard | Adopted — all org config inside `with-eval-after-load 'org` | `dotfile.spacemacs.tmpl` §P3-07 |
+| org-roam-mode auto-enable | Adopted — `org-roam-db-autosync-mode` on org-roam load | `dotfile.spacemacs.tmpl` §P3-07 |
+| mode-hooks for CLI files | Adopted (pattern rule) — prog-mode hooks placed in `user-init` | Coding standard recorded |
+| ivy stale prompts | NOT APPLICABLE — completion stack is helm (P3-05), not ivy | n/a |
+| evil-escape jj/fd | fd CONFIRMED — default, no override | P3-06 decision stands |
+| treemacs auto-load | Documented recipe for pinning SHA if regression occurs | Comment in §P3-07 |
+| native-comp warnings | Adopted — `native-comp-async-report-warnings-errors 'silent` | `dotfile.spacemacs.tmpl` user-init |
+| ELPA TLS / MITM proxy | OS-level only — add CA cert to macOS System Keychain; no code change | Documented in operator.private.el |
+| macOS title-bar | Already handled — ADR-022 (frame title) + §P3-12 title bar block | n/a |
+| Helm stability knobs | Adopted — `helm-prevent-escaping-from-minibuffer t` + fuzzy matching | `dotfile.spacemacs.tmpl` §P3-07 |
+
+### §3.3 Org-mode configuration
+
+| Setting | Decision | Rationale |
+|---------|----------|-----------|
+| org-directory | `<vault-root>/org/` (i.e. `Spacemacs.aDNA/org/`) | Modular, self-contained — vault = context graph; same git boundary as missions/sessions |
+| org-agenda-files | `inbox.org` + `work.org` only | Minimal; avoids slow agenda scan across large roam graph |
+| org-roam-directory | `<vault-root>/org/` | Co-located with standard org files; roam DB at `.roam.db` (gitignored) |
+| org-babel-languages | python, shell, jupyter, emacs-lisp | ML pipelines (python), runbooks (shell), notebook kernels (jupyter) |
+| org-journal | Deferred | Style TBD (daily/weekly) — add in later session after using agenda for a few weeks |
+| org-refile-targets | agenda files, maxlevel 9 | Full-depth refile for any heading in inbox/work |
+| org-todo-keywords | TODO → NEXT → WAIT → DONE/CANCELLED | Standard GTD-lite state machine |
+| org-roam-protocol | enabled | Allows `org-protocol://roam-ref` capture from browser |
+| org-sticky-header | enabled | Context breadcrumb visible while scrolling long org files |
+
+**Finding**: ivy workaround not applicable — helm is the confirmed completion stack from P3-05. Helm-specific stability knobs added to standard template instead.
 
 ## Promotion log (local → standard)
 

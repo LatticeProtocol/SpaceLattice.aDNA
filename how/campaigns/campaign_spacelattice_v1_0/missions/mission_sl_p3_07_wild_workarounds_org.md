@@ -4,12 +4,13 @@ mission_id: mission_sl_p3_07_wild_workarounds_org
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 3
 campaign_mission_number: 7
-status: planned
+status: completed
 mission_class: implementation
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-08
 last_edited_by: agent_stanley
-tags: [mission, planned, spacelattice, v1_0, p3, customization, wild_customizations, workarounds, org_mode, user_in_loop]
+aar: how/campaigns/campaign_spacelattice_v1_0/missions/artifacts/aar_p3_07.md
+tags: [mission, completed, spacelattice, v1_0, p3, customization, wild_customizations, workarounds, org_mode, user_in_loop]
 blocked_by: [mission_sl_p3_06_perf_evil_fonts]
 ---
 
@@ -40,3 +41,11 @@ P3-06 closed.
 ## Reference
 
 - `what/context/spacemacs/spacemacs_customization_reference.md` §3.1, §3.2, §3.3
+
+## AAR (2026-05-08)
+
+**Worked**: All three §3.1/3.2/3.3 walks completed in one session; full template + profile + org dir written.
+**Didn't**: Ivy workaround was asked despite helm being the confirmed stack (P3-05 finding); corrected on the fly.
+**Finding**: §3.1 broad adoption (5 stacks) adds install dependencies (mu4e/mu, ipython-notebook) — document in P3-12 runbook.
+**Change**: Pre-assess from prior mission decisions before building the §3.2 question list in future P3 sessions.
+**Follow-up**: P3-12 should cover mu4e + org-roam-protocol browser extension setup; org-journal style deferred to post-usage review.

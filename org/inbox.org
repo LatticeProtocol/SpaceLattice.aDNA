@@ -1,0 +1,8 @@
+#+TITLE: Inbox
+#+AUTHOR: Stanley
+#+STARTUP: overview
+
+* Inbox
+:PROPERTIES:
+:DESCRIPTION: Capture landing zone. Process weekly: refile, schedule, or delete.
+:END:

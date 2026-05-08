@@ -1,0 +1,18 @@
+#+TITLE: Work
+#+AUTHOR: Stanley
+#+STARTUP: overview
+
+* Active
+:PROPERTIES:
+:DESCRIPTION: Currently in-flight tasks and projects.
+:END:
+
+* Waiting
+:PROPERTIES:
+:DESCRIPTION: Blocked on someone or something else.
+:END:
+
+* Reference
+:PROPERTIES:
+:DESCRIPTION: Non-actionable reference material.
+:END:

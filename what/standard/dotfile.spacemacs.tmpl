@@ -47,7 +47,10 @@
      emacs-lisp
      (markdown :variables markdown-live-preview-engine 'vmd)
      (org :variables org-want-todo-bindings t
-                      org-enable-roam-support t)
+                      org-enable-roam-support t
+                      org-enable-roam-protocol t
+                      org-enable-sticky-header t
+                      org-enable-org-journal-support nil) ; journal style TBD per operator
      yaml
      csv
      toml
@@ -57,6 +60,7 @@
                        latex-backend 'lsp)           ; requires texlive + texlab LSP
      pdf                                             ; pdf-tools — native PDF rendering
      epub                                            ; nov.el — epub reader
+     html                                            ; web-mode for HTML/Jinja/Django templates
 
      ;; === tools ===
      (shell :variables shell-default-shell 'vterm shell-default-position 'bottom)
@@ -65,8 +69,15 @@
      syntax-checking
      restclient                                      ; HTTP REPL via .http files (SPC m s s)
      docker                                          ; Dockerfile + docker-compose support
+     kubernetes                                      ; k8s resource editing + kubectl integration
+     ansible                                         ; YAML playbooks + vault + inventory navigation
+     ipython-notebook                                ; ein — Jupyter notebooks in Emacs (§3.1 Python/DS)
      (dap :variables dap-python-debugger 'debugpy)  ; Debug Adapter Protocol — all language debuggers
      tree-sitter                                     ; Emacs 29+ treesit — structured syntax highlighting
+
+     ;; === email ===
+     (mu4e :variables mu4e-installation-path "/usr/local/share/emacs/site-lisp/mu4e"
+                      mu4e-enable-async-operations t) ; requires: brew install mu + isync
 
      ;; === AI + agentic ===
      claude-code-ide                                 ; Claude Code MCP bridge — buffer/diagnostic/tree-sitter context (ADR-019)
@@ -172,6 +183,18 @@
   ;; ref-clean envs where the module hasn't been compiled yet.
   (setq vterm-always-compile-module t)
 
+  ;; exec-path-from-shell (§3.2 macOS workaround): inherit $PATH from login shell.
+  ;; Suppresses "interactive shell" warning; ensures GUI-launched Emacs gets
+  ;; the same PATH as a terminal session (homebrew, pyenv, rbenv, etc.).
+  (when (and (eq system-type 'darwin) (fboundp 'exec-path-from-shell-initialize))
+    (setq exec-path-from-shell-check-startup-files nil)
+    (exec-path-from-shell-initialize))
+
+  ;; native-comp (§3.2): silence async compilation warnings in Emacs 28+.
+  ;; Avoids spurious *Warnings* popups during package install.
+  (when (boundp 'native-comp-async-report-warnings-errors)
+    (setq native-comp-async-report-warnings-errors 'silent))
+
   ;; Load operator's private elisp last (gitignored) — additive only.
   (let ((private-el (expand-file-name "operator.private.el"
                                       (concat dotspacemacs-directory "what/local"))))
@@ -225,7 +248,67 @@
   (set-face-attribute 'default nil :height 150)
 
   ;;; ── §P3-07 Workarounds / org-mode ───────────────────────────────────────
-  ;; (populated by mission P3-07)
+
+  ;; ─ LSP file-watcher limit ─────────────────────────────────────────────────
+  ;; Disables FS-watchers that exhaust inotify on large monorepos (~/lattice/).
+  ;; Pairs with ADR-016 GC/throughput tuning already in dotspacemacs/init.
+  (with-eval-after-load 'lsp-mode
+    (setq lsp-enable-file-watchers nil
+          lsp-idle-delay 0.5
+          lsp-completion-provider :capf))
+
+  ;; ─ Org: double-load guard + full config ──────────────────────────────────
+  ;; All org config is wrapped in with-eval-after-load to ensure the ELPA
+  ;; org layer (not Emacs built-in org) is already active when these run.
+  (with-eval-after-load 'org
+    ;; Vault-local org dir: modular, self-contained context graph.
+    ;; Lives at <vault-root>/org/ alongside missions, sessions, campaigns.
+    (setq org-directory (concat dotspacemacs-directory "org/"))
+
+    ;; Minimal agenda: inbox + work only.
+    (setq org-agenda-files
+          (list (concat dotspacemacs-directory "org/inbox.org")
+                (concat dotspacemacs-directory "org/work.org")))
+
+    ;; Refile any heading in agenda files, full depth.
+    (setq org-refile-targets '((nil :maxlevel . 9)
+                               (org-agenda-files :maxlevel . 9))
+          org-refile-use-outline-path t
+          org-outline-path-complete-in-steps nil)
+
+    ;; TODO state machine.
+    (setq org-todo-keywords
+          '((sequence "TODO" "NEXT" "WAIT" "|" "DONE" "CANCELLED")))
+
+    ;; Babel: python (ML), shell (runbooks/DevOps), jupyter (ein notebook kernels).
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (shell      . t)
+       (python     . t)
+       (jupyter    . t))))
+
+  ;; ─ Org-roam v2 ────────────────────────────────────────────────────────────
+  ;; Vault-local roam graph: DB sits alongside org files in <vault-root>/org/.
+  ;; autosync-mode keeps the DB current without manual M-x org-roam-db-sync.
+  (with-eval-after-load 'org-roam
+    (setq org-roam-directory  (concat dotspacemacs-directory "org/")
+          org-roam-db-location (concat dotspacemacs-directory "org/.roam.db"))
+    (org-roam-db-autosync-mode))
+
+  ;; ─ Helm stability knobs ───────────────────────────────────────────────────
+  ;; Prevents accidental minibuffer dismissal; enables fuzzy matching globally.
+  (with-eval-after-load 'helm
+    (setq helm-prevent-escaping-from-minibuffer t
+          helm-buffers-fuzzy-matching t
+          helm-M-x-fuzzy-match t
+          helm-imenu-fuzzy-match t))
+
+  ;; ─ Treemacs auto-load regression note ────────────────────────────────────
+  ;; If a MELPA treemacs update causes workspace corruption, pin via:
+  ;;   (dotspacemacs-additional-packages '((treemacs :location (recipe :fetcher github
+  ;;     :repo "Alexander-Miller/treemacs" :commit "<known-good-sha>"))))
+  ;; Current MELPA version is stable; no pin needed at P3-07 close.
 
   ;;; ── §P3-08 Languages / keys / navigation ────────────────────────────────
   ;; Project-search: ripgrep; discover all vaults in ~/lattice/

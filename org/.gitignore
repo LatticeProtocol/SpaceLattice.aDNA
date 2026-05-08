@@ -1,0 +1,4 @@
+# org-roam database — rebuilt locally from the org files
+.roam.db
+# org-id locations cache
+.org-id-locations
