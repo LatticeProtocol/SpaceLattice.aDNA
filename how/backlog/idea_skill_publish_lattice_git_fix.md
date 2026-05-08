@@ -1,10 +1,10 @@
 ---
 type: backlog
 idea_id: idea_skill_publish_lattice_git_fix
-status: ready
+status: in_progress
 priority: high
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 last_edited_by: agent_stanley
 tags: [backlog, upstream, publish, git, skill, adna_template, infrastructure]
 target_phase: upstream

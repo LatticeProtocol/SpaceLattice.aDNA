@@ -12,7 +12,7 @@ estimation_class: governance-broad
 priority: medium
 predecessor: "spacemacs.aDNA genesis (plan-driven; AAR at how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md)"
 created: 2026-05-05
-updated: 2026-05-07
+updated: 2026-05-08
 last_edited_by: agent_stanley
 p2_progress: "4/4 missions closed ✅ P2 COMPLETE"
 ratified_by:
@@ -113,7 +113,7 @@ Systematic walk through the **22 dimensions** of `what/context/spacemacs/spacema
 - `mission_sl_p3_03_layer_anatomy_api` — §1.4 (layer anatomy + grammar), §1.5 (`configuration-layer/` API surface)
 - `mission_sl_p3_04_themes_modeline_banner_startup` — §1.6 (theme), §1.7 (modeline; 6 themes), §1.8 (banner + selection logic), §1.9 (startup buffer + scratch + frame title)
 - `mission_sl_p3_05_editing_completion_packages` — §2.1 (editing styles), §2.2 (completion stack), §2.3 (package mgmt knobs)
-- `mission_sl_p3_06_perf_evil_fonts` — §2.5 (performance), §2.6 (evil + misc), §2.7 (font + icon)
+- `mission_sl_p3_06_perf_evil_fonts` ✅ — §2.5 (performance), §2.6 (evil + misc), §2.7 (font + icon)
 - `mission_sl_p3_07_wild_workarounds_org` — §3.1 (wild combos), §3.2 (10 canonical workarounds), §3.3 (org-mode power-user)
 - `mission_sl_p3_08_languages_keys_perf` — §3.4 (LSP + tree-sitter + DAP), §3.5 (keybinding philosophy + `SPC o l`), §3.6 (perf recipes); P3 phase-gate evidence
 - `mission_sl_p3_09_obsidian_plugin_audit` — trim `.obsidian/plugins/` from 15 plugins (~13MB) to essentials (~1.5MB); document optionals; operator UX verification post-trim *(added at P1-01 backlog audit 2026-05-06)*

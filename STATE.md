@@ -4,7 +4,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_session: session_sl_p3_05_2026_05_08
+last_session: session_sl_p3_06_2026_05_08
 tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_active, research_integration]
 ---
 
@@ -81,9 +81,9 @@ None blocking. Audit findings status:
 - ✅ Both skills active: `skill_telemetry_submit` + `skill_telemetry_aggregate`
 - ✅ ADR-009 (schema) + ADR-010 (submit) + ADR-011 (aggregate) all accepted
 
-**P3 active.** Customization walk-through — 15 missions (P3-00 ✅, P3-01 ✅, P3-02 ✅, P3-03 ✅, P3-04 ✅, P3-05 ✅, P3-06 next, P3-07 through P3-14 queued), 9-15 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`. P4-05 (banner assets) reclassified to stub/skip — no custom banner work needed.
+**P3 active.** Customization walk-through — 15 missions (P3-00 ✅, P3-01 ✅, P3-02 ✅, P3-03 ✅, P3-04 ✅, P3-05 ✅, P3-06 ✅, P3-07 next, P3-08 through P3-14 queued), 8-14 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`. P4-05 (banner assets) reclassified to stub/skip — no custom banner work needed.
 
-**Immediate next**: P3-06 performance/evil/fonts (§2.5 gc-cons/lazy-install/quickstart, §2.6 evil-escape/undo-system/folding, §2.7 font fallback chains/icon font). Then P3-07 through P3-11 → P3-12 (macOS platform review), P3-13 (perf hardening operator gate), P3-14 (org-mode deep config).
+**Immediate next**: P3-07 wild combos + workarounds + org-mode power-user (§3.1, §3.2, §3.3). Then P3-08 languages/keys/perf → P3-09 Obsidian plugin audit → P3-12 macOS platform → P3-13 perf hardening gate → P3-14 org-mode deep config.
 
 **P4 queue additions**: P4-09 (complete claude-code-ide layer — `skill_install`/`skill_deploy` wiring + live acceptance test), P4-10 (agent command tree — `SPC a x` transient + `skill_adna_index` update).
 
@@ -95,6 +95,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-08 | **P3-06 complete** — Performance + evil + fonts/icons: all §2.5 performance knobs at defaults (gc-cons + LSP buffer already locked ADR-016); all §2.6 evil/misc knobs at defaults; §2.7: font → SpaceMono Nerd Font 13.0 (from Source Code Pro 15.0), icons-font → `nerd-icons` (was unset); `dotspacemacs-maximized-at-startup` already `t`. ADR-023 accepted. Pre-req: `brew install --cask font-space-mono-nerd-font` + `M-x nerd-icons-install-fonts` | P3-06 session |
 | 2026-05-08 | **P3-05 complete** — Editing styles + completion stack + package management: `'vim` editing style (pure Evil, no `:variables`); `helm` sole completion framework; `'used-only` install policy; default ELPA archives; empty frozen-packages + additional-packages; no quelpa recipes. Zero drift from standard — no ADR issued. §2.1/§2.2/§2.3 decisions in operator profile | P3-05 session |
 | 2026-05-08 | **P3-04 complete** — Themes + modeline + banner + startup: `theming` layer added (ADR-021); frame-title-format → buffer + project (ADR-022); doom-modeline-icon `t` in `operator.private.el` (first use); P4-05 → stub/skip (official banner permanent); P4-03 pre-figuring: doom-one + modus-vivendi; §1.6–§1.9 decisions in operator profile | P3-04 session |
 | 2026-05-08 | **P3-03 complete** — Layer anatomy + API walk: `layers.el` added (declare-layer-dependencies spacemacs-bootstrap), `json` → `(json :location built-in)`, README.org live-implementation table, `adna-claude-code-command` as `:variables`, distribution name `'spacemacs-latticeprotocol` confirmed; 8 decision blocks + §1.5 familiarity in operator profile | P3-03 session |
@@ -139,6 +140,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Upgrade | Source |
 |------|---------|--------|
+| 2026-05-08 | **P3-06 perf + evil + fonts/icons** — §2.5/§2.6 all defaults confirmed; §2.7: `dotspacemacs-default-font` → SpaceMono Nerd Font 13.0; `dotspacemacs-default-icons-font` → `nerd-icons`; ADR-023 accepted; `dotfile.spacemacs.tmpl` updated; health-check green; coord memo `coord_2026_05_08_adna_publish_rewrite` co-signed (Daedalus); backlog idea `idea_skill_publish_lattice_git_fix` → `in_progress` | session_sl_p3_06_2026_05_08 |
 | 2026-05-08 | **P3-05 editing + completion + packages** — §2.1 `'vim` (no `:variables`); §2.2 `helm` sole completion; §2.3 `'used-only` + default ELPA archives + empty frozen/additional-packages; operator profile P3-05 decision block; no ADR needed (all defaults) | session_sl_p3_05_2026_05_08 |
 | 2026-05-08 | **P3-04 themes + modeline + banner + startup** — `theming` layer in `dotspacemacs-configuration-layers` (ADR-021); `dotspacemacs-frame-title-format` → buffer + project (ADR-022); `what/local/operator.private.el` created (doom-modeline-icon t); operator profile P3-04 decision blocks; P4-05 scope cleared | session_sl_p3_04_2026_05_08 |
 | 2026-05-08 | **P3-03 layer anatomy walk** — `layers.el` added; packages.el `json` grammar fixed; README.org updated (Phase-2 placeholder → live table); dotfile template exposes `adna-claude-code-command` as `:variables`; operator profile blocks A–H + §1.5 | session_sl_p3_03_2026_05_08 |

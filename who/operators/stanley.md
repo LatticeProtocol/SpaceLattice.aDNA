@@ -357,6 +357,39 @@ Change landed in `what/standard/dotfile.spacemacs.tmpl` (ADR-020).
 
 **Finding**: All three primary P3-05 decisions (editing-style, completion-engine, install-packages) are Spacemacs defaults. No ADR issued — no drift from standard.
 
+## Mission p3_06_perf_evil_fonts (completed 2026-05-08)
+
+### §2.5 Performance knobs
+
+| Knob | Decision | Rationale |
+|------|----------|-----------|
+| `dotspacemacs-gc-cons` | 200 MB — already locked ADR-016 | Heavy LSP/ML use; confirmed in P3-02 |
+| `dotspacemacs-read-process-output-max` | 4 MB — already locked ADR-016 | LSP throughput for agentic SE; confirmed in P3-02 |
+| `dotspacemacs-enable-lazy-installation` | `'unused` (default) | Install layers on first use; good balance for dev workloads |
+| `dotspacemacs-enable-load-hints` | `nil` (default, skip) | macOS — Windows-only speedup, no effect here |
+| `dotspacemacs-enable-package-quickstart` | `nil` (default) | Scan each boot; avoids stale autoloads after package changes |
+| `dotspacemacs-byte-compile` | `nil` (default) | Native-comp (Emacs `--with-native-comp`) handles this; no manual byte-compile |
+
+### §2.6 Evil & misc
+
+| Knob | Decision | Rationale |
+|------|----------|-----------|
+| `evil-escape-key-sequence` | `fd` (default) | Fast to type, minimal conflicts; no custom override needed |
+| `dotspacemacs-undo-system` | `undo-fu` (default) | Lightweight, reliable; no need for full undo-tree visualization at this time |
+| `dotspacemacs-folding-method` | `'evil` (default) | Native Evil fold ops (za/zc/zo) sufficient for current workload |
+| `dotspacemacs-search-tools` | `'("rg" "ag" "grep")` — already in template | rg-first; rg installed on L1 machine |
+
+### §2.7 Font + icon
+
+| Knob | Decision | Notes |
+|------|----------|-------|
+| `dotspacemacs-default-font` | `"SpaceMono Nerd Font"` @ 13.0, normal weight | ADR-023; pre-req: `brew install --cask font-space-mono-nerd-font` |
+| `dotspacemacs-default-icons-font` | `'nerd-icons` | ADR-023; pre-req: `M-x nerd-icons-install-fonts` after first deploy |
+| `dotspacemacs-maximized-at-startup` | `t` | Already in template — no change needed |
+| `dotspacemacs-fullscreen-at-startup` | `nil` | Default; maximized (not native fullscreen) is preferred |
+| `dotspacemacs-undecorated-at-startup` | `nil` | Keep macOS title bar |
+| `background-transparency` | 100 | Already locked ADR-020 |
+
 ## Promotion log (local → standard)
 
 | Date | Promoted | ADR | Notes |
