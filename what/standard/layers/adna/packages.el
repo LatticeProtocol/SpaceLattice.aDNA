@@ -10,7 +10,7 @@
 
 (defconst adna-packages
   '(yaml
-    json
+    (json :location built-in)
     (markdown-mode :location built-in))
   "List of packages required by the adna layer.
 

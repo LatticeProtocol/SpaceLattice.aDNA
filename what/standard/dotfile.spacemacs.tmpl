@@ -72,7 +72,8 @@
      (llm-client :variables llm-client-enable-gptel t) ; gptel — Claude/OpenAI/Ollama from any buffer
 
      ;; === Spacemacs.aDNA bridge ===
-     adna
+     (adna :variables
+           adna-claude-code-command "claude")  ; override path if claude not on $PATH
 
      ;; === operator-added local layers (dirs inside what/local/ via dotspacemacs-configuration-layer-path) ===
      {{LOCAL_LAYER_LIST}}

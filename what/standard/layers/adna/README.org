@@ -1,5 +1,5 @@
 #+TITLE: adna layer
-#+AUTHOR: SpaceLattice.aDNA / Daedalus
+#+AUTHOR: Spacemacs.aDNA / Daedalus
 #+DATE: 2026-05-03
 #+LANGUAGE: en
 
@@ -11,53 +11,56 @@ activates =adna-mode=, parses the file's YAML frontmatter into buffer-local
 variables, and surfaces the =SPC a= transient menu for triad-aware navigation.
 
 This layer is the "wings" half of the Daedalus metaphor governing
-SpaceLattice.aDNA — tools that lift the operator above the labyrinth of
+Spacemacs.aDNA — tools that lift the operator above the labyrinth of
 aDNA context-graph relations rather than just through it.
 
 * Implementation status
 
-** Phase 2 (genesis) — placeholder
+** Live — Phase 4 complete (2026-05-08)
 
-This README is in place; the elisp source files are stubs. Full implementation
-arrives in **Phase 4** of the genesis plan.
+All five files fully implemented and live-boot validated (skill_install E2E pass;
+adna-index producing 223 nodes / 341 edges; health-check passing).
 
-** Phase 4 (planned) — full implementation
-
-Files to be authored:
-
-| File             | Purpose                                                           |
-|------------------+-------------------------------------------------------------------|
-| =packages.el=    | Spacemacs layer manifest (declares yaml, transient, vterm, json)  |
-| =config.el=      | =defvar= / =defcustom= declarations                               |
-| =funcs.el=       | All interactive commands and helpers                              |
-| =keybindings.el= | =SPC a= transient menu + =SPC c c= Claude Code spawn              |
+| File             | Status | Notes                                                              |
+|------------------+--------+--------------------------------------------------------------------|
+| =layers.el=      | Live   | declare-layer-dependencies spacemacs-bootstrap                     |
+| =packages.el=    | Live   | yaml (ELPA) + (json :location built-in) + markdown-mode post-init |
+| =config.el=      | Live   | defcustom group adna, adna-mode minor mode, 6 toggle vars          |
+| =funcs.el=       | Live   | Vault detection, frontmatter parsing, nav, wikilink, Claude        |
+| =keybindings.el= | Live   | SPC a transient tree · SPC ol LP sub-menu · SPC cc Claude sub-menu |
 
 Specification: =what/standard/adna-bridge.md=.
+Layer contract: =what/standard/LAYER_CONTRACT.md=.
 
 * Install
 
 Activated automatically when this layer is listed in =dotspacemacs-configuration-layers=
-of =~/.spacemacs=. The Phase 2 =what/standard/dotfile.spacemacs.tmpl= already
-includes =adna= in the canonical layer list.
+of =~/.spacemacs=. =what/standard/dotfile.spacemacs.tmpl= includes =adna= in the
+canonical layer list with the =adna-claude-code-command= variable exposed.
 
 The layer's source lives at =<vault>/what/standard/layers/adna/=. =skill_install=
 symlinks it to =~/.emacs.d/private/layers/adna/=.
 
-* Key bindings (to be implemented Phase 4)
+* Key bindings
 
-| Key         | Command                       | Purpose                                  |
-|-------------+-------------------------------+------------------------------------------|
-| =SPC a m=   | =adna/open-manifest=          | Open MANIFEST.md of nearest aDNA vault   |
-| =SPC a c=   | =adna/open-claude=            | Open CLAUDE.md                           |
-| =SPC a s=   | =adna/open-state=             | Open STATE.md                            |
-| =SPC a r=   | =adna/jump-triad-root=        | Cycle who/ → what/ → how/                |
-| =SPC a k=   | =adna/run-nearest-skill=      | Execute nearest skill_*.md               |
-| =SPC a g=   | =adna/render-lattice-graph=   | View context graph as org tree           |
-| =SPC a n=   | =adna/capture-session-note=   | New session note in how/sessions/active/ |
-| =SPC a i=   | =adna/index-project=          | Rebuild what/standard/index/graph.json   |
-| =SPC a w=   | =adna/follow-wikilink=        | Resolve =[[Target]]= at point            |
-| =SPC a o=   | =adna/open-in-obsidian=       | Jump to current file in Obsidian         |
-| =SPC c c=   | =adna/spawn-claude-code=      | Open Claude Code at nearest aDNA root    |
+| Key       | Command                     | Purpose                                           |
+|-----------+-----------------------------+---------------------------------------------------|
+| =SPC a=   | =adna/menu=                 | aDNA vault transient root menu                    |
+| =SPC a m= | =adna/open-manifest=        | Open MANIFEST.md of nearest aDNA vault            |
+| =SPC a c= | =adna/open-claude=          | Open CLAUDE.md                                    |
+| =SPC a s= | =adna/open-state=           | Open STATE.md                                     |
+| =SPC a r= | =adna/jump-triad-root=      | Cycle who/ → what/ → how/                         |
+| =SPC a k= | =adna/run-nearest-skill=    | Execute nearest skill_*.md via picker             |
+| =SPC a i= | =adna-index-project=        | Rebuild what/standard/index/graph.json            |
+| =SPC a g= | =adna/render-lattice-graph= | Open context graph JSON                           |
+| =SPC a h= | =adna/health-check=         | Self-test adna layer (used by skill_health_check) |
+| =SPC a w= | =adna/follow-wikilink=      | Resolve =[[Target]]= at point                     |
+| =SPC a n= | =adna/capture-session-note= | New session file in how/sessions/active/          |
+| =SPC a o= | =adna/open-in-obsidian=     | Jump to current file in Obsidian                  |
+| =SPC a l= | =adna/lp-menu=              | Lattice Protocol sub-menu                         |
+| =SPC a ,= | =adna/claude-menu=          | Claude Code sub-menu                              |
+| =SPC ol=  | =adna/lp-menu=              | LP sub-menu (standalone entry point)              |
+| =SPC cc=  | =adna/claude-menu=          | Claude Code sub-menu (standalone entry point)     |
 
 * License
 

@@ -229,6 +229,52 @@ Change landed in `what/standard/dotfile.spacemacs.tmpl` (ADR-020).
 | `dotspacemacs-use-SPC-as-y` | `nil` (default) — confirmed | SPC is leader key; double-duty on prompts creates confusion + accidental confirmations |
 | `dotspacemacs-swap-number-row` | `nil` (default) — confirmed | Standard US QWERTY layout |
 
+## Mission p3_03_layer_anatomy_api (closed 2026-05-08)
+
+### Knob A — Layer class for `adna` (§1.4 layer classes)
+- **Decision**: Private class. `skill_install` symlinks `what/standard/layers/adna/` → `~/.emacs.d/private/layers/adna/`. Spacemacs loads it as a private layer; no `dotspacemacs-configuration-layer-path` entry needed for `adna` itself. `what/local/` path in layer-path is for operator-private custom layers, not for `adna`.
+- **Reason**: Symlink deploy is the vault's canonical deploy mechanism (ADR-015). Private class is the correct Spacemacs category for vault-governed layers not contributed upstream.
+
+### Knob B — `layers.el` (§1.4 file inventory)
+- **Decision**: Add `layers.el` with `(configuration-layer/declare-layer-dependencies '(spacemacs-bootstrap))`.
+- **Reason**: `keybindings.el` does `(require 'transient)` directly; transient is owned by `spacemacs-bootstrap`. `layers.el` makes the load-order dependency explicit per §1.4 standard. No functional change (spacemacs-bootstrap always loads first in practice), but documents the dependency correctly.
+
+### Knob C — Package declaration patterns (§1.4 grammar)
+- **Decision**: Fix `json` → `(json :location built-in)` in packages.el. Other declarations correct: `yaml` (ELPA, `init-yaml` owns it), `(markdown-mode :location built-in)` with `post-init-markdown-mode` (correct ownership pattern), deliberate omission of `transient`/`vterm` from packages list (owned by spacemacs-bootstrap/shell layers).
+- **Reason**: Bare symbol for a built-in library is technically incorrect per §1.4 grammar and confusing to read. Aligning with the grammar standard.
+
+### Knob D — `spacemacs|use-package-add-hook` (§1.4 hook macro)
+- **Decision**: Not needed currently. `with-eval-after-load` in `post-init-markdown-mode` is the correct pattern — adna doesn't need to inject into another layer's `use-package` body.
+- **Reason**: Hook macro is for cross-layer `use-package` injection (e.g., extending lsp-mode's body without touching the lsp layer). adna's markdown-mode hook is self-contained. Pattern documented for future use if adna needs to extend an upstream layer.
+
+### Knob E — Layer `:variables` exposure (§1.4 dotspacemacs-configuration-layers grammar)
+- **Decision**: Expose `adna-claude-code-command` as a `:variables` entry in the dotfile template. All other `defcustom` vars stay `defcustom`-only (configured via `what/local/operator.private.el`).
+- **Reason**: `adna-claude-code-command` is the most likely to vary across machines (different PATH configurations). Exposing it as `:variables` in the template makes the override path obvious without requiring knowledge of `defcustom`. Other vars are opt-in behavioral toggles better configured in operator.private.el.
+
+### Knob F — LP distribution layer (§1.4 layer classes, §4B fork playbook)
+- **Decision**: Distribution name = `'spacemacs-latticeprotocol` (per fork-strategy.md). Stub deferred to P4-02. Structure confirmed: `layers/+distributions/spacemacs-latticeprotocol/` in fork repo, `layers.el` declares `(configuration-layer/declare-layer-dependencies '(spacemacs))`, namespace `lp/` + `latticeprotocol-`.
+- **Reason**: Name follows fork-strategy.md. Stub in P4-02 aligns with the phased campaign plan.
+
+### §1.5 API familiarity (configuration-layer/ symbols)
+
+| Symbol | Intended usage |
+|--------|----------------|
+| `declare-layer-dependencies` | yes — in adna `layers.el` (this mission); in distribution `layers.el` (P4-02) |
+| `declare-layer` / `declare-layers` | yes — distribution `layers.el` will use these to force-add LP-curated layers (P4-02) |
+| `package-usedp` | possibly — guard adna code paths that depend on optional pkgs in future hardening missions |
+| `layer-usedp` | possibly — guard LP-only behaviors if LP distribution layer is not active |
+| `sync` | already using — `SPC f e R` is standard re-sync workflow |
+| `create-layer` | rarely — reference scaffolding when adding new private layers |
+| `update-packages` | occasionally — routine MELPA refresh |
+| `rollback` | rarely — break-glass after a bad MELPA update |
+| `configuration-layer-elpa-archives` | possibly — `user-init` override if internal ELPA mirror needed (L2 HPC context) |
+| `load` / `load-lock-file` | no — framework-internal |
+| `make-package` / `force-distribution` | no — framework-internal |
+
+### Knob H — README.org (pre-audit F-3)
+- **Decision**: Updated README.org: fixed `#+AUTHOR:` (SpaceLattice → Spacemacs), removed Phase 2/4 placeholder sections, added live implementation status table (all 5 files), updated key bindings table to 16 rows matching actual `keybindings.el`.
+- **Reason**: README was written in Phase 2 as a stub. Phase 4 implementation completed 2026-05-06. ADR-017 renamed the vault; author line was never updated.
+
 ## Promotion log (local → standard)
 
 | Date | Promoted | ADR | Notes |

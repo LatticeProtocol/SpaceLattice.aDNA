@@ -4,7 +4,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_session: session_2026_05_08_p3_02_finish
+last_session: session_sl_p3_03_2026_05_08
 tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_active, research_integration]
 ---
 
@@ -24,6 +24,8 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 **P3-02 COMPLETE (2026-05-08).** All 10 sub-groups confirmed (§1.3.1–§1.3.10). Three non-default changes total: gc-cons 200 MB + LSP buffer 4 MB (ADR-016); background-transparency 100 (ADR-020). All decisions recorded in `who/operators/stanley.md`. AAR filed at `how/missions/artifacts/aar_p3_02_dotspacemacs_variables.md`. Template diff/reference sync gap surfaced — future variable walks should cross-check counts at mission open.
 
+**P3-03 COMPLETE (2026-05-08).** Layer anatomy + configuration-layer/ API surface walk. Pre-audit surfaced 5 findings: `layers.el` added (`declare-layer-dependencies spacemacs-bootstrap`); `json` grammar fixed to `(json :location built-in)`; README.org updated from Phase-2 placeholder to live implementation table (16 keybindings, 5-file status; author line fixed for ADR-017 rename); `adna-claude-code-command` exposed as `:variables` in dotfile template; distribution name `'spacemacs-latticeprotocol` confirmed for P4-02. All 8 decision blocks (A–H) + §1.5 API familiarity recorded in `who/operators/stanley.md`.
+
 **Campaign research integration (2026-05-07):** 3 research sources integrated — macOS platform (xenodium.com), performance config batch (emacsredux.com, ADR-018), claude-code-ide.el MCP bridge (ADR-019). 5 new missions added (p3_12 macOS platform, p3_13 perf hardening, p3_14 org-mode deep config, p4_09 claude-code-ide layer, p4_10 agent command tree). Campaign count: 31 → 36. Vault rename ADR-017 verified complete. Key artifacts seeded: `what/context/platform_macos.md`, `how/standard/runbooks/macos_setup.md`, `what/standard/layers/claude-code-ide/` (skeleton), `what/context/agent_command_tree.md`, `what/context/org_mode_config.md` (stub).
 
 ## What's Working
@@ -32,7 +34,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 - Foundational ADR 000 — vault identity, persona (Daedalus), project pattern, layered architecture, LatticeProtocol publish target
 - `what/standard/` documents: `pins.md`, `layers.md`, `dotfile.spacemacs.tmpl`, `packages.el.tmpl`, `adna-bridge.md` (Phase 4 spec), `model-routing.md`, `obsidian-coupling.md`, `LAYER_CONTRACT.md` (stub)
 - `what/local/` private layer enforced — `.gitignore` allows only `*.example` templates and `README.md`; verified via `git check-ignore`
-- `what/standard/layers/adna/README.org` placeholder (elisp implementation in Phase 4)
+- `what/standard/layers/adna/` — all 5 elisp files + `layers.el` live (packages, config, funcs, keybindings, layers.el added P3-03); README.org updated to live-implementation table (16 keybindings, 5-file status) — P3-03
 - `how/standard/skills/` populated: `skill_install`, `skill_deploy`, `skill_health_check`, `skill_layer_add` (Phase 3 deliverables); `skill_inspect_live` added P3-00 — emacsclient + screencapture closed-loop validation
 - `how/standard/runbooks/` populated: `fresh_machine.md`, `update_spacemacs.md`, `recover_from_breakage.md`
 - **Phase 4** — aDNA bridge layer authored: `what/standard/layers/adna/{packages,config,funcs,keybindings}.el`. Python CLI fallback `what/standard/index/build_graph.py` runs end-to-end against this vault — 218 nodes, 331 edges. `skill_adna_index.md` wraps both callers (elisp + Python).
@@ -75,9 +77,9 @@ None blocking. Audit findings status:
 - ✅ Both skills active: `skill_telemetry_submit` + `skill_telemetry_aggregate`
 - ✅ ADR-009 (schema) + ADR-010 (submit) + ADR-011 (aggregate) all accepted
 
-**P3 active.** Customization walk-through — 13 missions (P3-00 ✅, P3-01 ✅, P3-02 ✅, P3-03 next, P3-04 through P3-14 queued), 12-18 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
+**P3 active.** Customization walk-through — 13 missions (P3-00 ✅, P3-01 ✅, P3-02 ✅, P3-03 ✅, P3-04 next, P3-05 through P3-14 queued), 11-17 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
 
-**Immediate next**: P3-03 layer anatomy / API walk. Then continue P3 walk → P3-04 themes/modeline/banner/startup → P3-05 through P3-11 → NEW P3-12 (macOS platform review), P3-13 (perf hardening operator gate), P3-14 (org-mode deep config).
+**Immediate next**: P3-04 themes/modeline/banner/startup walk. Then P3-05 editing/completion/packages → P3-06 performance/evil/fonts → P3-07 through P3-11 → P3-12 (macOS platform review), P3-13 (perf hardening operator gate), P3-14 (org-mode deep config).
 
 **P4 queue additions**: P4-09 (complete claude-code-ide layer — `skill_install`/`skill_deploy` wiring + live acceptance test), P4-10 (agent command tree — `SPC a x` transient + `skill_adna_index` update).
 
@@ -89,6 +91,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-08 | **P3-03 complete** — Layer anatomy + API walk: `layers.el` added (declare-layer-dependencies spacemacs-bootstrap), `json` → `(json :location built-in)`, README.org live-implementation table, `adna-claude-code-command` as `:variables`, distribution name `'spacemacs-latticeprotocol` confirmed; 8 decision blocks + §1.5 familiarity in operator profile | P3-03 session |
 | 2026-05-07 | **ADR-017 accepted** — Rename vault + GitHub repo: SpaceLattice.aDNA → Spacemacs.aDNA; modeline format `spacelattice-main` → `adna-main`; campaign historical ID preserved | rename session |
 | 2026-05-07 | **ADR-018 accepted** — Performance + editing config hardening batch: bidi suppression, fontification skip, ffap hostname reject, cursor in non-selected windows, save-interprogram-paste, kill-ring dedup, auto-chmod, window-combination-resize, winner-mode, set-mark-command-repeat-pop, help-window-select, reb-re-syntax; applied to `dotfile.spacemacs.tmpl §P3-13` | research integration session |
 | 2026-05-07 | **ADR-019 accepted** — Add `claude-code-ide` layer (default-on, replaces upstream `claude-code` layer); wraps `claude-code-ide.el` MCP bridge; `SPC c c/s/t/p/l/r/n` keybindings; buffer/diagnostic/tree-sitter/LSP context to Claude Code sessions; skeleton at `what/standard/layers/claude-code-ide/` | research integration session |
@@ -130,6 +133,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Upgrade | Source |
 |------|---------|--------|
+| 2026-05-08 | **P3-03 layer anatomy walk** — `layers.el` added; packages.el `json` grammar fixed; README.org updated (Phase-2 placeholder → live table); dotfile template exposes `adna-claude-code-command` as `:variables`; operator profile blocks A–H + §1.5 | session_sl_p3_03_2026_05_08 |
 | 2026-05-07 | **Campaign review + research integration** — rename verified (ADR-017); macOS platform context + runbook seeded; perf hardening batch in dotfile §P3-13 (ADR-018); claude-code-ide layer skeleton at `what/standard/layers/claude-code-ide/` (ADR-019); agent command tree context authored; org-mode config stub seeded; 5 new campaign mission files (p3_12/13/14, p4_09/10); campaign count 31 → 36 | session_stanley_20260507T_campaign_review |
 | 2026-05-07 | **P3-02 §1.3.2–§1.3.6** — `dotfile.spacemacs.tmpl`: gc-cons 200 MB + LSP buffer 4 MB (ADR-016); `who/operators/stanley.md`: §1.3.2–§1.3.6 decision tables appended; `how/backlog/idea_agentic_layout_system.md` + `idea_skill_publish_lattice_git_fix.md` created; `missions/mission_sl_p4_layout_intelligence.md` seeded; ADR-016 committed | sessions `20260507T071737Z` + wind-down |
 | 2026-05-03 | Phase 1 — Forked from `.adna/` template; identity customized (Daedalus); workspace integration | Phase 1 |
