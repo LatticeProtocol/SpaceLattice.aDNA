@@ -33,6 +33,7 @@
      ;; === OS & fonts ===
      osx                                             ; macOS modifier keys + system integration
      unicode-fonts                                   ; color emoji + full Unicode coverage on macOS
+     theming                                         ; per-theme face overrides via theming-modifications alist (ADR-021)
 
      ;; === languages ===
      (lsp :variables lsp-headerline-breadcrumb-enable t)
@@ -149,7 +150,7 @@
    dotspacemacs-server-socket-dir nil
    dotspacemacs-persistent-server t
    dotspacemacs-search-tools '("rg" "ag" "grep")
-   dotspacemacs-frame-title-format "%I@%S"
+   dotspacemacs-frame-title-format '("%b [" (:eval (projectile-project-name)) "]") ; buffer + project (ADR-022)
    dotspacemacs-icon-title-format nil
    dotspacemacs-show-trailing-whitespace t
    dotspacemacs-whitespace-cleanup 'trailing

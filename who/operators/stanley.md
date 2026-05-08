@@ -275,6 +275,46 @@ Change landed in `what/standard/dotfile.spacemacs.tmpl` (ADR-020).
 - **Decision**: Updated README.org: fixed `#+AUTHOR:` (SpaceLattice → Spacemacs), removed Phase 2/4 placeholder sections, added live implementation status table (all 5 files), updated key bindings table to 16 rows matching actual `keybindings.el`.
 - **Reason**: README was written in Phase 2 as a stub. Phase 4 implementation completed 2026-05-06. ADR-017 renamed the vault; author line was never updated.
 
+## Mission p3_04_themes_modeline_banner_startup (completed 2026-05-08)
+
+### §1.6 Theme system depth
+
+| Topic | Decision | Rationale |
+|-------|----------|-----------|
+| `theming` layer | **Add to standard** (ADR-021) | Per-theme face overrides are first-class. `theming-modifications` alist available; no overhead when empty. |
+| `themes-megapack` | Skip — on-demand | No bulk install; individual alternate themes declared in `dotspacemacs-themes` on demand (P4-03). |
+| Custom theme dir | `what/standard/assets/themes/` | Reserved for future in-tree themes; no action now. |
+
+**P4-03 pre-figuring — alternate theme candidates** (intel, not binding decisions):
+- `doom-one` — dark, high-contrast; similar palette to spacemacs-dark but more saturated
+- `modus-vivendi` — Emacs built-in since 29; WCAG AAA accessibility; best for long sessions
+
+### §1.7 Modeline depth (doom-modeline knobs)
+
+| Variable | Decision | Location |
+|----------|----------|----------|
+| `doom-modeline-icon` | **`t`** — enabled | `what/local/operator.private.el` (requires `M-x all-the-icons-install-fonts`; standard keeps nil) |
+| `doom-modeline-lsp` | `nil` — off (default) | Standard |
+| `doom-modeline-env-version` | `nil` — off (default) | Standard |
+| `doom-modeline-github` | `nil` — off (default) | Standard |
+| Segment format string | `adna-main` confirmed (P3-preflight) | Standard; no change needed |
+
+### §1.8 Banner system — P4-05 pre-figuring
+
+- **v1.0 banner**: **Stay with `'official` Spacemacs image indefinitely**. P4-05 mission becomes stub/skip.
+- No custom logo PNG or text-banner switch planned.
+
+### §1.9 Frame title / which-key / transient states
+
+| Variable | Decision | Location |
+|----------|----------|----------|
+| `dotspacemacs-frame-title-format` | **`'("%b [" (:eval (projectile-project-name)) "]")`** — buffer + project (ADR-022) | Standard template |
+| `dotspacemacs-icon-title-format` | `nil` (default) | Standard |
+| `dotspacemacs-which-key-delay` | `0.4` (default confirmed) | Standard |
+| `dotspacemacs-which-key-position` | `'bottom` (default confirmed) | Standard |
+| `dotspacemacs-show-transient-state-title` | `t` (default confirmed) | Standard |
+| `dotspacemacs-show-transient-state-color-guide` | `t` (default confirmed) | Standard |
+
 ## Promotion log (local → standard)
 
 | Date | Promoted | ADR | Notes |
