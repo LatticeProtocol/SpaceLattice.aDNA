@@ -2,8 +2,8 @@
 type: layers_manifest
 status: active
 created: 2026-05-03
-updated: 2026-05-03
-last_edited_by: agent_init
+updated: 2026-05-07
+last_edited_by: agent_stanley
 tags: [layers, standard, spacemacs, manifest]
 ---
 
@@ -64,6 +64,37 @@ Capabilities (full spec: `what/standard/adna-bridge.md`):
 - `M-x adna-index-project` — emit context graph to `what/standard/index/graph.json`
 
 License: GPL-3.0 (matches Spacemacs upstream — see `who/upstreams/syl20bnr.md`).
+
+### `claude-code-ide` (vault-private)
+
+Lives in `what/standard/layers/claude-code-ide/`. Symlinked to `~/.emacs.d/private/layers/claude-code-ide/` by `skill_install`.
+
+Wraps [`claude-code-ide.el`](https://github.com/manzaltu/claude-code-ide.el) — an MCP bridge between Claude Code CLI and Emacs. Default-on per ADR-019.
+
+Capabilities:
+
+- Active buffer and text selection context visible to Claude Code sessions
+- Flycheck/Flymake diagnostics exposed to Claude via MCP
+- Tree-sitter AST analysis as MCP tools
+- LSP/xref navigation (go-to-definition, find-references) as MCP tools
+- Ediff integration for reviewing/accepting Claude's code suggestions
+- Multi-session support across concurrent projects
+- Custom function exposure via `claude-code-ide-make-tool`
+
+Keybindings (extends ADR-013):
+
+| Key | Command | Description |
+|-----|---------|-------------|
+| `SPC c c` | `claude-code-ide-menu` | Main transient menu |
+| `SPC c s` | `claude-code-ide` | Start session for current project |
+| `SPC c t` | `claude-code-ide-toggle` | Toggle Claude window |
+| `SPC c p` | `claude-code-ide-send-prompt` | Send prompt from minibuffer |
+| `SPC c l` | `claude-code-ide-list-sessions` | List/switch sessions |
+| `SPC c r` | `claude-code-ide-resume` | Resume previous conversation |
+
+Dependencies: `eat` (terminal backend), `flycheck` (diagnostics — already standard), `vterm` (fallback).
+
+License: GPL-3.0.
 
 ## Layer addition protocol
 

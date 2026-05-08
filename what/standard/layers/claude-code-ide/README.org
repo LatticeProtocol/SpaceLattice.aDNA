@@ -1,0 +1,82 @@
+#+TITLE: claude-code-ide layer
+#+AUTHOR: Spacemacs.aDNA / Daedalus
+#+DATE: 2026-05-07
+
+* Description
+
+MCP bridge between Claude Code CLI and Emacs. Wraps [[https://github.com/manzaltu/claude-code-ide.el][claude-code-ide.el]] with
+Spacemacs-native keybindings, window placement, and terminal configuration.
+
+See ~what/decisions/adr/adr_019_claude_code_ide_layer.md~ for the full design decision.
+
+** What it provides
+
+- Active buffer and selection context visible to Claude Code sessions
+- Flycheck/Flymake diagnostics exposed to Claude via MCP
+- Tree-sitter AST analysis as MCP tools
+- LSP/xref navigation (go-to-definition, find-references) as MCP tools
+- Ediff integration for reviewing/accepting Claude's code suggestions
+- Multi-session support across concurrent projects
+- Custom Emacs function exposure via ~claude-code-ide-make-tool~
+
+* Install
+
+This layer is included by default in ~dotfile.spacemacs.tmpl~. No manual install needed.
+
+The ~claude-code-ide~ package is fetched directly from GitHub on first Spacemacs launch:
+
+#+BEGIN_SRC bash
+# Prerequisite: Claude Code CLI must be installed and in PATH
+which claude   # should return a path
+#+END_SRC
+
+* Keybindings
+
+| Key       | Command                        | Description                          |
+|-----------+--------------------------------+--------------------------------------|
+| ~SPC c c~ | ~claude-code-ide-menu~         | Main transient menu                  |
+| ~SPC c s~ | ~claude-code-ide~              | Start Claude for current project     |
+| ~SPC c t~ | ~claude-code-ide-toggle~       | Toggle Claude window                 |
+| ~SPC c p~ | ~claude-code-ide-send-prompt~  | Send prompt from minibuffer          |
+| ~SPC c l~ | ~claude-code-ide-list-sessions~| List/switch active sessions          |
+| ~SPC c r~ | ~claude-code-ide-resume~       | Resume previous conversation         |
+| ~SPC c n~ | ~claude-code-ide-continue~     | Continue most recent conversation    |
+
+* Configuration
+
+Default settings (override in ~what/local/operator.private.el~):
+
+#+BEGIN_SRC emacs-lisp
+;; Terminal backend: eat (preferred) or vterm
+(setq claude-code-ide-terminal-backend 'eat)
+
+;; Window placement
+(setq claude-code-ide-window-side 'right
+      claude-code-ide-window-width 100
+      claude-code-ide-focus-on-open nil)
+
+;; Diagnostics backend
+(setq claude-code-ide-diagnostics-backend 'flycheck)
+#+END_SRC
+
+* Custom MCP tools
+
+Register custom Emacs functions as MCP tools (accessible to Claude during sessions):
+
+#+BEGIN_SRC emacs-lisp
+;; In what/local/operator.private.el
+(with-eval-after-load 'claude-code-ide
+  (claude-code-ide-make-tool
+   :function #'my-function
+   :name "my_tool"
+   :description "What this tool does"
+   :args '((:name "param" :type string :description "Parameter description"))))
+#+END_SRC
+
+See ~what/context/agent_command_tree.md~ for the full extension pattern.
+
+* References
+
+- ADR-019: ~what/decisions/adr/adr_019_claude_code_ide_layer.md~
+- Agent command tree: ~what/context/agent_command_tree.md~
+- Mission: ~how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_p4_09_claude_code_ide_layer.md~

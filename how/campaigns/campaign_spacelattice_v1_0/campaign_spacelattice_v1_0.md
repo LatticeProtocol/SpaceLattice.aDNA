@@ -5,17 +5,19 @@ title: "Spacemacs v1.0 — Genesis to Production"
 owner: stanley
 status: execution
 phase_count: 6
-mission_count: 31
-estimated_sessions: "36-53"
-calibrated_sessions: 48
+mission_count: 36
+estimated_sessions: "40-58"
+calibrated_sessions: 53
 estimation_class: governance-broad
 priority: medium
 predecessor: "spacemacs.aDNA genesis (plan-driven; AAR at how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md)"
 created: 2026-05-05
-updated: 2026-05-06
+updated: 2026-05-07
 last_edited_by: agent_stanley
 p2_progress: "4/4 missions closed ✅ P2 COMPLETE"
-ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
+ratified_by:
+  - what/decisions/adr/adr_005_rename_to_spacelattice.md
+  - what/decisions/adr/adr_017_rename_to_spacemacs_adna.md
 tags: [campaign, spacelattice, v1_0, daedalus, customization_walk, telemetry, lp_fork, sustainability]
 ---
 
@@ -37,10 +39,10 @@ Take Spacemacs.aDNA from **v0.2.0** (rename + repositioning + framework outlines
 | P0 | mission_sl_planning_01 | 1 | 1 (closed) |
 | P1 | p1_01_backlog_cleanup, p1_02_sanitization_warns_adr, p1_03_self_improve_schedule | 3 | 3-4 |
 | P2 | p2_01_sustainability_runbook_teeth, p2_02_telemetry_schema, p2_03_telemetry_submit_skill, p2_04_telemetry_aggregate_skill_and_round_trip | 4 | 5-8 |
-| P3 | p3_01 dotfile-entry-lifecycle, p3_02 dotspacemacs-variables, p3_03 layer-anatomy-api, p3_04 themes-modeline-banner-startup, p3_05 editing-completion-packages, p3_06 perf-evil-fonts, p3_07 wild-workarounds-org, p3_08 languages-keys-perf, p3_09 obsidian-plugin-audit | 9 | 12-17 |
-| P4 | p4_01 clone-fork, p4_02 distribution-layer, p4_03 theme, p4_04 branding-strings, p4_05 banner-assets, p4_06 news-welcome-dotfile, p4_07 ci-workflows, p4_08 first-rebase-skill-install-update | 8 | 9-13 |
+| P3 | p3_01 dotfile-entry-lifecycle, p3_02 dotspacemacs-variables, p3_03 layer-anatomy-api, p3_04 themes-modeline-banner-startup, p3_05 editing-completion-packages, p3_06 perf-evil-fonts, p3_07 wild-workarounds-org, p3_08 languages-keys-perf, p3_09 obsidian-plugin-audit, **p3_12 platform-context-macos**, **p3_13 dotfile-perf-hardening**, **p3_14 org-mode-deep-config** | 12 | 14-20 |
+| P4 | p4_01 clone-fork, p4_02 distribution-layer, p4_03 theme, p4_04 branding-strings, p4_05 banner-assets, p4_06 news-welcome-dotfile, p4_07 ci-workflows, p4_08 first-rebase-skill-install-update, **p4_09 claude-code-ide-layer**, **p4_10 agent-command-tree** | 10 | 11-16 |
 | P5 | p5_01 doc-pass, p5_02 second-machine-install, p5_03 tag-release-notes | 3 | 3 |
-| **Total** | | **28** | **32-45 (calibrated ~39)** |
+| **Total** | | **33** | **38-52 (calibrated ~46)** |
 
 ## Phases
 
@@ -115,12 +117,15 @@ Systematic walk through the **22 dimensions** of `what/context/spacemacs/spacema
 - `mission_sl_p3_07_wild_workarounds_org` — §3.1 (wild combos), §3.2 (10 canonical workarounds), §3.3 (org-mode power-user)
 - `mission_sl_p3_08_languages_keys_perf` — §3.4 (LSP + tree-sitter + DAP), §3.5 (keybinding philosophy + `SPC o l`), §3.6 (perf recipes); P3 phase-gate evidence
 - `mission_sl_p3_09_obsidian_plugin_audit` — trim `.obsidian/plugins/` from 15 plugins (~13MB) to essentials (~1.5MB); document optionals; operator UX verification post-trim *(added at P1-01 backlog audit 2026-05-06)*
+- `mission_sl_p3_12_platform_context_macos` — author `what/context/platform_macos.md` + `how/standard/runbooks/macos_setup.md`; operator review; add darwin-conditional block to `dotfile.spacemacs.tmpl` via ADR *(added 2026-05-07 — macOS platform research integration)*
+- `mission_sl_p3_13_dotfile_perf_hardening` — apply ADR-018 batch (bidi suppression, fontification skip, ffap reject, kill-ring dedup, winner-mode, window-combination-resize, help-window-select); health-check validation *(added 2026-05-07 — emacsredux.com research integration)*
+- `mission_sl_p3_14_org_mode_deep_config` — web research pass on Spacemacs org layer; author/complete `what/context/org_mode_config.md`; draft org-mode user-config section; ADR for any standard choices; operator approval *(added 2026-05-07 — operator request for deep org-mode config)*
 
-**Mission count**: 10 (1 infrastructure + 9 customization walk). Sessions estimate: 12-17.
+**Mission count**: 13 (1 infrastructure + 12 customization walk). Sessions estimate: 14-20.
 
 **Phase exit gate**:
 - [x] P3-00 closed (infrastructure) ✅
-- [ ] All 9 P3 customization walk missions (P3-01 through P3-09/10/11) closed with AARs
+- [ ] All 12 P3 customization walk missions (P3-01 through P3-09, P3-12, P3-13, P3-14) closed with AARs
 - [ ] All 22 dimensions reviewed in operator-in-the-loop sessions
 - [ ] `who/operators/stanley.md` operator profile updated with all decisions
 - [ ] `what/local/operator.private.el` populated with operator-specific overrides
@@ -140,8 +145,10 @@ Execute the LP fork playbook from `what/context/spacemacs/spacemacs_customizatio
 - `mission_sl_p4_06_news_welcome_dotfile` — `core/news/news-1.0.0.org` + `lp-welcome.el` widget + `dotspacemacs-template.el` LP defaults
 - `mission_sl_p4_07_ci_workflows` — `.github/workflows/{ci,upstream-sync}.yml`
 - `mission_sl_p4_08_first_rebase_skill_install_update` — first weekly rebase against `upstream/develop`; vault `skill_install.md` updated to clone the LP fork; **P4 phase-gate validation**
+- `mission_sl_p4_09_claude_code_ide_layer` — complete `what/standard/layers/claude-code-ide/` (skeleton created 2026-05-07); update `skill_install`/`skill_deploy` to symlink the layer; health-check validation; operator `SPC c c` acceptance test *(added 2026-05-07 — claude-code-ide.el integration, ADR-019)*
+- `mission_sl_p4_10_agent_command_tree` — complete `what/context/agent_command_tree.md` (seeded 2026-05-07); add `SPC a x` extension transient stub to `adna` layer keybindings; update `skill_adna_index` to document post-extension re-indexing; operator acceptance test *(added 2026-05-07 — agent operationalization)*
 
-**Mission count**: 8. Sessions estimate: 9-13.
+**Mission count**: 10. Sessions estimate: 11-16.
 
 **Phase exit gate**:
 - [ ] All 8 P4 missions closed with AARs
@@ -187,12 +194,19 @@ This campaign is **governance-broad**: multi-domain (customization + branding + 
 ## References
 
 - ADR 005 (rename + repositioning): `what/decisions/adr/adr_005_rename_to_spacelattice.md`
+- ADR 017 (rename → Spacemacs.aDNA): `what/decisions/adr/adr_017_rename_to_spacemacs_adna.md`
+- ADR 018 (perf hardening batch): `what/decisions/adr/adr_018_perf_config_hardening.md`
+- ADR 019 (claude-code-ide layer): `what/decisions/adr/adr_019_claude_code_ide_layer.md`
 - LP positioning: `what/standard/lp-positioning.md`
 - Fork strategy: `what/standard/fork-strategy.md`
 - Customization reference: `what/context/spacemacs/spacemacs_customization_reference.md`
+- Platform context (macOS): `what/context/platform_macos.md`
+- Org-mode config reference: `what/context/org_mode_config.md`
+- Agent command tree: `what/context/agent_command_tree.md`
 - Sustainability framework: `what/standard/sustainability.md`
 - Telemetry framework: `what/standard/telemetry.md`
 - User-in-the-loop runbook (P3): `how/standard/runbooks/customization_session_protocol.md`
+- macOS setup runbook: `how/standard/runbooks/macos_setup.md`
 - Genesis AAR: `how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md`
 - M-Planning-01 AAR: `how/campaigns/campaign_spacelattice_v1_0/missions/artifacts/aar_mission_sl_planning_01.md`
 - Plan B: `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` § Plan B

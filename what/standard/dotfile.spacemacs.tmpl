@@ -1,4 +1,4 @@
-;;; .spacemacs --- SpaceLattice.aDNA standard dotfile  -*- mode: emacs-lisp; lexical-binding: t -*-
+;;; .spacemacs --- Spacemacs.aDNA standard dotfile  -*- mode: emacs-lisp; lexical-binding: t -*-
 ;;
 ;; Rendered to <vault-root>/init.el by skill_deploy. Spacemacs finds it via
 ;; $SPACEMACSDIR=<vault-root> (written to shell profile by skill_install).
@@ -7,7 +7,7 @@
 ;; Remaining placeholder: LOCAL_LAYER_LIST — empty by default.
 ;;
 ;; License: GPL-3.0 (matches upstream Spacemacs)
-;; Vault: github.com/LatticeProtocol/SpaceLattice.aDNA
+;; Vault: github.com/LatticeProtocol/Spacemacs.aDNA
 
 (defun dotspacemacs/layers ()
   "Configuration layers declaration."
@@ -68,10 +68,10 @@
      tree-sitter                                     ; Emacs 29+ treesit — structured syntax highlighting
 
      ;; === AI + agentic ===
-     claude-code                                     ; Claude Code CLI integration (official Spacemacs layer)
+     claude-code-ide                                 ; Claude Code MCP bridge — buffer/diagnostic/tree-sitter context (ADR-019)
      (llm-client :variables llm-client-enable-gptel t) ; gptel — Claude/OpenAI/Ollama from any buffer
 
-     ;; === SpaceLattice.aDNA bridge ===
+     ;; === Spacemacs.aDNA bridge ===
      adna
 
      ;; === operator-added local layers (dirs inside what/local/ via dotspacemacs-configuration-layer-path) ===
@@ -257,7 +257,7 @@
   ;; (populated by mission P3-10)
 
   ;;; ── §P3-11 Browser / eww integration ────────────────────────────────────
-  ;; SpaceLattice browser stack: eww → xwidget (--with-xwidgets) → external
+  ;; Spacemacs.aDNA browser stack: eww → xwidget (--with-xwidgets) → external
   (with-eval-after-load 'eww
     (when (fboundp 'ace-link-eww)
       (define-key eww-mode-map (kbd "o") #'ace-link-eww))
@@ -269,7 +269,65 @@
           (".*slack\\.com.*"            . browse-url-default-browser)
           (".*"                         . eww-browse-url)))
 
-  (setq adna-browse-url-function #'eww-browse-url))
+  (setq adna-browse-url-function #'eww-browse-url)
+
+  ;;; ── §P3-12 macOS platform integration ───────────────────────────────────
+  ;; See what/context/platform_macos.md for full context and rationale.
+  ;; (populated by mission p3_12_platform_context_macos — operator approval required)
+  (when (eq system-type 'darwin)
+    ;; Command → Meta; Option → macOS (diacritics, special chars pass through)
+    (setq mac-command-modifier 'meta
+          mac-option-modifier 'none)
+    ;; Reuse existing frame rather than popping new ones from 'open' CLI
+    (setq ns-pop-up-frames nil)
+    ;; Transparent title bar; dark appearance to match spacemacs-dark theme
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    (add-to-list 'default-frame-alist '(ns-appearance . dark))
+    ;; Accurate color rendering for themes
+    (setq ns-use-srgb-colorspace nil))
+
+  ;;; ── §P3-13 Performance and editing hardening (ADR-018) ───────────────────
+  ;; Bidi suppression — major speedup for large files (JSON/logs/generated code).
+  ;; Only left-to-right text is used in this vault and typical ML codebases.
+  (setq-default bidi-display-reordering 'left-to-right
+                bidi-paragraph-direction 'left-to-right)
+  (setq bidi-inhibit-bpa t)
+
+  ;; Skip syntax highlighting during rapid typing — eliminates micro-stutter
+  ;; in large buffers and tree-sitter modes.
+  (setq redisplay-skip-fontification-on-input t)
+
+  ;; Prevent ffap from pinging hostnames — avoids multi-second freezes when
+  ;; point is on a hostname-like string.
+  (setq ffap-machine-p-known 'reject)
+
+  ;; Hide cursors in non-focused windows — reduces rendering work.
+  (setq-default cursor-in-non-selected-windows nil)
+  (setq highlight-nonselected-windows nil)
+
+  ;; Preserve external clipboard content before kill-ring operations.
+  (setq save-interprogram-paste-before-kill t)
+
+  ;; Deduplicate kill ring entries.
+  (setq kill-do-not-save-duplicates t)
+
+  ;; Auto-chmod: make script files (shebang lines) executable on save.
+  (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
+
+  ;; Proportional window resizing when splitting.
+  (setq window-combination-resize t)
+
+  ;; winner-mode: reversible window configurations (C-x 1 becomes toggleable).
+  (winner-mode +1)
+
+  ;; Mark ring: continue popping with C-SPC after first C-u C-SPC.
+  (setq set-mark-command-repeat-pop t)
+
+  ;; Auto-focus help windows (C-h f, C-h v jump to help buffer).
+  (setq help-window-select t)
+
+  ;; re-builder: eliminate double-escaping in interactive regex development.
+  (setq reb-re-syntax 'string))
 
 ;; Do not write anything past this comment. Anything written here is overwritten
 ;; by Emacs on save. Operator customizations belong in

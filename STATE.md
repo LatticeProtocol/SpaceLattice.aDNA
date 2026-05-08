@@ -4,8 +4,8 @@ status: active
 created: 2026-05-03
 updated: 2026-05-07
 last_edited_by: agent_stanley
-last_session: session_stanley_20260507T071737Z_p3_02_1_3_2
-tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_active]
+last_session: session_stanley_20260507T_campaign_review
+tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_active, research_integration]
 ---
 
 # Operational State
@@ -23,6 +23,8 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 **P3-01 COMPLETE (2026-05-06):** Vault-resident deployment model — ADR-015 accepted. `$SPACEMACSDIR` → vault root; `skill_install` writes one export line to shell rc; render target is `<vault>/init.el` (gitignored). All `{{PLACEHOLDER}}` substitutions eliminated except `{{LOCAL_LAYER_LIST}}`; `dotspacemacs-directory`-relative paths throughout. `dotspacemacs/user-config` now carries `§P3-01`–`§P3-11` section scaffold. `.spacemacs.env.example` added for env var documentation.
 
 **P3-02 in progress.** §1.3.1–§1.3.6 confirmed (2026-05-07): layer/pkg management, ELPA/version/dump, editing style/leaders, startup buffer/banner/lists, themes/modeline/fonts/cursor, layout system. Two non-default changes accepted: gc-cons 200 MB + LSP buffer 4 MB (ADR-016). All decisions recorded in `stanley.md`. **Next sub-group: §1.3.7** files/autosave/rollback. Sub-groups §1.3.7–§1.3.10 remain; P3-02 AAR after §1.3.10.
+
+**Campaign research integration (2026-05-07):** 3 research sources integrated — macOS platform (xenodium.com), performance config batch (emacsredux.com, ADR-018), claude-code-ide.el MCP bridge (ADR-019). 5 new missions added (p3_12 macOS platform, p3_13 perf hardening, p3_14 org-mode deep config, p4_09 claude-code-ide layer, p4_10 agent command tree). Campaign count: 31 → 36. Vault rename ADR-017 verified complete. Key artifacts seeded: `what/context/platform_macos.md`, `how/standard/runbooks/macos_setup.md`, `what/standard/layers/claude-code-ide/` (skeleton), `what/context/agent_command_tree.md`, `what/context/org_mode_config.md` (stub).
 
 ## What's Working
 
@@ -73,7 +75,11 @@ None blocking. Audit findings status:
 - ✅ Both skills active: `skill_telemetry_submit` + `skill_telemetry_aggregate`
 - ✅ ADR-009 (schema) + ADR-010 (submit) + ADR-011 (aggregate) all accepted
 
-**P3 active.** Customization walk-through — 10 missions (P3-00 ✅, P3-01 ✅, P3-02 through P3-11 queued), 11-16 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
+**P3 active.** Customization walk-through — 13 missions (P3-00 ✅, P3-01 ✅, P3-02 in-progress, P3-03 through P3-14 queued), 14-20 sessions remaining. User-in-the-loop at each dimension per `how/standard/runbooks/customization_session_protocol.md`.
+
+**Immediate next**: P3-02 §1.3.7–§1.3.10 (files/autosave/rollback → evil/misc → font/icon → layout-mgmt/perf), then AAR. Then P3-03 layer anatomy → continue P3 walk → NEW P3-12 (macOS platform review), P3-13 (perf hardening operator gate), P3-14 (org-mode deep config).
+
+**P4 queue additions**: P4-09 (complete claude-code-ide layer — `skill_install`/`skill_deploy` wiring + live acceptance test), P4-10 (agent command tree — `SPC a x` transient + `skill_adna_index` update).
 
 **Note**: `skill_self_improve` Stop hook is live. Session count gate at 5 — will be silent until session 5.
 
@@ -83,6 +89,10 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-07 | **ADR-017 accepted** — Rename vault + GitHub repo: SpaceLattice.aDNA → Spacemacs.aDNA; modeline format `spacelattice-main` → `adna-main`; campaign historical ID preserved | rename session |
+| 2026-05-07 | **ADR-018 accepted** — Performance + editing config hardening batch: bidi suppression, fontification skip, ffap hostname reject, cursor in non-selected windows, save-interprogram-paste, kill-ring dedup, auto-chmod, window-combination-resize, winner-mode, set-mark-command-repeat-pop, help-window-select, reb-re-syntax; applied to `dotfile.spacemacs.tmpl §P3-13` | research integration session |
+| 2026-05-07 | **ADR-019 accepted** — Add `claude-code-ide` layer (default-on, replaces upstream `claude-code` layer); wraps `claude-code-ide.el` MCP bridge; `SPC c c/s/t/p/l/r/n` keybindings; buffer/diagnostic/tree-sitter/LSP context to Claude Code sessions; skeleton at `what/standard/layers/claude-code-ide/` | research integration session |
+| 2026-05-07 | **5 new missions added** — p3_12 macOS platform, p3_13 perf hardening, p3_14 org-mode deep config, p4_09 claude-code-ide layer completion, p4_10 agent command tree; campaign 31 → 36 missions | research integration session |
 | 2026-05-07 | **ADR-016 accepted** — GC threshold 200 MB (`dotspacemacs-gc-cons '(200000000 0.1)`), LSP read buffer 4 MB (`dotspacemacs-read-process-output-max (* 4 1024 1024)`): both as shared template defaults for heavy LSP/ML use; `dotfile.spacemacs.tmpl` updated | P3-02 §1.3.2 session |
 | 2026-05-07 | **§1.3.1–§1.3.6 confirmed** — 6 of 10 P3-02 sub-groups complete; all variables at template defaults except gc-cons + LSP buffer (ADR-016); operator decisions recorded in `who/operators/stanley.md` | P3-02 session |
 | 2026-05-07 | **Layout intelligence system seeded** — `how/backlog/idea_agentic_layout_system.md` (3-layer design: 8 named layouts + context guide + campaign protocol integration); `how/campaigns/campaign_spacelattice_v1_0/missions/mission_sl_p4_layout_intelligence.md` (P4 mission stub, 2 sessions estimated) | P3-02 session |
@@ -120,6 +130,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Upgrade | Source |
 |------|---------|--------|
+| 2026-05-07 | **Campaign review + research integration** — rename verified (ADR-017); macOS platform context + runbook seeded; perf hardening batch in dotfile §P3-13 (ADR-018); claude-code-ide layer skeleton at `what/standard/layers/claude-code-ide/` (ADR-019); agent command tree context authored; org-mode config stub seeded; 5 new campaign mission files (p3_12/13/14, p4_09/10); campaign count 31 → 36 | session_stanley_20260507T_campaign_review |
 | 2026-05-07 | **P3-02 §1.3.2–§1.3.6** — `dotfile.spacemacs.tmpl`: gc-cons 200 MB + LSP buffer 4 MB (ADR-016); `who/operators/stanley.md`: §1.3.2–§1.3.6 decision tables appended; `how/backlog/idea_agentic_layout_system.md` + `idea_skill_publish_lattice_git_fix.md` created; `missions/mission_sl_p4_layout_intelligence.md` seeded; ADR-016 committed | sessions `20260507T071737Z` + wind-down |
 | 2026-05-03 | Phase 1 — Forked from `.adna/` template; identity customized (Daedalus); workspace integration | Phase 1 |
 | 2026-05-03 | Phase 2 — Triad scaffold (305 files, 40,420 insertions); first commit `50c7084` | Phase 2 |
