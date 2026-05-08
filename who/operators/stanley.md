@@ -5,7 +5,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_mission: mission_sl_p3_07_wild_workarounds_org
+last_mission: mission_sl_p3_08_languages_keys_perf
 hostname: null
 primary_models:
   - claude-opus-4-7
@@ -436,6 +436,81 @@ Change landed in `what/standard/dotfile.spacemacs.tmpl` (ADR-020).
 | org-sticky-header | enabled | Context breadcrumb visible while scrolling long org files |
 
 **Finding**: ivy workaround not applicable — helm is the confirmed completion stack from P3-05. Helm-specific stability knobs added to standard template instead.
+
+## Mission p3_08_languages_keys_perf (completed 2026-05-08)
+
+### §3.4 Language-stack patterns
+
+| Topic | Decision | Rationale |
+|-------|----------|-----------|
+| Language layers enabled | `python` (lsp, fill-col 100), `typescript` (lsp, fmt-on-save), `rust` (lsp, format-on-save), `go` (lsp, format-on-save), `javascript` (lsp, node-modules), `latex` (lsp), `html` | Already in standard template from P3-07; confirmed for operator's ML/agentic workload |
+| `typescript-backend` | `'lsp` — **added** | Aligns with python/rust/go pattern; enables full LSP hover/rename/refs via typescript-language-server |
+| `treesit-auto` package | Deferred — skip for v1.0 | `tree-sitter` layer (ELPA) covers structured highlighting; treesit-auto adds post-v1.0 when Emacs 29+ is baseline assumption |
+| DAP | `(dap :variables dap-python-debugger 'debugpy)` — confirmed | Already in template; covers Python debug via debugpy; other adapters configurable per-language |
+| compleseus + LSP | n/a — helm chosen P3-05 | consult-lsp not relevant; helm+lsp integration is native |
+| LSP file-watchers | `nil` — already locked P3-07 | Prevents inotify exhaustion on large monorepo (`~/lattice/`) |
+| LSP idle-delay | `0.5` — already locked P3-07 | Balanced: responsive hover without constant re-analysis |
+| LSP completion | `:capf` — already locked P3-07 | Spacemacs-compatible completion-at-point backend |
+| LSP modeline diagnostics | `lsp-modeline-diagnostics-enable t` + scope `:workspace` — **added** | Workspace-scoped error/warning count on modeline; actionable signal during ML pipeline work |
+| LSP ui-doc | `lsp-ui-doc-position 'at-point` + delay `0.5` — **added** | Documentation popup at cursor; 0.5s delay avoids flicker during navigation |
+
+### §3.5 Keybinding remap philosophies
+
+**Reserved LP prefix**: `SPC o l` (under user-reserved `SPC o`; never collide with Spacemacs-owned prefixes).
+
+**LP prefix binding table** (source of truth for P4-02 `keybindings.el`):
+
+| Binding | Command | Description |
+|---------|---------|-------------|
+| `SPC o l h` | `adna-home` | Jump to vault root (`dotspacemacs-directory`) |
+| `SPC o l f` | `adna-find-context` | Helm/fuzzy-find context file in `what/context/` |
+| `SPC o l s` | `adna-session-new` | Open new session file in `how/sessions/active/` |
+| `SPC o l g` | `adna-graph` | Open `what/standard/index/graph.json` |
+| `SPC o l c` | claude-code-ide buffer | Toggle Claude Code IDE bridge buffer |
+
+Note: `SPC o l u` (url-at-point) skipped — `SPC j o` (link-hint-open-link) already covers this.
+
+**Reserved Spacemacs prefixes** (never touch): `SPC h`, `SPC f`, `SPC b`, `SPC p`, `SPC m`, `SPC w`, `SPC SPC`, `SPC :`, root `SPC` keys.
+
+**Namespace convention** (LP fork, per fork-strategy.md):
+- Public commands: `lp/` prefix
+- Private helpers: `lp//` prefix
+- Variables: `latticeprotocol-` prefix
+- Never introduce `dotspacemacs-` symbols (privileged scan in dotspacemacs/init)
+
+### §3.6 Performance-tuning recipes (final consolidated recipe)
+
+All perf settings confirmed. Final recipe across lifecycle positions:
+
+**In `dotspacemacs/init`** (dotfile variables):
+| Setting | Value | ADR |
+|---------|-------|-----|
+| `dotspacemacs-gc-cons` | `'(200000000 0.1)` | ADR-016 |
+| `dotspacemacs-read-process-output-max` | `(* 4 1024 1024)` | ADR-016 |
+| `dotspacemacs-enable-package-quickstart` | `nil` | P3-02 (avoids stale autoloads) |
+| `dotspacemacs-line-numbers` | `'(:relative t :enabled-for-modes prog-mode text-mode)` | P3-02 |
+| `dotspacemacs-loading-progress-bar` | `t` | P3-02 (useful startup feedback) |
+
+**In `dotspacemacs/user-init`** (pre-layer, Emacs built-ins):
+| Setting | Value | Notes |
+|---------|-------|-------|
+| `native-comp-async-report-warnings-errors` | `'silent` | P3-07 — suppresses spurious *Warnings* popups |
+| `native-comp-eln-load-path` | `(add-to-list ... "eln-cache/" user-emacs-dir)` | **Added P3-08** — explicit cache dir prevents cross-version pollution |
+
+**In `dotspacemacs/user-config`** (post-layer, package-specific):
+| Setting | Value | Notes |
+|---------|-------|-------|
+| `lsp-enable-file-watchers` | `nil` | P3-07 |
+| `lsp-idle-delay` | `0.5` | P3-07 |
+| `lsp-completion-provider` | `:capf` | P3-07 |
+| `lsp-modeline-diagnostics-enable` | `t` | **Added P3-08** |
+| `lsp-modeline-diagnostics-scope` | `:workspace` | **Added P3-08** |
+| `lsp-ui-doc-position` | `'at-point` | **Added P3-08** |
+| `lsp-ui-doc-delay` | `0.5` | **Added P3-08** |
+| bidi/fontification/ffap/cursor hardening | (ADR-018 block) | P3-13 |
+| `emacs-startup-hook` timer | prints elapsed + GC count to *Messages* | **Added P3-08** — diagnostic |
+
+**Finding**: All §3.6 recipe items from the reference are now in the template. No ADR needed — all changes are additive, non-behavioral (cache path + diagnostic hook) or extensions of already-decided settings (LSP UI).
 
 ## Promotion log (local → standard)
 

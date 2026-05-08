@@ -38,7 +38,7 @@
      ;; === languages ===
      (lsp :variables lsp-headerline-breadcrumb-enable t)
      (python :variables python-backend 'lsp python-fill-column 100)
-     (typescript :variables typescript-fmt-on-save t)
+     (typescript :variables typescript-backend 'lsp typescript-fmt-on-save t)
      (rust :variables rust-backend 'lsp rust-format-on-save t)
      (go :variables go-backend 'lsp go-format-before-save t)
      (javascript :variables javascript-backend 'lsp node-add-modules-path t)
@@ -195,6 +195,12 @@
   (when (boundp 'native-comp-async-report-warnings-errors)
     (setq native-comp-async-report-warnings-errors 'silent))
 
+  ;; native-comp eln cache (§3.6): explicit cache dir prevents cross-version
+  ;; pollution when multiple Emacs builds coexist (homebrew + built-from-source).
+  (when (boundp 'native-comp-eln-load-path)
+    (add-to-list 'native-comp-eln-load-path
+                 (expand-file-name "eln-cache/" user-emacs-directory)))
+
   ;; Load operator's private elisp last (gitignored) — additive only.
   (let ((private-el (expand-file-name "operator.private.el"
                                       (concat dotspacemacs-directory "what/local"))))
@@ -255,7 +261,12 @@
   (with-eval-after-load 'lsp-mode
     (setq lsp-enable-file-watchers nil
           lsp-idle-delay 0.5
-          lsp-completion-provider :capf))
+          lsp-completion-provider :capf
+          ;; §3.4 LSP UI — diagnostics on modeline (workspace scope); doc at point.
+          lsp-modeline-diagnostics-enable t
+          lsp-modeline-diagnostics-scope :workspace
+          lsp-ui-doc-position 'at-point
+          lsp-ui-doc-delay 0.5))
 
   ;; ─ Org: double-load guard + full config ──────────────────────────────────
   ;; All org config is wrapped in with-eval-after-load to ensure the ELPA
@@ -336,6 +347,13 @@
   (with-eval-after-load 'link-hint
     (spacemacs/set-leader-keys "jo" #'link-hint-open-link)
     (spacemacs/set-leader-keys "jO" #'link-hint-copy-link))
+
+  ;; Startup timing log (§3.6): prints elapsed time + GC count to *Messages*.
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (message "Spacemacs ready in %.2fs (%d GCs)"
+                       (float-time (time-subtract after-init-time before-init-time))
+                       gcs-done)))
 
   ;;; ── §P3-09 Obsidian plugin audit ─────────────────────────────────────────
   ;; (populated by mission P3-09)
