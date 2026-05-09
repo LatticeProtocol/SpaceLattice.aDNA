@@ -4,8 +4,8 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_session: session_sl_p3_14_2026_05_08
-tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_complete, p4_open]
+last_session: session_sl_p4_02_2026_05_08
+tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_complete, p4_active]
 ---
 
 # Operational State
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Spacemacs v0.2.0 — campaign v1.0 P3 FULLY COMPLETE / P4 OPEN.** P2 complete. P3 complete: 9 core missions (P3-00→P3-08, 2026-05-08) + 4 extended missions (P3-09 Obsidian trim, P3-12 macOS platform, P3-13 perf hardening, P3-14 org-mode deep config, 2026-05-08). All 13 P3 missions closed with AARs. **P4 (fork branding + LP layers) is the active phase.** Next: P4-01 LP layer scaffold + skill_install extension (vault-only model, ADR-024).
+**Spacemacs v0.2.0 — campaign v1.0 P4 ACTIVE (2/10 missions closed).** P3 fully complete (13/13 missions, 2026-05-08). **P4-01** closed 2026-05-08: LP layer scaffold + skill_install Step 5 extended to all 4 layers (ADR-024 vault-only model). **P4-02** closed 2026-05-08: `SPC o l` keybindings live — 5 bindings wired to existing adna/claude-code-ide functions; `spacelattice_distribution_spec.md` + ADR-025 accepted. **Next: P4-03** — theme layer (`what/standard/layers/+themes/latticeprotocol-theme/`) dark + light variants.
 
 **P3 pre-flight COMPLETE (2026-05-06):** Dotfile placeholders resolved (theme/font/modeline/banner); doom-modeline adapted to spacemacs-dark (icon nil, `adna-vault` segment); adna layer keybindings refactored to Transient hierarchy (SPC a root + SPC o l LP + SPC c c Claude Code); LP stubs + Claude Code variants added to funcs.el; ADR-012 + ADR-013 accepted. Banner system live (3 variants + banner_active.txt). Visual layer deployed and live-inspected: font 150/✓, centaur-tabs star-filter/✓, doom-modeline/✓, projectile/✓.
 

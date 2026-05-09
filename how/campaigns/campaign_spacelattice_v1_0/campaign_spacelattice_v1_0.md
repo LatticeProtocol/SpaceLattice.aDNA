@@ -140,8 +140,8 @@ Execute the LP fork playbook from `what/context/spacemacs/spacemacs_customizatio
 
 **Scope** (8 missions, sequenced):
 
-- `mission_sl_p4_01_clone_fork_set_remotes` — local clone of fork; upstream remote set; `lp-develop` branch
-- `mission_sl_p4_02_distribution_layer` — new `layers/+distributions/spacelattice/` (declares dependency on `spacemacs` distribution; LP keybindings `SPC o l`)
+- `mission_sl_p4_01_clone_fork_set_remotes` ✅ — LP layer scaffold + skill_install Step 5 extended to all 4 layers (vault-only model, ADR-024; completed 2026-05-08)
+- `mission_sl_p4_02_distribution_layer` ✅ — `SPC o l` keybindings live (5 bindings mapped to adna/claude-code-ide functions); `spacelattice_distribution_spec.md` + ADR-025 accepted (completed 2026-05-08)
 - `mission_sl_p4_03_theme` — new `layers/+themes/latticeprotocol-theme/` (dark + light)
 - `mission_sl_p4_04_branding_strings` — patches to `core/core-spacemacs-buffer.el` (logo title + buffer name), `core/core-versions.el` (`latticeprotocol-version`), `core/core-spacemacs.el` (repository constants); prefer additive `core/lp-branding.el` module
 - `mission_sl_p4_05_banner_assets` — image (PNG + SVG + ICNS) + ASCII text variants 000–003
