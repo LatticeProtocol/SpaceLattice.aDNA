@@ -1,0 +1,29 @@
+#+TITLE: LatticeProtocol Spacemacs Distribution — Release Notes v1.0
+#+AUTHOR: LatticeProtocol / Daedalus (Spacemacs.aDNA)
+#+DATE: 2026-05-08
+#+OPTIONS: toc:nil
+
+# Stub — final content authored at P5-03 (polish + release phase).
+
+* What's New in v1.0
+
+  LatticeProtocol Spacemacs Distribution v1.0 — the context-native agentic IDE
+  built on Spacemacs, governed by the Spacemacs.aDNA vault.
+
+** Highlights
+
+   - *adna layer* — wikilink navigation, context-graph indexing, and Claude Code
+     bindings integrated as a first-class Spacemacs layer.
+   - *LP themes* — latticeprotocol-dark and latticeprotocol-light, derived from
+     spacemacs-dark with sharper accents and cooler backgrounds.
+   - *SPC o l* keybindings — quick access to LP-specific operations.
+   - *aDNA bridge* — `M-x adna-index-project` produces graph.json from any vault.
+
+** Getting Started
+
+   See the README in the Spacemacs.aDNA vault or run ~SPC h d~ for help.
+
+* Upgrade Notes
+
+  Fresh install: run `skill_install` from `how/standard/skills/skill_install.md`.
+  Existing install: run `skill_deploy` and then ~SPC q r~ to restart.

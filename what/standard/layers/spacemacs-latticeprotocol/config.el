@@ -24,15 +24,22 @@
       spacemacs-repository-owner "LatticeProtocol"
       spacemacs-checkversion-branch "lp-stable")
 
-;;; LP Banner (P4-05 — ADR-028)
-;; Points to the deployed ASCII banner (safe default — works in all terminals).
-;; To use the PNG image banner, run the SVG→PNG derivation step in spacelattice_assets.md
-;; and override dotspacemacs-startup-banner in what/local/operator.private.el instead.
+;;; LP Banner (ADR-029)
+;; Official Spacemacs banner retained as distribution default.
+;; LP ASCII assets (lp-banner-{1..4}.txt, latticeprotocol.svg) live in
+;; what/standard/layers/spacemacs-latticeprotocol/banners/ — available for
+;; operator override in what/local/operator.private.el when desired.
 
-(setq dotspacemacs-startup-banner
-      (expand-file-name
-       "private/layers/spacemacs-latticeprotocol/banners/lp-banner-1.txt"
-       spacemacs-start-directory))
+(setq dotspacemacs-startup-banner 'official)
+
+;;; LP News + Welcome (P4-06 — ADR-030)
+;; Point the startup buffer note to LP release notes instead of upstream Spacemacs news.
+;; Stub at what/docs/lp_release_notes_v1_0.org; final content authored at P5-03.
+
+(with-eval-after-load 'spacemacs-buffer
+  (setq spacemacs-buffer-note-file
+        (expand-file-name "what/docs/lp_release_notes_v1_0.org"
+                          dotspacemacs-directory)))
 
 ;;; Modeline format
 ;; The standard adna layer uses `adna-main' modeline segment format.

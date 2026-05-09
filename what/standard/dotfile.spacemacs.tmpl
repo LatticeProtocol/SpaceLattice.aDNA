@@ -12,7 +12,7 @@
 (defun dotspacemacs/layers ()
   "Configuration layers declaration."
   (setq-default
-   dotspacemacs-distribution 'spacemacs
+   dotspacemacs-distribution 'spacemacs-latticeprotocol
    dotspacemacs-enable-lazy-installation 'unused
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layer-path (list (concat dotspacemacs-directory "what/local/"))
@@ -117,7 +117,8 @@
    dotspacemacs-show-startup-list-numbers t
    ;; LP-branded themes (spacemacs-dark derivative with cooler bg + sharper accent).
    ;; Loaded from layers/+themes/latticeprotocol-theme/ local package (ADR-026).
-   dotspacemacs-themes '(latticeprotocol-dark latticeprotocol-light)
+   ;; spacemacs-dark included as fallback in case LP theme package fails to load (ADR-030).
+   dotspacemacs-themes '(latticeprotocol-dark latticeprotocol-light spacemacs-dark)
    ;; doom-modeline: superior info density + aDNA vault segment.
    ;; Adapts to spacemacs-dark faces (icon nil = text-only, theme-agnostic).
    dotspacemacs-mode-line-theme 'doom
