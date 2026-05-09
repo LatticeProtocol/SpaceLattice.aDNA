@@ -183,22 +183,36 @@ PY
 
 If template rendering fails, abort. The host now has bare Spacemacs but no rendered dotfile — recoverable by re-running this step.
 
-### Step 5 — Install adna layer
+### Step 5 — Install all LP layers
+
+Symlink each vault-resident LP layer into `~/.emacs.d/private/layers/`. Idempotent:
+re-running keeps existing correct symlinks and replaces stale ones.
 
 ```bash
 mkdir -p ~/.emacs.d/private/layers
-ADNA_SRC="$VAULT/what/standard/layers/adna"
-ADNA_DST=~/.emacs.d/private/layers/adna
 
-if [[ -L "$ADNA_DST" ]]; then
-  # Existing symlink — verify it points to our source; if not, replace
-  CUR=$(readlink "$ADNA_DST")
-  [[ "$CUR" != "$ADNA_SRC" ]] && rm "$ADNA_DST"
-fi
-[[ ! -e "$ADNA_DST" ]] && ln -s "$ADNA_SRC" "$ADNA_DST"
+# Helper: symlink $1 (source) → $2 (dest); replace if stale.
+_lp_symlink() {
+  local SRC="$1" DST="$2"
+  if [[ -L "$DST" ]]; then
+    [[ "$(readlink "$DST")" != "$SRC" ]] && rm "$DST"
+  fi
+  [[ ! -e "$DST" ]] && ln -s "$SRC" "$DST"
+}
+
+# Standard layers (private class)
+_lp_symlink "$VAULT/what/standard/layers/adna"                    ~/.emacs.d/private/layers/adna
+_lp_symlink "$VAULT/what/standard/layers/claude-code-ide"         ~/.emacs.d/private/layers/claude-code-ide
+_lp_symlink "$VAULT/what/standard/layers/spacemacs-latticeprotocol" ~/.emacs.d/private/layers/spacemacs-latticeprotocol
+
+# Theme layer (private class, +themes category)
+mkdir -p ~/.emacs.d/private/layers/+themes
+_lp_symlink "$VAULT/what/standard/layers/+themes/latticeprotocol-theme" \
+            ~/.emacs.d/private/layers/+themes/latticeprotocol-theme
 ```
 
-Idempotent: re-running keeps the same symlink.
+All four layers are now available to Spacemacs as private layers. `dotspacemacs-configuration-layers`
+will need to declare `spacemacs-latticeprotocol` as the distribution layer (populated in P4-02).
 
 ### Step 6 — First batch boot (validates layers load)
 
@@ -243,7 +257,7 @@ host: $HOST
 utc: $UTC
 emacs_version: $(emacs --version | head -1)
 spacemacs_sha: $(cd ~/.emacs.d && git rev-parse HEAD)
-adna_layer: $ADNA_DST -> $ADNA_SRC
+layers: adna + claude-code-ide + spacemacs-latticeprotocol + latticeprotocol-theme
 health_status: green
 preflight_log: how/local/machine_runbooks/last_install.log
 tags: [deploy_receipt, $HOST, install]
@@ -262,7 +276,10 @@ skill_install completed end-to-end. See preflight log for tooling versions and E
 - $VAULT/init.el ← rendered from \`what/standard/dotfile.spacemacs.tmpl\` (gitignored)
 - SPACEMACSDIR=$VAULT written to shell rc
 - ~/.emacs.d/private/packages.el ← rendered from \`what/standard/packages.el.tmpl\`
-- ~/.emacs.d/private/layers/adna → symlink to vault's \`what/standard/layers/adna/\`
+- ~/.emacs.d/private/layers/adna → vault's \`what/standard/layers/adna/\`
+- ~/.emacs.d/private/layers/claude-code-ide → vault's \`what/standard/layers/claude-code-ide/\`
+- ~/.emacs.d/private/layers/spacemacs-latticeprotocol → vault's \`what/standard/layers/spacemacs-latticeprotocol/\`
+- ~/.emacs.d/private/layers/+themes/latticeprotocol-theme → vault's \`what/standard/layers/+themes/latticeprotocol-theme/\`
 
 ## Health check result
 
@@ -278,7 +295,7 @@ After successful run:
 - `~/.emacs.d/` is a Spacemacs clone at the pinned SHA
 - `<vault>/init.el` is rendered from this vault's template (gitignored)
 - `SPACEMACSDIR=<vault>` exported in shell rc — Spacemacs finds `<vault>/init.el` on next launch
-- `~/.emacs.d/private/layers/adna/` is a symlink to `<vault>/what/standard/layers/adna/`
+- All 4 LP layers symlinked: `adna`, `claude-code-ide`, `spacemacs-latticeprotocol`, `+themes/latticeprotocol-theme`
 - `how/local/machine_runbooks/last_install.log` captures the install transcript (gitignored)
 - `deploy/<hostname>/<utc>.md` records the receipt (gitignored)
 

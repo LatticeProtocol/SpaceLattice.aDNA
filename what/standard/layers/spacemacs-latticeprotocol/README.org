@@ -1,0 +1,47 @@
+#+TITLE: spacemacs-latticeprotocol distribution layer
+#+AUTHOR: LatticeProtocol / Daedalus (Spacemacs.aDNA)
+#+LICENSE: GPL-3.0
+
+* Description
+
+The =spacemacs-latticeprotocol= layer is the LP distribution layer for
+Spacemacs.aDNA. It extends the upstream =spacemacs= distribution with:
+
+- The =latticeprotocol-theme= local package (dark + light variants)
+- LP-specific branding overrides via =setq= (no core file patching)
+- The =SPC o l= LP keybinding prefix (aDNA navigation + Claude Code IDE)
+
+This layer follows the vault-only model established in ADR-024: all LP code
+lives in =what/standard/layers/= inside the vault. No fork of
+=syl20bnr/spacemacs= is maintained.
+
+* Deployment
+
+=skill_install= Step 5 symlinks this layer into =~/.emacs.d/private/layers/=:
+
+#+begin_src bash
+ln -s "$VAULT/what/standard/layers/spacemacs-latticeprotocol" \
+      ~/.emacs.d/private/layers/spacemacs-latticeprotocol
+#+end_src
+
+In =dotfile.spacemacs.tmpl=, set:
+
+#+begin_src emacs-lisp
+dotspacemacs-distribution 'spacemacs-latticeprotocol
+#+end_src
+
+* Layer status
+
+| File | Status | Mission |
+|------+--------+---------|
+| =layers.el= | Skeleton ✓ | P4-01 |
+| =packages.el= | Skeleton ✓ | P4-01 |
+| =config.el= | Stub (branding stubs commented out) | P4-04 |
+| =keybindings.el= | Stub (SPC o l prefix table pending) | P4-02 |
+| =latticeprotocol-theme= | Not yet authored | P4-03 |
+
+* References
+
+- ADR-024: =what/decisions/adr/adr_024_vault_only_layer_model.md=
+- P3-08 binding table: =who/operators/stanley.md §3.5=
+- Theme layer: =what/standard/layers/+themes/latticeprotocol-theme/=
