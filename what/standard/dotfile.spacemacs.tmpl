@@ -298,7 +298,33 @@
      '((emacs-lisp . t)
        (shell      . t)
        (python     . t)
-       (jupyter    . t))))
+       (jupyter    . t)))
+
+    ;; Capture templates: inbox TODO, datetree session note, decision candidate, code snippet.
+    (setq org-capture-templates
+          '(("t" "TODO inbox" entry
+             (file+headline "org/inbox.org" "Inbox")
+             "* TODO %?\n  %i\n  %a\n  :CREATED: %U")
+            ("s" "Session note" entry
+             (file+olp+datetree "org/work.org")
+             "* %<%H:%M> %?\n  %i")
+            ("d" "Decision candidate" entry
+             (file+headline "org/work.org" "Decisions")
+             "* DECISION %?\n  Context: %i\n  Ref: %a\n  :CREATED: %U")
+            ("c" "Code snippet" entry
+             (file+headline "org/work.org" "Snippets")
+             "* %?\n  #+BEGIN_SRC %^{Language}\n  %i\n  #+END_SRC\n  Ref: %a")))
+
+    ;; Clock: persist across restarts; resume last clock; clean zero-time entries.
+    (setq org-clock-persist t
+          org-clock-in-resume t
+          org-clock-out-remove-zero-time-clocks t
+          org-clock-report-include-clocking-task t)
+    (org-clock-persistence-insinuate))
+
+  ;; Export backends: Markdown (built-in ox-md) — loaded lazily.
+  (with-eval-after-load 'ox
+    (require 'ox-md nil t))
 
   ;; ─ Org-roam v2 ────────────────────────────────────────────────────────────
   ;; Vault-local roam graph: DB sits alongside org files in <vault-root>/org/.

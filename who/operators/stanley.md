@@ -5,7 +5,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_mission: mission_sl_p3_13_dotfile_perf_hardening
+last_mission: mission_sl_p3_14_org_mode_deep_config
 hostname: null
 primary_models:
   - claude-opus-4-7
@@ -542,6 +542,26 @@ All perf settings confirmed. Final recipe across lifecycle positions:
 | `reb-re-syntax 'string` | **Confirmed** | LOW |
 
 All 12 settings were applied to `dotfile.spacemacs.tmpl §P3-13` during the 2026-05-07 research integration session. ADR-018 was accepted at research time. Operator walk-through confirmed no adjustments needed.
+
+## Mission p3_14_org_mode_deep_config (completed 2026-05-08)
+
+### §P3-14 Org-mode deep config decisions
+
+| Sub-feature | Decision | Notes |
+|------------|----------|-------|
+| `org-directory` | `<vault-root>/org/` | Vault-local; confirmed P3-07 |
+| `org-agenda-files` | `inbox.org` + `work.org` | Minimal scope; expand reactively |
+| `org-todo-keywords` | `TODO → NEXT → WAIT → DONE/CANCELLED` | GTD-lite; confirmed P3-07 |
+| org-babel languages | `emacs-lisp`, `shell`, `python`, `jupyter` | ML + runbooks + notebook kernels |
+| Capture templates | **4 templates**: `t` TODO inbox, `s` session note datetree, `d` decision candidate, `c` code snippet | All in `dotfile.spacemacs.tmpl §P3-07` |
+| org-clock | **Enabled** — `org-clock-persist t`, resume, clean zero-time, include clocking task | Useful for session and ML research time tracking |
+| ox-md (Markdown export) | **Enabled** — `require 'ox-md` in `with-eval-after-load 'ox` | Built-in org; no extra package; GitHub/static site export |
+| ox-reveal | **Deferred** — not in current use | Add to additional-packages if presentation workflow needed |
+| org-roam | `<vault-root>/org/` + autosync | Confirmed P3-07; org-roam-ui deferred |
+| org-roam dailies | **Deferred** | Use once agenda workflow stable; alternative to org-journal |
+| iOS sync | **Documented** in `platform_macos.md`; iCloud path in `operator.private.el` | Beorg / Plain Org via iCloud Drive |
+| org-projectile | **Deferred** | Links TODOs to projectile projects; add when workflow matures |
+| org-enable-org-journal-support | `nil` | Journal style TBD; org-roam dailies may cover this |
 
 ## Promotion log (local → standard)
 
