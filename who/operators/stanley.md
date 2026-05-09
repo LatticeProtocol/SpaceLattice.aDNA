@@ -5,7 +5,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_mission: mission_sl_p3_12_platform_context_macos
+last_mission: mission_sl_p3_13_dotfile_perf_hardening
 hostname: null
 primary_models:
   - claude-opus-4-7
@@ -521,6 +521,27 @@ All perf settings confirmed. Final recipe across lifecycle positions:
 | `dwim-shell-command` | **Add to `dotspacemacs-additional-packages`** | Useful macOS shell integration (reveal-in-finder, trash, OCR) without needing a separate layer; `with-eval-after-load` binding block in §P3-12 remaps `shell-command` + `dired` variants |
 | Karabiner-Elements | **In use — Hyper key setup** | Caps Lock → Ctrl+Shift+Alt+Cmd (Hyper). `H-` modifier gives conflict-free namespace for custom Emacs bindings. Bare Caps Lock tap → Escape (useful in evil-mode). Config at `~/.config/karabiner/karabiner.json`. |
 | darwin-conditional block | **Confirmed** | Modifier keys (`mac-command-modifier 'meta`, `mac-option-modifier 'none`), `ns-pop-up-frames nil`, transparent title bar, accurate color rendering — all correct and approved |
+
+## Mission p3_13_dotfile_perf_hardening (completed 2026-05-08)
+
+### §P3-13 ADR-018 batch — all 12 settings confirmed
+
+| Setting | Decision | Priority |
+|---------|----------|----------|
+| Bidi suppression (`bidi-display-reordering`, `bidi-paragraph-direction`, `bidi-inhibit-bpa`) | **Confirmed** | HIGH |
+| `redisplay-skip-fontification-on-input t` | **Confirmed** | HIGH |
+| `ffap-machine-p-known 'reject` | **Confirmed** | HIGH |
+| `cursor-in-non-selected-windows nil` + `highlight-nonselected-windows nil` | **Confirmed** | MEDIUM |
+| `window-combination-resize t` | **Confirmed** | MEDIUM |
+| `winner-mode +1` | **Confirmed** | MEDIUM |
+| `set-mark-command-repeat-pop t` | **Confirmed** | MEDIUM |
+| `save-interprogram-paste-before-kill t` | **Confirmed** | LOW |
+| `kill-do-not-save-duplicates t` | **Confirmed** | LOW |
+| `executable-make-buffer-file-executable-if-script-p` hook | **Confirmed** | LOW |
+| `help-window-select t` | **Confirmed** | LOW |
+| `reb-re-syntax 'string` | **Confirmed** | LOW |
+
+All 12 settings were applied to `dotfile.spacemacs.tmpl §P3-13` during the 2026-05-07 research integration session. ADR-018 was accepted at research time. Operator walk-through confirmed no adjustments needed.
 
 ## Promotion log (local → standard)
 

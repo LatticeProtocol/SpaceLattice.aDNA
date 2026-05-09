@@ -4,12 +4,12 @@ mission_id: mission_sl_p3_13_dotfile_perf_hardening
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 3
 campaign_mission_number: 13
-status: planned
+status: completed
 mission_class: implementation
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 last_edited_by: agent_stanley
-tags: [mission, planned, spacemacs, v1_0, p3, performance, config, dotfile, adr_018]
+tags: [mission, completed, spacemacs, v1_0, p3, performance, config, dotfile, adr_018]
 blocked_by: [mission_sl_p3_12_platform_context_macos]
 ---
 
