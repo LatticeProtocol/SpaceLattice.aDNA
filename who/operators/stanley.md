@@ -5,7 +5,7 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_mission: mission_sl_p3_08_languages_keys_perf
+last_mission: mission_sl_p3_12_platform_context_macos
 hostname: null
 primary_models:
   - claude-opus-4-7
@@ -511,6 +511,16 @@ All perf settings confirmed. Final recipe across lifecycle positions:
 | `emacs-startup-hook` timer | prints elapsed + GC count to *Messages* | **Added P3-08** — diagnostic |
 
 **Finding**: All §3.6 recipe items from the reference are now in the template. No ADR needed — all changes are additive, non-behavioral (cache path + diagnostic hook) or extensions of already-decided settings (LSP UI).
+
+## Mission p3_12_platform_context_macos (completed 2026-05-08)
+
+### §P3-12 macOS platform decisions
+
+| Topic | Decision | Rationale |
+|-------|----------|-----------|
+| `dwim-shell-command` | **Add to `dotspacemacs-additional-packages`** | Useful macOS shell integration (reveal-in-finder, trash, OCR) without needing a separate layer; `with-eval-after-load` binding block in §P3-12 remaps `shell-command` + `dired` variants |
+| Karabiner-Elements | **In use — Hyper key setup** | Caps Lock → Ctrl+Shift+Alt+Cmd (Hyper). `H-` modifier gives conflict-free namespace for custom Emacs bindings. Bare Caps Lock tap → Escape (useful in evil-mode). Config at `~/.config/karabiner/karabiner.json`. |
+| darwin-conditional block | **Confirmed** | Modifier keys (`mac-command-modifier 'meta`, `mac-option-modifier 'none`), `ns-pop-up-frames nil`, transparent title bar, accurate color rendering — all correct and approved |
 
 ## Promotion log (local → standard)
 

@@ -3,7 +3,7 @@ type: context
 title: "Platform context — macOS"
 status: active
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 last_edited_by: agent_stanley
 tags: [platform, macos, osx, emacs, spacemacs, configuration, deployment]
 ---
@@ -132,21 +132,39 @@ macOS-specific capabilities (loaded via `dwim-shell-commands`):
 | `dwim-shell-commands-macos-toggle-dark-mode` | Toggle macOS dark/light mode |
 | `dwim-shell-commands-macos-ocr-image` | OCR image file to text |
 
-**Layer placement**: `dwim-shell-command` should be added to `dotspacemacs-additional-packages`
-or a future `platform-macos` private layer. Defer to mission `p3_12_platform_context_macos`
-for ADR and layer placement decision.
+**Layer placement (P3-12 decision)**: Added to `dotspacemacs-additional-packages` (not a separate layer). `with-eval-after-load` binding block lives in `dotfile.spacemacs.tmpl §P3-12`.
 
 ---
 
 ## Keybinding system extensions
 
-**Karabiner-Elements**: External tool for extending Emacs-style keybindings system-wide,
-enabling Emacs bindings in non-Emacs apps (browsers, terminals). Not directly configured
-in Spacemacs.aDNA but referenced as a complementary macOS tool.
+### Karabiner-Elements — Hyper key setup
 
-- Allows remapping Caps Lock → Control system-wide
-- Enables `C-a` / `C-e` / `C-k` in any macOS text field
-- Configuration lives in `~/.config/karabiner/karabiner.json`
+**Operator setup (P3-12 confirmed)**: Caps Lock → **Hyper key** (Ctrl+Shift+Alt+Cmd simultaneously).
+
+The Hyper modifier gives Emacs a clean, conflict-free modifier namespace (`H-` prefix) for custom bindings, separate from `C-`, `M-`, `s-` (Super), and `A-` (Alt). No macOS system shortcut uses `H-`, so every `H-<key>` binding is available.
+
+**Karabiner-Elements configuration**:
+
+```json
+{
+  "description": "Caps Lock → Hyper (Ctrl+Shift+Alt+Cmd)",
+  "manipulators": [
+    {
+      "from": { "key_code": "caps_lock", "modifiers": { "optional": ["any"] } },
+      "to": [{ "key_code": "left_shift", "modifiers": ["left_control", "left_option", "left_command"] }],
+      "to_if_alone": [{ "key_code": "escape" }],
+      "type": "basic"
+    }
+  ]
+}
+```
+
+`to_if_alone` maps a bare Caps Lock tap to `Escape` — useful in vim/evil-mode for exiting normal state without reaching for the corner key.
+
+**Emacs side**: Spacemacs receives `H-<key>` events automatically when Karabiner remaps Caps Lock this way. No elisp configuration needed. Reserve `H-` bindings for global commands that should work in any major mode (e.g., `H-l` → `adna-find-context`, `H-s` → `adna-session-new`).
+
+Configuration lives in `~/.config/karabiner/karabiner.json`. Install via `brew install --cask karabiner-elements`.
 
 ---
 

@@ -91,9 +91,10 @@
      {{LOCAL_LAYER_LIST}}
      )
    ;; Packages not in any layer:
-   ;;   link-hint  — Vimium-style overlay on all visible links (SPC j o / SPC j O)
-   ;;   ace-link   — 'o' in eww/info/help jumps to any visible link
-   dotspacemacs-additional-packages '(link-hint ace-link)
+   ;;   link-hint         — Vimium-style overlay on all visible links (SPC j o / SPC j O)
+   ;;   ace-link          — 'o' in eww/info/help jumps to any visible link
+   ;;   dwim-shell-command — OS-aware shell commands with context-aware I/O (§P3-12)
+   dotspacemacs-additional-packages '(link-hint ace-link dwim-shell-command)
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
    dotspacemacs-install-packages 'used-only))
@@ -390,6 +391,18 @@
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     ;; Accurate color rendering for themes
     (setq ns-use-srgb-colorspace nil))
+
+  ;; dwim-shell-command — macOS-aware shell commands on buffer/dired selection
+  ;; Package in additional-packages (§P3-12). Remaps shell-command and dired
+  ;; async-shell-command to context-aware variants.
+  (with-eval-after-load 'dwim-shell-command
+    (define-key global-map [remap shell-command] #'dwim-shell-command)
+    (define-key dired-mode-map
+      [remap dired-do-async-shell-command] #'dwim-shell-command)
+    (define-key dired-mode-map
+      [remap dired-do-shell-command] #'dwim-shell-command)
+    (define-key dired-mode-map
+      [remap dired-smart-shell-command] #'dwim-shell-command))
 
   ;;; ── §P3-13 Performance and editing hardening (ADR-018) ───────────────────
   ;; Bidi suppression — major speedup for large files (JSON/logs/generated code).
