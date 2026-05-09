@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- LatticeProtocol Spacemacs Distribution Logo
+     Source of truth: SVG; PNG + ICNS are derived.
+     Derivation: rsvg-convert -w 256 -h 256 latticeprotocol.svg > latticeprotocol.png
+     License: GPL-3.0 (matches Spacemacs upstream, per ADR-028)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Background -->
+  <rect width="256" height="256" fill="#1e2029"/>
+
+  <!-- Lattice grid nodes (5×5) -->
+  <g fill="#5b9bd5" opacity="0.4">
+    <!-- row 1 -->
+    <circle cx="48"  cy="48"  r="4"/>
+    <circle cx="96"  cy="48"  r="4"/>
+    <circle cx="144" cy="48"  r="4"/>
+    <circle cx="192" cy="48"  r="4"/>
+    <!-- row 2 -->
+    <circle cx="48"  cy="96"  r="4"/>
+    <circle cx="96"  cy="96"  r="4"/>
+    <circle cx="144" cy="96"  r="4"/>
+    <circle cx="192" cy="96"  r="4"/>
+    <!-- row 3 -->
+    <circle cx="48"  cy="144" r="4"/>
+    <circle cx="96"  cy="144" r="4"/>
+    <circle cx="144" cy="144" r="4"/>
+    <circle cx="192" cy="144" r="4"/>
+    <!-- row 4 -->
+    <circle cx="48"  cy="192" r="4"/>
+    <circle cx="96"  cy="192" r="4"/>
+    <circle cx="144" cy="192" r="4"/>
+    <circle cx="192" cy="192" r="4"/>
+  </g>
+
+  <!-- Lattice grid edges -->
+  <g stroke="#5b9bd5" stroke-width="1" opacity="0.25">
+    <!-- horizontal -->
+    <line x1="48"  y1="48"  x2="192" y2="48"/>
+    <line x1="48"  y1="96"  x2="192" y2="96"/>
+    <line x1="48"  y1="144" x2="192" y2="144"/>
+    <line x1="48"  y1="192" x2="192" y2="192"/>
+    <!-- vertical -->
+    <line x1="48"  y1="48"  x2="48"  y2="192"/>
+    <line x1="96"  y1="48"  x2="96"  y2="192"/>
+    <line x1="144" y1="48"  x2="144" y2="192"/>
+    <line x1="192" y1="48"  x2="192" y2="192"/>
+    <!-- diagonal accents -->
+    <line x1="48"  y1="48"  x2="192" y2="192" opacity="0.15"/>
+    <line x1="192" y1="48"  x2="48"  y2="192" opacity="0.15"/>
+  </g>
+
+  <!-- LP monogram (centred) -->
+  <text x="128" y="120" font-family="monospace" font-size="48"
+        font-weight="bold" fill="#5b9bd5" text-anchor="middle">LP</text>
+
+  <!-- Full name -->
+  <text x="128" y="160" font-family="monospace" font-size="14"
+        fill="#b2cfe8" text-anchor="middle" letter-spacing="3">LATTICE PROTOCOL</text>
+
+  <!-- Tagline -->
+  <text x="128" y="185" font-family="monospace" font-size="10"
+        fill="#5b9bd5" text-anchor="middle" opacity="0.8">Spacemacs Distribution</text>
+</svg>
