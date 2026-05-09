@@ -1,15 +1,18 @@
 ---
 type: strategy
-status: outline
+status: superseded
 created: 2026-05-05
-updated: 2026-05-05
-last_edited_by: agent_init
+updated: 2026-05-08
+last_edited_by: agent_stanley
 implementation_phase: v1_0_campaign_p4
 ratified_by: what/decisions/adr/adr_005_rename_to_spacelattice.md
-tags: [strategy, fork, spacemacs, latticeprotocol, branding]
+superseded_by: what/decisions/adr/adr_024_vault_only_layer_model.md
+tags: [strategy, fork, spacemacs, latticeprotocol, branding, superseded]
 ---
 
 # Fork Strategy — `LatticeProtocol/spacelattice`
+
+> **SUPERSEDED by ADR-024 (2026-05-08).** The two-repo fork model was replaced by the vault-only layer model. All LP-specific Spacemacs code now lives in `what/standard/layers/`. `LatticeProtocol/spacelattice` was archived (no LP commits existed). Preserved below for audit.
 
 ## Purpose
 
