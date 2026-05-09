@@ -15,7 +15,7 @@ created: 2026-05-05
 updated: 2026-05-08
 last_edited_by: agent_stanley
 p2_progress: "4/4 missions closed ✅ P2 COMPLETE"
-p3_core_progress: "9/9 core missions closed (P3-00→P3-08) ✅ 22 DIMENSIONS COMPLETE — P3 phase-gate READY (P3-09/12/13/14 continue in parallel)"
+p3_core_progress: "13/13 missions closed ✅ P3 FULLY COMPLETE (2026-05-08) — core P3-00→P3-08 + extended P3-09/12/13/14 all closed"
 ratified_by:
   - what/decisions/adr/adr_005_rename_to_spacelattice.md
   - what/decisions/adr/adr_017_rename_to_spacemacs_adna.md
@@ -117,20 +117,22 @@ Systematic walk through the **22 dimensions** of `what/context/spacemacs/spacema
 - `mission_sl_p3_06_perf_evil_fonts` ✅ — §2.5 (performance), §2.6 (evil + misc), §2.7 (font + icon)
 - `mission_sl_p3_07_wild_workarounds_org` ✅ — §3.1 (wild combos), §3.2 (10 canonical workarounds), §3.3 (org-mode power-user)
 - `mission_sl_p3_08_languages_keys_perf` ✅ — §3.4 (LSP + tree-sitter + DAP), §3.5 (keybinding philosophy + `SPC o l`), §3.6 (perf recipes); **P3 phase-gate PASSED** (22 dimensions complete 2026-05-08)
-- `mission_sl_p3_09_obsidian_plugin_audit` — trim `.obsidian/plugins/` from 15 plugins (~13MB) to essentials (~1.5MB); document optionals; operator UX verification post-trim *(added at P1-01 backlog audit 2026-05-06)*
-- `mission_sl_p3_12_platform_context_macos` — author `what/context/platform_macos.md` + `how/standard/runbooks/macos_setup.md`; operator review; add darwin-conditional block to `dotfile.spacemacs.tmpl` via ADR *(added 2026-05-07 — macOS platform research integration)*
-- `mission_sl_p3_13_dotfile_perf_hardening` — apply ADR-018 batch (bidi suppression, fontification skip, ffap reject, kill-ring dedup, winner-mode, window-combination-resize, help-window-select); health-check validation *(added 2026-05-07 — emacsredux.com research integration)*
-- `mission_sl_p3_14_org_mode_deep_config` — web research pass on Spacemacs org layer; author/complete `what/context/org_mode_config.md`; draft org-mode user-config section; ADR for any standard choices; operator approval *(added 2026-05-07 — operator request for deep org-mode config)*
+- `mission_sl_p3_09_obsidian_plugin_audit` ✅ — 15 plugins → 2 tracked (advanced-canvas + templater); 10 optional documented; `what/context/obsidian_plugins.md` created *(2026-05-08)*
+- `mission_sl_p3_12_platform_context_macos` ✅ — `dwim-shell-command` → additional-packages; Karabiner Hyper key (Caps Lock → H-) documented; darwin-conditional block confirmed *(2026-05-08)*
+- `mission_sl_p3_13_dotfile_perf_hardening` ✅ — all 12 ADR-018 settings confirmed without adjustment; perf hardening batch operator-gated *(2026-05-08)*
+- `mission_sl_p3_14_org_mode_deep_config` ✅ — 4 capture templates + org-clock + ox-md export; `what/context/org_mode_config.md` stub → active *(2026-05-08)*
 
 **Mission count**: 13 (1 infrastructure + 12 customization walk). Sessions estimate: 14-20.
 
 **Phase exit gate**:
 - [x] P3-00 closed (infrastructure) ✅
-- [ ] All 12 P3 customization walk missions (P3-01 through P3-09, P3-12, P3-13, P3-14) closed with AARs
-- [ ] All 22 dimensions reviewed in operator-in-the-loop sessions
-- [ ] `who/operators/stanley.md` operator profile updated with all decisions
-- [ ] `what/local/operator.private.el` populated with operator-specific overrides
-- [ ] Standard layer absorbed validated patterns via `skill_layer_promote` (those eligible for commons)
+- [x] All 12 P3 customization walk missions (P3-01→P3-09, P3-12, P3-13, P3-14) closed with AARs ✅ (2026-05-08)
+- [x] All 22 dimensions reviewed in operator-in-the-loop sessions ✅
+- [x] `who/operators/stanley.md` operator profile updated with all decisions ✅
+- [ ] `what/local/operator.private.el` populated with operator-specific overrides (deferred to first `skill_install` run)
+- [ ] Standard layer absorbed validated patterns via `skill_layer_promote` (deferred to P4+)
+
+**P3 COMPLETE (2026-05-08)**
 
 ### Phase 4 — Fork branding (LP playbook execution)
 

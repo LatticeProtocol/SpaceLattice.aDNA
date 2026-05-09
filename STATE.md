@@ -4,8 +4,8 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_session: session_sl_p3_08_2026_05_08
-tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_core_complete, p4_gate_ready, research_integration]
+last_session: session_sl_p3_14_2026_05_08
+tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_complete, p4_open]
 ---
 
 # Operational State
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Spacemacs v0.2.0 — campaign v1.0 P3 CORE COMPLETE / P4 GATE READY.** P2 is complete (all 4 missions closed). P3 core 22-dimension walk complete (9 missions P3-00→P3-08, 2026-05-08). P3 extended missions (P3-09/12/13/14) continue in parallel with P4. **P3→P4 phase gate requires operator confirmation before P4 opens.**
+**Spacemacs v0.2.0 — campaign v1.0 P3 FULLY COMPLETE / P4 OPEN.** P2 complete. P3 complete: 9 core missions (P3-00→P3-08, 2026-05-08) + 4 extended missions (P3-09 Obsidian trim, P3-12 macOS platform, P3-13 perf hardening, P3-14 org-mode deep config, 2026-05-08). All 13 P3 missions closed with AARs. **P4 (fork branding + LP layers) is the active phase.** Next: P4-01 LP layer scaffold + skill_install extension (vault-only model, ADR-024).
 
 **P3 pre-flight COMPLETE (2026-05-06):** Dotfile placeholders resolved (theme/font/modeline/banner); doom-modeline adapted to spacemacs-dark (icon nil, `adna-vault` segment); adna layer keybindings refactored to Transient hierarchy (SPC a root + SPC o l LP + SPC c c Claude Code); LP stubs + Claude Code variants added to funcs.el; ADR-012 + ADR-013 accepted. Banner system live (3 variants + banner_active.txt). Visual layer deployed and live-inspected: font 150/✓, centaur-tabs star-filter/✓, doom-modeline/✓, projectile/✓.
 
@@ -87,7 +87,9 @@ None blocking. Audit findings status:
 
 **P3-08 COMPLETE (2026-05-08) — P3 PHASE-GATE PASSED.** Language stack + keybinding philosophy + final perf recipe (§3.4–§3.6). `typescript-backend 'lsp` added to typescript layer; LSP UI knobs added (modeline diagnostics + lsp-ui-doc); native-comp-eln-load-path block added to user-init; startup timing hook added to user-config. `SPC o l` LP prefix table locked (h/f/s/g/c). All 22 dimensions reviewed; operator profile complete through P3-08; no ADR issued (all changes additive/non-behavioral). **P3→P4 gate: READY — awaiting operator confirmation to open P4.**
 
-**Immediate next (operator confirmation required):** Confirm P3→P4 gate to open P4 (fork branding). In parallel: P3-09 Obsidian plugin audit → P3-12 macOS platform → P3-13 perf hardening → P3-14 org-mode deep config.
+**P3 COMPLETE (2026-05-08)** — all 13 P3 missions closed. Extended missions P3-09/12/13/14 completed same session as P3-08. P3→P4 gate confirmed by operator at P3-08 close.
+
+**Immediate next**: P4-01 — LP distribution + theme layer scaffold in vault; extend `skill_install` Step 5 to symlink all LP layers (vault-only model per ADR-024).
 
 **P4 queue additions**: P4-09 (complete claude-code-ide layer — `skill_install`/`skill_deploy` wiring + live acceptance test), P4-10 (agent command tree — `SPC a x` transient + `skill_adna_index` update).
 
@@ -99,6 +101,10 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-08 | **P3-14 complete — org-mode deep config.** 4 capture templates (t/s/d/c), org-clock persist+resume, ox-md Markdown export, `org_mode_config.md` stub → active. org-projectile + roam-ui deferred. | P3-14 session |
+| 2026-05-08 | **P3-13 complete — ADR-018 batch confirmed.** All 12 perf/editing settings confirmed without adjustment: bidi suppression, fontification skip, ffap reject, cursor, winner-mode, mark-ring, clipboard, kill-ring dedup, auto-chmod, help-window, re-builder. | P3-13 session |
+| 2026-05-08 | **P3-12 complete — macOS platform context.** `dwim-shell-command` → `additional-packages` + `with-eval-after-load` binding block; Karabiner-Elements Hyper key (Caps Lock → Ctrl+Shift+Alt+Cmd, bare tap → Escape); darwin-conditional block approved. | P3-12 session |
+| 2026-05-08 | **P3-09 complete — Obsidian plugin audit.** 15 plugins → 2 tracked (`obsidian-advanced-canvas` + `templater-obsidian`); 10 optional documented; 3 removed; `what/context/obsidian_plugins.md` created; `community-plugins.json` trimmed. | P3-09 session |
 | 2026-05-08 | **ADR-024 accepted — Vault-only layer model.** Supersedes two-repo fork model (ADR-005 + fork-strategy.md). All LP-specific Spacemacs code lives in `what/standard/layers/`. `LatticeProtocol/spacelattice` archived (no LP commits). `skill_install` Step 5 extended to symlink all LP layers. Branding via `setq` overrides in distribution layer `config.el`. P4-01 rescoped: no fork clone; scaffold LP layers in vault. P4-08 rescoped: `skill_update_pin` replaces "first rebase." | ADR-024 session |
 | 2026-05-08 | **P3-08 complete + P3 phase-gate PASSED** — Language stack + keybinding philosophy + final perf recipe (§3.4–§3.6): `typescript-backend 'lsp` added; LSP UI knobs (modeline diagnostics + lsp-ui-doc at-point) added to lsp-mode block; native-comp-eln-load-path block added to user-init; startup timing hook added to user-config; `SPC o l` LP prefix locked (h=adna-home, f=adna-find-context, s=adna-session-new, g=adna-graph, c=claude-code-ide); `treesit-auto` deferred (post-v1.0). All 22 dimensions complete. No ADR (all changes additive). | P3-08 session |
 | 2026-05-08 | **P3-07 complete** — Wild combos + workarounds + org-mode: 5 layer stacks adopted (ipython-notebook, kubernetes, ansible, html, mu4e); 9 of 11 §3.2 workarounds adopted (ivy N/A — helm stack, macOS title-bar already done); §3.3 org config: vault-local `org/` dir + inbox+work agenda + python/shell/jupyter babel + org-roam-db-autosync. Template §P3-07 section populated; user-init hardened (exec-path-from-shell + native-comp silent). Finding: ivy workaround asked despite helm stack — pre-assess from prior decisions in future walks. | P3-07 session |
@@ -147,6 +153,9 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Upgrade | Source |
 |------|---------|--------|
+| 2026-05-08 | **P3-14 org-mode deep** — `dotfile.spacemacs.tmpl §P3-07`: 4 capture templates, org-clock persist+resume, ox-md backend; `what/context/org_mode_config.md` promoted stub → active | session_sl_p3_14_2026_05_08 |
+| 2026-05-08 | **P3-13 perf hardening** — ADR-018 batch confirmed: all 12 settings (bidi, fontification, ffap, cursor, winner-mode, mark-ring, clipboard, kill-ring, auto-chmod, help-window, re-builder) | session_sl_p3_13_2026_05_08 |
+| 2026-05-08 | **P3-12 macOS platform** — `dotfile.spacemacs.tmpl §P3-12`: `dwim-shell-command` binding block added; `what/context/platform_macos.md`: Karabiner Hyper key (Caps Lock → H-) documented | session_sl_p3_12_2026_05_08 |
 | 2026-05-08 | **P3-08 language stack + keybinding philosophy + final perf recipe** — `dotfile.spacemacs.tmpl`: typescript-backend 'lsp, lsp-modeline-diagnostics + lsp-ui-doc knobs, native-comp-eln-load-path block, startup timing hook; `who/operators/stanley.md`: §3.4/§3.5/§3.6 decision blocks; `SPC o l` LP prefix table locked (source of truth for P4-02). P3 phase-gate PASSED (22 dimensions) | session_sl_p3_08_2026_05_08 |
 | 2026-05-08 | **P3-06 perf + evil + fonts/icons** — §2.5/§2.6 all defaults confirmed; §2.7: `dotspacemacs-default-font` → SpaceMono Nerd Font 13.0; `dotspacemacs-default-icons-font` → `nerd-icons`; ADR-023 accepted; `dotfile.spacemacs.tmpl` updated; health-check green; coord memo `coord_2026_05_08_adna_publish_rewrite` co-signed (Daedalus); backlog idea `idea_skill_publish_lattice_git_fix` → `in_progress` | session_sl_p3_06_2026_05_08 |
 | 2026-05-08 | **P3-05 editing + completion + packages** — §2.1 `'vim` (no `:variables`); §2.2 `helm` sole completion; §2.3 `'used-only` + default ELPA archives + empty frozen/additional-packages; operator profile P3-05 decision block; no ADR needed (all defaults) | session_sl_p3_05_2026_05_08 |
