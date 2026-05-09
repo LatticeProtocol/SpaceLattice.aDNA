@@ -2,9 +2,9 @@
 type: state
 status: active
 created: 2026-05-03
-updated: 2026-05-08
+updated: 2026-05-09
 last_edited_by: agent_stanley
-last_session: session_sl_p4_02_2026_05_08
+last_session: session_sl_p4_03_2026_05_09T020901Z
 tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_complete, p4_active]
 ---
 
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Spacemacs v0.2.0 — campaign v1.0 P4 ACTIVE (2/10 missions closed).** P3 fully complete (13/13 missions, 2026-05-08). **P4-01** closed 2026-05-08: LP layer scaffold + skill_install Step 5 extended to all 4 layers (ADR-024 vault-only model). **P4-02** closed 2026-05-08: `SPC o l` keybindings live — 5 bindings wired to existing adna/claude-code-ide functions; `spacelattice_distribution_spec.md` + ADR-025 accepted. **Next: P4-03** — theme layer (`what/standard/layers/+themes/latticeprotocol-theme/`) dark + light variants.
+**Spacemacs v0.2.0 — campaign v1.0 P4 ACTIVE (2/10 missions closed).** P3 fully complete (13/13 missions, 2026-05-08). **P4-01** closed 2026-05-08: LP layer scaffold + skill_install Step 5 extended to all 4 layers (ADR-024 vault-only model). **P4-02** closed 2026-05-08: `SPC o l` keybindings live — 5 bindings wired to existing adna/claude-code-ide functions; `spacelattice_distribution_spec.md` + ADR-025 accepted. **P4-03** closed 2026-05-09: `latticeprotocol-dark` + `latticeprotocol-light` themes authored (spacemacs-dark derivative, 2 LP tweaks); `packages.el` wired; `spacelattice_theme_spec.md` + ADR-026 accepted; `dotfile.spacemacs.tmpl` themes updated to LP pair. **Next: P4-04** — branding strings (logo, buffer name, version string).
 
 **P3 pre-flight COMPLETE (2026-05-06):** Dotfile placeholders resolved (theme/font/modeline/banner); doom-modeline adapted to spacemacs-dark (icon nil, `adna-vault` segment); adna layer keybindings refactored to Transient hierarchy (SPC a root + SPC o l LP + SPC c c Claude Code); LP stubs + Claude Code variants added to funcs.el; ADR-012 + ADR-013 accepted. Banner system live (3 variants + banner_active.txt). Visual layer deployed and live-inspected: font 150/✓, centaur-tabs star-filter/✓, doom-modeline/✓, projectile/✓.
 
@@ -101,6 +101,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-09 | **P4-03 complete — LP theme authored.** `latticeprotocol-dark` + `latticeprotocol-light` live (spacemacs-dark derivative; 2 LP tweaks: bg `#1e2029`, accent `#5b9bd5`). `packages.el` wired (`add-to-list 'custom-theme-load-path`). `dotfile.spacemacs.tmpl` themes → LP pair. `spacelattice_theme_spec.md` + ADR-026 accepted. Both files pass `emacs --batch` load validation. | P4-03 session |
 | 2026-05-08 | **P3-14 complete — org-mode deep config.** 4 capture templates (t/s/d/c), org-clock persist+resume, ox-md Markdown export, `org_mode_config.md` stub → active. org-projectile + roam-ui deferred. | P3-14 session |
 | 2026-05-08 | **P3-13 complete — ADR-018 batch confirmed.** All 12 perf/editing settings confirmed without adjustment: bidi suppression, fontification skip, ffap reject, cursor, winner-mode, mark-ring, clipboard, kill-ring dedup, auto-chmod, help-window, re-builder. | P3-13 session |
 | 2026-05-08 | **P3-12 complete — macOS platform context.** `dwim-shell-command` → `additional-packages` + `with-eval-after-load` binding block; Karabiner-Elements Hyper key (Caps Lock → Ctrl+Shift+Alt+Cmd, bare tap → Escape); darwin-conditional block approved. | P3-12 session |

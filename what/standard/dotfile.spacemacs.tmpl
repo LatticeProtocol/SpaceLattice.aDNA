@@ -115,9 +115,9 @@
    dotspacemacs-startup-lists '((recents . 5) (projects . 7))
    dotspacemacs-startup-buffer-responsive t
    dotspacemacs-show-startup-list-numbers t
-   ;; Stock spacemacs-dark theme — LP-consistent, no extra packages needed.
-   ;; doom-modeline (below) adapts to this theme's faces automatically.
-   dotspacemacs-themes '(spacemacs-dark spacemacs-light)
+   ;; LP-branded themes (spacemacs-dark derivative with cooler bg + sharper accent).
+   ;; Loaded from layers/+themes/latticeprotocol-theme/ local package (ADR-026).
+   dotspacemacs-themes '(latticeprotocol-dark latticeprotocol-light)
    ;; doom-modeline: superior info density + aDNA vault segment.
    ;; Adapts to spacemacs-dark faces (icon nil = text-only, theme-agnostic).
    dotspacemacs-mode-line-theme 'doom
