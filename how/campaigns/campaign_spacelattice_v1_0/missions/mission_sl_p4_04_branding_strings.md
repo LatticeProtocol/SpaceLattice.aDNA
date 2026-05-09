@@ -4,13 +4,14 @@ mission_id: mission_sl_p4_04_branding_strings
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 4
 campaign_mission_number: 4
-status: planned
+status: completed
 mission_class: implementation
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-09
+completed: 2026-05-09
 last_edited_by: agent_stanley
-tags: [mission, planned, spacelattice, v1_0, p4, fork_branding, strings]
-blocked_by: [mission_sl_p4_03_theme]
+tags: [mission, completed, spacelattice, v1_0, p4, fork_branding, strings]
+blocked_by: []
 ---
 
 # Mission — P4-04: Branding strings (logo title, buffer name, version, repository constants)
@@ -44,3 +45,17 @@ P4-03 closed.
 
 - `what/context/spacemacs/spacemacs_customization_reference.md` §4A.5 + §4B.3 (branding strings + version-string changes)
 - `what/standard/fork-strategy.md` § Mitigations (additive overrides)
+
+---
+
+## AAR (2026-05-09)
+
+**Worked**: All 5 branding overrides applied via `setq`/`defconst` in `config.el` per vault-only model (ADR-024); `spacelattice_branding_patch_spec.md` + ADR-027 filed; 1 session as estimated.
+
+**Didn't**: Original mission spec described `core/lp-branding.el` fork patching — that approach was never applicable given ADR-024 was accepted the same day the mission was created.
+
+**Finding**: Mission deliverables list referenced `adr_015_<slug>` as the ADR to file, but ADR-015 was already taken (vault deployment model). Branding ADR landed as ADR-027. Future missions should leave ADR number as TBD at creation time.
+
+**Change**: `config.el` already had a stub `latticeprotocol-version "0.1.0-alpha"` — updated to `"0.1.0"` to match the mission spec; the `setq` overrides were uncommented and corrected (stub had wrong values).
+
+**Follow-up**: P4-05 (banner assets) must supply `img/latticeprotocol.png` and wire the `spacemacs-buffer//choose-banner` path override (item 7 in branding spec, currently deferred).
