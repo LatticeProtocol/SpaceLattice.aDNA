@@ -1,0 +1,54 @@
+name: Upstream monitor — Spacemacs pin drift
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Monday 09:00 UTC
+  workflow_dispatch:
+
+jobs:
+  check-upstream:
+    name: Check Spacemacs upstream vs pinned SHA
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read pinned SHA from pins.md
+        id: pin
+        run: |
+          SHA=$(grep 'Pinned SHA' what/standard/pins.md | grep -oE '[0-9a-f]{40}')
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Pinned SHA: $SHA"
+
+      - name: Fetch upstream HEAD (develop)
+        id: upstream
+        run: |
+          SHA=$(gh api repos/syl20bnr/spacemacs/git/ref/heads/develop --jq '.object.sha')
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Upstream SHA: $SHA"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: No drift — exit early
+        if: steps.pin.outputs.sha == steps.upstream.outputs.sha
+        run: echo "Pinned SHA matches upstream develop — no action needed."
+
+      - name: Open issue for drift
+        if: steps.pin.outputs.sha != steps.upstream.outputs.sha
+        run: |
+          PINNED="${{ steps.pin.outputs.sha }}"
+          UPSTREAM="${{ steps.upstream.outputs.sha }}"
+          AHEAD=$(gh api \
+            "repos/syl20bnr/spacemacs/compare/${PINNED}...${UPSTREAM}" \
+            --jq '.ahead_by' 2>/dev/null || echo "unknown")
+          TODAY=$(date +%Y-%m-%d)
+          gh issue create \
+            --title "Upstream Spacemacs: ${AHEAD} new commits (${TODAY})" \
+            --body "$(printf \
+              '**Pinned SHA:** \`%s\`\n**Upstream HEAD:** \`%s\`\n**Commits ahead:** %s\n\n**Compare:** https://github.com/syl20bnr/spacemacs/compare/%s...%s\n\nFollow runbook: \`how/standard/runbooks/update_spacemacs.md\`\n\n_If an issue already exists for this cycle, close this duplicate._' \
+              "$PINNED" "$UPSTREAM" "$AHEAD" "$PINNED" "$UPSTREAM")" \
+            --label "upstream-sync" || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

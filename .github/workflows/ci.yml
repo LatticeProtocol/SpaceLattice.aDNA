@@ -1,0 +1,35 @@
+name: CI — Layer Byte-compile
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'what/standard/layers/**/*.el'
+  pull_request:
+    paths:
+      - 'what/standard/layers/**/*.el'
+
+jobs:
+  byte-compile:
+    name: Byte-compile (Emacs ${{ matrix.emacs-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        emacs-version:
+          - '28.2'
+          - '29.4'
+          - 'snapshot'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Emacs ${{ matrix.emacs-version }}
+        uses: purcell/setup-emacs@master
+        with:
+          version: ${{ matrix.emacs-version }}
+
+      - name: Byte-compile all layer elisp files
+        run: |
+          find what/standard/layers -name '*.el' -print0 \
+            | xargs -0 emacs --batch -f batch-byte-compile

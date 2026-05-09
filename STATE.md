@@ -4,8 +4,8 @@ status: active
 created: 2026-05-03
 updated: 2026-05-08
 last_edited_by: agent_stanley
-last_session: session_sl_p4_06_2026_05_08T180000Z
-tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_complete, p4_active, p4_06_complete]
+last_session: session_sl_p4_07_2026_05_08T200000Z
+tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_complete, p4_active, p4_07_complete]
 ---
 
 # Operational State
@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**Spacemacs v0.2.0 — campaign v1.0 P4 ACTIVE (5/10 missions closed).** P3 fully complete (13/13 missions, 2026-05-08). **P4-01** closed 2026-05-08: LP layer scaffold + skill_install Step 5 extended to all 4 layers (ADR-024 vault-only model). **P4-02** closed 2026-05-08: `SPC o l` keybindings live — 5 bindings wired to existing adna/claude-code-ide functions; `spacelattice_distribution_spec.md` + ADR-025 accepted. **P4-03** closed 2026-05-08: `latticeprotocol-dark` + `latticeprotocol-light` themes authored (spacemacs-dark derivative, 2 LP tweaks); `packages.el` wired; `spacelattice_theme_spec.md` + ADR-026 accepted; `dotfile.spacemacs.tmpl` themes updated to LP pair. **P4-04** closed 2026-05-08: LP branding strings live — `spacemacs-buffer-logo-title` → `[L A T T I C E   P R O T O C O L]`, `spacemacs-buffer-name` → `*spacelattice*`, `latticeprotocol-version "0.1.0"`, repository constants → `LatticeProtocol/spacelattice` + `lp-stable`; `spacelattice_branding_patch_spec.md` + ADR-027 accepted. **P4-05** closed 2026-05-08: LP banner assets live — 4 ASCII text variants + SVG source (`latticeprotocol.svg`); PNG/ICNS derivation documented; `spacelattice_assets.md` vault spec + ADR-028 accepted. **P4-05b** (same session, 2026-05-08): Banner reverted to `'official` per ADR-029 — LP assets held in reserve; ADR-028 banner `setq` superseded. **P4-06** closed 2026-05-08: Dotfile template overrides — `dotspacemacs-distribution 'spacemacs-latticeprotocol`, themes fallback (`spacemacs-dark`), LP news wire (`spacemacs-buffer-note-file` → `what/docs/lp_release_notes_v1_0.org`); `spacelattice_dotfile_template_overrides.md` vault reference doc + ADR-030 accepted. **Next: P4-07** — CI workflows.
+**Spacemacs v0.2.0 — campaign v1.0 P4 ACTIVE (7/10 missions closed).** P3 fully complete (13/13 missions, 2026-05-08). **P4-01** closed 2026-05-08: LP layer scaffold + skill_install Step 5 extended to all 4 layers (ADR-024 vault-only model). **P4-02** closed 2026-05-08: `SPC o l` keybindings live — 5 bindings wired to existing adna/claude-code-ide functions; `spacelattice_distribution_spec.md` + ADR-025 accepted. **P4-03** closed 2026-05-08: `latticeprotocol-dark` + `latticeprotocol-light` themes authored (spacemacs-dark derivative, 2 LP tweaks); `packages.el` wired; `spacelattice_theme_spec.md` + ADR-026 accepted; `dotfile.spacemacs.tmpl` themes updated to LP pair. **P4-04** closed 2026-05-08: LP branding strings live — `spacemacs-buffer-logo-title` → `[L A T T I C E   P R O T O C O L]`, `spacemacs-buffer-name` → `*spacelattice*`, `latticeprotocol-version "0.1.0"`, repository constants → `LatticeProtocol/spacelattice` + `lp-stable`; `spacelattice_branding_patch_spec.md` + ADR-027 accepted. **P4-05** closed 2026-05-08: LP banner assets live — 4 ASCII text variants + SVG source (`latticeprotocol.svg`); PNG/ICNS derivation documented; `spacelattice_assets.md` vault spec + ADR-028 accepted. **P4-05b** (same session, 2026-05-08): Banner reverted to `'official` per ADR-029 — LP assets held in reserve; ADR-028 banner `setq` superseded. **P4-06** closed 2026-05-08: Dotfile template overrides — `dotspacemacs-distribution 'spacemacs-latticeprotocol`, themes fallback (`spacemacs-dark`), LP news wire (`spacemacs-buffer-note-file` → `what/docs/lp_release_notes_v1_0.org`); `spacelattice_dotfile_template_overrides.md` vault reference doc + ADR-030 accepted. **P4-07** closed 2026-05-08: CI + upstream monitor live — `.github/workflows/ci.yml` (byte-compile matrix Emacs 28.2/29.4/snapshot on `what/standard/layers/**/*.el`) + `.github/workflows/upstream-sync.yml` (weekly Monday cron; opens GitHub issue on pin drift vs `syl20bnr/spacemacs develop`); `spacelattice_ci_spec.md` + ADR-031 accepted. **Next: P4-08** — skill_update_pin.
 
 **P3 pre-flight COMPLETE (2026-05-06):** Dotfile placeholders resolved (theme/font/modeline/banner); doom-modeline adapted to spacemacs-dark (icon nil, `adna-vault` segment); adna layer keybindings refactored to Transient hierarchy (SPC a root + SPC o l LP + SPC c c Claude Code); LP stubs + Claude Code variants added to funcs.el; ADR-012 + ADR-013 accepted. Banner system live (3 variants + banner_active.txt). Visual layer deployed and live-inspected: font 150/✓, centaur-tabs star-filter/✓, doom-modeline/✓, projectile/✓.
 
@@ -91,7 +91,7 @@ None blocking. Audit findings status:
 
 **Immediate next**: P4-01 — LP distribution + theme layer scaffold in vault; extend `skill_install` Step 5 to symlink all LP layers (vault-only model per ADR-024).
 
-**P4 queue additions**: P4-09 (complete claude-code-ide layer — `skill_install`/`skill_deploy` wiring + live acceptance test), P4-10 (agent command tree — `SPC a x` transient + `skill_adna_index` update).
+**P4 progress**: P4-07 closed (CI + upstream monitor). **Immediate next: P4-08** — `skill_update_pin` (ADR-gated pin-bump skill documentation + runbook integration). Queue: P4-09 (claude-code-ide layer — `skill_install`/`skill_deploy` wiring + live acceptance test), P4-10 (agent command tree — `SPC a x` transient + `skill_adna_index` update).
 
 **Note**: `skill_self_improve` Stop hook is live. Session count gate at 5 — will be silent until session 5.
 
@@ -101,6 +101,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-08 | **P4-07 complete — CI + upstream monitor live.** `.github/workflows/ci.yml`: byte-compile matrix (Emacs 28.2/29.4/snapshot) on `what/standard/layers/**/*.el` (push to master + PRs). `.github/workflows/upstream-sync.yml`: Monday 09:00 UTC cron + `workflow_dispatch`; parses pinned SHA from `pins.md`; opens GitHub issue on drift vs `syl20bnr/spacemacs develop`; `upstream-sync` label required. `spacelattice_ci_spec.md` + ADR-031 accepted. Fork-rebase model superseded by vault-only model (ADR-024). | P4-07 session |
 | 2026-05-08 | **P4-05 complete — LP banner assets live.** 4 ASCII text variants (`lp-banner-1..4.txt`) + SVG source (`latticeprotocol.svg`); PNG/ICNS derivation documented in `spacelattice_assets.md`; ADR-028 accepted (vault-only storage, GPL-3.0 posture, SVG-first derivation); `dotspacemacs-startup-banner` override in `config.el` → `lp-banner-1.txt` (terminal-safe default). | P4-05 session |
 | 2026-05-08 | **P4-04 complete — LP branding strings live.** `spacemacs-buffer-logo-title` → `[L A T T I C E   P R O T O C O L]`; `spacemacs-buffer-name` → `*spacelattice*`; `latticeprotocol-version "0.1.0"` defconst; repository constants → `LatticeProtocol/spacelattice` + `lp-stable`. All via `setq` in `config.el` (ADR-024 vault-only). `spacelattice_branding_patch_spec.md` (7-item catalogue) + ADR-027 accepted. | P4-04 session |
 | 2026-05-09 | **P4-03 complete — LP theme authored.** `latticeprotocol-dark` + `latticeprotocol-light` live (spacemacs-dark derivative; 2 LP tweaks: bg `#1e2029`, accent `#5b9bd5`). `packages.el` wired (`add-to-list 'custom-theme-load-path`). `dotfile.spacemacs.tmpl` themes → LP pair. `spacelattice_theme_spec.md` + ADR-026 accepted. Both files pass `emacs --batch` load validation. | P4-03 session |
@@ -156,6 +157,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Upgrade | Source |
 |------|---------|--------|
+| 2026-05-08 | **P4-07 CI + upstream monitor** — `.github/workflows/ci.yml` (byte-compile matrix Emacs 28.2/29.4/snapshot); `.github/workflows/upstream-sync.yml` (weekly drift monitor → GitHub issue); `what/standard/spacelattice_ci_spec.md`; `adr_031_ci_upstream_monitor.md` accepted | session_sl_p4_07_2026_05_08T200000Z |
 | 2026-05-08 | **P3-14 org-mode deep** — `dotfile.spacemacs.tmpl §P3-07`: 4 capture templates, org-clock persist+resume, ox-md backend; `what/context/org_mode_config.md` promoted stub → active | session_sl_p3_14_2026_05_08 |
 | 2026-05-08 | **P3-13 perf hardening** — ADR-018 batch confirmed: all 12 settings (bidi, fontification, ffap, cursor, winner-mode, mark-ring, clipboard, kill-ring, auto-chmod, help-window, re-builder) | session_sl_p3_13_2026_05_08 |
 | 2026-05-08 | **P3-12 macOS platform** — `dotfile.spacemacs.tmpl §P3-12`: `dwim-shell-command` binding block added; `what/context/platform_macos.md`: Karabiner Hyper key (Caps Lock → H-) documented | session_sl_p3_12_2026_05_08 |
