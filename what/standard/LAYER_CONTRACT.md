@@ -2,8 +2,8 @@
 type: contract
 status: active
 created: 2026-05-03
-updated: 2026-05-04
-last_edited_by: agent_init
+updated: 2026-05-11
+last_edited_by: agent_stanley
 ratified_by: what/decisions/adr/adr_000_vault_identity.md
 supersedes_stub: 2026-05-03
 tags: [contract, layers, standard, local, overlay, governance, normative]
@@ -112,6 +112,20 @@ A script that scans for patterns that should NEVER appear in `standard/`:
 | Internal URL fragments | `<host>.internal`, `localhost:<port>` (unless a documented example) | Warn |
 
 Implementation: inline in `skill_layer_promote` step 2 (Python with regex). No separate tool — keeps the contract self-contained. Operators can extend the pattern list per-vault by editing this file (which is itself a `standard/` change → ADR).
+
+### Clause 8 — Scripts directory
+
+The optional `scripts/` subdirectory in a layer (e.g., `what/standard/layers/adna/scripts/`)
+allows runtime-loaded elisp that registers keybindings without being a full layer:
+
+| Location | Governance | Gitignored |
+|----------|-----------|------------|
+| `what/standard/layers/<layer>/scripts/` | Standard — same sanitization rules as Clause 1 + § 4; ADR required for additions | No — tracked in commons |
+| `what/local/scripts/` | Private — operator-specific paths allowed; never published | Yes |
+
+Scripts in `what/standard/` MUST pass the sanitization scan (§ 4) before commit. Use `what/local/scripts/` for scripts with machine-specific paths or personal aliases. Promotion from `local/` to `standard/` follows Clause 4 (promotion ritual).
+
+Auto-discovery: `adna/load-scripts` (defined in `funcs.el`) loads all `*.el` from `what/standard/layers/adna/scripts/` and `what/local/scripts/` at Spacemacs startup (via `spacemacs-post-user-config-hook`). See ADR-038.
 
 ## 3. Verification (skill_health_check checks C)
 

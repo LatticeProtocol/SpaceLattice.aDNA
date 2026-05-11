@@ -3,8 +3,8 @@ type: skill
 skill_type: agent
 status: active
 created: 2026-05-03
-updated: 2026-05-03
-last_edited_by: agent_init
+updated: 2026-05-11
+last_edited_by: agent_stanley
 category: verification
 trigger: "Run before any commit to what/standard/. Run after every install or deploy. Run as gate inside skill_self_improve's dry-run."
 phase_introduced: 3
@@ -193,6 +193,43 @@ fi
 
 For Phase 3, the script doesn't exist yet — skip.
 
+### G. All LP layers byte-compile individually
+
+```bash
+for layer in what/standard/layers/*/; do
+  layer_name=$(basename "$layer")
+  for el in "${layer}"*.el; do
+    [[ -f "$el" ]] || continue
+    result=$(emacs --batch \
+      --eval '(setq load-prefer-newer t)' \
+      --eval "(byte-compile-file \"${el}\")" 2>&1)
+    if echo "$result" | grep -q "Error"; then
+      echo "RED G: byte-compile failed: ${el}"
+      echo "$result"
+      exit 85
+    fi
+  done
+  echo "OK G: ${layer_name}/ all .el files byte-compile clean"
+done
+```
+
+Warnings for `spacemacs/*` API stubs are expected (Spacemacs APIs load at boot, not in batch) — only `Error` lines fail this check.
+
+### H. Layer structure validation
+
+```bash
+if command -v python3 >/dev/null && [[ -f what/standard/index/validate_layers.py ]]; then
+  python3 what/standard/index/validate_layers.py
+  if [[ $? -ne 0 ]]; then
+    echo "RED H: validate_layers.py reported failures"
+    exit 86
+  fi
+  echo "OK H: validate_layers.py all checks passed"
+else
+  echo "SKIP H: validate_layers.py not found — structural check skipped"
+fi
+```
+
 ### I. layouts.el byte-compile + symbol check
 
 ```bash
@@ -235,6 +272,8 @@ fi
 | 60-69 | Graph emission failures (Phase 4+) |
 | 70-79 | Live state assertion failures (D+ check, Phase 3+) |
 | 80 | layouts.el compile/symbol failures (Check I) |
+| 85 | LP layer byte-compile failures (Check G) |
+| 86 | validate_layers.py structural failures (Check H) |
 
 ## Phase 3 baseline
 

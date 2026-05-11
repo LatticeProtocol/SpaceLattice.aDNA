@@ -4,12 +4,12 @@ mission_id: mission_sl_p5_04_shared_command_tree
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
 campaign_mission_number: 4
-status: planned
+status: completed
 mission_class: implementation
 created: 2026-05-10
 updated: 2026-05-11
 last_edited_by: agent_stanley
-tags: [mission, planned, spacemacs, v1_0, p5, command_tree, shared, scripts, auto_discovery, mcp, adr_038]
+tags: [mission, completed, spacemacs, v1_0, p5, command_tree, shared, scripts, auto_discovery, mcp, adr_038]
 blocked_by: []
 ---
 
@@ -143,3 +143,17 @@ P5-02 (Claude Code integration — `adna/open-claude-with-layout` script depends
 - `what/standard/LAYER_CONTRACT.md` (extend with scripts/ clause)
 - ADR-013 (original keybinding/extensibility decision)
 - ADR-034 (SPC a x stub — this mission fills it in properly)
+
+---
+
+## AAR — 2026-05-11
+
+**Worked**: `scripts/` directory created, 3 seed scripts with interface contract (`provide` + `spacemacs/set-leader-keys`), `adna/load-scripts` in `funcs.el`, `adna--layer-dir` defvar in `config.el`, `spacemacs-post-user-config-hook` call site, `shared_command_space.md` context doc, `agent_command_tree.md` updated with seed table + discovery protocol + extension discipline, `LAYER_CONTRACT.md` Clause 8 added, ADR-038 accepted.
+
+**Didn't work**: Nothing blocked. Minor: `adna/load-scripts` uses both `adna--layer-dir` and a `locate-library` fallback in case the defvar was nil — belt-and-suspenders for different install paths.
+
+**Finding**: Spacemacs layer loading order (packages.el → config.el → funcs.el) means `load-file-name` must be captured in `config.el` at load time, not in `funcs.el` (already loaded by then). The `adna--layer-dir` defvar at the top of `config.el` is the correct capture point.
+
+**Change**: Added `adna--layer-dir` defvar early in `config.el` (before buffer-local section); `adna/load-scripts` in `funcs.el` references it.
+
+**Follow-up**: Live validation (SPC a x → seed commands appear in which-key) requires running Emacs. Defer to operator at next boot — run `SPC a x` and verify `s/h/o` appear.

@@ -3,7 +3,7 @@ type: context
 title: "Agent command tree — dynamic keybinding extension for Spacemacs.aDNA"
 status: active
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-11
 last_edited_by: agent_stanley
 tags: [agent, keybinding, transient, mcp, command-tree, extensibility, adna]
 ---
@@ -47,12 +47,39 @@ live under `SPC o l` (namespaced under Spacemacs's user prefix `SPC o`).
 
 ---
 
-## SPC a x — Agent extension stub
+## SPC a x — Shared command space (auto-populated from scripts/)
 
-`SPC a x` is an intentionally reserved transient slot for agent-authored command
-extensions. When an agent adds a new capability, it appends a binding here.
+`SPC a x` is populated by `adna/load-scripts` at startup. It auto-discovers all `.el`
+files in `what/standard/layers/adna/scripts/` and `what/local/scripts/`, loading each
+and registering any `SPC a x` bindings they declare.
 
-### How agents add a command
+### Seed commands (v1.0 standard)
+
+| Key | Function | Description |
+|-----|----------|-------------|
+| `SPC a x s` | `adna/show-sitrep` | STATE.md + latest active session, side-by-side |
+| `SPC a x h` | `adna/run-health-check` | Opens vterm, runs validate_layers.py |
+| `SPC a x o` | `adna/open-claude-with-layout` | Agentic layout + Claude Code in one key |
+
+### scripts/ directory and auto-discovery
+
+Scripts live at `what/standard/layers/adna/scripts/` (standard) and
+`what/local/scripts/` (operator-private, gitignored). Both are loaded by
+`adna/load-scripts` wired in `config.el` via `spacemacs-post-user-config-hook`.
+
+Discovery protocol:
+1. Spacemacs finishes user-config phase
+2. `adna/load-scripts` loads all `*.el` from `scripts/` + `what/local/scripts/`
+3. Each script registers under `SPC a x` via `spacemacs/set-leader-keys`
+4. `which-key` shows the result when operator types `SPC a x`
+
+Agent workflow for adding a script:
+1. Draft in `what/local/scripts/` → auto-loads, appears in `SPC a x` immediately
+2. Propose via SITREP: describe the function and binding
+3. Operator approves → ADR filed → `skill_layer_promote` (sanitization scan)
+4. Lands in `what/standard/layers/adna/scripts/` → reaches all LP operators
+
+### How agents add a command (local, this session only)
 
 1. **Draft the elisp function** in a local layer (`what/local/`) or as a lambda:
 
@@ -168,8 +195,10 @@ An agent dropped into Spacemacs.aDNA can discover the current command tree by:
 3. **Querying which-key**: In a live Spacemacs session, `SPC a` then wait 0.4s to see
    all current `SPC a` bindings rendered by which-key
 4. **Reading `what/standard/layers/adna/keybindings.el`** — programmatic source of truth
-   for the `adna` layer's bindings
+   for the `adna` layer's static bindings
 5. **Reading `what/standard/layers/claude-code-ide/keybindings.el`** — `SPC c` bindings
+6. **Reading `what/standard/layers/adna/scripts/`** — auto-discovered `SPC a x` commands
+   (see `scripts/README.md` for interface contract)
 
 ---
 
@@ -177,13 +206,15 @@ An agent dropped into Spacemacs.aDNA can discover the current command tree by:
 
 | Action | Scope | Mechanism |
 |--------|-------|-----------|
-| Add command for this session | local/ | `operator.private.el` |
-| Add command to standard | ADR + skill_layer_promote | Sanitization + operator gate |
+| Add command for this session | `operator.private.el` | Immediate; session-scoped |
+| Add persistent private command | `what/local/scripts/` | Auto-loads at startup; gitignored |
+| Add command to standard | `scripts/` + ADR + `skill_layer_promote` | Sanitization + operator gate |
 | Expose function to Claude via MCP | Any | `claude-code-ide-make-tool` |
-| Remove a command | Any | Edit the binding file; re-run health-check |
+| Remove a command | Any | Remove from scripts/ or binding file; re-run health-check |
 
 **Rule**: Agents propose, operators gate. A new binding in `standard/` requires an ADR.
-A binding in `local/` is private and cannot reach the commons without promotion.
+A binding in `what/local/scripts/` is private and cannot reach the commons without
+promotion via `skill_layer_promote`.
 
 ---
 
@@ -191,6 +222,10 @@ A binding in `local/` is private and cannot reach the commons without promotion.
 
 - ADR-013: Keybinding refactor (`what/decisions/adr/adr_013_keybinding_refactor.md`)
 - ADR-019: claude-code-ide layer (`what/decisions/adr/adr_019_claude_code_ide_layer.md`)
+- ADR-034: `SPC a x` stub activation (`what/decisions/adr/adr_034_agent_command_tree_activation.md`)
+- ADR-038: Shared command space — `scripts/` + auto-discovery (`what/decisions/adr/adr_038_shared_command_space.md`)
 - `adna` layer keybindings: `what/standard/layers/adna/keybindings.el`
+- `adna` layer scripts/: `what/standard/layers/adna/scripts/`
 - `claude-code-ide` layer: `what/standard/layers/claude-code-ide/`
-- Mission: `mission_sl_p4_10_agent_command_tree`
+- Conceptual overview: `what/context/spacemacs/shared_command_space.md`
+- Mission: `mission_sl_p4_10_agent_command_tree`, `mission_sl_p5_04_shared_command_tree`

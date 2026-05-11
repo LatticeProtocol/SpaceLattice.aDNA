@@ -284,6 +284,7 @@ Used by skill_health_check Check E. In batch mode, exits 0/non-0."
                   adna/follow-wikilink
                   adna/spawn-claude-code
                   adna/claude-project-switch
+                  adna/load-scripts
                   adna-index-project))
       (unless (fboundp fn)
         (push (format "fbound-fail: %s" fn) failures)))
@@ -441,5 +442,30 @@ geometry before selecting a project session."
   (if (fboundp 'claude-code-ide-list-sessions)
       (call-interactively #'claude-code-ide-list-sessions)
     (adna/spawn-claude-code)))
+
+;;; ============================================================================
+;;; Scripts auto-discovery (ADR-038)
+;;; ============================================================================
+
+(defun adna/load-scripts ()
+  "Load all .el files from adna/scripts/ and what/local/scripts/ (if present).
+Called via `spacemacs-post-user-config-hook' (registered in config.el) so all
+layers are available when scripts register their SPC a x sub-commands.
+
+Standard scripts:  what/standard/layers/adna/scripts/  (this layer's scripts/)
+Operator scripts:  what/local/scripts/                  (gitignored, private)"
+  (let* ((layer-dir (or adna--layer-dir
+                        ;; Fallback: find via locate-library at runtime
+                        (when-let ((lib (locate-library "adna")))
+                          (file-name-directory lib))))
+         (std-scripts (when layer-dir
+                        (expand-file-name "scripts/" layer-dir)))
+         (local-root (ignore-errors (adna/vault-root)))
+         (local-scripts (when local-root
+                          (expand-file-name "what/local/scripts/" local-root))))
+    (dolist (dir (delq nil (list std-scripts local-scripts)))
+      (when (file-directory-p dir)
+        (dolist (f (directory-files dir t "\\.el$"))
+          (load f nil t))))))
 
 ;;; funcs.el ends here

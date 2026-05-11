@@ -4,12 +4,12 @@ mission_id: mission_sl_p5_03_automated_validation
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
 campaign_mission_number: 3
-status: planned
+status: completed
 mission_class: implementation
 created: 2026-05-10
 updated: 2026-05-11
 last_edited_by: agent_stanley
-tags: [mission, planned, spacemacs, v1_0, p5, validation, testing, health_check, ci, adr_037]
+tags: [mission, completed, spacemacs, v1_0, p5, validation, testing, health_check, ci, adr_037]
 blocked_by: []
 ---
 
@@ -135,3 +135,17 @@ P5-00 (gap register may add specific checks to validate_layers.py). Can run in p
 - `what/standard/index/build_graph.py` (pattern for Python validator)
 - `what/standard/LAYER_CONTRACT.md` (sanitization rules for check H §3)
 - ADR-014 (closed-loop validation decision)
+
+---
+
+## AAR — 2026-05-11
+
+**Worked**: `validate_layers.py` (7 checks, 7/7 pass on vault), CI `validate` job wired, `skill_health_check` Checks G + H added (exit codes 85/86), `operator_acceptance_test.md` runbook authored, ADR-037 accepted.
+
+**Didn't work**: Initial validator failed on `+themes/` (Spacemacs category dir) and `spacemacs-latticeprotocol/layers.el` (uses `configuration-layer/declare-layer-dependencies '(spacemacs)` not `spacemacs-bootstrap`). Required two fixes before 7/7 pass.
+
+**Finding**: Spacemacs uses `+` prefix for category groupings mixed with actual layer dirs in `layers/`. Validators must skip `+` dirs. Distribution layers declare their base distribution, not `spacemacs-bootstrap` directly.
+
+**Change**: Added `iter_layers()` helper to skip `+` dirs; relaxed check 3 to accept any `configuration-layer/declare-layer-dependencies` call.
+
+**Follow-up**: Check G (byte-compile) requires Emacs — runs in CI matrix; local health-check skips if Emacs absent. Extend `validate_layers.py` checks post-v1.0 as layer surface grows.

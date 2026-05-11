@@ -7,6 +7,16 @@
 ;; Loaded by Spacemacs after packages.el and before funcs.el.
 
 ;;; ============================================================================
+;;; Layer directory (captured at load time for scripts/ auto-discovery)
+;;; ============================================================================
+
+(defvar adna--layer-dir
+  (when load-file-name (file-name-directory load-file-name))
+  "Absolute path to the adna layer directory.
+Captured at load time from `load-file-name'. Used by `adna/load-scripts'
+to locate the scripts/ subdirectory regardless of install path.")
+
+;;; ============================================================================
 ;;; Buffer-local frontmatter mirror
 ;;; ============================================================================
 
@@ -103,5 +113,17 @@ When active:
   :init-value nil
   :lighter " aDNA"
   :group 'adna)
+
+;;; ============================================================================
+;;; Scripts auto-discovery hook (ADR-038)
+;;; ============================================================================
+
+;; `adna/load-scripts' is defined in funcs.el (loaded after config.el).
+;; Schedule it to run after the full Spacemacs user-config phase so all layers
+;; and packages are available when scripts register their SPC a x sub-commands.
+(add-hook 'spacemacs-post-user-config-hook
+          (lambda ()
+            (when (fboundp 'adna/load-scripts)
+              (adna/load-scripts))))
 
 ;;; config.el ends here

@@ -33,3 +33,17 @@ jobs:
         run: |
           find what/standard/layers -name '*.el' -print0 \
             | xargs -0 emacs --batch -f batch-byte-compile
+
+  validate:
+    name: Layer structure validation (Python)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run validate_layers.py
+        run: python3 what/standard/index/validate_layers.py
