@@ -1,9 +1,9 @@
 ---
 type: pins
-status: pending_first_install
+status: active
 created: 2026-05-03
-updated: 2026-05-03
-last_edited_by: agent_init
+updated: 2026-05-10
+last_edited_by: agent_stanley
 tags: [pins, standard, spacemacs, version]
 ---
 
@@ -15,10 +15,11 @@ This file is the **single source of truth for what we build on**. Every install 
 
 | Field | Value | Notes |
 |-------|-------|-------|
-| Repo | `https://github.com/syl20bnr/spacemacs` | Upstream — see `who/upstreams/syl20bnr.md` |
+| Upstream repo | `https://github.com/syl20bnr/spacemacs` | Upstream — see `who/upstreams/syl20bnr.md` |
+| Fork repo | `https://github.com/LatticeProtocol/spacelattice` | LP-controlled distribution point — install source per ADR-032 |
 | Branch | `develop` | Build target per ADR 000 + the brief |
-| Pinned SHA | `e57594e7aa1d459d3428b9b116bb84b344aa6084` | Captured at first install 2026-05-04; ratified by ADR 002 |
-| Pin date | 2026-05-04 | Set on first install |
+| Pinned SHA | `37e2a32b95d548a8e4c37996df408ec02e3f22f6` | Bumped 2026-05-10; ratified by ADR-032 (prev: `e57594e7` ADR-002) |
+| Pin date | 2026-05-10 | First pin bump via `skill_update_pin` |
 
 ~~When pin is `PIN PENDING`, `skill_install` on first run does the following:~~ (Pin captured 2026-05-04 — first-install bootstrap is past.)
 

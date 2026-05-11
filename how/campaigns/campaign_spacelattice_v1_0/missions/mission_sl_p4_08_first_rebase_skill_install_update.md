@@ -4,13 +4,13 @@ mission_id: mission_sl_p4_08_first_rebase_skill_install_update
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 4
 campaign_mission_number: 8
-status: planned
+status: completed
 mission_class: verification
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-10
 last_edited_by: agent_stanley
-tags: [mission, planned, spacelattice, v1_0, p4, fork_branding, rebase, skill_install, phase_gate]
-blocked_by: [mission_sl_p4_07_ci_workflows]
+tags: [mission, completed, spacelattice, v1_0, p4, fork_branding, pin_bump, skill_update_pin, install_source, phase_gate]
+blocked_by: []
 ---
 
 # Mission — P4-08: First rebase + skill_install update (P4 phase-gate)
@@ -42,5 +42,18 @@ P4-07 closed (CI workflows in place to gate the rebase).
 ## Reference
 
 - `how/standard/runbooks/update_spacemacs.md` (post-P2-01 expansion)
-- `how/standard/skills/skill_install.md` (current — pre-update)
-- `what/context/spacemacs/spacemacs_customization_reference.md` §4B.5 (rebase strategy)
+- `how/standard/skills/skill_install.md` (updated — clone target → LP fork)
+- `what/standard/pins.md` (bumped to `37e2a32b`, 2026-05-10, ADR-032)
+- `how/standard/runbooks/rebase_log_2026_05_10T000000Z.md` (first pin-bump receipt)
+- `what/decisions/adr/adr_032_install_source_switch.md` (accepted)
+- `how/standard/skills/skill_update_pin.md` (new — ADR-gated pin-bump procedure)
+
+## AAR (lightweight)
+
+- **Worked**: Pin bump + install-source switch delivered cleanly; ADR-024 rescope (vault-only = pin-only rebase) eliminated all conflict-resolution complexity.
+- **Didn't**: `~/lattice/spacelattice/` local fork clone was not present on current machine — fork-side `UPSTREAM_REV` artifact deferred; vault-side receipt covers the audit requirement.
+- **Finding**: "First rebase" language in original mission spec is misleading post-ADR-024; renamed to "first pin bump" in `skill_update_pin.md` and ADR-032 for future clarity.
+- **Change**: `skill_update_pin.md` introduced as the canonical ADR-gated pin-bump procedure; links wired from `pins.md` update protocol + `skill_install.md` reproducibility pact.
+- **Follow-up**: P4-09 (claude-code-ide layer completion) is next; no blockers.
+
+Full AAR: `missions/artifacts/aar_sl_p4_08.md`

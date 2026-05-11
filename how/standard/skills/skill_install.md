@@ -3,8 +3,8 @@ type: skill
 skill_type: agent
 status: active
 created: 2026-05-03
-updated: 2026-05-03
-last_edited_by: agent_init
+updated: 2026-05-10
+last_edited_by: agent_stanley
 category: install
 trigger: "Operator wants to install Spacemacs.aDNA on a fresh machine, or machine state shows ~/.emacs.d/ is empty/missing, or first deploy after fork."
 phase_introduced: 3
@@ -93,7 +93,9 @@ If the backup `mv` fails (disk full, permission), abort. Don't proceed with a ha
 PIN_SHA=$(awk -F'`' '/Pinned SHA/ && /[0-9a-f]{7,}/ {print $2; exit}' what/standard/pins.md || echo "")
 
 if [[ ! -d ~/.emacs.d/.git ]]; then
-  git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
+  # Clone from LP-controlled fork (tracks syl20bnr/spacemacs:develop; no LP commits per ADR-024).
+  # LP controls pin timing; CI monitors drift (ADR-031). See ADR-032.
+  git clone https://github.com/LatticeProtocol/spacelattice.git ~/.emacs.d
 fi
 cd ~/.emacs.d
 git fetch origin develop
