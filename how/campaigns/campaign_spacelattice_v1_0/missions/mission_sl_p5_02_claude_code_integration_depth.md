@@ -4,12 +4,12 @@ mission_id: mission_sl_p5_02_claude_code_integration_depth
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
 campaign_mission_number: 2
-status: planned
+status: completed
 mission_class: implementation
 created: 2026-05-10
 updated: 2026-05-11
 last_edited_by: agent_stanley
-tags: [mission, planned, spacemacs, v1_0, p5, claude_code, integration, multi_session, adr_036]
+tags: [mission, completed, spacemacs, v1_0, p5, claude_code, integration, multi_session, adr_036]
 blocked_by: [mission_sl_p5_01_agentic_layout_system]
 ---
 
@@ -105,3 +105,10 @@ P5-01 (agentic layout system must be live so window coordination can be verified
 - ADR-019 (claude-code-ide layer decision)
 - ADR-033 (P4-09 layer completion)
 - `mission_sl_p5_01_agentic_layout_system` (layout system — prerequisite)
+
+## AAR
+- **Worked**: Window contract (80-col right, treemacs left, edit center) documents cleanly in ADR-036; `adna/claude-project-switch` slots naturally into both `SPC a ,` and `SPC a x p`.
+- **Didn't**: `SPC c c` binding conflict between adna and claude-code-ide layers was not caught in P4-09 — claude-code-ide wins via `with-eval-after-load`, adna binding silently loses; documented not fixed (correct behavior).
+- **Finding**: `adna/layout-agentic-default` was calling the vterm fallback (`adna/spawn-claude-code`) instead of the live `claude-code-ide` — a silent regression from P4-09 that this mission corrected.
+- **Change**: Future layer additions that touch the `SPC c` prefix should be cross-checked against adna/keybindings.el binding table at PR time.
+- **Follow-up**: P5-04 (shared command tree) can reference `SPC a x p` as the canonical extension pattern; `adna/extensions-menu` now has a real example entry.

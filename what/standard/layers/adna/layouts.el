@@ -48,7 +48,11 @@ top-right, Claude Code terminal on the bottom-right.
   ;; After treemacs opens its side window, selected window is the main area.
   (split-window-below (floor (* 0.65 (frame-height))))
   (other-window 1)
-  (adna/spawn-claude-code)
+  ;; Prefer the claude-code-ide.el layer (P4-09) when available;
+  ;; fall back to vterm-based spawn for environments without the layer.
+  (if (fboundp 'claude-code-ide)
+      (claude-code-ide)
+    (adna/spawn-claude-code))
   ;; Return focus to the edit area.
   (other-window 1))
 

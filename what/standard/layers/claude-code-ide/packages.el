@@ -32,9 +32,11 @@
                claude-code-ide-resume
                claude-code-ide-continue)
     :init
-    ;; Window placement: right side, 100 cols, don't steal focus on open.
+    ;; Window placement: right side, 80 cols, don't steal focus on open.
+    ;; 80 cols leaves adequate edit area when treemacs (≈35 cols) is also open.
+    ;; Window contract: treemacs far-left | edit center | Claude right (ADR-036).
     (setq claude-code-ide-window-side 'right
-          claude-code-ide-window-width 100
+          claude-code-ide-window-width 80
           claude-code-ide-focus-on-open nil)
     ;; Use eat backend for anti-flicker and proper color rendering.
     (setq claude-code-ide-terminal-backend 'eat)

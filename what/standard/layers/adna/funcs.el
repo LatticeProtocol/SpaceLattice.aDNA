@@ -283,6 +283,7 @@ Used by skill_health_check Check E. In batch mode, exits 0/non-0."
                   adna/jump-triad-root
                   adna/follow-wikilink
                   adna/spawn-claude-code
+                  adna/claude-project-switch
                   adna-index-project))
       (unless (fboundp fn)
         (push (format "fbound-fail: %s" fn) failures)))
@@ -391,6 +392,10 @@ valid JSON with a known `type' field. Full jsonschema validation
 ;;; ============================================================================
 ;;; Claude Code variants (plan mode, loop mode, review)
 ;;; ============================================================================
+;;
+;; These four functions provide a vterm/eshell fallback path that predates the
+;; claude-code-ide.el layer (P4-09). When the layer is active, prefer the
+;; claude-code-ide-* commands (SPC c prefix) for full MCP tool support.
 
 (defun adna/spawn-claude-plan ()
   "Spawn Claude Code in plan mode at nearest aDNA root."
@@ -420,5 +425,21 @@ valid JSON with a known `type' field. Full jsonschema validation
          (default-directory root)
          (cmd (format "%s /review %s" adna-claude-code-command (shell-quote-argument file))))
     (adna/--spawn-vterm-command cmd (format "*claude-review:%s*" vault-name))))
+
+;;; ============================================================================
+;;; Project-aware Claude Code session switch
+;;; ============================================================================
+
+(defun adna/claude-project-switch ()
+  "Activate the agentic-default layout then list Claude Code sessions for switching.
+Combines `adna/layout-agentic-default' (treemacs + edit + terminal columns) with
+`claude-code-ide-list-sessions' so the operator lands in the correct window
+geometry before selecting a project session."
+  (interactive)
+  (when (fboundp 'adna/layout-agentic-default)
+    (adna/layout-agentic-default))
+  (if (fboundp 'claude-code-ide-list-sessions)
+      (call-interactively #'claude-code-ide-list-sessions)
+    (adna/spawn-claude-code)))
 
 ;;; funcs.el ends here

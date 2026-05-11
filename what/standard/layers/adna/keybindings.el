@@ -69,8 +69,9 @@
     ("c" "Interactive"    adna/spawn-claude-code)
     ("p" "Plan mode"      adna/spawn-claude-plan)
     ("l" "Loop mode"      adna/spawn-claude-loop)]
-   ["Review"
-    ("r" "Review file"    adna/spawn-claude-review)]
+   ["Review & Projects"
+    ("r" "Review file"    adna/spawn-claude-review)
+    ("s" "Project switch" adna/claude-project-switch)]
    [""
     ("<" "← Back"         adna/menu)]])
 
@@ -79,7 +80,7 @@
 (transient-define-prefix adna/extensions-menu ()
   "SPC a x — Agent-authored extensions. Add entries via what/local/operator.private.el."
   ["Agent Extensions"
-   ("?" "No extensions registered — see agent_command_tree.md" ignore)])
+   ("p" "Project switch (layout + session list)" adna/claude-project-switch)])
 
 ;; ── Leader key wiring ─────────────────────────────────────────────────────
 
