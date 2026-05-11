@@ -27,6 +27,8 @@ Walk the triad, parse every markdown/org/yaml file's frontmatter and links, emit
 - **From inside Emacs** — `M-x adna-index-project` (in `funcs.el`) shells out to `python3 build_graph.py`
 - **From outside Emacs** — direct invocation: `python3 what/standard/index/build_graph.py --vault . --output what/standard/index/graph.json`
 
+After adding a `SPC a x` extension command via `what/local/operator.private.el`, re-run to capture the new command node in `graph.json`.
+
 Both produce identical output. The Python CLI is the canonical implementation; the elisp is a thin wrapper.
 
 ## Why a Python script and not pure elisp?

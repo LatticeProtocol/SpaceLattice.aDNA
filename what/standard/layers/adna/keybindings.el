@@ -29,7 +29,8 @@
     ("o" "Obsidian"         adna/open-in-obsidian)]
    ["LP & Claude →"
     ("l" "Lattice Protocol" adna/lp-menu)
-    ("," "Claude Code"      adna/claude-menu)]])
+    ("," "Claude Code"      adna/claude-menu)
+    ("x" "Agent extensions" adna/extensions-menu)]])
 
 ;; ── Lattice Protocol sub-menu (SPC a l / SPC o l) ─────────────────────────
 
@@ -59,6 +60,13 @@
    [""
     ("<" "← Back"         adna/menu)]])
 
+;; ── Agent extensions sub-menu (SPC a x) ──────────────────────────────────
+
+(transient-define-prefix adna/extensions-menu ()
+  "SPC a x — Agent-authored extensions. Add entries via what/local/operator.private.el."
+  ["Agent Extensions"
+   ("?" "No extensions registered — see agent_command_tree.md" ignore)])
+
 ;; ── Leader key wiring ─────────────────────────────────────────────────────
 
 ;; SPC a → aDNA Transient root menu
@@ -73,5 +81,9 @@
 ;; declare-prefix is no-op if 'c' already claimed by another layer
 (spacemacs/declare-prefix "c" "claude")
 (spacemacs/set-leader-keys "cc" #'adna/claude-menu)
+
+;; SPC a x → agent-extensible sub-menu stub
+(spacemacs/declare-prefix "ax" "agent-extensions")
+(spacemacs/set-leader-keys "ax" #'adna/extensions-menu)
 
 ;;; keybindings.el ends here

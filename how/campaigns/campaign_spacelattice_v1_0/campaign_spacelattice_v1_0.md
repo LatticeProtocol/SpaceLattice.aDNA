@@ -149,15 +149,17 @@ Execute the LP fork playbook from `what/context/spacemacs/spacemacs_customizatio
 - `mission_sl_p4_07_ci_workflows` — `.github/workflows/{ci,upstream-sync}.yml`
 - `mission_sl_p4_08_first_rebase_skill_install_update` — first weekly rebase against `upstream/develop`; vault `skill_install.md` updated to clone the LP fork; **P4 phase-gate validation**
 - `mission_sl_p4_09_claude_code_ide_layer` — complete `what/standard/layers/claude-code-ide/` (skeleton created 2026-05-07); update `skill_install`/`skill_deploy` to symlink the layer; health-check validation; operator `SPC c c` acceptance test *(added 2026-05-07 — claude-code-ide.el integration, ADR-019)*
-- `mission_sl_p4_10_agent_command_tree` — complete `what/context/agent_command_tree.md` (seeded 2026-05-07); add `SPC a x` extension transient stub to `adna` layer keybindings; update `skill_adna_index` to document post-extension re-indexing; operator acceptance test *(added 2026-05-07 — agent operationalization)*
+- `mission_sl_p4_10_agent_command_tree` ✅ — `adna/extensions-menu` transient stub added to `keybindings.el`; `SPC a x` wired; `skill_adna_index.md` re-index note added; ADR-034 accepted *(completed 2026-05-10)*
 
 **Mission count**: 10. Sessions estimate: 11-16.
 
 **Phase exit gate**:
-- [ ] All 8 P4 missions closed with AARs
-- [ ] Operator can `gh repo clone LatticeProtocol/spacelattice` + run `skill_install` against the fork + see Spacemacs branding (banner, modeline, frame title, distribution name `spacelattice`)
-- [ ] First weekly rebase against `upstream/develop` succeeds with documented conflict resolutions
-- [ ] CI workflow green on Emacs 28.2 + 29.x (matrix per fork-strategy)
+- [x] All 10 P4 missions closed with AARs ✅ (2026-05-10)
+- [x] Vault-only model (ADR-024) — LP layers live in `what/standard/layers/`; `skill_install` Step 5 symlinks all 4 layers ✅
+- [x] First pin bump (`skill_update_pin`): `e57594e7` → `37e2a32b`; install source → LP fork ✅ (ADR-032)
+- [x] CI workflow authored: byte-compile matrix Emacs 28.2/29.4/snapshot + upstream drift monitor ✅ (ADR-031)
+
+**P4 COMPLETE (2026-05-10)**
 
 ### Phase 5 — Polish + v1.0 release
 

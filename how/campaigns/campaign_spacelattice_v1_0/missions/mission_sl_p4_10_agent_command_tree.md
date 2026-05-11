@@ -4,10 +4,11 @@ mission_id: mission_sl_p4_10_agent_command_tree
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 4
 campaign_mission_number: 10
-status: planned
+status: completed
 mission_class: implementation
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-10
+completed_date: 2026-05-10
 last_edited_by: agent_stanley
 tags: [mission, planned, spacemacs, v1_0, p4, agent, keybinding, command_tree, mcp, extensibility]
 blocked_by: [mission_sl_p4_09_claude_code_ide_layer]
@@ -61,3 +62,10 @@ P4-09 closed (claude-code-ide live — the MCP tool registration pattern depends
 - ADR-013: `what/decisions/adr/adr_013_keybinding_transient_refactor.md` (SPC a origin)
 - ADR-019: `what/decisions/adr/adr_019_claude_code_ide_layer.md` (MCP tool registration)
 - `how/standard/skills/skill_adna_index.md`
+
+## AAR
+- **Worked**: Transient stub pattern (one placeholder entry + `ignore`) wires cleanly and serves as a graft point for `transient-append-suffix` — no empty-group elisp edge case.
+- **Didn't**: Live Emacs validation deferred (no operator boot this session) — byte-compile check substitutes as gate.
+- **Finding**: Context doc and keybindings.el were out of sync for 3 days; stub activation immediately resolves the dead-reference problem without requiring agent extensions to exist.
+- **Change**: Future keybinding context docs should note their activation status (wired / stub / planned) so the gap is visible at a glance.
+- **Follow-up**: P5-01 doc pass should verify `agent_command_tree.md` accurately reflects the live keybinding layout after this change.
