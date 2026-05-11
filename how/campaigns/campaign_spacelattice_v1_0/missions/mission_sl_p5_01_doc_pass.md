@@ -3,14 +3,14 @@ type: mission
 mission_id: mission_sl_p5_01_doc_pass
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
-campaign_mission_number: 1
+campaign_mission_number: 5
 status: planned
 mission_class: implementation
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-10
 last_edited_by: agent_stanley
 tags: [mission, planned, spacelattice, v1_0, p5, polish, doc_pass, release_prep]
-blocked_by: [mission_sl_p4_08_first_rebase_skill_install_update]
+blocked_by: [mission_sl_p5_04_shared_command_tree]
 ---
 
 # Mission — P5-01: v1.0 documentation pass

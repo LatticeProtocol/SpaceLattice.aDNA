@@ -3,11 +3,11 @@ type: mission
 mission_id: mission_sl_p5_02_second_machine_install
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
-campaign_mission_number: 2
+campaign_mission_number: 6
 status: planned
 mission_class: verification
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-10
 last_edited_by: agent_stanley
 tags: [mission, planned, spacelattice, v1_0, p5, polish, second_machine, peer_install]
 blocked_by: [mission_sl_p5_01_doc_pass]

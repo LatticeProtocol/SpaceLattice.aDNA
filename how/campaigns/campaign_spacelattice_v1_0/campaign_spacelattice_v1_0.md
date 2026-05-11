@@ -5,14 +5,14 @@ title: "Spacemacs v1.0 — Genesis to Production"
 owner: stanley
 status: execution
 phase_count: 6
-mission_count: 36
-estimated_sessions: "40-58"
-calibrated_sessions: 53
+mission_count: 41
+estimated_sessions: "47-68"
+calibrated_sessions: 62
 estimation_class: governance-broad
 priority: medium
 predecessor: "spacemacs.aDNA genesis (plan-driven; AAR at how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md)"
 created: 2026-05-05
-updated: 2026-05-08
+updated: 2026-05-10
 last_edited_by: agent_stanley
 p2_progress: "4/4 missions closed ✅ P2 COMPLETE"
 p3_core_progress: "13/13 missions closed ✅ P3 FULLY COMPLETE (2026-05-08) — core P3-00→P3-08 + extended P3-09/12/13/14 all closed"
@@ -42,8 +42,8 @@ Take Spacemacs.aDNA from **v0.2.0** (rename + repositioning + framework outlines
 | P2 | p2_01_sustainability_runbook_teeth, p2_02_telemetry_schema, p2_03_telemetry_submit_skill, p2_04_telemetry_aggregate_skill_and_round_trip | 4 | 5-8 |
 | P3 | p3_01 dotfile-entry-lifecycle, p3_02 dotspacemacs-variables, p3_03 layer-anatomy-api, p3_04 themes-modeline-banner-startup, p3_05 editing-completion-packages, p3_06 perf-evil-fonts, p3_07 wild-workarounds-org, p3_08 languages-keys-perf, p3_09 obsidian-plugin-audit, **p3_12 platform-context-macos**, **p3_13 dotfile-perf-hardening**, **p3_14 org-mode-deep-config** | 12 | 14-20 |
 | P4 | p4_01 clone-fork, p4_02 distribution-layer, p4_03 theme, p4_04 branding-strings, p4_05 banner-assets, p4_06 news-welcome-dotfile, p4_07 ci-workflows, p4_08 first-rebase-skill-install-update, **p4_09 claude-code-ide-layer**, **p4_10 agent-command-tree** | 10 | 11-16 |
-| P5 | p5_01 doc-pass, p5_02 second-machine-install, p5_03 tag-release-notes | 3 | 3 |
-| **Total** | | **33** | **38-52 (calibrated ~46)** |
+| P5 | p5_00 strategic-aar, p5_01 agentic-layout, p5_02 claude-code-depth, p5_03 automated-validation, p5_04 shared-command-tree, p5_05 doc-pass, p5_06 second-machine-install, p5_07 tag-release-notes | 8 | 9-11 |
+| **Total** | | **41** | **47-68 (calibrated ~62)** |
 
 ## Phases
 
@@ -161,25 +161,67 @@ Execute the LP fork playbook from `what/context/spacemacs/spacemacs_customizatio
 
 **P4 COMPLETE (2026-05-10)**
 
-### Phase 5 — Polish + v1.0 release
+### Phase 5 — Strategic AAR + Final build-out + v1.0 release
 
-Final hardening before v1.0.
+Comprehensive final phase: opens with strategic review + gap analysis, delivers the agentic layout system, Claude Code integration depth, automated validation infrastructure, and shared human-agent command tree, then closes with the original polish + release sequence.
 
-**Scope** (3 missions, sequenced):
+**Scope** (8 missions, sequenced with two parallel tracks after P5-00):
 
-- `mission_sl_p5_01_doc_pass` — README, MANIFEST, CLAUDE.md, all skill READMEs reviewed for v1.0 readiness; `~/lattice/CLAUDE.md` workspace row updated; CHANGELOG release entry staged
-- `mission_sl_p5_02_second_machine_install` — true peer install on second host; `skill_install` E2E from clean clone; receipt to `deploy/<host>/`
-- `mission_sl_p5_03_tag_release_notes` — `v1.0.0` tag on vault; `latticeprotocol-1.0.0` tag on fork; `lp-stable` branch; release notes; **campaign AAR**
+**P5-00 — Strategic AAR + Gap Analysis** *(opens P5; gates all implementation)*
+- Walk all ADRs, `what/standard/`, `adna/funcs.el` stubs, and `how/backlog/` for gaps vs. original design goals
+- Output: `p5_gap_register.md` with must-fix / nice-to-have / post-v1.0 tiers
+- Gate: shapes scope for P5-01 through P5-04
 
-**Mission count**: 3. Sessions estimate: 3.
+**P5-01 — Agentic Layout System** *(2 sessions)*
+- `what/standard/layers/adna/layouts.el` — 4 named layouts (agentic-default, vault-navigation, campaign-planning, code-review)
+- Default layout: treemacs left + Claude terminal bottom + file buffer center-right
+- `SPC a l` transient + `adna/layouts-menu`; opt-in boot hook in dotfile template
+- `what/context/spacemacs/agentic_layout_guide.md`; ADR-035
+- Folds in deferred `mission_sl_p4_layout_intelligence.md`
+
+**P5-02 — Claude Code Integration Depth** *(1 session)*
+- Fill `adna/funcs.el` Claude Code spawn stubs; add `adna/claude-project-switch`
+- Window coordination audit (treemacs + Claude terminal width contract)
+- `adna-bridge.md` updated to reflect P4-09 live layer
+- Multi-project session management context doc + operator acceptance test runbook; ADR-036
+
+**P5-03 — Automated Validation Infrastructure** *(1 session, parallel with P5-01/02)*
+- `what/standard/index/validate_layers.py` — layer structure validator (no Emacs needed)
+- `skill_health_check.md` checks G/H/I (per-layer byte-compile, structure, graph freshness)
+- CI: add `validate_layers` job alongside byte-compile matrix
+- `how/standard/runbooks/operator_acceptance_test.md` — structured live boot checklist; ADR-037
+
+**P5-04 — Shared Human-Agent Command Tree** *(1 session)*
+- `what/standard/layers/adna/scripts/` directory + 3 seed scripts (show-sitrep, run-health-check, open-claude-with-layout)
+- `adna/load-scripts` auto-discovery — `SPC a x` self-populates from scripts/ at init
+- `what/context/shared_command_space.md` — bidirectional pattern, MCP tool bridge, token economy
+- `agent_command_tree.md` updated; `LAYER_CONTRACT.md` scripts/ clause; ADR-038
+
+**P5-05 — Doc Pass** *(1 session, was P5-01)*
+- README, MANIFEST, CLAUDE.md, all skill READMEs reviewed for v1.0 readiness
+- Review P5-01 through P5-04 outputs (agentic_layout_guide, shared_command_space) for accuracy
+- `~/lattice/CLAUDE.md` workspace row → "Production v1.0"; CHANGELOG staged
+
+**P5-06 — Second-Machine Install Validation** *(1 session, was P5-02)*
+- True peer install on second host; `skill_install` E2E; deploy receipt
+- Verify agentic layout activates at boot; Claude terminal positions correctly
+
+**P5-07 — Tag v1.0.0 + Release Notes + Campaign AAR** *(1 session, was P5-03)*
+- `git tag v1.0.0` on vault; `gh release create` with release notes
+- Release notes highlight: agentic layout, shared command tree, automated validation
+- **Campaign AAR**: full scorecard across all 41 missions + 6 phases
+
+**Mission count**: 8. Sessions estimate: 9-11.
 
 **Phase exit gate**:
-- [ ] All 3 P5 missions closed with AARs
-- [ ] `v1.0.0` tagged on `LatticeProtocol/Spacemacs.aDNA` (vault) — `gh release` published
-- [ ] `latticeprotocol-1.0.0` tagged on `LatticeProtocol/spacelattice` (fork) — release notes shipped via `core/news/news-1.0.0.org`
-- [ ] Second-machine install validated (P5-02 receipt)
-- [ ] Release notes published (CHANGELOG + README + GitHub release)
-- [ ] Campaign AAR closes the campaign; STATE.md updated
+- [ ] P5-00 complete — gap register filed; no must-fix items outstanding
+- [ ] P5-01 complete — agentic layout live; `SPC a l a` activates correctly (operator-validated at boot)
+- [ ] P5-02 complete — Claude Code stubs filled; window contract documented; acceptance test runbook authored
+- [ ] P5-03 complete — `validate_layers.py` passes; CI green on 3 Emacs versions + validator; operator acceptance checklist authored
+- [ ] P5-04 complete — `scripts/` directory seeded; `SPC a x` auto-discovers scripts; shared_command_space.md live
+- [ ] P5-05 complete — all docs v1.0 ready; CHANGELOG staged
+- [ ] P5-06 complete — second-machine receipt filed; agentic layout validated on peer host
+- [ ] P5-07 complete — `v1.0.0` tagged; `gh release` published; campaign AAR closes all phases; STATE.md → "v1.0.0 released"
 
 ## Decision points / phase gates
 
