@@ -1,11 +1,12 @@
 ---
 type: backlog_idea
-status: planned
+status: deferred
 priority: high
 created: 2026-04-04
-updated: 2026-05-06
+updated: 2026-05-11
 last_edited_by: agent_stanley
-plan_id: p3_09
+plan_id: post_v1_0
+deferred_reason: post-v1.0 per p5_gap_register GAP-11
 tags: [backlog, obsidian, performance, clone-size]
 ---
 

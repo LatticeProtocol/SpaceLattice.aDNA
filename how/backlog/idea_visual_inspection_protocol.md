@@ -3,9 +3,11 @@ type: idea
 status: proposed
 priority: high
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-11
 last_edited_by: agent_stanley
 tags: [backlog, visual-inspection, health-check, ux, qa, spacemacs]
+assigned_to_mission: mission_sl_p5_05_doc_pass
+gap_register_id: GAP-08
 ---
 
 # Idea: Visual Inspection Protocol for Spacemacs

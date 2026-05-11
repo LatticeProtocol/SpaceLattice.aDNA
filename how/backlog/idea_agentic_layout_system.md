@@ -1,14 +1,14 @@
 ---
 type: backlog
 idea_id: idea_agentic_layout_system
-status: ready
+status: promoted
 priority: high
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-11
 last_edited_by: agent_stanley
-tags: [backlog, layout, agentic, context_graph, campaign_protocol, p4, ux]
-target_phase: P4
-promoted_to_mission: mission_sl_p4_layout_intelligence
+tags: [backlog, layout, agentic, context_graph, campaign_protocol, p5, ux]
+target_phase: P5
+promoted_to_mission: mission_sl_p5_01_agentic_layout_system
 ---
 
 # Idea — Agentic Layout Intelligence System

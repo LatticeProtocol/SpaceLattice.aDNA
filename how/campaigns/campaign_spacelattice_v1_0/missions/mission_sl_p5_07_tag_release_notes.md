@@ -1,16 +1,16 @@
 ---
 type: mission
-mission_id: mission_sl_p5_03_tag_release_notes
+mission_id: mission_sl_p5_07_tag_release_notes
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
 campaign_mission_number: 7
 status: planned
 mission_class: closeout
 created: 2026-05-05
-updated: 2026-05-10
+updated: 2026-05-11
 last_edited_by: agent_stanley
 tags: [mission, planned, spacelattice, v1_0, p5, release, tag, campaign_close]
-blocked_by: [mission_sl_p5_02_second_machine_install]
+blocked_by: [mission_sl_p5_06_second_machine_install]
 ---
 
 # Mission — P5-03: Tag v1.0.0 + release notes + campaign AAR

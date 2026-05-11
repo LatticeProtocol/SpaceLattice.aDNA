@@ -7,10 +7,10 @@ campaign_mission_number: 1
 status: planned
 mission_class: implementation
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-11
 last_edited_by: agent_stanley
 tags: [mission, planned, spacemacs, v1_0, p5, layout, treemacs, claude_code, agentic_layout, adr_035]
-blocked_by: [mission_sl_p5_00_strategic_aar_gap_analysis]
+blocked_by: []
 ---
 
 # Mission — P5-01: Agentic Layout System

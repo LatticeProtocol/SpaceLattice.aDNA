@@ -7,10 +7,10 @@ campaign_mission_number: 4
 status: planned
 mission_class: implementation
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-11
 last_edited_by: agent_stanley
 tags: [mission, planned, spacemacs, v1_0, p5, command_tree, shared, scripts, auto_discovery, mcp, adr_038]
-blocked_by: [mission_sl_p5_02_claude_code_integration_depth]
+blocked_by: []
 ---
 
 # Mission — P5-04: Shared Human-Agent Command Tree

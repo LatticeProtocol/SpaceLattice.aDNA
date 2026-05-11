@@ -2,10 +2,12 @@
 type: backlog_idea
 status: active
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-11
 last_edited_by: agent_stanley
 tags: [backlog, layer_contract, convention, quality]
 source: aar_sl_p4_09
+assigned_to_mission: mission_sl_p5_05_doc_pass
+gap_register_id: GAP-07
 ---
 
 # Idea: Document minimum file count for standard layers in LAYER_CONTRACT.md

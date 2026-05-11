@@ -7,7 +7,7 @@ campaign_mission_number: 2
 status: planned
 mission_class: implementation
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-11
 last_edited_by: agent_stanley
 tags: [mission, planned, spacemacs, v1_0, p5, claude_code, integration, multi_session, adr_036]
 blocked_by: [mission_sl_p5_01_agentic_layout_system]
@@ -20,20 +20,22 @@ blocked_by: [mission_sl_p5_01_agentic_layout_system]
 
 ## Objective
 
-Deepen the Claude Code integration beyond the skeleton layer delivered in P4-09. Fill in the stub functions in `adna/funcs.el`, wire multi-project session management to the layout system, verify window configuration coordination, and produce a documented operator acceptance test runbook. The goal: the operator can open Spacemacs, activate the agentic layout, start a Claude Code session, and have a coherent two-pane workflow — code on the left, Claude on the right — without manual window manipulation.
+Deepen the Claude Code integration beyond the skeleton layer delivered in P4-09. Verify and document the existing `adna/funcs.el` Claude Code implementations, wire multi-project session management to the layout system, document the window layout contract, and produce an operator acceptance test runbook. The goal: the operator can open Spacemacs, activate the agentic layout, start a Claude Code session, and have a coherent two-pane workflow — code on the left, Claude on the right — without manual window manipulation.
+
+**Note (P5-00 gap register, GAP-02)**: The four spawn functions (`adna/spawn-claude-code`, `spawn-claude-plan`, `spawn-claude-loop`, `spawn-claude-review`) are already implemented in `adna/funcs.el` — they are NOT stubs. The real scope here is window contract documentation + `adna/claude-project-switch` addition + `adna-bridge.md` update + acceptance runbook.
 
 ## Deliverables
 
-### 1. `adna/funcs.el` — fill Claude Code stubs
-Current stubs (4 functions) call `claude-code-ide` with simple `(claude-code-ide)` invocations. Review each:
+### 1. `adna/funcs.el` — verify Claude Code implementations + add project-switch
+The four spawn functions are implemented. Verify each against the live `claude-code-ide.el` API:
 
-**`adna/spawn-claude-code`** → wire to `claude-code-ide` (start for current project-root). If already correct, document it as non-stub.
+**`adna/spawn-claude-code`** — verify it starts a Claude Code session in the vault root via vterm. Document any parameter gaps vs. `claude-code-ide` API.
 
-**`adna/spawn-claude-plan`** → `claude-code-ide` with `--plan` flag or equivalent transient arg (check upstream claude-code-ide.el for plan-mode API).
+**`adna/spawn-claude-plan`** — verify `--plan` flag is accepted by `claude` CLI (confirm actual flag name).
 
-**`adna/spawn-claude-loop`** → `claude-code-ide` with `--loop` flag or equivalent.
+**`adna/spawn-claude-loop`** — verify `--loop` flag and task prompt flow.
 
-**`adna/spawn-claude-review`** → `claude-code-ide` with file path for current buffer; review workflow.
+**`adna/spawn-claude-review`** — verify file path quoting and `/review` command syntax.
 
 New function **`adna/claude-project-switch`**:
 ```elisp
@@ -96,7 +98,7 @@ P5-01 (agentic layout system must be live so window coordination can be verified
 
 ## Reference
 
-- `what/standard/layers/adna/funcs.el` (stubs to fill)
+- `what/standard/layers/adna/funcs.el` (spawn functions — verify, not fill)
 - `what/standard/layers/claude-code-ide/packages.el` (window config)
 - `what/standard/adna-bridge.md` (needs update)
 - `what/context/agent_command_tree.md` (MCP tool pattern)
