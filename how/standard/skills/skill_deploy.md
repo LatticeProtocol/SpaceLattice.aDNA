@@ -3,8 +3,8 @@ type: skill
 skill_type: agent
 status: active
 created: 2026-05-03
-updated: 2026-05-03
-last_edited_by: agent_init
+updated: 2026-05-10
+last_edited_by: agent_stanley
 category: deploy
 trigger: "Operator changed something in what/standard/ or what/local/ and wants the change reflected in their running ~/.emacs.d/. Skip the clone phase."
 phase_introduced: 3
@@ -15,6 +15,7 @@ requirements:
     - what/standard/dotfile.spacemacs.tmpl
     - what/standard/packages.el.tmpl
     - what/standard/layers/adna/
+    - what/standard/layers/claude-code-ide/
     - what/local/ (optional)
   permissions:
     - "write <vault-root>/init.el"
@@ -26,7 +27,7 @@ requirements:
 
 ## Purpose
 
-Faster cousin of `skill_install`. When `~/.emacs.d/` is already present and at the pinned SHA, just re-render templates, refresh the adna layer symlink, restart Emacs, and write a new receipt.
+Faster cousin of `skill_install`. When `~/.emacs.d/` is already present and at the pinned SHA, just re-render templates, refresh all LP layer symlinks, restart Emacs, and write a new receipt.
 
 Use cases:
 
@@ -49,7 +50,7 @@ This skill is **steps 4-8 of `skill_install`**, executed unchanged. See `skill_i
 | # | Action |
 |---|--------|
 | 4 | Re-render `dotfile.spacemacs.tmpl` → `<vault>/init.el` and `packages.el.tmpl` → `~/.emacs.d/private/packages.el` |
-| 5 | Refresh `~/.emacs.d/private/layers/adna` symlink |
+| 5 | Refresh all LP layer symlinks: `adna`, `claude-code-ide`, `spacemacs-latticeprotocol`, `+themes/latticeprotocol-theme` |
 | 6 | Batch boot: `emacs --batch -l ~/.spacemacs` (cheaper than first install — packages cached) |
 | 7 | Run `skill_health_check` (checks A-D+) |
 | 8 | Write deploy receipt to `deploy/<hostname>/<utc>.md` |
