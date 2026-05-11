@@ -2,10 +2,10 @@
 type: state
 status: active
 created: 2026-05-03
-updated: 2026-05-10
+updated: 2026-05-11
 last_edited_by: agent_stanley
-last_session: session_sl_p5_expansion_2026_05_10T030000Z
-tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_complete, p4_complete, p5_active, p5_expanded]
+last_session: session_p5_00_2026_05_10
+tags: [state, governance, spacemacs, daedalus, v0_2_0, campaign_v1_0, p3_complete, p4_complete, p5_active, p5_00_complete]
 ---
 
 # Operational State
@@ -91,7 +91,7 @@ None blocking. Audit findings status:
 
 **Immediate next**: P4-01 — LP distribution + theme layer scaffold in vault; extend `skill_install` Step 5 to symlink all LP layers (vault-only model per ADR-024).
 
-**P4 COMPLETE (10/10, 2026-05-10)**: All missions closed. **P4-10 complete (2026-05-10)**: `adna/extensions-menu` transient stub added to `what/standard/layers/adna/keybindings.el`; `SPC a x` wired via `spacemacs/declare-prefix + set-leader-keys`; `skill_adna_index.md` updated with post-extension re-index note; ADR-034 accepted. **P5 expanded to 8 missions (2026-05-10)**: Original 3 missions (doc-pass, second-machine, tag-release) renumbered to P5-05/06/07. New missions added: P5-00 strategic AAR + gap analysis, P5-01 agentic layout system (treemacs + Claude terminal + file view; `SPC a l`), P5-02 Claude Code integration depth (spawn stubs + window contract), P5-03 automated validation (`validate_layers.py` + health check G/H/I + CI), P5-04 shared human-agent command tree (`scripts/` auto-discovery + `SPC a x` self-populating). **Immediate next: P5-00** — reads all ADRs, stubs, backlog; produces `p5_gap_register.md`; gates P5 implementation missions.
+**P4 COMPLETE (10/10, 2026-05-10)**: All missions closed. **P4-10 complete (2026-05-10)**: `adna/extensions-menu` transient stub added to `what/standard/layers/adna/keybindings.el`; `SPC a x` wired via `spacemacs/declare-prefix + set-leader-keys`; `skill_adna_index.md` updated with post-extension re-index note; ADR-034 accepted. **P5 expanded to 8 missions (2026-05-10)**: Original 3 missions (doc-pass, second-machine, tag-release) renumbered to P5-05/06/07. New missions added: P5-00 strategic AAR + gap analysis, P5-01 agentic layout system (treemacs + Claude terminal + file view; `SPC a l`), P5-02 Claude Code integration depth (spawn stubs + window contract), P5-03 automated validation (`validate_layers.py` + health check G/H/I + CI), P5-04 shared human-agent command tree (`scripts/` auto-discovery + `SPC a x` self-populating). **P5-00 complete (2026-05-11)**: Strategic AAR + gap analysis done. 12 gaps catalogued in `missions/artifacts/p5_gap_register.md`: 4 must-fix (all assigned to P5-01/02/03/04), 4 nice-to-have (fold into P5-05 doc pass), 4 post-v1.0 deferred. All 34 ADRs accepted; no orphaned stubs; claude-code-ide layer clean. **Immediate next: P5-01** (agentic layout system — `adna/layouts.el` + `SPC a l`, 2 sessions) + **P5-03** (automated validation — `validate_layers.py`) + **P5-04** (command tree — `scripts/` + `SPC a x`) — all three parallel-capable. P5-02 (Claude Code window contract) remains sequenced after P5-01.
 
 **Note**: `skill_self_improve` Stop hook is live. Session count gate at 5 — will be silent until session 5.
 
@@ -101,6 +101,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Decision | Source |
 |------|----------|--------|
+| 2026-05-11 | **P5-00 complete — gap register live.** 12 gaps catalogued (`p5_gap_register.md`): 4 must-fix (→ P5-01/02/03/04), 4 nice-to-have (→ P5-05), 4 post-v1.0 deferred. All 34 ADRs accepted. P5-01 + P5-03 + P5-04 now unblocked (parallel). | P5-00 session |
 | 2026-05-10 | **P5 expanded 3 → 8 missions.** Added P5-00 (strategic AAR + gap analysis), P5-01 (agentic layout system — `layouts.el` + `SPC a l`), P5-02 (Claude Code integration depth), P5-03 (automated validation — `validate_layers.py` + CI), P5-04 (shared human-agent command tree — `scripts/` auto-discovery). Original P5-01/02/03 renumbered to P5-05/06/07. Campaign mission_count 36 → 41; calibrated_sessions 53 → 62. | P5 expansion session |
 | 2026-05-10 | **P4-10 complete — agent command tree activation.** `adna/extensions-menu` transient stub added to `keybindings.el`; `SPC a x` wired (`spacemacs/declare-prefix "ax" + set-leader-keys`); `("x" "Agent extensions" adna/extensions-menu)` added to parent `adna/menu`; `skill_adna_index.md` updated with post-`SPC a x` re-index note; ADR-034 accepted. P4 fully complete (10/10); P5 opens. | P4-10 session |
 | 2026-05-10 | **P4-09 complete — claude-code-ide layer completion.** `layers.el` added to `what/standard/layers/claude-code-ide/` — 5-file layer complete; `spacemacs-bootstrap` load-order dependency declared. `skill_deploy.md` Step 5 corrected from "adna symlink" to "all LP layers"; `requirements.context` updated. ADR-033 accepted. Live validation (SPC c c / MCP tools / flycheck) deferred to operator boot. | P4-09 session |
@@ -161,6 +162,7 @@ The vault continues improving itself via the Phase-5 self-improvement loop (oper
 
 | Date | Upgrade | Source |
 |------|---------|--------|
+| 2026-05-11 | **P5-00 strategic AAR + gap analysis** — `missions/artifacts/p5_gap_register.md` (12-row gap table; 4 must-fix, 4 nice-to-have, 4 post-v1.0); `mission_sl_p5_00_strategic_aar_gap_analysis.md` → completed + AAR appended | session_p5_00_2026_05_10 |
 | 2026-05-10 | **P4-10 agent command tree activation** — `what/standard/layers/adna/keybindings.el` (`adna/extensions-menu` transient stub + `SPC a x` binding + parent menu entry); `how/standard/skills/skill_adna_index.md` (post-extension re-index note); `adr_034_agent_command_tree_activation.md` accepted | session_sl_p4_10_2026_05_10T020000Z |
 | 2026-05-10 | **P4-09 claude-code-ide layer completion** — `what/standard/layers/claude-code-ide/layers.el` (new; `spacemacs-bootstrap` dependency); `how/standard/skills/skill_deploy.md` (Step 5 all LP layers + requirements.context); `adr_033_claude_code_ide_layer_complete.md` accepted | session_sl_p4_09_2026_05_10T010000Z |
 | 2026-05-10 | **P4-08 skill_update_pin + install source switch** — `how/standard/skills/skill_update_pin.md` (new, 8-step ADR-gated procedure); `what/standard/pins.md` bumped (`e57594e7` → `37e2a32b`, fork_repo field added, status active); `how/standard/skills/skill_install.md` Step 3 → LP fork; `how/standard/runbooks/rebase_log_2026_05_10T000000Z.md` (first receipt); `adr_032_install_source_switch.md` accepted; P4 phase-gate PASS | session_sl_p4_08_2026_05_10T000000Z |

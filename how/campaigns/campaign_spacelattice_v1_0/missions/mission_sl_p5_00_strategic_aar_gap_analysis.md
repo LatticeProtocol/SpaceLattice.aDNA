@@ -4,7 +4,7 @@ mission_id: mission_sl_p5_00_strategic_aar_gap_analysis
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
 campaign_mission_number: 0
-status: planned
+status: completed
 mission_class: review
 created: 2026-05-10
 updated: 2026-05-10
@@ -92,3 +92,17 @@ P4 closed (all 10 missions). Already met as of 2026-05-10.
 - `what/decisions/adr/adr_000_vault_identity.md` (original design goals)
 - `what/decisions/adr/adr_005_rename_to_spacelattice.md` (repositioning goals)
 - P5 implementation missions (P5-01 through P5-04) — gap register shapes their scope
+
+---
+
+## AAR (2026-05-10)
+
+- **Worked**: Parallel sweeps (ADR, elisp, backlog, campaign master) in one pass — all 34 ADRs clean; no orphaned proposed/stub ADRs; gap inventory completed in 1 session as estimated
+- **Didn't**: `adna/spawn-claude-*` functions are fully implemented (not stub shells) — P5-02 scope is about window contract + acceptance runbook, not filling stub bodies; mission description slightly overstated the stub count
+- **Finding**: All 4 must-fix gaps map cleanly to existing P5 missions (P5-01/02/03/04); no new missions needed; 4 nice-to-have items fold neatly into P5-05 doc pass without scope creep
+- **Change**: P5-03 + P5-04 confirmed parallel-capable with P5-01 (they don't require layouts.el to be live); P5-02 remains sequenced after P5-01 (window coordination dependency)
+- **Follow-up**: P5-05 doc pass should update `adna/telemetry-validate` docstring from "Phase 4 layer hardening" to "post-v1.0 hardening" to prevent future confusion
+
+## Artifact
+
+`how/campaigns/campaign_spacelattice_v1_0/missions/artifacts/p5_gap_register.md` — 12-row gap table with severity/mission assignments; readiness statement PASS.
