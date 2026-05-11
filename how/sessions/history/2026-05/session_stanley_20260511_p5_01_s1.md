@@ -7,7 +7,7 @@ tags: [session, p5, layout, adr_035, keybindings]
 session_id: session_stanley_20260511_p5_01_s1
 user: stanley
 started: 2026-05-11T00:00:00Z
-status: active
+status: completed
 intent: "P5-01 Session 1 — author layouts.el (4 named layouts), update keybindings.el (SPC a l layout menu, LP key l→p), draft ADR-035"
 files_modified:
   - what/standard/layers/adna/keybindings.el

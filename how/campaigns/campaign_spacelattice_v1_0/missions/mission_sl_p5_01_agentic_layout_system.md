@@ -4,10 +4,11 @@ mission_id: mission_sl_p5_01_agentic_layout_system
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
 campaign_mission_number: 1
-status: in_progress
+status: completed
 mission_class: implementation
 created: 2026-05-10
 updated: 2026-05-11
+completed: 2026-05-11
 last_edited_by: agent_stanley
 tags: [mission, planned, spacemacs, v1_0, p5, layout, treemacs, claude_code, agentic_layout, adr_035]
 blocked_by: []
@@ -147,3 +148,16 @@ P5-00 (gap register confirms layout is must-have for v1.0).
 - `skill_health_check.md` Check I expansion (layouts.el byte-compile + function definition check)
 - CI glob verification (`what/standard/layers/**/*.el` covers layouts.el)
 - Operator boot check: `SPC a l a` live Emacs validation
+
+### Session 2 — 2026-05-11 (agent_stanley) ✓ COMPLETE
+
+**Objectives**:
+- [x] `what/context/spacemacs/agentic_layout_guide.md` created — layout inventory + window diagrams + claude-code-ide coordination + multi-project switching + composition rules + startup opt-in
+- [x] `dotfile.spacemacs.tmpl` §P5-01 startup hook block added (commented opt-in, references `what/local/operator.private.el`)
+- [x] `skill_health_check.md` Check I added — `layouts.el` byte-compile + `adna/layout-agentic-default` symbol check; exit code 80; SKIP branch for emacs-absent environments
+- [x] CI glob verified: `what/standard/layers/**/*.el` already covers `layouts.el` — no ci.yml change needed
+- [x] AAR filed: `how/missions/artifacts/aar_mission_sl_p5_01_agentic_layout_system.md`
+
+**Operator boot check (deferred)**: Run `SPC a l a` in running Spacemacs to confirm layout activates. If Claude Code panel crowds edit area, set `(setq claude-code-ide-window-width 80)` in `what/local/operator.private.el`.
+
+**Mission status: COMPLETE** — all 6 deliverables landed across 2 sessions.

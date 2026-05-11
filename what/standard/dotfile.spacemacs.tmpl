@@ -472,7 +472,12 @@
   (setq help-window-select t)
 
   ;; re-builder: eliminate double-escaping in interactive regex development.
-  (setq reb-re-syntax 'string))
+  (setq reb-re-syntax 'string)
+
+  ;;; ── §P5-01 Agentic layout on startup (opt-in) ───────────────────────────
+  ;; Uncomment in what/local/operator.private.el to activate at boot:
+  ;; (add-hook 'emacs-startup-hook #'adna/layout-agentic-default)
+  )
 
 ;; Do not write anything past this comment. Anything written here is overwritten
 ;; by Emacs on save. Operator customizations belong in

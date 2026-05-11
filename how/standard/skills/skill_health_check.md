@@ -193,6 +193,35 @@ fi
 
 For Phase 3, the script doesn't exist yet — skip.
 
+### I. layouts.el byte-compile + symbol check
+
+```bash
+if [[ -f what/standard/layers/adna/layouts.el ]]; then
+  emacs --batch \
+    --eval '(setq load-prefer-newer t)' \
+    --eval "(byte-compile-file \"what/standard/layers/adna/layouts.el\")" \
+    2>&1 | tee /tmp/_layouts.log
+
+  if grep -q "Error" /tmp/_layouts.log; then
+    echo "RED: layouts.el byte-compile failed"
+    cat /tmp/_layouts.log
+    exit 80
+  fi
+
+  SYMS=$(emacs --batch \
+    --eval "(load-file \"what/standard/layers/adna/layouts.el\")" \
+    --eval '(princ (if (fboundp (quote adna/layout-agentic-default)) "ok" "missing"))' \
+    2>/dev/null)
+  if [[ "$SYMS" != "ok" ]]; then
+    echo "RED: adna/layout-agentic-default not defined after loading layouts.el"
+    exit 80
+  fi
+  echo "OK: layouts.el byte-compiles; adna/layout-agentic-default defined"
+else
+  echo "SKIP: layouts.el not present — layout check skipped"
+fi
+```
+
 ## Exit codes
 
 | Code | Meaning |
@@ -205,6 +234,7 @@ For Phase 3, the script doesn't exist yet — skip.
 | 50-59 | adna layer health-check failures (Phase 4+) |
 | 60-69 | Graph emission failures (Phase 4+) |
 | 70-79 | Live state assertion failures (D+ check, Phase 3+) |
+| 80 | layouts.el compile/symbol failures (Check I) |
 
 ## Phase 3 baseline
 
