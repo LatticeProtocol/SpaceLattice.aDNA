@@ -4,7 +4,7 @@ mission_id: mission_sl_p5_01_agentic_layout_system
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
 campaign_mission_number: 1
-status: planned
+status: in_progress
 mission_class: implementation
 created: 2026-05-10
 updated: 2026-05-11
@@ -129,3 +129,21 @@ P5-00 (gap register confirms layout is must-have for v1.0).
 - `what/standard/layers/adna/keybindings.el` (parent `adna/menu` — add `SPC a l` here)
 - `what/standard/layers/claude-code-ide/packages.el` (window-side + width config)
 - ADR-019, ADR-013 (keybinding and Claude Code layer decisions)
+
+## Session Progress
+
+### Session 1 — 2026-05-11 (agent_stanley) ✓ COMPLETE
+
+**Objectives**:
+- [x] ADR-035 drafted and accepted (`what/decisions/adr/adr_035_agentic_layout_system.md`)
+- [x] `layouts.el` created with 4 named layout functions + `adna/--find-state-md` helper
+- [x] `keybindings.el` updated: `adna/layouts-menu` transient, `SPC a l` wired, LP key `l→p`
+
+**Keybinding resolution (ADR-035)**: `SPC a l` was formerly wired to `adna/lp-menu`. Moved LP to key `p` in root menu; `SPC o l` standalone unchanged. `SPC a l` now routes to `adna/layouts-menu`.
+
+**Deferred to Session 2**:
+- `what/context/spacemacs/agentic_layout_guide.md` — layout inventory + coordination notes
+- `dotfile.spacemacs.tmpl` `§P5-01` startup hook block (commented opt-in)
+- `skill_health_check.md` Check I expansion (layouts.el byte-compile + function definition check)
+- CI glob verification (`what/standard/layers/**/*.el` covers layouts.el)
+- Operator boot check: `SPC a l a` live Emacs validation

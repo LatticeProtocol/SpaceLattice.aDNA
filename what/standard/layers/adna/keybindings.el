@@ -27,12 +27,26 @@
     ("w" "Follow wikilink"  adna/follow-wikilink)
     ("n" "Session note"     adna/capture-session-note)
     ("o" "Obsidian"         adna/open-in-obsidian)]
-   ["LP & Claude →"
-    ("l" "Lattice Protocol" adna/lp-menu)
+   ["Layouts & LP →"
+    ("l" "Layouts"          adna/layouts-menu)
+    ("p" "Lattice Protocol" adna/lp-menu)
     ("," "Claude Code"      adna/claude-menu)
     ("x" "Agent extensions" adna/extensions-menu)]])
 
-;; ── Lattice Protocol sub-menu (SPC a l / SPC o l) ─────────────────────────
+;; ── Layouts sub-menu (SPC a l) ───────────────────────────────────────────────
+
+(transient-define-prefix adna/layouts-menu ()
+  "⬡ aDNA Layouts — Named window configurations"
+  [["Battle station"
+    ("a" "Agentic default"    adna/layout-agentic-default)
+    ("v" "Vault navigation"   adna/layout-vault-navigation)]
+   ["Planning & review"
+    ("c" "Campaign planning"  adna/layout-campaign-planning)
+    ("r" "Code review"        adna/layout-code-review)]
+   [""
+    ("<" "← Back"             adna/menu)]])
+
+;; ── Lattice Protocol sub-menu (SPC a p / SPC o l) ─────────────────────────
 
 (transient-define-prefix adna/lp-menu ()
   "⬡ Lattice Protocol — Commands"
@@ -85,5 +99,9 @@
 ;; SPC a x → agent-extensible sub-menu stub
 (spacemacs/declare-prefix "ax" "agent-extensions")
 (spacemacs/set-leader-keys "ax" #'adna/extensions-menu)
+
+;; SPC a l → layout sub-menu (ADR-035; supersedes former SPC a l → LP mapping)
+(spacemacs/declare-prefix "al" "layouts")
+(spacemacs/set-leader-keys "al" #'adna/layouts-menu)
 
 ;;; keybindings.el ends here
