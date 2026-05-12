@@ -4,6 +4,18 @@ All notable changes to this project will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] — 2026-05-11
+
+Full campaign `campaign_spacelattice_v1_0` complete. 41 missions, 34 ADRs, all skills live.
+
+**P1 (Audit closure)**: backlog cleanup, sanitization WARN ADR, self-improve schedule.
+**P2 (Sustainability + telemetry)**: runbook teeth, telemetry schema, submit/aggregate skills, end-to-end round-trip validated.
+**P3 (Customization walk)**: 22 dimensions documented — dotfile lifecycle, layer anatomy, themes, editing/completion, perf, org-mode, Obsidian coupling, macOS context, dotfile hardening.
+**P4 (Fork branding)**: distribution layer, claude-code-ide layer (treemacs + Claude Code window contract), agentic layout system (4 named layouts, `SPC a l` transient), agent command tree + extensions menu (`SPC a x`), CI/upstream monitor, pin update skill.
+**P5 (Polish + release)**: strategic AAR + gap analysis, `adna/claude-project-switch`, automated validation (`validate_layers.py` + CI job), shared human-agent command tree (`scripts/` auto-discovery), v1.0 doc pass.
+
+See the `[Unreleased]` section below for per-phase detailed entries.
+
 ## [Unreleased]
 
 ### Vault rename: SpaceLattice.aDNA → Spacemacs.aDNA (2026-05-07)

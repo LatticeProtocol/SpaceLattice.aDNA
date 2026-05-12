@@ -345,7 +345,7 @@ valid JSON with a known `type' field. Full jsonschema validation
       t)))
 
 ;;; ============================================================================
-;;; LP command stubs (SPC o l / SPC a l — Phase 3 namespace reservation)
+;;; Lattice Protocol commands (SPC o l / SPC a l)
 ;;; ============================================================================
 
 (defun adna/--spawn-vterm-command (command buffer-name)

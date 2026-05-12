@@ -127,6 +127,23 @@ Scripts in `what/standard/` MUST pass the sanitization scan (§ 4) before commit
 
 Auto-discovery: `adna/load-scripts` (defined in `funcs.el`) loads all `*.el` from `what/standard/layers/adna/scripts/` and `what/local/scripts/` at Spacemacs startup (via `spacemacs-post-user-config-hook`). See ADR-038.
 
+### Clause 9 — Minimum required files per standard layer
+
+Every layer directory under `what/standard/layers/<name>/` MUST ship these four files to be a valid standard layer:
+
+| File | Purpose |
+|------|---------|
+| `packages.el` | Spacemacs layer manifest — declares packages, `layer-packages` list |
+| `config.el` | Defcustoms, buffer-local vars, minor mode definition |
+| `funcs.el` | Interactive commands and helper functions |
+| `keybindings.el` | All `spacemacs/set-leader-keys` and Transient menu declarations |
+
+Optional additions (no Clause 9 constraint):
+- `scripts/` — auto-discovered by `adna/load-scripts`; governed by Clause 8
+- `layers/` — nested sub-layers (rare; require their own ADR)
+
+**Verification**: `skill_health_check` Check G (`validate_layers.py`) asserts that every directory under `what/standard/layers/` contains all four required files. Layers failing this check block the health-check gate.
+
 ## 3. Verification (skill_health_check checks C)
 
 `skill_health_check` runs these assertions on every gate:

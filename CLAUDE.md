@@ -61,7 +61,7 @@ Spacemacs.aDNA/
 │   ├── standard/                # shared, deterministic — the published commons
 │   │   ├── pins.md, layers.md, dotfile.spacemacs.tmpl, packages.el.tmpl
 │   │   ├── adna-bridge.md, model-routing.md, obsidian-coupling.md, LAYER_CONTRACT.md
-│   │   ├── layers/adna/         # the Spacemacs `adna` layer (elisp — Phase 4)
+│   │   ├── layers/adna/         # the Spacemacs `adna` layer (elisp)
 │   │   └── index/               # graph.json emitted by M-x adna-index-project
 │   ├── local/                   # gitignored — operator/machine-private (.example templates tracked)
 │   ├── overlay/                 # third-party Spacemacs distros (consumed via skill_overlay_consume)
@@ -70,14 +70,14 @@ Spacemacs.aDNA/
 ├── how/                         # HOW
 │   ├── standard/
 │   │   ├── skills/              # install, deploy, self-improve, health-check, layer add/promote,
-│   │   │                        # overlay consume, adna index, publish lattice (Phases 3-7)
+│   │   │                        # overlay consume, adna index, publish lattice
 │   │   └── runbooks/            # fresh-machine, update-spacemacs, recover-from-breakage, share-to-lattice
 │   ├── local/                   # gitignored — machine-specific runbooks + last_install.log
 │   ├── skills/, sessions/, missions/, campaigns/, templates/, backlog/, pipelines/, quests/  # inherited
 ├── who/                         # WHO
 │   ├── operators/               # who runs this battle station (per-machine)
 │   ├── upstreams/               # Spacemacs maintainers + layer authors
-│   ├── peers/                   # other Spacemacs.aDNA forks (lattice federation, Phase 7+)
+│   ├── peers/                   # other Spacemacs.aDNA forks (lattice federation)
 │   ├── governance/, team/, coordination/  # inherited
 └── deploy/                      # gitignored — per-deploy receipts (deploy/<hostname>/<utc>.md)
 ```
@@ -249,7 +249,7 @@ Reusable agent recipes and documented procedures in `how/skills/`. Skills have t
 | `skill_sqlite_persistence` | process | Multiple agents, sessions hard to query, learnings accumulating without validation signal |
 | `skill_orchestration_tiers` | process | Multi-file tasks, tier classification, agent spawning, model routing decisions |
 
-**Skills inventory** — Spacemacs.aDNA project-specific (Phases 3-7, in `how/standard/skills/`):
+**Skills inventory** — Spacemacs.aDNA project-specific (all live, in `how/standard/skills/`):
 
 | Skill | Type | Phase | Trigger |
 |-------|------|-------|---------|

@@ -26,19 +26,14 @@ After install, you get:
 
 ## Install
 
-> ⚠️ **Genesis state (2026-05-03).** The `skill_install` procedure is being authored in **Phase 3** of the genesis plan. This README documents the planned UX. The vault repo on GitHub is published in **Phase 7**.
-
-When Phase 3 + 7 land, install will be:
-
 ```bash
 git clone https://github.com/LatticeProtocol/Spacemacs.aDNA.git ~/lattice/Spacemacs.aDNA
 cd ~/lattice/Spacemacs.aDNA
-# Run skill_install (Phase 3) — checks deps, backs up ~/.emacs.d/ + ~/.spacemacs,
-# clones Spacemacs at pinned SHA, renders templates, first-boots Emacs in batch,
-# runs skill_health_check, writes deploy receipt to deploy/<hostname>/<utc>.md.
+# Read how/standard/skills/skill_install.md and follow the steps.
+# Checks deps, backs up ~/.emacs.d/ + ~/.spacemacs, clones Spacemacs at pinned SHA,
+# renders templates, first-boots Emacs in batch, runs skill_health_check,
+# writes deploy receipt to deploy/<hostname>/<utc>.md.
 ```
-
-Until then, the vault is being scaffolded interactively — see the plan at `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` (on the originating operator's machine) for current state.
 
 ## Layout
 
@@ -70,7 +65,7 @@ Spacemacs.aDNA/
 | See current operational state | [`STATE.md`](STATE.md) |
 | Understand the layered contract | [`what/standard/LAYER_CONTRACT.md`](what/standard/LAYER_CONTRACT.md) |
 | Read the foundational decision | [`what/decisions/adr/adr_000_vault_identity.md`](what/decisions/adr/adr_000_vault_identity.md) |
-| See the planned skills | [`how/standard/skills/README.md`](how/standard/skills/README.md) |
+| See available skills | [`how/standard/skills/README.md`](how/standard/skills/README.md) |
 | Explore the Spacemacs `adna` layer spec | [`what/standard/adna-bridge.md`](what/standard/adna-bridge.md) |
 
 ## License
@@ -79,4 +74,4 @@ GPL-3.0 — matches upstream Spacemacs to maintain compatibility. Vault content 
 
 ## Status
 
-**Genesis v0.1.0** — 2026-05-03. Forked from the [Agentic-DNA](https://github.com/LatticeProtocol/Agentic-DNA) base template. Phases 1-2 complete; phases 3-7 + DoD pending.
+**v1.0.0** — 2026-05-11. Forked from the [Agentic-DNA](https://github.com/LatticeProtocol/Agentic-DNA) base template. 41 missions, 34 ADRs, all skills live. See [CHANGELOG.md](CHANGELOG.md) for full release history.

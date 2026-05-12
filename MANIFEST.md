@@ -3,11 +3,11 @@ type: manifest
 subject: spacemacs
 pattern: project
 persona: daedalus
-version: "0.1.0-genesis"
+version: "1.0.0"
 created: 2026-05-03
-updated: 2026-05-03
-last_edited_by: agent_init
-tags: [manifest, governance, spacemacs, daedalus, battle_station, ide, layered_config, self_improving, genesis]
+updated: 2026-05-11
+last_edited_by: agent_stanley
+tags: [manifest, governance, spacemacs, daedalus, battle_station, ide, layered_config, self_improving, production]
 ---
 
 # Spacemacs.aDNA — Project Manifest
@@ -97,13 +97,13 @@ The vault includes a Spacemacs layer at `what/standard/layers/adna/` that:
 |----------|-----------|------|
 | **Agents** | `CLAUDE.md` (auto-loaded) | `STATE.md` → `how/sessions/active/` → work |
 | **Operators (humans)** | `README.md` | copy-paste install command → `what/standard/layers.md` |
-| **Peer forkers** | `https://github.com/LatticeProtocol/Spacemacs.aDNA` (planned) | `skill_install` from extracted tarball |
+| **Peer forkers** | `https://github.com/LatticeProtocol/Spacemacs.aDNA` | `skill_install` from cloned repo |
 
 ## Active Phase
 
-**Genesis (v0.1.0)** — 2026-05-03. Fork freshly cut from `.adna/` template; layered scaffold and Spacemacs adna layer to be added in Phase 2-4. First deploy and first self-improvement loop validation pending Phase 5+.
+**v1.0.0 Production** — 2026-05-11. All 8 campaign phases complete. 41 missions closed, 34 ADRs accepted. All skills live: `skill_install`, `skill_deploy`, `skill_health_check`, `skill_layer_add`, `skill_adna_index`, `skill_self_improve`, `skill_layer_promote`, `skill_overlay_consume`, `skill_publish_lattice`. Agentic layouts, Claude Code integration, automated validation, and shared command tree shipped in P4-P5.
 
-See `STATE.md` for current operational state and `~/.claude/plans/please-read-the-claude-md-splendid-boole.md` for the seven-phase plan.
+See `STATE.md` for current operational state.
 
 ## Reuse from `.adna/` template
 
