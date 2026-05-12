@@ -4,12 +4,12 @@ mission_id: mission_sl_p5_06_second_machine_install
 campaign: campaign_spacelattice_v1_0
 campaign_phase: 5
 campaign_mission_number: 6
-status: planned
+status: abandoned
 mission_class: verification
 created: 2026-05-05
-updated: 2026-05-11
+updated: 2026-05-12
 last_edited_by: agent_stanley
-tags: [mission, planned, spacelattice, v1_0, p5, polish, second_machine, peer_install]
+tags: [mission, abandoned, spacelattice, v1_0, p5, polish, second_machine, peer_install]
 blocked_by: [mission_sl_p5_05_doc_pass]
 ---
 
@@ -44,3 +44,7 @@ P5-01 closed.
 - `how/standard/skills/skill_install.md` (post-P4-08 update)
 - `how/standard/skills/skill_health_check.md`
 - `deploy/` directory convention (gitignored, hostname-scoped)
+
+## Abandonment note
+
+Skipped by operator directive 2026-05-12. Second-machine install deferred to post-v1.0. Campaign proceeds directly to P5-07 (tag + release + campaign AAR). Per Standing Order #6 — archive, never delete.

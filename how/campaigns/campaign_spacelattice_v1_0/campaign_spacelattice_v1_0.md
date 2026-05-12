@@ -3,7 +3,8 @@ campaign_id: campaign_spacelattice_v1_0
 type: campaign
 title: "Spacemacs v1.0 — Genesis to Production"
 owner: stanley
-status: execution
+status: completed
+completed: 2026-05-12
 phase_count: 6
 mission_count: 41
 estimated_sessions: "47-68"
@@ -12,7 +13,7 @@ estimation_class: governance-broad
 priority: medium
 predecessor: "spacemacs.aDNA genesis (plan-driven; AAR at how/missions/artifacts/aar_genesis_2026_05_03_to_2026_05_05.md)"
 created: 2026-05-05
-updated: 2026-05-10
+updated: 2026-05-12
 last_edited_by: agent_stanley
 p2_progress: "4/4 missions closed ✅ P2 COMPLETE"
 p3_core_progress: "13/13 missions closed ✅ P3 FULLY COMPLETE (2026-05-08) — core P3-00→P3-08 + extended P3-09/12/13/14 all closed"
@@ -23,6 +24,8 @@ tags: [campaign, spacelattice, v1_0, daedalus, customization_walk, telemetry, lp
 ---
 
 # Campaign — Spacemacs v1.0 (Genesis to Production)
+
+> **COMPLETED 2026-05-12** — v1.0.0 tagged. 41 missions (39 complete, 1 abandoned, 1 folded), 34 ADRs. AAR at `aar_campaign_spacelattice_v1_0.md`.
 
 ## Mission statement
 
