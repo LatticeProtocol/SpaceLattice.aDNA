@@ -14,7 +14,7 @@ Dynamic operational snapshot for cold-start orientation. Updated each session.
 
 ## Current Phase
 
-**v1.0.0 RELEASED — 2026-05-12.** `campaign_spacelattice_v1_0` complete. 41 missions (39 complete, 1 abandoned P5-06, 1 folded P4-layout-intelligence), 34 ADRs. Local tag `v1.0.0` on `57d289c`. Remote push + `gh release create` pending operator action (see `how/standard/runbooks/v1_0_publish_checklist.md`). Post-v1.0 deferred: peer federation (finding #7), second-machine install (P5-06), GAP-05 funcs.el docstring. Campaign AAR at `how/campaigns/campaign_spacelattice_v1_0/aar_campaign_spacelattice_v1_0.md`.
+**v1.0.0 RELEASED — 2026-05-12.** `campaign_spacelattice_v1_0` complete. 41 missions (39 complete, 1 abandoned P5-06, 1 folded P4-layout-intelligence), 34 ADRs. Local tag `v1.0.0` on `0721be0`. Remote push + `gh release create` pending operator action (see `how/standard/runbooks/v1_0_publish_checklist.md`). Post-v1.0 deferred: peer federation (finding #7), second-machine install (P5-06), GAP-05 funcs.el docstring. Campaign AAR at `how/campaigns/campaign_spacelattice_v1_0/aar_campaign_spacelattice_v1_0.md`.
 
 **Historical record — campaign execution log (P1–P5):**
 

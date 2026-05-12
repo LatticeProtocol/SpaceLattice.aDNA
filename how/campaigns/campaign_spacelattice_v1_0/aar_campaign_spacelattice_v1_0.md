@@ -13,7 +13,7 @@ tags: [aar, campaign, spacelattice, v1_0, closeout, daedalus]
 **Dates**: 2026-05-05 → 2026-05-12
 **Missions**: 41 total (39 completed, 1 abandoned, 1 deferred-within-P5)
 **ADRs accepted**: 34 (ADR-000 through ADR-038)
-**Version shipped**: `v1.0.0` (local tag `57d289c`)
+**Version shipped**: `v1.0.0` (local tag `0721be0`)
 
 ---
 
@@ -132,5 +132,5 @@ At v1.0.0, Spacemacs.aDNA delivers:
 
 ## v1.0.0 tag
 
-Local: `git tag -a v1.0.0` on commit `57d289c` (P5-05 doc pass).
+Local: `git tag -a v1.0.0` on commit `0721be0` (P5-07 campaign closeout, 2026-05-12).
 Remote push: operator action per `how/standard/runbooks/v1_0_publish_checklist.md`.
